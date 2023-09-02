@@ -5,6 +5,8 @@
 from flask_table import Table, Col, LinkCol
 from flask import flash, render_template, request, redirect
 from flask import Flask
+from logging.config import dictConfig
+
 import grpc
 import account_pb2
 import account_pb2_grpc
@@ -14,6 +16,21 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
+})
 
 
 #MOCK TABLA
@@ -67,6 +84,7 @@ def findAll():
     print("Greeter client received: " + str(response))    
     return str(response)
 
+#TO DO JSON POST
 @app.route("/addAccount",methods = ['GET'])
 def addAccount():
     app.logger.info("/addAccount",request.args['number'])
@@ -79,19 +97,19 @@ def addAccount():
 
 @app.route("/findByCustomer",methods = ['GET'])
 def findByCustomer():
-    app.logger.info("/findByCustomer",request.args['customer_id'])
+    app.logger.info("/findByCustomer %s",request.args.get('customer_id'))
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
-        stub = account_pb2_grpc.AccountsServiceStub(channel)
-        response = stub.FindByCustomer(account_pb2.Account(number="888888",customer_id=2))
+        stub = account_pb2_grpc.AccountsServiceStub(channel)        
+        response = stub.FindByCustomer(account_pb2.Account(customer_id=int(request.args.get('customer_id'))))
     print("Greeter client received: " + str(response))    
     return str(response)
 
 
 @app.route("/findByNumber",methods = ['GET'])
 def findByNumber():
-    app.logger.info("/findByNumber",request.args['number'])
+    app.logger.info("/findByNumber %s",request.args.get('number'))
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = account_pb2_grpc.AccountsServiceStub(channel)
-        response = stub.FindByNumber(account_pb2.Account(id=1,number="777777",customer_id=2))
+        response = stub.FindByNumber(account_pb2.Account(number=str(request.args.get('number'))))
     print("Greeter client received: " + str(response))    
     return str(response)
