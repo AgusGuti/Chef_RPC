@@ -9,6 +9,9 @@ mvn spring-boot:run
 
 CLIENTE/SERVIDOR PYTHON 
 
+version python
+Python 3.9.13
+
 comandos terminal:
 cd app-python
 pip install -r requirements.txt
