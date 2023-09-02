@@ -10,7 +10,7 @@ import "google/protobuf/wrappers.proto";
 
 service AccountsService {
   rpc FindByNumber(google.protobuf.StringValue) returns (Account) {}
-  rpc FindByCustomer(google.protobuf.Int32Value) returns (Accounts) {}
+  rpc FindByCustomer(Account) returns (Accounts) {}
   rpc FindAll(google.protobuf.Empty) returns (Accounts) {}
   rpc AddAccount(Account) returns (Account) {}
 }

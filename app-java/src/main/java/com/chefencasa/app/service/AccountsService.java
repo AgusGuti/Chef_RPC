@@ -27,8 +27,8 @@ public class AccountsService extends AccountsServiceGrpc.AccountsServiceImplBase
     }
 
     @Override
-    public void findByCustomer(Int32Value request, StreamObserver<AccountProto.Accounts> responseObserver) {
-        List<AccountProto.Account> accounts = repository.findByCustomer(request.getValue());
+    public void findByCustomer(AccountProto.Account request, StreamObserver<AccountProto.Accounts> responseObserver) {
+        List<AccountProto.Account> accounts = repository.findByCustomer(request.getCustomerId());
         AccountProto.Accounts a = AccountProto.Accounts.newBuilder().addAllAccount(accounts).build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();

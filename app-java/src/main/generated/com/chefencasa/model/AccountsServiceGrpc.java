@@ -46,27 +46,27 @@ public final class AccountsServiceGrpc {
     return getFindByNumberMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Int32Value,
+  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.AccountProto.Account,
       com.chefencasa.model.AccountProto.Accounts> getFindByCustomerMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "FindByCustomer",
-      requestType = com.google.protobuf.Int32Value.class,
+      requestType = com.chefencasa.model.AccountProto.Account.class,
       responseType = com.chefencasa.model.AccountProto.Accounts.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.google.protobuf.Int32Value,
+  public static io.grpc.MethodDescriptor<com.chefencasa.model.AccountProto.Account,
       com.chefencasa.model.AccountProto.Accounts> getFindByCustomerMethod() {
-    io.grpc.MethodDescriptor<com.google.protobuf.Int32Value, com.chefencasa.model.AccountProto.Accounts> getFindByCustomerMethod;
+    io.grpc.MethodDescriptor<com.chefencasa.model.AccountProto.Account, com.chefencasa.model.AccountProto.Accounts> getFindByCustomerMethod;
     if ((getFindByCustomerMethod = AccountsServiceGrpc.getFindByCustomerMethod) == null) {
       synchronized (AccountsServiceGrpc.class) {
         if ((getFindByCustomerMethod = AccountsServiceGrpc.getFindByCustomerMethod) == null) {
           AccountsServiceGrpc.getFindByCustomerMethod = getFindByCustomerMethod =
-              io.grpc.MethodDescriptor.<com.google.protobuf.Int32Value, com.chefencasa.model.AccountProto.Accounts>newBuilder()
+              io.grpc.MethodDescriptor.<com.chefencasa.model.AccountProto.Account, com.chefencasa.model.AccountProto.Accounts>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FindByCustomer"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.google.protobuf.Int32Value.getDefaultInstance()))
+                  com.chefencasa.model.AccountProto.Account.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.chefencasa.model.AccountProto.Accounts.getDefaultInstance()))
               .setSchemaDescriptor(new AccountsServiceMethodDescriptorSupplier("FindByCustomer"))
@@ -196,7 +196,7 @@ public final class AccountsServiceGrpc {
 
     /**
      */
-    default void findByCustomer(com.google.protobuf.Int32Value request,
+    default void findByCustomer(com.chefencasa.model.AccountProto.Account request,
         io.grpc.stub.StreamObserver<com.chefencasa.model.AccountProto.Accounts> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindByCustomerMethod(), responseObserver);
     }
@@ -253,7 +253,7 @@ public final class AccountsServiceGrpc {
 
     /**
      */
-    public void findByCustomer(com.google.protobuf.Int32Value request,
+    public void findByCustomer(com.chefencasa.model.AccountProto.Account request,
         io.grpc.stub.StreamObserver<com.chefencasa.model.AccountProto.Accounts> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getFindByCustomerMethod(), getCallOptions()), request, responseObserver);
@@ -301,7 +301,7 @@ public final class AccountsServiceGrpc {
 
     /**
      */
-    public com.chefencasa.model.AccountProto.Accounts findByCustomer(com.google.protobuf.Int32Value request) {
+    public com.chefencasa.model.AccountProto.Accounts findByCustomer(com.chefencasa.model.AccountProto.Account request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getFindByCustomerMethod(), getCallOptions(), request);
     }
@@ -348,7 +348,7 @@ public final class AccountsServiceGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.AccountProto.Accounts> findByCustomer(
-        com.google.protobuf.Int32Value request) {
+        com.chefencasa.model.AccountProto.Account request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getFindByCustomerMethod(), getCallOptions()), request);
     }
@@ -397,7 +397,7 @@ public final class AccountsServiceGrpc {
               (io.grpc.stub.StreamObserver<com.chefencasa.model.AccountProto.Account>) responseObserver);
           break;
         case METHODID_FIND_BY_CUSTOMER:
-          serviceImpl.findByCustomer((com.google.protobuf.Int32Value) request,
+          serviceImpl.findByCustomer((com.chefencasa.model.AccountProto.Account) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.AccountProto.Accounts>) responseObserver);
           break;
         case METHODID_FIND_ALL:
@@ -437,7 +437,7 @@ public final class AccountsServiceGrpc {
           getFindByCustomerMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              com.google.protobuf.Int32Value,
+              com.chefencasa.model.AccountProto.Account,
               com.chefencasa.model.AccountProto.Accounts>(
                 service, METHODID_FIND_BY_CUSTOMER)))
         .addMethod(
