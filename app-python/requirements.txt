@@ -1,3 +1,5 @@
 Flask
 grpcio
 grpcio-tools
+Flask-RESTful
+python-dotenv
