@@ -68,7 +68,7 @@ def findAll():
     return str(response)
 
 @app.route("/addAccount",methods = ['GET'])
-def findByNumber():
+def addAccount():
     app.logger.info("/addAccount",request.args['number'])
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = account_pb2_grpc.AccountsServiceStub(channel)
@@ -83,5 +83,15 @@ def findByCustomer():
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = account_pb2_grpc.AccountsServiceStub(channel)
         response = stub.FindByCustomer(account_pb2.Account(number="888888",customer_id=2))
+    print("Greeter client received: " + str(response))    
+    return str(response)
+
+
+@app.route("/findByNumber",methods = ['GET'])
+def findByNumber():
+    app.logger.info("/findByNumber",request.args['number'])
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = account_pb2_grpc.AccountsServiceStub(channel)
+        response = stub.FindByNumber(account_pb2.Account(id=1,number="777777",customer_id=2))
     print("Greeter client received: " + str(response))    
     return str(response)

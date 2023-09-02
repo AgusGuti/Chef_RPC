@@ -1527,14 +1527,14 @@ public final class AccountProto {
       "empty.proto\032\036google/protobuf/wrappers.pr" +
       "oto\"+\n\010Accounts\022\037\n\007account\030\001 \003(\0132\016.model" +
       ".Account\":\n\007Account\022\n\n\002id\030\001 \001(\005\022\016\n\006numbe" +
-      "r\030\002 \001(\t\022\023\n\013customer_id\030\003 \001(\0052\354\001\n\017Account" +
-      "sService\022>\n\014FindByNumber\022\034.google.protob" +
-      "uf.StringValue\032\016.model.Account\"\000\0223\n\016Find" +
-      "ByCustomer\022\016.model.Account\032\017.model.Accou" +
-      "nts\"\000\0224\n\007FindAll\022\026.google.protobuf.Empty" +
-      "\032\017.model.Accounts\"\000\022.\n\nAddAccount\022\016.mode" +
-      "l.Account\032\016.model.Account\"\000B$\n\024com.chefe" +
-      "ncasa.modelB\014AccountProtob\006proto3"
+      "r\030\002 \001(\t\022\023\n\013customer_id\030\003 \001(\0052\336\001\n\017Account" +
+      "sService\0220\n\014FindByNumber\022\016.model.Account" +
+      "\032\016.model.Account\"\000\0223\n\016FindByCustomer\022\016.m" +
+      "odel.Account\032\017.model.Accounts\"\000\0224\n\007FindA" +
+      "ll\022\026.google.protobuf.Empty\032\017.model.Accou" +
+      "nts\"\000\022.\n\nAddAccount\022\016.model.Account\032\016.mo" +
+      "del.Account\"\000B$\n\024com.chefencasa.modelB\014A" +
+      "ccountProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

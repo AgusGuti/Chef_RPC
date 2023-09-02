@@ -20,8 +20,8 @@ public class AccountsService extends AccountsServiceGrpc.AccountsServiceImplBase
     AccountRepository repository;
 
     @Override
-    public void findByNumber(StringValue request, StreamObserver<AccountProto.Account> responseObserver) {
-        AccountProto.Account a = repository.findByNumber(request.getValue());
+    public void findByNumber(AccountProto.Account request, StreamObserver<AccountProto.Account> responseObserver) {
+        AccountProto.Account a = repository.findByNumber(request.getNumber());
         responseObserver.onNext(a);
         responseObserver.onCompleted();
     }

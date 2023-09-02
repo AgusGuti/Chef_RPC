@@ -4,7 +4,6 @@ import grpc
 
 import account_pb2 as account__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
-from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 
 
 class AccountsServiceStub(object):
@@ -18,7 +17,7 @@ class AccountsServiceStub(object):
         """
         self.FindByNumber = channel.unary_unary(
                 '/model.AccountsService/FindByNumber',
-                request_serializer=google_dot_protobuf_dot_wrappers__pb2.StringValue.SerializeToString,
+                request_serializer=account__pb2.Account.SerializeToString,
                 response_deserializer=account__pb2.Account.FromString,
                 )
         self.FindByCustomer = channel.unary_unary(
@@ -70,7 +69,7 @@ def add_AccountsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'FindByNumber': grpc.unary_unary_rpc_method_handler(
                     servicer.FindByNumber,
-                    request_deserializer=google_dot_protobuf_dot_wrappers__pb2.StringValue.FromString,
+                    request_deserializer=account__pb2.Account.FromString,
                     response_serializer=account__pb2.Account.SerializeToString,
             ),
             'FindByCustomer': grpc.unary_unary_rpc_method_handler(
@@ -110,7 +109,7 @@ class AccountsService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/model.AccountsService/FindByNumber',
-            google_dot_protobuf_dot_wrappers__pb2.StringValue.SerializeToString,
+            account__pb2.Account.SerializeToString,
             account__pb2.Account.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
