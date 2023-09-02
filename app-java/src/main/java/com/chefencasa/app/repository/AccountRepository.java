@@ -3,17 +3,22 @@ package com.chefencasa.app.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.context.annotation.Bean;
 
+import com.chefencasa.model.AccountProto;
 import com.chefencasa.model.AccountProto.Account;
 
 public class AccountRepository {
 
     List<Account> accounts;
-
+    AtomicInteger id;
+    
     public AccountRepository(List<Account> accounts) {
         this.accounts = accounts;
+        this.id = new AtomicInteger();
+        this.id.set(accounts.size());
     }
 
     public List<Account> findAll() {
@@ -38,6 +43,15 @@ public class AccountRepository {
                 .filter(it -> it.getNumber().equals(number))
                 .findFirst()
                 .orElseThrow();
+    }
+
+    public AccountProto.Account add(int customerId, String number) {
+        AccountProto.Account a = AccountProto.Account.newBuilder()
+                .setId(id.incrementAndGet())
+                .setCustomerId(customerId)
+                .setNumber(number)
+                .build();
+        return a;
     }
 
 

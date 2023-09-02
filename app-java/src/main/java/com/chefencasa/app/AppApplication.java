@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import com.chefencasa.app.repository.AccountRepository;
 import com.chefencasa.model.AccountProto;
-import com.chefencasa.model.AccountProto.Account;
+import com.chefencasa.app.repository.AccountRepository;
+
 
 @SpringBootApplication
 public class AppApplication {

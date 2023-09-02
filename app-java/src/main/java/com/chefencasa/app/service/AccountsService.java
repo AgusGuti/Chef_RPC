@@ -42,6 +42,13 @@ public class AccountsService extends AccountsServiceGrpc.AccountsServiceImplBase
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void addAccount(AccountProto.Account request, StreamObserver<AccountProto.Account> responseObserver) {
+        AccountProto.Account a = repository.add(request.getCustomerId(), request.getNumber());
+        responseObserver.onNext(a);
+        responseObserver.onCompleted();
+    }
+
 
 }
 
