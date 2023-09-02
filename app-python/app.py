@@ -1,4 +1,10 @@
-from flask import Flask,jsonify,request
+#from app import app
+#from tables import Results
+#from db_config import mysql
+
+from flask_table import Table, Col, LinkCol
+from flask import flash, render_template, request, redirect
+from flask import Flask
 import grpc
 import account_pb2
 import account_pb2_grpc
@@ -9,8 +15,48 @@ load_dotenv()
 
 
 
+
+#MOCK TABLA
+class ItemTable(Table):
+    name = Col('Name')
+    description = Col('Description')
+        
+class Item(object):
+    def __init__(self, name, description):
+        self.name = name
+        self.description = description
+        
+items = [Item('Name1', 'Description1'),
+         Item('Name2', 'Description2'),
+         Item('Name3', 'Description3')]
+
+
+
 app = Flask(__name__)
 
+#Adding routes for (add), (update), (delete)
+@app.route('/')
+def users():
+	table = ItemTable(items)
+	table.border = True
+	return render_template('users.html', table=table)
+
+
+@app.route('/new_user')
+def add_user_view():
+	return render_template('add.html')
+
+@app.route('/add', methods=['POST'])
+def add_user():
+	_name = request.form['inputName']
+	_email = request.form['inputEmail']
+	_password = request.form['inputPassword']
+	# validate the received values
+	if _name and _email and _password and request.method == 'POST':
+		flash('User added successfully!')
+		return redirect('/')
+	else:
+		return 'Error while adding user'
 
 @app.route("/findAll")
 def findAll():
