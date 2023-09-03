@@ -14,6 +14,9 @@ import grpc
 import account_pb2
 import account_pb2_grpc
 
+import user_pb2
+import user_pb2_grpc
+
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -114,5 +117,16 @@ def findByNumber():
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = account_pb2_grpc.AccountsServiceStub(channel)
         response = stub.FindByNumber(account_pb2.Account(number=str(request.args.get('number'))))
+    print("Greeter client received: " + str(response))    
+    return MessageToJson(response)
+
+
+@app.route("/addUser",methods = ['POST'])
+def addUser():
+    app.logger.info("/addUser",request.get_json())
+    user=request.get_json()
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = user_pb2_grpc.UsersServiceStub(channel)
+        response = stub.AddUser(user_pb2.User(id=user['id'],email=user['email'],name=user['email'],nick=user['nick'],password=user['password'],role=user['role'],surname=user['surname']))
     print("Greeter client received: " + str(response))    
     return MessageToJson(response)

@@ -32,8 +32,13 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
             }
 		}
         UserProto.User a = UserProto.User.newBuilder()
-        .setName(request.getName())
+        .setId(request.getId())
         .setEmail(request.getEmail())
+        .setName(request.getName())
+        .setNick(request.getNick())
+        .setPassword(request.getPassword())
+        .setRole(request.getRole())
+        .setSurname(request.getSurname())
         .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();
