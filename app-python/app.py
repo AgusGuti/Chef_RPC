@@ -3,9 +3,12 @@
 #from db_config import mysql
 
 from flask_table import Table, Col, LinkCol
-from flask import flash, render_template, request, redirect
+from flask import flash, render_template, request, redirect, jsonify
 from flask import Flask
 from logging.config import dictConfig
+
+from google.protobuf.json_format import MessageToDict, MessageToJson
+
 
 import grpc
 import account_pb2
@@ -82,7 +85,7 @@ def findAll():
         stub = account_pb2_grpc.AccountsServiceStub(channel)
         response = stub.FindAll(account_pb2.Accounts())
     print("Greeter client received: " + str(response))    
-    return str(response)
+    return MessageToJson(response)
 
 #TO DO JSON POST
 @app.route("/addAccount",methods = ['GET'])
@@ -92,7 +95,7 @@ def addAccount():
         stub = account_pb2_grpc.AccountsServiceStub(channel)
         response = stub.AddAccount(account_pb2.Account(number="888888",customer_id=2))
     print("Greeter client received: " + str(response))    
-    return str(response)
+    return MessageToJson(response)
 
 
 @app.route("/findByCustomer",methods = ['GET'])
@@ -101,8 +104,8 @@ def findByCustomer():
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = account_pb2_grpc.AccountsServiceStub(channel)        
         response = stub.FindByCustomer(account_pb2.Account(customer_id=int(request.args.get('customer_id'))))
-    print("Greeter client received: " + str(response))    
-    return str(response)
+    print("Greeter client received: " + str(response))        
+    return MessageToJson(response)
 
 
 @app.route("/findByNumber",methods = ['GET'])
@@ -112,4 +115,4 @@ def findByNumber():
         stub = account_pb2_grpc.AccountsServiceStub(channel)
         response = stub.FindByNumber(account_pb2.Account(number=str(request.args.get('number'))))
     print("Greeter client received: " + str(response))    
-    return str(response)
+    return MessageToJson(response)
