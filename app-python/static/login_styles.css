@@ -1,0 +1,106 @@
+@charset "ISO-8859-1";
+
+header.masthead {
+	padding-top: 10rem;
+	padding-bottom: calc(10rem - 4.5rem);
+	background: url("../static/bg-masthead.jpg");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: center center;
+}
+
+header.masthead h1, header.masthead .h1 {
+	font-size: 2.25rem;
+}
+
+@media ( min-width : 1200px) {
+	header.masthead {
+		height: 100vh;
+		min-height: 40rem;
+		padding-top: 4.5rem;
+		padding-bottom: 0;
+	}
+	header.masthead p {
+		font-size: 1.15rem;
+	}
+	header.masthead h1, header.masthead .h1 {
+		font-size: 3rem;
+	}
+}
+
+@media ( min-width : 1200px) {
+	header.masthead h1, header.masthead .h1 {
+		font-size: 3.5rem;
+	}
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'montserrat';
+	background-image: blur(8px), url("../assets/img/bg-masthead.jpg");
+	box-sizing: border-box;
+}
+
+h3 {
+	font-style: italic;
+	font-family: "Playfair Display", "Bookman", serif;
+	color: white;
+	letter-spacing: -0.005em;
+	word-spacing: 1px;
+	font-size: 2em;
+	font-weight: bold;
+	margin-top: 30px;
+}
+
+body {
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+.login-form {
+	background: #FFFFFF;
+	margin-top: 40px;
+	margin-bottom: 20px;
+	padding: 70px;
+	color: #CACFD2;
+}
+
+.login-heading {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.btn-login {
+	background-color: #641E16;
+	color: rgb(255, 255, 255);
+}
+
+
+.form-group input{
+    height: 42px;
+    font-size: 17px;
+    padding-left: 45px;
+    border-radius: 5px;
+}
+
+
+.form-group::before {
+	font-family: "Font Awesome\ 5 Free";
+	position: absolute;
+	left: 95px;
+	font-size: 22px;
+	padding-top: 4px;
+}
+
+.form-group#user-group::before {
+	content: "\f007";
+}
+
+.form-group#contrasena-group::before {
+	content: "\f023";
+}

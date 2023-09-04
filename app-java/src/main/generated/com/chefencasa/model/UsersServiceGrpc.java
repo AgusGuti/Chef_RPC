@@ -46,6 +46,37 @@ public final class UsersServiceGrpc {
     return getAddUserMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.UserProto.User,
+      com.chefencasa.model.UserProto.User> getValidarCredencialesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ValidarCredenciales",
+      requestType = com.chefencasa.model.UserProto.User.class,
+      responseType = com.chefencasa.model.UserProto.User.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.chefencasa.model.UserProto.User,
+      com.chefencasa.model.UserProto.User> getValidarCredencialesMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.User> getValidarCredencialesMethod;
+    if ((getValidarCredencialesMethod = UsersServiceGrpc.getValidarCredencialesMethod) == null) {
+      synchronized (UsersServiceGrpc.class) {
+        if ((getValidarCredencialesMethod = UsersServiceGrpc.getValidarCredencialesMethod) == null) {
+          UsersServiceGrpc.getValidarCredencialesMethod = getValidarCredencialesMethod =
+              io.grpc.MethodDescriptor.<com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.User>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ValidarCredenciales"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.UserProto.User.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.UserProto.User.getDefaultInstance()))
+              .setSchemaDescriptor(new UsersServiceMethodDescriptorSupplier("ValidarCredenciales"))
+              .build();
+        }
+      }
+    }
+    return getValidarCredencialesMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -100,6 +131,13 @@ public final class UsersServiceGrpc {
         io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.User> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddUserMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void validarCredenciales(com.chefencasa.model.UserProto.User request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.User> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getValidarCredencialesMethod(), responseObserver);
+    }
   }
 
   /**
@@ -136,6 +174,14 @@ public final class UsersServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getAddUserMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void validarCredenciales(com.chefencasa.model.UserProto.User request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.User> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getValidarCredencialesMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -159,6 +205,13 @@ public final class UsersServiceGrpc {
     public com.chefencasa.model.UserProto.User addUser(com.chefencasa.model.UserProto.User request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getAddUserMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.UserProto.User validarCredenciales(com.chefencasa.model.UserProto.User request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getValidarCredencialesMethod(), getCallOptions(), request);
     }
   }
 
@@ -185,9 +238,18 @@ public final class UsersServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getAddUserMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.UserProto.User> validarCredenciales(
+        com.chefencasa.model.UserProto.User request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getValidarCredencialesMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_ADD_USER = 0;
+  private static final int METHODID_VALIDAR_CREDENCIALES = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -208,6 +270,10 @@ public final class UsersServiceGrpc {
       switch (methodId) {
         case METHODID_ADD_USER:
           serviceImpl.addUser((com.chefencasa.model.UserProto.User) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.User>) responseObserver);
+          break;
+        case METHODID_VALIDAR_CREDENCIALES:
+          serviceImpl.validarCredenciales((com.chefencasa.model.UserProto.User) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.User>) responseObserver);
           break;
         default:
@@ -235,6 +301,13 @@ public final class UsersServiceGrpc {
               com.chefencasa.model.UserProto.User,
               com.chefencasa.model.UserProto.User>(
                 service, METHODID_ADD_USER)))
+        .addMethod(
+          getValidarCredencialesMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.chefencasa.model.UserProto.User,
+              com.chefencasa.model.UserProto.User>(
+                service, METHODID_VALIDAR_CREDENCIALES)))
         .build();
   }
 
@@ -284,6 +357,7 @@ public final class UsersServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new UsersServiceFileDescriptorSupplier())
               .addMethod(getAddUserMethod())
+              .addMethod(getValidarCredencialesMethod())
               .build();
         }
       }
