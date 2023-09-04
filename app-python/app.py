@@ -81,6 +81,10 @@ def autenticar():
     else:
         return render_template('index.html', user=request.form['username'])
 
+@app.route("/logout",methods = ['GET'])
+def logout():
+    app.logger.info("/logout")
+    return redirect('/')
 
 @app.route('/new_user')
 def add_user_view():
