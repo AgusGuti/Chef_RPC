@@ -1,0 +1,57 @@
+@charset "ISO-8859-1";
+
+/*********************************
+Footer 
+*********************************/
+
+:root {
+    --burntUmber: #8e2836;
+    --flushMahogany: #C7374A;
+}
+
+.social-media-icon {
+    color: #000000;
+}
+
+.social-media-icon i {
+    font-size: 30px;
+    line-height: 60px;
+}
+
+.center {
+    display: block;
+    margin-left: 200px;
+    margin-right: 200px;
+    width: 70%;
+}
+
+.nav-bk {
+    background: #000000;
+}
+
+.btn-aulas {
+    background-color: var(--burntUmber);
+    color: rgb(255, 255, 255);
+}
+
+.btn-aulas:hover {
+    background-color: var(--flushMahogany);
+    color: rgb(255, 255, 255);
+}
+
+.btn-unla {
+    min-width: 8rem;
+    min-height: 4rem;
+    background-color: var(--burntUmber);
+    color: rgb(255, 255, 255);
+}
+
+.btn-unla:hover {
+    background-color: var(--flushMahogany);
+    color: rgb(255, 255, 255);
+}
+
+.table {
+    border: 1px solid;
+    border-color: #d8d6d6;
+}

@@ -2200,10 +2200,11 @@ public final class UserProto {
       "\"\"\n\005Users\022\031\n\004user\030\001 \003(\0132\013.model.User\"n\n\004" +
       "User\022\n\n\002id\030\001 \001(\005\022\r\n\005email\030\002 \001(\t\022\014\n\004name\030" +
       "\003 \001(\t\022\014\n\004nick\030\004 \001(\t\022\020\n\010password\030\005 \001(\t\022\014\n" +
-      "\004role\030\006 \001(\t\022\017\n\007surname\030\007 \001(\t25\n\014UsersSer" +
+      "\004role\030\006 \001(\t\022\017\n\007surname\030\007 \001(\t2h\n\014UsersSer" +
       "vice\022%\n\007AddUser\022\013.model.User\032\013.model.Use" +
-      "r\"\000B!\n\024com.chefencasa.modelB\tUserProtob\006" +
-      "proto3"
+      "r\"\000\0221\n\023ValidarCredenciales\022\013.model.User\032" +
+      "\013.model.User\"\000B!\n\024com.chefencasa.modelB\t" +
+      "UserProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

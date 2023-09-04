@@ -24,13 +24,11 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.util.DigestUtils;
 
-
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "rol")
 @Data @NoArgsConstructor
 public class Rol implements Serializable {
 
@@ -38,26 +36,18 @@ public class Rol implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int idRol;
 
-
-	@Column(name = "rol", nullable = false)
+	@Column(name = "rol", unique = true, nullable = false, length = 45)
 	private String rol;
 
-
-	
-
-	public Rol(int id, String rol) {
-		
-		this.id = id;
+	public Rol(int idRol, String rol) {
+		this.idRol = idRol;
 		this.rol = rol;
-		
-	}
 
+	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-
     
 }

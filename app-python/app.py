@@ -17,6 +17,9 @@ import account_pb2_grpc
 import user_pb2
 import user_pb2_grpc
 
+import rol_pb2
+import rol_pb2_grpc
+
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -56,14 +59,35 @@ items = [Item('Name1', 'Description1'),
 
 
 app = Flask(__name__)
+app.secret_key = "secret key"
 
 #Adding routes for (add), (update), (delete)
 @app.route('/')
 def users():
 	table = ItemTable(items)
 	table.border = True
-	return render_template('users.html', table=table)
+	return render_template('login.html', table=table)
 
+
+@app.route("/autenticar",methods = ['POST'])
+def autenticar():
+    app.logger.info("/autenticar",request.form['username'])
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = user_pb2_grpc.UsersServiceStub(channel)
+        response = stub.ValidarCredenciales(user_pb2.User(name=request.form['username'],email=request.form['username'],password=request.form['password']))
+    print("Greeter client received: " + str(response))    
+    user={"user":MessageToJson(response)}
+    app.logger.info("user %s",user)
+    if user["user"]=="{}":
+        flash('Usuario o clave invalidas')
+        return redirect('/')
+    else:
+        return render_template('index.html', user=request.form['username'])
+
+@app.route("/logout",methods = ['GET'])
+def logout():
+    app.logger.info("/logout")
+    return redirect('/')
 
 @app.route('/new_user')
 def add_user_view():
@@ -130,3 +154,26 @@ def addUser():
         response = stub.AddUser(user_pb2.User(id=user['id'],email=user['email'],name=user['email'],nick=user['nick'],password=user['password'],role=user['role'],surname=user['surname']))
     print("Greeter client received: " + str(response))    
     return MessageToJson(response)
+
+
+
+# ROL
+@app.route('/rols')
+def rols():
+	table = ItemTable(items)
+	table.border = True
+	return render_template('rols.html', table=table)
+
+@app.route('/new_rol')
+def add_rol_view():
+	return render_template('addRol.html')
+
+@app.route('/addRol', methods=['POST'])
+def add_rol():
+	_rol = request.form['inputRol']
+	# validate the received values
+	if _rol.method == 'POST':
+		flash('Rol added successfully!')
+		return redirect('/')
+	else:
+		return 'Error while adding rol'

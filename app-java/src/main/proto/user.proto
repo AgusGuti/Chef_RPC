@@ -10,6 +10,8 @@ import "google/protobuf/wrappers.proto";
 
 service UsersService {
   rpc AddUser(User) returns (User) {}
+  rpc ValidarCredenciales(User) returns (User) {}
+
 }
 
 message Users {
