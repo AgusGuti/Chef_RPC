@@ -24,31 +24,45 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.util.DigestUtils;
 
+
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-
-@Table(name = "rol")
+@Table(name = "categoria")
 @Data @NoArgsConstructor
-public class Rol implements Serializable {
+public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idRol;
+	private int id;
+	
+	@ManyToOne
+	@JoinColumn(name = "receta_id")
+	@NotNull(message="Campo requerido.")
+	private Receta receta;
 
-	@Column(name = "rol", unique = true, nullable = false, length = 45)
-	private String rol;
 
-	public Rol(int idRol, String rol) {
-		this.idRol = idRol;
-		this.rol = rol;
+	@Column(name = "categoria", nullable = false)
+	private String categoria;
 
+
+	
+
+	public Categoria(int id, String categoria) {
+		
+		this.id = id;
+		this.categoria = categoria;
+		
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+
     
 }
