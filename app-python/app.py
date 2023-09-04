@@ -17,6 +17,9 @@ import account_pb2_grpc
 import user_pb2
 import user_pb2_grpc
 
+import rol_pb2
+import rol_pb2_grpc
+
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -63,7 +66,6 @@ def users():
 	table = ItemTable(items)
 	table.border = True
 	return render_template('users.html', table=table)
-
 
 @app.route('/new_user')
 def add_user_view():
@@ -130,3 +132,26 @@ def addUser():
         response = stub.AddUser(user_pb2.User(id=user['id'],email=user['email'],name=user['email'],nick=user['nick'],password=user['password'],role=user['role'],surname=user['surname']))
     print("Greeter client received: " + str(response))    
     return MessageToJson(response)
+
+
+
+# ROL
+@app.route('/rols')
+def rols():
+	table = ItemTable(items)
+	table.border = True
+	return render_template('rols.html', table=table)
+
+@app.route('/new_rol')
+def add_rol_view():
+	return render_template('addRol.html')
+
+@app.route('/addRol', methods=['POST'])
+def add_rol():
+	_rol = request.form['inputRol']
+	# validate the received values
+	if _rol.method == 'POST':
+		flash('Rol added successfully!')
+		return redirect('/')
+	else:
+		return 'Error while adding rol'
