@@ -28,7 +28,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-
 @Table(name = "rol")
 @Data @NoArgsConstructor
 public class Rol implements Serializable {
@@ -46,7 +45,7 @@ public class Rol implements Serializable {
 		this.idRol = idRol;
 		this.rol = rol;
 
-
+	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

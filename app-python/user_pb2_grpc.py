@@ -19,6 +19,11 @@ class UsersServiceStub(object):
                 request_serializer=user__pb2.User.SerializeToString,
                 response_deserializer=user__pb2.User.FromString,
                 )
+        self.ValidarCredenciales = channel.unary_unary(
+                '/model.UsersService/ValidarCredenciales',
+                request_serializer=user__pb2.User.SerializeToString,
+                response_deserializer=user__pb2.User.FromString,
+                )
 
 
 class UsersServiceServicer(object):
@@ -30,11 +35,22 @@ class UsersServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ValidarCredenciales(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_UsersServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'AddUser': grpc.unary_unary_rpc_method_handler(
                     servicer.AddUser,
+                    request_deserializer=user__pb2.User.FromString,
+                    response_serializer=user__pb2.User.SerializeToString,
+            ),
+            'ValidarCredenciales': grpc.unary_unary_rpc_method_handler(
+                    servicer.ValidarCredenciales,
                     request_deserializer=user__pb2.User.FromString,
                     response_serializer=user__pb2.User.SerializeToString,
             ),
@@ -60,6 +76,23 @@ class UsersService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/model.UsersService/AddUser',
+            user__pb2.User.SerializeToString,
+            user__pb2.User.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ValidarCredenciales(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.UsersService/ValidarCredenciales',
             user__pb2.User.SerializeToString,
             user__pb2.User.FromString,
             options, channel_credentials,
