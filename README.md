@@ -22,4 +22,6 @@ python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_ou
 
 python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/rol.proto
 
+python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/receta.proto
+
 flask run
