@@ -38,18 +38,18 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Table chefencasa.categoria
 -- -----------------------------------------------------
 
-INSERT INTO chefencasa.`user` (`name`, `surname`, `email`, `nick`, `password`, `role`)
+INSERT INTO chefencasa.`user` (`nombre`, `apellido`, `email`, `clave`, `rol`)
 VALUES
-	('Juan', 'Gonzalez', 'User1234@volcanmail.com', 'User1234', 'cl4ve01', 1),
-	('Maria', 'Fernandez', 'ByteGeek@volcanmail.com', 'ByteGeek', 'cl4ve02', 2),
-	('Carlos', 'Martinez', 'CodeNerd@volcanmail.com', 'CodeNerd', 'cl4ve03', 1),
-	('Ana', 'Rodriguez', 'QuickFox@volcanmail.com', 'QuickFox', 'cl4ve04', 3),
-	('Luis', 'Perez', 'PixelArt@volcanmail.com', 'PixelArt', 'cl4ve05', 2),
-	('Laura', 'Diaz', 'DataGuru@volcanmail.com', 'DataGuru', 'cl4ve06', 1),
-	('Lucía', 'Lopez', 'TechWhiz@volcanmail.com', 'TechWhiz', 'cl4ve07', 3),
-	('Diego', 'Sanchez', 'CodeHero@volcanmail.com', 'CodeHero', 'cl4ve08', 2),
-	('Silvia', 'Gomez', 'NeonStar@volcanmail.com', 'NeonStar', 'cl4ve09', 1),
-	('Mariano', 'Torres', 'ByteBoss@volcanmail.com', 'ByteBoss', 'cl4ve010', 3);
+	('Juan', 'Gonzalez', 'User1234@volcanmail.com', 'cl4ve01', 1),
+	('Maria', 'Fernandez', 'ByteGeek@volcanmail.com', 'cl4ve02', 2),
+	('Carlos', 'Martinez', 'CodeNerd@volcanmail.com', 'cl4ve03', 1),
+	('Ana', 'Rodriguez', 'QuickFox@volcanmail.com', 'cl4ve04', 3),
+	('Luis', 'Perez', 'PixelArt@volcanmail.com', 'cl4ve05', 2),
+	('Laura', 'Diaz', 'DataGuru@volcanmail.com', 'cl4ve06', 1),
+	('Lucía', 'Lopez', 'TechWhiz@volcanmail.com', 'cl4ve07', 3),
+	('Diego', 'Sanchez', 'CodeHero@volcanmail.com', 'cl4ve08', 2),
+	('Silvia', 'Gomez', 'NeonStar@volcanmail.com', 'cl4ve09', 1),
+	('Mariano', 'Torres', 'ByteBoss@volcanmail.com', 'cl4ve010', 3);
 
 
 -- select * from chefencasa.user;
