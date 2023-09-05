@@ -21,15 +21,16 @@ class Ingrediente(_message.Message):
     def __init__(self, idIngrediente: _Optional[int] = ..., ingrediente: _Optional[str] = ...) -> None: ...
 
 class Receta(_message.Message):
-    __slots__ = ["idReceta", "idUsuario", "tituloReceta", "descripcion", "idCategoria", "pasos", "fechaCreacion", "ingredientes", "foto1", "foto2", "foto3", "foto4", "foto5"]
+    __slots__ = ["idReceta", "idUsuario", "tituloReceta", "descripcion", "Categoria", "pasos", "fechaCreacion", "ingredientes", "tiempoPreparacion", "foto1", "foto2", "foto3", "foto4", "foto5"]
     IDRECETA_FIELD_NUMBER: _ClassVar[int]
     IDUSUARIO_FIELD_NUMBER: _ClassVar[int]
     TITULORECETA_FIELD_NUMBER: _ClassVar[int]
     DESCRIPCION_FIELD_NUMBER: _ClassVar[int]
-    IDCATEGORIA_FIELD_NUMBER: _ClassVar[int]
+    CATEGORIA_FIELD_NUMBER: _ClassVar[int]
     PASOS_FIELD_NUMBER: _ClassVar[int]
     FECHACREACION_FIELD_NUMBER: _ClassVar[int]
     INGREDIENTES_FIELD_NUMBER: _ClassVar[int]
+    TIEMPOPREPARACION_FIELD_NUMBER: _ClassVar[int]
     FOTO1_FIELD_NUMBER: _ClassVar[int]
     FOTO2_FIELD_NUMBER: _ClassVar[int]
     FOTO3_FIELD_NUMBER: _ClassVar[int]
@@ -39,16 +40,17 @@ class Receta(_message.Message):
     idUsuario: int
     tituloReceta: str
     descripcion: str
-    idCategoria: str
+    Categoria: str
     pasos: str
     fechaCreacion: _timestamp_pb2.Timestamp
     ingredientes: _containers.RepeatedScalarFieldContainer[str]
+    tiempoPreparacion: int
     foto1: str
     foto2: str
     foto3: str
     foto4: str
     foto5: str
-    def __init__(self, idReceta: _Optional[int] = ..., idUsuario: _Optional[int] = ..., tituloReceta: _Optional[str] = ..., descripcion: _Optional[str] = ..., idCategoria: _Optional[str] = ..., pasos: _Optional[str] = ..., fechaCreacion: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., ingredientes: _Optional[_Iterable[str]] = ..., foto1: _Optional[str] = ..., foto2: _Optional[str] = ..., foto3: _Optional[str] = ..., foto4: _Optional[str] = ..., foto5: _Optional[str] = ...) -> None: ...
+    def __init__(self, idReceta: _Optional[int] = ..., idUsuario: _Optional[int] = ..., tituloReceta: _Optional[str] = ..., descripcion: _Optional[str] = ..., Categoria: _Optional[str] = ..., pasos: _Optional[str] = ..., fechaCreacion: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., ingredientes: _Optional[_Iterable[str]] = ..., tiempoPreparacion: _Optional[int] = ..., foto1: _Optional[str] = ..., foto2: _Optional[str] = ..., foto3: _Optional[str] = ..., foto4: _Optional[str] = ..., foto5: _Optional[str] = ...) -> None: ...
 
 class RecetaResponse(_message.Message):
     __slots__ = ["receta", "mensaje"]
@@ -88,6 +90,6 @@ class RecetaFiltro(_message.Message):
     categoria: int
     nombre: str
     ingredientes: _containers.RepeatedCompositeFieldContainer[Ingrediente]
-    tiempoPrepDesde: str
-    tiempoPrepHasta: str
-    def __init__(self, categoria: _Optional[int] = ..., nombre: _Optional[str] = ..., ingredientes: _Optional[_Iterable[_Union[Ingrediente, _Mapping]]] = ..., tiempoPrepDesde: _Optional[str] = ..., tiempoPrepHasta: _Optional[str] = ...) -> None: ...
+    tiempoPrepDesde: int
+    tiempoPrepHasta: int
+    def __init__(self, categoria: _Optional[int] = ..., nombre: _Optional[str] = ..., ingredientes: _Optional[_Iterable[_Union[Ingrediente, _Mapping]]] = ..., tiempoPrepDesde: _Optional[int] = ..., tiempoPrepHasta: _Optional[int] = ...) -> None: ...
