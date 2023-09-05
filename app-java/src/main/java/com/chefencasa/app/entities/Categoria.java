@@ -39,11 +39,6 @@ public class Categoria implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@ManyToOne
-	@JoinColumn(name = "receta_id")
-	@NotNull(message="Campo requerido.")
-	private Receta receta;
 
 
 	@Column(name = "categoria", nullable = false)
@@ -51,10 +46,15 @@ public class Categoria implements Serializable {
 
 
 	
-
 	public Categoria(int id, String categoria) {
 		
 		this.id = id;
+		this.categoria = categoria;
+		
+	}
+	
+	public Categoria(String categoria) {
+		
 		this.categoria = categoria;
 		
 	}

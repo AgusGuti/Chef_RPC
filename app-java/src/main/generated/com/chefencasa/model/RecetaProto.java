@@ -1107,16 +1107,16 @@ public final class RecetaProto {
         getDescripcionBytes();
 
     /**
-     * <code>string idCategoria = 5;</code>
-     * @return The idCategoria.
+     * <code>string Categoria = 5;</code>
+     * @return The categoria.
      */
-    java.lang.String getIdCategoria();
+    java.lang.String getCategoria();
     /**
-     * <code>string idCategoria = 5;</code>
-     * @return The bytes for idCategoria.
+     * <code>string Categoria = 5;</code>
+     * @return The bytes for categoria.
      */
     com.google.protobuf.ByteString
-        getIdCategoriaBytes();
+        getCategoriaBytes();
 
     /**
      * <code>string pasos = 6;</code>
@@ -1171,60 +1171,66 @@ public final class RecetaProto {
         getIngredientesBytes(int index);
 
     /**
-     * <code>string foto1 = 9;</code>
+     * <code>int32 tiempoPreparacion = 9;</code>
+     * @return The tiempoPreparacion.
+     */
+    int getTiempoPreparacion();
+
+    /**
+     * <code>string foto1 = 10;</code>
      * @return The foto1.
      */
     java.lang.String getFoto1();
     /**
-     * <code>string foto1 = 9;</code>
+     * <code>string foto1 = 10;</code>
      * @return The bytes for foto1.
      */
     com.google.protobuf.ByteString
         getFoto1Bytes();
 
     /**
-     * <code>string foto2 = 10;</code>
+     * <code>string foto2 = 11;</code>
      * @return The foto2.
      */
     java.lang.String getFoto2();
     /**
-     * <code>string foto2 = 10;</code>
+     * <code>string foto2 = 11;</code>
      * @return The bytes for foto2.
      */
     com.google.protobuf.ByteString
         getFoto2Bytes();
 
     /**
-     * <code>string foto3 = 11;</code>
+     * <code>string foto3 = 12;</code>
      * @return The foto3.
      */
     java.lang.String getFoto3();
     /**
-     * <code>string foto3 = 11;</code>
+     * <code>string foto3 = 12;</code>
      * @return The bytes for foto3.
      */
     com.google.protobuf.ByteString
         getFoto3Bytes();
 
     /**
-     * <code>string foto4 = 12;</code>
+     * <code>string foto4 = 13;</code>
      * @return The foto4.
      */
     java.lang.String getFoto4();
     /**
-     * <code>string foto4 = 12;</code>
+     * <code>string foto4 = 13;</code>
      * @return The bytes for foto4.
      */
     com.google.protobuf.ByteString
         getFoto4Bytes();
 
     /**
-     * <code>string foto5 = 13;</code>
+     * <code>string foto5 = 14;</code>
      * @return The foto5.
      */
     java.lang.String getFoto5();
     /**
-     * <code>string foto5 = 13;</code>
+     * <code>string foto5 = 14;</code>
      * @return The bytes for foto5.
      */
     com.google.protobuf.ByteString
@@ -1245,7 +1251,7 @@ public final class RecetaProto {
     private Receta() {
       tituloReceta_ = "";
       descripcion_ = "";
-      idCategoria_ = "";
+      categoria_ = "";
       pasos_ = "";
       ingredientes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       foto1_ = "";
@@ -1311,7 +1317,7 @@ public final class RecetaProto {
             case 42: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              idCategoria_ = s;
+              categoria_ = s;
               break;
             }
             case 50: {
@@ -1342,31 +1348,36 @@ public final class RecetaProto {
               ingredientes_.add(s);
               break;
             }
-            case 74: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 72: {
 
-              foto1_ = s;
+              tiempoPreparacion_ = input.readInt32();
               break;
             }
             case 82: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              foto2_ = s;
+              foto1_ = s;
               break;
             }
             case 90: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              foto3_ = s;
+              foto2_ = s;
               break;
             }
             case 98: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              foto4_ = s;
+              foto3_ = s;
               break;
             }
             case 106: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              foto4_ = s;
+              break;
+            }
+            case 114: {
               java.lang.String s = input.readStringRequireUtf8();
 
               foto5_ = s;
@@ -1499,36 +1510,36 @@ public final class RecetaProto {
       }
     }
 
-    public static final int IDCATEGORIA_FIELD_NUMBER = 5;
-    private volatile java.lang.Object idCategoria_;
+    public static final int CATEGORIA_FIELD_NUMBER = 5;
+    private volatile java.lang.Object categoria_;
     /**
-     * <code>string idCategoria = 5;</code>
-     * @return The idCategoria.
+     * <code>string Categoria = 5;</code>
+     * @return The categoria.
      */
-    public java.lang.String getIdCategoria() {
-      java.lang.Object ref = idCategoria_;
+    public java.lang.String getCategoria() {
+      java.lang.Object ref = categoria_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        idCategoria_ = s;
+        categoria_ = s;
         return s;
       }
     }
     /**
-     * <code>string idCategoria = 5;</code>
-     * @return The bytes for idCategoria.
+     * <code>string Categoria = 5;</code>
+     * @return The bytes for categoria.
      */
     public com.google.protobuf.ByteString
-        getIdCategoriaBytes() {
-      java.lang.Object ref = idCategoria_;
+        getCategoriaBytes() {
+      java.lang.Object ref = categoria_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        idCategoria_ = b;
+        categoria_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -1629,10 +1640,20 @@ public final class RecetaProto {
       return ingredientes_.getByteString(index);
     }
 
-    public static final int FOTO1_FIELD_NUMBER = 9;
+    public static final int TIEMPOPREPARACION_FIELD_NUMBER = 9;
+    private int tiempoPreparacion_;
+    /**
+     * <code>int32 tiempoPreparacion = 9;</code>
+     * @return The tiempoPreparacion.
+     */
+    public int getTiempoPreparacion() {
+      return tiempoPreparacion_;
+    }
+
+    public static final int FOTO1_FIELD_NUMBER = 10;
     private volatile java.lang.Object foto1_;
     /**
-     * <code>string foto1 = 9;</code>
+     * <code>string foto1 = 10;</code>
      * @return The foto1.
      */
     public java.lang.String getFoto1() {
@@ -1648,7 +1669,7 @@ public final class RecetaProto {
       }
     }
     /**
-     * <code>string foto1 = 9;</code>
+     * <code>string foto1 = 10;</code>
      * @return The bytes for foto1.
      */
     public com.google.protobuf.ByteString
@@ -1665,10 +1686,10 @@ public final class RecetaProto {
       }
     }
 
-    public static final int FOTO2_FIELD_NUMBER = 10;
+    public static final int FOTO2_FIELD_NUMBER = 11;
     private volatile java.lang.Object foto2_;
     /**
-     * <code>string foto2 = 10;</code>
+     * <code>string foto2 = 11;</code>
      * @return The foto2.
      */
     public java.lang.String getFoto2() {
@@ -1684,7 +1705,7 @@ public final class RecetaProto {
       }
     }
     /**
-     * <code>string foto2 = 10;</code>
+     * <code>string foto2 = 11;</code>
      * @return The bytes for foto2.
      */
     public com.google.protobuf.ByteString
@@ -1701,10 +1722,10 @@ public final class RecetaProto {
       }
     }
 
-    public static final int FOTO3_FIELD_NUMBER = 11;
+    public static final int FOTO3_FIELD_NUMBER = 12;
     private volatile java.lang.Object foto3_;
     /**
-     * <code>string foto3 = 11;</code>
+     * <code>string foto3 = 12;</code>
      * @return The foto3.
      */
     public java.lang.String getFoto3() {
@@ -1720,7 +1741,7 @@ public final class RecetaProto {
       }
     }
     /**
-     * <code>string foto3 = 11;</code>
+     * <code>string foto3 = 12;</code>
      * @return The bytes for foto3.
      */
     public com.google.protobuf.ByteString
@@ -1737,10 +1758,10 @@ public final class RecetaProto {
       }
     }
 
-    public static final int FOTO4_FIELD_NUMBER = 12;
+    public static final int FOTO4_FIELD_NUMBER = 13;
     private volatile java.lang.Object foto4_;
     /**
-     * <code>string foto4 = 12;</code>
+     * <code>string foto4 = 13;</code>
      * @return The foto4.
      */
     public java.lang.String getFoto4() {
@@ -1756,7 +1777,7 @@ public final class RecetaProto {
       }
     }
     /**
-     * <code>string foto4 = 12;</code>
+     * <code>string foto4 = 13;</code>
      * @return The bytes for foto4.
      */
     public com.google.protobuf.ByteString
@@ -1773,10 +1794,10 @@ public final class RecetaProto {
       }
     }
 
-    public static final int FOTO5_FIELD_NUMBER = 13;
+    public static final int FOTO5_FIELD_NUMBER = 14;
     private volatile java.lang.Object foto5_;
     /**
-     * <code>string foto5 = 13;</code>
+     * <code>string foto5 = 14;</code>
      * @return The foto5.
      */
     public java.lang.String getFoto5() {
@@ -1792,7 +1813,7 @@ public final class RecetaProto {
       }
     }
     /**
-     * <code>string foto5 = 13;</code>
+     * <code>string foto5 = 14;</code>
      * @return The bytes for foto5.
      */
     public com.google.protobuf.ByteString
@@ -1835,8 +1856,8 @@ public final class RecetaProto {
       if (!getDescripcionBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, descripcion_);
       }
-      if (!getIdCategoriaBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, idCategoria_);
+      if (!getCategoriaBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, categoria_);
       }
       if (!getPasosBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 6, pasos_);
@@ -1847,20 +1868,23 @@ public final class RecetaProto {
       for (int i = 0; i < ingredientes_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 8, ingredientes_.getRaw(i));
       }
+      if (tiempoPreparacion_ != 0) {
+        output.writeInt32(9, tiempoPreparacion_);
+      }
       if (!getFoto1Bytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, foto1_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, foto1_);
       }
       if (!getFoto2Bytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, foto2_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 11, foto2_);
       }
       if (!getFoto3Bytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 11, foto3_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 12, foto3_);
       }
       if (!getFoto4Bytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 12, foto4_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 13, foto4_);
       }
       if (!getFoto5Bytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 13, foto5_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, foto5_);
       }
       unknownFields.writeTo(output);
     }
@@ -1885,8 +1909,8 @@ public final class RecetaProto {
       if (!getDescripcionBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, descripcion_);
       }
-      if (!getIdCategoriaBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, idCategoria_);
+      if (!getCategoriaBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, categoria_);
       }
       if (!getPasosBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, pasos_);
@@ -1903,20 +1927,24 @@ public final class RecetaProto {
         size += dataSize;
         size += 1 * getIngredientesList().size();
       }
+      if (tiempoPreparacion_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, tiempoPreparacion_);
+      }
       if (!getFoto1Bytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, foto1_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, foto1_);
       }
       if (!getFoto2Bytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, foto2_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, foto2_);
       }
       if (!getFoto3Bytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, foto3_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, foto3_);
       }
       if (!getFoto4Bytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, foto4_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(13, foto4_);
       }
       if (!getFoto5Bytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(13, foto5_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, foto5_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1941,8 +1969,8 @@ public final class RecetaProto {
           .equals(other.getTituloReceta())) return false;
       if (!getDescripcion()
           .equals(other.getDescripcion())) return false;
-      if (!getIdCategoria()
-          .equals(other.getIdCategoria())) return false;
+      if (!getCategoria()
+          .equals(other.getCategoria())) return false;
       if (!getPasos()
           .equals(other.getPasos())) return false;
       if (hasFechaCreacion() != other.hasFechaCreacion()) return false;
@@ -1952,6 +1980,8 @@ public final class RecetaProto {
       }
       if (!getIngredientesList()
           .equals(other.getIngredientesList())) return false;
+      if (getTiempoPreparacion()
+          != other.getTiempoPreparacion()) return false;
       if (!getFoto1()
           .equals(other.getFoto1())) return false;
       if (!getFoto2()
@@ -1981,8 +2011,8 @@ public final class RecetaProto {
       hash = (53 * hash) + getTituloReceta().hashCode();
       hash = (37 * hash) + DESCRIPCION_FIELD_NUMBER;
       hash = (53 * hash) + getDescripcion().hashCode();
-      hash = (37 * hash) + IDCATEGORIA_FIELD_NUMBER;
-      hash = (53 * hash) + getIdCategoria().hashCode();
+      hash = (37 * hash) + CATEGORIA_FIELD_NUMBER;
+      hash = (53 * hash) + getCategoria().hashCode();
       hash = (37 * hash) + PASOS_FIELD_NUMBER;
       hash = (53 * hash) + getPasos().hashCode();
       if (hasFechaCreacion()) {
@@ -1993,6 +2023,8 @@ public final class RecetaProto {
         hash = (37 * hash) + INGREDIENTES_FIELD_NUMBER;
         hash = (53 * hash) + getIngredientesList().hashCode();
       }
+      hash = (37 * hash) + TIEMPOPREPARACION_FIELD_NUMBER;
+      hash = (53 * hash) + getTiempoPreparacion();
       hash = (37 * hash) + FOTO1_FIELD_NUMBER;
       hash = (53 * hash) + getFoto1().hashCode();
       hash = (37 * hash) + FOTO2_FIELD_NUMBER;
@@ -2144,7 +2176,7 @@ public final class RecetaProto {
 
         descripcion_ = "";
 
-        idCategoria_ = "";
+        categoria_ = "";
 
         pasos_ = "";
 
@@ -2156,6 +2188,8 @@ public final class RecetaProto {
         }
         ingredientes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000001);
+        tiempoPreparacion_ = 0;
+
         foto1_ = "";
 
         foto2_ = "";
@@ -2197,7 +2231,7 @@ public final class RecetaProto {
         result.idUsuario_ = idUsuario_;
         result.tituloReceta_ = tituloReceta_;
         result.descripcion_ = descripcion_;
-        result.idCategoria_ = idCategoria_;
+        result.categoria_ = categoria_;
         result.pasos_ = pasos_;
         if (fechaCreacionBuilder_ == null) {
           result.fechaCreacion_ = fechaCreacion_;
@@ -2209,6 +2243,7 @@ public final class RecetaProto {
           bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.ingredientes_ = ingredientes_;
+        result.tiempoPreparacion_ = tiempoPreparacion_;
         result.foto1_ = foto1_;
         result.foto2_ = foto2_;
         result.foto3_ = foto3_;
@@ -2276,8 +2311,8 @@ public final class RecetaProto {
           descripcion_ = other.descripcion_;
           onChanged();
         }
-        if (!other.getIdCategoria().isEmpty()) {
-          idCategoria_ = other.idCategoria_;
+        if (!other.getCategoria().isEmpty()) {
+          categoria_ = other.categoria_;
           onChanged();
         }
         if (!other.getPasos().isEmpty()) {
@@ -2296,6 +2331,9 @@ public final class RecetaProto {
             ingredientes_.addAll(other.ingredientes_);
           }
           onChanged();
+        }
+        if (other.getTiempoPreparacion() != 0) {
+          setTiempoPreparacion(other.getTiempoPreparacion());
         }
         if (!other.getFoto1().isEmpty()) {
           foto1_ = other.foto1_;
@@ -2559,78 +2597,78 @@ public final class RecetaProto {
         return this;
       }
 
-      private java.lang.Object idCategoria_ = "";
+      private java.lang.Object categoria_ = "";
       /**
-       * <code>string idCategoria = 5;</code>
-       * @return The idCategoria.
+       * <code>string Categoria = 5;</code>
+       * @return The categoria.
        */
-      public java.lang.String getIdCategoria() {
-        java.lang.Object ref = idCategoria_;
+      public java.lang.String getCategoria() {
+        java.lang.Object ref = categoria_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          idCategoria_ = s;
+          categoria_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string idCategoria = 5;</code>
-       * @return The bytes for idCategoria.
+       * <code>string Categoria = 5;</code>
+       * @return The bytes for categoria.
        */
       public com.google.protobuf.ByteString
-          getIdCategoriaBytes() {
-        java.lang.Object ref = idCategoria_;
+          getCategoriaBytes() {
+        java.lang.Object ref = categoria_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          idCategoria_ = b;
+          categoria_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string idCategoria = 5;</code>
-       * @param value The idCategoria to set.
+       * <code>string Categoria = 5;</code>
+       * @param value The categoria to set.
        * @return This builder for chaining.
        */
-      public Builder setIdCategoria(
+      public Builder setCategoria(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        idCategoria_ = value;
+        categoria_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string idCategoria = 5;</code>
+       * <code>string Categoria = 5;</code>
        * @return This builder for chaining.
        */
-      public Builder clearIdCategoria() {
+      public Builder clearCategoria() {
         
-        idCategoria_ = getDefaultInstance().getIdCategoria();
+        categoria_ = getDefaultInstance().getCategoria();
         onChanged();
         return this;
       }
       /**
-       * <code>string idCategoria = 5;</code>
-       * @param value The bytes for idCategoria to set.
+       * <code>string Categoria = 5;</code>
+       * @param value The bytes for categoria to set.
        * @return This builder for chaining.
        */
-      public Builder setIdCategoriaBytes(
+      public Builder setCategoriaBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        idCategoria_ = value;
+        categoria_ = value;
         onChanged();
         return this;
       }
@@ -2940,9 +2978,39 @@ public final class RecetaProto {
         return this;
       }
 
+      private int tiempoPreparacion_ ;
+      /**
+       * <code>int32 tiempoPreparacion = 9;</code>
+       * @return The tiempoPreparacion.
+       */
+      public int getTiempoPreparacion() {
+        return tiempoPreparacion_;
+      }
+      /**
+       * <code>int32 tiempoPreparacion = 9;</code>
+       * @param value The tiempoPreparacion to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTiempoPreparacion(int value) {
+        
+        tiempoPreparacion_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 tiempoPreparacion = 9;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTiempoPreparacion() {
+        
+        tiempoPreparacion_ = 0;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object foto1_ = "";
       /**
-       * <code>string foto1 = 9;</code>
+       * <code>string foto1 = 10;</code>
        * @return The foto1.
        */
       public java.lang.String getFoto1() {
@@ -2958,7 +3026,7 @@ public final class RecetaProto {
         }
       }
       /**
-       * <code>string foto1 = 9;</code>
+       * <code>string foto1 = 10;</code>
        * @return The bytes for foto1.
        */
       public com.google.protobuf.ByteString
@@ -2975,7 +3043,7 @@ public final class RecetaProto {
         }
       }
       /**
-       * <code>string foto1 = 9;</code>
+       * <code>string foto1 = 10;</code>
        * @param value The foto1 to set.
        * @return This builder for chaining.
        */
@@ -2990,7 +3058,7 @@ public final class RecetaProto {
         return this;
       }
       /**
-       * <code>string foto1 = 9;</code>
+       * <code>string foto1 = 10;</code>
        * @return This builder for chaining.
        */
       public Builder clearFoto1() {
@@ -3000,7 +3068,7 @@ public final class RecetaProto {
         return this;
       }
       /**
-       * <code>string foto1 = 9;</code>
+       * <code>string foto1 = 10;</code>
        * @param value The bytes for foto1 to set.
        * @return This builder for chaining.
        */
@@ -3018,7 +3086,7 @@ public final class RecetaProto {
 
       private java.lang.Object foto2_ = "";
       /**
-       * <code>string foto2 = 10;</code>
+       * <code>string foto2 = 11;</code>
        * @return The foto2.
        */
       public java.lang.String getFoto2() {
@@ -3034,7 +3102,7 @@ public final class RecetaProto {
         }
       }
       /**
-       * <code>string foto2 = 10;</code>
+       * <code>string foto2 = 11;</code>
        * @return The bytes for foto2.
        */
       public com.google.protobuf.ByteString
@@ -3051,7 +3119,7 @@ public final class RecetaProto {
         }
       }
       /**
-       * <code>string foto2 = 10;</code>
+       * <code>string foto2 = 11;</code>
        * @param value The foto2 to set.
        * @return This builder for chaining.
        */
@@ -3066,7 +3134,7 @@ public final class RecetaProto {
         return this;
       }
       /**
-       * <code>string foto2 = 10;</code>
+       * <code>string foto2 = 11;</code>
        * @return This builder for chaining.
        */
       public Builder clearFoto2() {
@@ -3076,7 +3144,7 @@ public final class RecetaProto {
         return this;
       }
       /**
-       * <code>string foto2 = 10;</code>
+       * <code>string foto2 = 11;</code>
        * @param value The bytes for foto2 to set.
        * @return This builder for chaining.
        */
@@ -3094,7 +3162,7 @@ public final class RecetaProto {
 
       private java.lang.Object foto3_ = "";
       /**
-       * <code>string foto3 = 11;</code>
+       * <code>string foto3 = 12;</code>
        * @return The foto3.
        */
       public java.lang.String getFoto3() {
@@ -3110,7 +3178,7 @@ public final class RecetaProto {
         }
       }
       /**
-       * <code>string foto3 = 11;</code>
+       * <code>string foto3 = 12;</code>
        * @return The bytes for foto3.
        */
       public com.google.protobuf.ByteString
@@ -3127,7 +3195,7 @@ public final class RecetaProto {
         }
       }
       /**
-       * <code>string foto3 = 11;</code>
+       * <code>string foto3 = 12;</code>
        * @param value The foto3 to set.
        * @return This builder for chaining.
        */
@@ -3142,7 +3210,7 @@ public final class RecetaProto {
         return this;
       }
       /**
-       * <code>string foto3 = 11;</code>
+       * <code>string foto3 = 12;</code>
        * @return This builder for chaining.
        */
       public Builder clearFoto3() {
@@ -3152,7 +3220,7 @@ public final class RecetaProto {
         return this;
       }
       /**
-       * <code>string foto3 = 11;</code>
+       * <code>string foto3 = 12;</code>
        * @param value The bytes for foto3 to set.
        * @return This builder for chaining.
        */
@@ -3170,7 +3238,7 @@ public final class RecetaProto {
 
       private java.lang.Object foto4_ = "";
       /**
-       * <code>string foto4 = 12;</code>
+       * <code>string foto4 = 13;</code>
        * @return The foto4.
        */
       public java.lang.String getFoto4() {
@@ -3186,7 +3254,7 @@ public final class RecetaProto {
         }
       }
       /**
-       * <code>string foto4 = 12;</code>
+       * <code>string foto4 = 13;</code>
        * @return The bytes for foto4.
        */
       public com.google.protobuf.ByteString
@@ -3203,7 +3271,7 @@ public final class RecetaProto {
         }
       }
       /**
-       * <code>string foto4 = 12;</code>
+       * <code>string foto4 = 13;</code>
        * @param value The foto4 to set.
        * @return This builder for chaining.
        */
@@ -3218,7 +3286,7 @@ public final class RecetaProto {
         return this;
       }
       /**
-       * <code>string foto4 = 12;</code>
+       * <code>string foto4 = 13;</code>
        * @return This builder for chaining.
        */
       public Builder clearFoto4() {
@@ -3228,7 +3296,7 @@ public final class RecetaProto {
         return this;
       }
       /**
-       * <code>string foto4 = 12;</code>
+       * <code>string foto4 = 13;</code>
        * @param value The bytes for foto4 to set.
        * @return This builder for chaining.
        */
@@ -3246,7 +3314,7 @@ public final class RecetaProto {
 
       private java.lang.Object foto5_ = "";
       /**
-       * <code>string foto5 = 13;</code>
+       * <code>string foto5 = 14;</code>
        * @return The foto5.
        */
       public java.lang.String getFoto5() {
@@ -3262,7 +3330,7 @@ public final class RecetaProto {
         }
       }
       /**
-       * <code>string foto5 = 13;</code>
+       * <code>string foto5 = 14;</code>
        * @return The bytes for foto5.
        */
       public com.google.protobuf.ByteString
@@ -3279,7 +3347,7 @@ public final class RecetaProto {
         }
       }
       /**
-       * <code>string foto5 = 13;</code>
+       * <code>string foto5 = 14;</code>
        * @param value The foto5 to set.
        * @return This builder for chaining.
        */
@@ -3294,7 +3362,7 @@ public final class RecetaProto {
         return this;
       }
       /**
-       * <code>string foto5 = 13;</code>
+       * <code>string foto5 = 14;</code>
        * @return This builder for chaining.
        */
       public Builder clearFoto5() {
@@ -3304,7 +3372,7 @@ public final class RecetaProto {
         return this;
       }
       /**
-       * <code>string foto5 = 13;</code>
+       * <code>string foto5 = 14;</code>
        * @param value The bytes for foto5 to set.
        * @return This builder for chaining.
        */
@@ -6093,28 +6161,16 @@ public final class RecetaProto {
         int index);
 
     /**
-     * <code>string tiempoPrepDesde = 4;</code>
+     * <code>int32 tiempoPrepDesde = 4;</code>
      * @return The tiempoPrepDesde.
      */
-    java.lang.String getTiempoPrepDesde();
-    /**
-     * <code>string tiempoPrepDesde = 4;</code>
-     * @return The bytes for tiempoPrepDesde.
-     */
-    com.google.protobuf.ByteString
-        getTiempoPrepDesdeBytes();
+    int getTiempoPrepDesde();
 
     /**
-     * <code>string tiempoPrepHasta = 5;</code>
+     * <code>int32 tiempoPrepHasta = 5;</code>
      * @return The tiempoPrepHasta.
      */
-    java.lang.String getTiempoPrepHasta();
-    /**
-     * <code>string tiempoPrepHasta = 5;</code>
-     * @return The bytes for tiempoPrepHasta.
-     */
-    com.google.protobuf.ByteString
-        getTiempoPrepHastaBytes();
+    int getTiempoPrepHasta();
   }
   /**
    * Protobuf type {@code model.RecetaFiltro}
@@ -6131,8 +6187,6 @@ public final class RecetaProto {
     private RecetaFiltro() {
       nombre_ = "";
       ingredientes_ = java.util.Collections.emptyList();
-      tiempoPrepDesde_ = "";
-      tiempoPrepHasta_ = "";
     }
 
     @java.lang.Override
@@ -6186,16 +6240,14 @@ public final class RecetaProto {
                   input.readMessage(com.chefencasa.model.RecetaProto.Ingrediente.parser(), extensionRegistry));
               break;
             }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 32: {
 
-              tiempoPrepDesde_ = s;
+              tiempoPrepDesde_ = input.readInt32();
               break;
             }
-            case 42: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 40: {
 
-              tiempoPrepHasta_ = s;
+              tiempoPrepHasta_ = input.readInt32();
               break;
             }
             default: {
@@ -6315,75 +6367,23 @@ public final class RecetaProto {
     }
 
     public static final int TIEMPOPREPDESDE_FIELD_NUMBER = 4;
-    private volatile java.lang.Object tiempoPrepDesde_;
+    private int tiempoPrepDesde_;
     /**
-     * <code>string tiempoPrepDesde = 4;</code>
+     * <code>int32 tiempoPrepDesde = 4;</code>
      * @return The tiempoPrepDesde.
      */
-    public java.lang.String getTiempoPrepDesde() {
-      java.lang.Object ref = tiempoPrepDesde_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        tiempoPrepDesde_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string tiempoPrepDesde = 4;</code>
-     * @return The bytes for tiempoPrepDesde.
-     */
-    public com.google.protobuf.ByteString
-        getTiempoPrepDesdeBytes() {
-      java.lang.Object ref = tiempoPrepDesde_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        tiempoPrepDesde_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getTiempoPrepDesde() {
+      return tiempoPrepDesde_;
     }
 
     public static final int TIEMPOPREPHASTA_FIELD_NUMBER = 5;
-    private volatile java.lang.Object tiempoPrepHasta_;
+    private int tiempoPrepHasta_;
     /**
-     * <code>string tiempoPrepHasta = 5;</code>
+     * <code>int32 tiempoPrepHasta = 5;</code>
      * @return The tiempoPrepHasta.
      */
-    public java.lang.String getTiempoPrepHasta() {
-      java.lang.Object ref = tiempoPrepHasta_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        tiempoPrepHasta_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string tiempoPrepHasta = 5;</code>
-     * @return The bytes for tiempoPrepHasta.
-     */
-    public com.google.protobuf.ByteString
-        getTiempoPrepHastaBytes() {
-      java.lang.Object ref = tiempoPrepHasta_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        tiempoPrepHasta_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getTiempoPrepHasta() {
+      return tiempoPrepHasta_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -6409,11 +6409,11 @@ public final class RecetaProto {
       for (int i = 0; i < ingredientes_.size(); i++) {
         output.writeMessage(3, ingredientes_.get(i));
       }
-      if (!getTiempoPrepDesdeBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, tiempoPrepDesde_);
+      if (tiempoPrepDesde_ != 0) {
+        output.writeInt32(4, tiempoPrepDesde_);
       }
-      if (!getTiempoPrepHastaBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, tiempoPrepHasta_);
+      if (tiempoPrepHasta_ != 0) {
+        output.writeInt32(5, tiempoPrepHasta_);
       }
       unknownFields.writeTo(output);
     }
@@ -6435,11 +6435,13 @@ public final class RecetaProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, ingredientes_.get(i));
       }
-      if (!getTiempoPrepDesdeBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, tiempoPrepDesde_);
+      if (tiempoPrepDesde_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, tiempoPrepDesde_);
       }
-      if (!getTiempoPrepHastaBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, tiempoPrepHasta_);
+      if (tiempoPrepHasta_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, tiempoPrepHasta_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -6462,10 +6464,10 @@ public final class RecetaProto {
           .equals(other.getNombre())) return false;
       if (!getIngredientesList()
           .equals(other.getIngredientesList())) return false;
-      if (!getTiempoPrepDesde()
-          .equals(other.getTiempoPrepDesde())) return false;
-      if (!getTiempoPrepHasta()
-          .equals(other.getTiempoPrepHasta())) return false;
+      if (getTiempoPrepDesde()
+          != other.getTiempoPrepDesde()) return false;
+      if (getTiempoPrepHasta()
+          != other.getTiempoPrepHasta()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -6486,9 +6488,9 @@ public final class RecetaProto {
         hash = (53 * hash) + getIngredientesList().hashCode();
       }
       hash = (37 * hash) + TIEMPOPREPDESDE_FIELD_NUMBER;
-      hash = (53 * hash) + getTiempoPrepDesde().hashCode();
+      hash = (53 * hash) + getTiempoPrepDesde();
       hash = (37 * hash) + TIEMPOPREPHASTA_FIELD_NUMBER;
-      hash = (53 * hash) + getTiempoPrepHasta().hashCode();
+      hash = (53 * hash) + getTiempoPrepHasta();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -6633,9 +6635,9 @@ public final class RecetaProto {
         } else {
           ingredientesBuilder_.clear();
         }
-        tiempoPrepDesde_ = "";
+        tiempoPrepDesde_ = 0;
 
-        tiempoPrepHasta_ = "";
+        tiempoPrepHasta_ = 0;
 
         return this;
       }
@@ -6758,13 +6760,11 @@ public final class RecetaProto {
             }
           }
         }
-        if (!other.getTiempoPrepDesde().isEmpty()) {
-          tiempoPrepDesde_ = other.tiempoPrepDesde_;
-          onChanged();
+        if (other.getTiempoPrepDesde() != 0) {
+          setTiempoPrepDesde(other.getTiempoPrepDesde());
         }
-        if (!other.getTiempoPrepHasta().isEmpty()) {
-          tiempoPrepHasta_ = other.tiempoPrepHasta_;
-          onChanged();
+        if (other.getTiempoPrepHasta() != 0) {
+          setTiempoPrepHasta(other.getTiempoPrepHasta());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -7142,154 +7142,62 @@ public final class RecetaProto {
         return ingredientesBuilder_;
       }
 
-      private java.lang.Object tiempoPrepDesde_ = "";
+      private int tiempoPrepDesde_ ;
       /**
-       * <code>string tiempoPrepDesde = 4;</code>
+       * <code>int32 tiempoPrepDesde = 4;</code>
        * @return The tiempoPrepDesde.
        */
-      public java.lang.String getTiempoPrepDesde() {
-        java.lang.Object ref = tiempoPrepDesde_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          tiempoPrepDesde_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getTiempoPrepDesde() {
+        return tiempoPrepDesde_;
       }
       /**
-       * <code>string tiempoPrepDesde = 4;</code>
-       * @return The bytes for tiempoPrepDesde.
-       */
-      public com.google.protobuf.ByteString
-          getTiempoPrepDesdeBytes() {
-        java.lang.Object ref = tiempoPrepDesde_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          tiempoPrepDesde_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string tiempoPrepDesde = 4;</code>
+       * <code>int32 tiempoPrepDesde = 4;</code>
        * @param value The tiempoPrepDesde to set.
        * @return This builder for chaining.
        */
-      public Builder setTiempoPrepDesde(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+      public Builder setTiempoPrepDesde(int value) {
+        
         tiempoPrepDesde_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string tiempoPrepDesde = 4;</code>
+       * <code>int32 tiempoPrepDesde = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearTiempoPrepDesde() {
         
-        tiempoPrepDesde_ = getDefaultInstance().getTiempoPrepDesde();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string tiempoPrepDesde = 4;</code>
-       * @param value The bytes for tiempoPrepDesde to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTiempoPrepDesdeBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        tiempoPrepDesde_ = value;
+        tiempoPrepDesde_ = 0;
         onChanged();
         return this;
       }
 
-      private java.lang.Object tiempoPrepHasta_ = "";
+      private int tiempoPrepHasta_ ;
       /**
-       * <code>string tiempoPrepHasta = 5;</code>
+       * <code>int32 tiempoPrepHasta = 5;</code>
        * @return The tiempoPrepHasta.
        */
-      public java.lang.String getTiempoPrepHasta() {
-        java.lang.Object ref = tiempoPrepHasta_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          tiempoPrepHasta_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getTiempoPrepHasta() {
+        return tiempoPrepHasta_;
       }
       /**
-       * <code>string tiempoPrepHasta = 5;</code>
-       * @return The bytes for tiempoPrepHasta.
-       */
-      public com.google.protobuf.ByteString
-          getTiempoPrepHastaBytes() {
-        java.lang.Object ref = tiempoPrepHasta_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          tiempoPrepHasta_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string tiempoPrepHasta = 5;</code>
+       * <code>int32 tiempoPrepHasta = 5;</code>
        * @param value The tiempoPrepHasta to set.
        * @return This builder for chaining.
        */
-      public Builder setTiempoPrepHasta(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+      public Builder setTiempoPrepHasta(int value) {
+        
         tiempoPrepHasta_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string tiempoPrepHasta = 5;</code>
+       * <code>int32 tiempoPrepHasta = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearTiempoPrepHasta() {
         
-        tiempoPrepHasta_ = getDefaultInstance().getTiempoPrepHasta();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string tiempoPrepHasta = 5;</code>
-       * @param value The bytes for tiempoPrepHasta to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTiempoPrepHastaBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        tiempoPrepHasta_ = value;
+        tiempoPrepHasta_ = 0;
         onChanged();
         return this;
       }
@@ -7399,31 +7307,32 @@ public final class RecetaProto {
       "mpty.proto\032\036google/protobuf/wrappers.pro" +
       "to\032\037google/protobuf/timestamp.proto\"\007\n\005E" +
       "mpty\"9\n\013Ingrediente\022\025\n\ridIngrediente\030\001 \001" +
-      "(\005\022\023\n\013ingrediente\030\002 \001(\t\"\220\002\n\006Receta\022\020\n\010id" +
+      "(\005\022\023\n\013ingrediente\030\002 \001(\t\"\251\002\n\006Receta\022\020\n\010id" +
       "Receta\030\001 \001(\005\022\021\n\tidUsuario\030\002 \001(\005\022\024\n\014titul" +
-      "oReceta\030\003 \001(\t\022\023\n\013descripcion\030\004 \001(\t\022\023\n\013id" +
-      "Categoria\030\005 \001(\t\022\r\n\005pasos\030\006 \001(\t\0221\n\rfechaC" +
-      "reacion\030\007 \001(\0132\032.google.protobuf.Timestam" +
-      "p\022\024\n\014ingredientes\030\010 \003(\t\022\r\n\005foto1\030\t \001(\t\022\r" +
-      "\n\005foto2\030\n \001(\t\022\r\n\005foto3\030\013 \001(\t\022\r\n\005foto4\030\014 " +
-      "\001(\t\022\r\n\005foto5\030\r \001(\t\"@\n\016RecetaResponse\022\035\n\006" +
-      "receta\030\001 \001(\0132\r.model.Receta\022\017\n\007mensaje\030\002" +
-      " \001(\t\"A\n\017RecetasResponse\022\035\n\006receta\030\001 \003(\0132" +
-      "\r.model.Receta\022\017\n\007mensaje\030\002 \001(\t\"\036\n\tUsuar" +
-      "ioId\022\021\n\tidUsuario\030\001 \001(\005\"\034\n\010RecetaId\022\020\n\010i" +
-      "dReceta\030\001 \001(\005\"\215\001\n\014RecetaFiltro\022\021\n\tcatego" +
-      "ria\030\001 \001(\005\022\016\n\006nombre\030\002 \001(\t\022(\n\014ingrediente" +
-      "s\030\003 \003(\0132\022.model.Ingrediente\022\027\n\017tiempoPre" +
-      "pDesde\030\004 \001(\t\022\027\n\017tiempoPrepHasta\030\005 \001(\t2\271\002" +
-      "\n\016RecetasService\0223\n\tAddReceta\022\r.model.Re" +
-      "ceta\032\025.model.RecetaResponse\"\000\022<\n\013getByFi" +
-      "lter\022\023.model.RecetaFiltro\032\026.model.Receta" +
-      "sResponse\"\000\0227\n\rgetAllRecetas\022\014.model.Emp" +
-      "ty\032\026.model.RecetasResponse\"\000\022A\n\023getAllRe" +
-      "cetasByUser\022\020.model.UsuarioId\032\026.model.Re" +
-      "cetasResponse\"\000\0228\n\014updateReceta\022\017.model." +
-      "RecetaId\032\025.model.RecetaResponse\"\000B#\n\024com" +
-      ".chefencasa.modelB\013RecetaProtob\006proto3"
+      "oReceta\030\003 \001(\t\022\023\n\013descripcion\030\004 \001(\t\022\021\n\tCa" +
+      "tegoria\030\005 \001(\t\022\r\n\005pasos\030\006 \001(\t\0221\n\rfechaCre" +
+      "acion\030\007 \001(\0132\032.google.protobuf.Timestamp\022" +
+      "\024\n\014ingredientes\030\010 \003(\t\022\031\n\021tiempoPreparaci" +
+      "on\030\t \001(\005\022\r\n\005foto1\030\n \001(\t\022\r\n\005foto2\030\013 \001(\t\022\r" +
+      "\n\005foto3\030\014 \001(\t\022\r\n\005foto4\030\r \001(\t\022\r\n\005foto5\030\016 " +
+      "\001(\t\"@\n\016RecetaResponse\022\035\n\006receta\030\001 \001(\0132\r." +
+      "model.Receta\022\017\n\007mensaje\030\002 \001(\t\"A\n\017Recetas" +
+      "Response\022\035\n\006receta\030\001 \003(\0132\r.model.Receta\022" +
+      "\017\n\007mensaje\030\002 \001(\t\"\036\n\tUsuarioId\022\021\n\tidUsuar" +
+      "io\030\001 \001(\005\"\034\n\010RecetaId\022\020\n\010idReceta\030\001 \001(\005\"\215" +
+      "\001\n\014RecetaFiltro\022\021\n\tcategoria\030\001 \001(\005\022\016\n\006no" +
+      "mbre\030\002 \001(\t\022(\n\014ingredientes\030\003 \003(\0132\022.model" +
+      ".Ingrediente\022\027\n\017tiempoPrepDesde\030\004 \001(\005\022\027\n" +
+      "\017tiempoPrepHasta\030\005 \001(\0052\271\002\n\016RecetasServic" +
+      "e\0223\n\tAddReceta\022\r.model.Receta\032\025.model.Re" +
+      "cetaResponse\"\000\022<\n\013getByFilter\022\023.model.Re" +
+      "cetaFiltro\032\026.model.RecetasResponse\"\000\0227\n\r" +
+      "getAllRecetas\022\014.model.Empty\032\026.model.Rece" +
+      "tasResponse\"\000\022A\n\023getAllRecetasByUser\022\020.m" +
+      "odel.UsuarioId\032\026.model.RecetasResponse\"\000" +
+      "\0228\n\014updateReceta\022\017.model.RecetaId\032\025.mode" +
+      "l.RecetaResponse\"\000B#\n\024com.chefencasa.mod" +
+      "elB\013RecetaProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -7449,7 +7358,7 @@ public final class RecetaProto {
     internal_static_model_Receta_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_Receta_descriptor,
-        new java.lang.String[] { "IdReceta", "IdUsuario", "TituloReceta", "Descripcion", "IdCategoria", "Pasos", "FechaCreacion", "Ingredientes", "Foto1", "Foto2", "Foto3", "Foto4", "Foto5", });
+        new java.lang.String[] { "IdReceta", "IdUsuario", "TituloReceta", "Descripcion", "Categoria", "Pasos", "FechaCreacion", "Ingredientes", "TiempoPreparacion", "Foto1", "Foto2", "Foto3", "Foto4", "Foto5", });
     internal_static_model_RecetaResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_model_RecetaResponse_fieldAccessorTable = new

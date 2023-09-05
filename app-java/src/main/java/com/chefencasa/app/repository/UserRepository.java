@@ -15,5 +15,7 @@ public interface UserRepository extends JpaRepository<User, Serializable> {
 	@Query("SELECT u FROM User u WHERE (u.nombre LIKE :nombre AND u.clave LIKE :clave) OR (u.email LIKE :email AND u.clave LIKE :clave)")
 	public abstract User validarCredenciales(@Param("nombre") String nombre, @Param("email") String email,
 			@Param("clave") String clave);
+	
+	public abstract User findById(int id);
 
 }
