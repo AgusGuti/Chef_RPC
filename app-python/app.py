@@ -74,15 +74,38 @@ def autenticar():
     app.logger.info("/autenticar",request.form['username'])
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = user_pb2_grpc.UsersServiceStub(channel)
-        response = stub.ValidarCredenciales(user_pb2.User(name=request.form['username'],email=request.form['username'],password=request.form['password']))
+        response = stub.ValidarCredenciales(user_pb2.User(nombre=request.form['username'],email=request.form['username'],clave=request.form['password']))
     print("Greeter client received: " + str(response))    
     user={"user":MessageToJson(response)}
     app.logger.info("user %s",user)
     if user["user"]=="{}":
-        flash('Usuario o clave invalidas')
+        flash('Usuario y/o clave incorrectos')
         return redirect('/')
     else:
         return render_template('index.html', user=request.form['username'])
+
+@app.route("/registrar",methods = ['POST'])
+def registrarUser():
+    app.logger.info("/registrar")
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = user_pb2_grpc.UsersServiceStub(channel)
+        response = stub.AddUser(user_pb2.User(nombre=request.form['nombre'],apellido=request.form['apellido'],email=request.form['email'],clave=request.form['clave']))
+    print("Greeter client received: " + str(response))    
+    user={"user":MessageToJson(response)}
+    app.logger.info("user registrado %s",user)
+    if user["user"]=="{}":
+        flash('Error al intentar cargar el usuario')
+        return redirect('/registrar')
+    else:
+        flash('Usuario creado exitosamente!')
+        return redirect('/')
+
+
+@app.route("/registrar",methods = ['GET'])
+def registrar():
+    app.logger.info("/registrar")
+    return render_template('registrar.html')
+
 
 @app.route("/logout",methods = ['GET'])
 def logout():

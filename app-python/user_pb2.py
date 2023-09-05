@@ -15,7 +15,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nuser.proto\x12\x05model\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\"\n\x05Users\x12\x19\n\x04user\x18\x01 \x03(\x0b\x32\x0b.model.User\"n\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0c\n\x04nick\x18\x04 \x01(\t\x12\x10\n\x08password\x18\x05 \x01(\t\x12\x0c\n\x04role\x18\x06 \x01(\t\x12\x0f\n\x07surname\x18\x07 \x01(\t2h\n\x0cUsersService\x12%\n\x07\x41\x64\x64User\x12\x0b.model.User\x1a\x0b.model.User\"\x00\x12\x31\n\x13ValidarCredenciales\x12\x0b.model.User\x1a\x0b.model.User\"\x00\x42!\n\x14\x63om.chefencasa.modelB\tUserProtob\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nuser.proto\x12\x05model\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\"\n\x05Users\x12\x19\n\x04user\x18\x01 \x03(\x0b\x32\x0b.model.User\"_\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0e\n\x06nombre\x18\x02 \x01(\t\x12\x10\n\x08\x61pellido\x18\x03 \x01(\t\x12\r\n\x05\x65mail\x18\x04 \x01(\t\x12\r\n\x05\x63lave\x18\x05 \x01(\t\x12\x0b\n\x03rol\x18\x06 \x01(\t2h\n\x0cUsersService\x12%\n\x07\x41\x64\x64User\x12\x0b.model.User\x1a\x0b.model.User\"\x00\x12\x31\n\x13ValidarCredenciales\x12\x0b.model.User\x1a\x0b.model.User\"\x00\x42!\n\x14\x63om.chefencasa.modelB\tUserProtob\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -27,7 +27,7 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_USERS']._serialized_start=82
   _globals['_USERS']._serialized_end=116
   _globals['_USER']._serialized_start=118
-  _globals['_USER']._serialized_end=228
-  _globals['_USERSSERVICE']._serialized_start=230
-  _globals['_USERSSERVICE']._serialized_end=334
+  _globals['_USER']._serialized_end=213
+  _globals['_USERSSERVICE']._serialized_start=215
+  _globals['_USERSSERVICE']._serialized_end=319
 # @@protoc_insertion_point(module_scope)

@@ -14,19 +14,17 @@ class Users(_message.Message):
     def __init__(self, user: _Optional[_Iterable[_Union[User, _Mapping]]] = ...) -> None: ...
 
 class User(_message.Message):
-    __slots__ = ["id", "email", "name", "nick", "password", "role", "surname"]
+    __slots__ = ["id", "nombre", "apellido", "email", "clave", "rol"]
     ID_FIELD_NUMBER: _ClassVar[int]
+    NOMBRE_FIELD_NUMBER: _ClassVar[int]
+    APELLIDO_FIELD_NUMBER: _ClassVar[int]
     EMAIL_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    NICK_FIELD_NUMBER: _ClassVar[int]
-    PASSWORD_FIELD_NUMBER: _ClassVar[int]
-    ROLE_FIELD_NUMBER: _ClassVar[int]
-    SURNAME_FIELD_NUMBER: _ClassVar[int]
+    CLAVE_FIELD_NUMBER: _ClassVar[int]
+    ROL_FIELD_NUMBER: _ClassVar[int]
     id: int
+    nombre: str
+    apellido: str
     email: str
-    name: str
-    nick: str
-    password: str
-    role: str
-    surname: str
-    def __init__(self, id: _Optional[int] = ..., email: _Optional[str] = ..., name: _Optional[str] = ..., nick: _Optional[str] = ..., password: _Optional[str] = ..., role: _Optional[str] = ..., surname: _Optional[str] = ...) -> None: ...
+    clave: str
+    rol: str
+    def __init__(self, id: _Optional[int] = ..., nombre: _Optional[str] = ..., apellido: _Optional[str] = ..., email: _Optional[str] = ..., clave: _Optional[str] = ..., rol: _Optional[str] = ...) -> None: ...
