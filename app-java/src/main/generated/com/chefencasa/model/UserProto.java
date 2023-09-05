@@ -813,76 +813,64 @@ public final class UserProto {
     int getId();
 
     /**
-     * <code>string email = 2;</code>
+     * <code>string nombre = 2;</code>
+     * @return The nombre.
+     */
+    java.lang.String getNombre();
+    /**
+     * <code>string nombre = 2;</code>
+     * @return The bytes for nombre.
+     */
+    com.google.protobuf.ByteString
+        getNombreBytes();
+
+    /**
+     * <code>string apellido = 3;</code>
+     * @return The apellido.
+     */
+    java.lang.String getApellido();
+    /**
+     * <code>string apellido = 3;</code>
+     * @return The bytes for apellido.
+     */
+    com.google.protobuf.ByteString
+        getApellidoBytes();
+
+    /**
+     * <code>string email = 4;</code>
      * @return The email.
      */
     java.lang.String getEmail();
     /**
-     * <code>string email = 2;</code>
+     * <code>string email = 4;</code>
      * @return The bytes for email.
      */
     com.google.protobuf.ByteString
         getEmailBytes();
 
     /**
-     * <code>string name = 3;</code>
-     * @return The name.
+     * <code>string clave = 5;</code>
+     * @return The clave.
      */
-    java.lang.String getName();
+    java.lang.String getClave();
     /**
-     * <code>string name = 3;</code>
-     * @return The bytes for name.
+     * <code>string clave = 5;</code>
+     * @return The bytes for clave.
      */
     com.google.protobuf.ByteString
-        getNameBytes();
+        getClaveBytes();
 
     /**
-     * <code>string nick = 4;</code>
-     * @return The nick.
+     * <code>string rol = 6;</code>
+     * @return The rol.
      */
-    java.lang.String getNick();
+    java.lang.String getRol();
     /**
-     * <code>string nick = 4;</code>
-     * @return The bytes for nick.
+     * <code>string rol = 6;</code>
+     * @return The bytes for rol.
      */
     com.google.protobuf.ByteString
-        getNickBytes();
-
-    /**
-     * <code>string password = 5;</code>
-     * @return The password.
-     */
-    java.lang.String getPassword();
-    /**
-     * <code>string password = 5;</code>
-     * @return The bytes for password.
-     */
-    com.google.protobuf.ByteString
-        getPasswordBytes();
-
-    /**
-     * <code>string role = 6;</code>
-     * @return The role.
-     */
-    java.lang.String getRole();
-    /**
-     * <code>string role = 6;</code>
-     * @return The bytes for role.
-     */
-    com.google.protobuf.ByteString
-        getRoleBytes();
-
-    /**
-     * <code>string surname = 7;</code>
-     * @return The surname.
-     */
-    java.lang.String getSurname();
-    /**
-     * <code>string surname = 7;</code>
-     * @return The bytes for surname.
-     */
-    com.google.protobuf.ByteString
-        getSurnameBytes();
+        getRolBytes();
   }
   /**
    * Protobuf type {@code model.User}
@@ -897,12 +885,11 @@ public final class UserProto {
       super(builder);
     }
     private User() {
+      nombre_ = "";
+      apellido_ = "";
       email_ = "";
-      name_ = "";
-      nick_ = "";
-      password_ = "";
-      role_ = "";
-      surname_ = "";
+      clave_ = "";
+      rol_ = "";
     }
 
     @java.lang.Override
@@ -943,37 +930,31 @@ public final class UserProto {
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              email_ = s;
+              nombre_ = s;
               break;
             }
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              name_ = s;
+              apellido_ = s;
               break;
             }
             case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              nick_ = s;
+              email_ = s;
               break;
             }
             case 42: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              password_ = s;
+              clave_ = s;
               break;
             }
             case 50: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              role_ = s;
-              break;
-            }
-            case 58: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              surname_ = s;
+              rol_ = s;
               break;
             }
             default: {
@@ -1018,10 +999,82 @@ public final class UserProto {
       return id_;
     }
 
-    public static final int EMAIL_FIELD_NUMBER = 2;
+    public static final int NOMBRE_FIELD_NUMBER = 2;
+    private volatile java.lang.Object nombre_;
+    /**
+     * <code>string nombre = 2;</code>
+     * @return The nombre.
+     */
+    public java.lang.String getNombre() {
+      java.lang.Object ref = nombre_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        nombre_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string nombre = 2;</code>
+     * @return The bytes for nombre.
+     */
+    public com.google.protobuf.ByteString
+        getNombreBytes() {
+      java.lang.Object ref = nombre_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nombre_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int APELLIDO_FIELD_NUMBER = 3;
+    private volatile java.lang.Object apellido_;
+    /**
+     * <code>string apellido = 3;</code>
+     * @return The apellido.
+     */
+    public java.lang.String getApellido() {
+      java.lang.Object ref = apellido_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        apellido_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string apellido = 3;</code>
+     * @return The bytes for apellido.
+     */
+    public com.google.protobuf.ByteString
+        getApellidoBytes() {
+      java.lang.Object ref = apellido_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        apellido_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int EMAIL_FIELD_NUMBER = 4;
     private volatile java.lang.Object email_;
     /**
-     * <code>string email = 2;</code>
+     * <code>string email = 4;</code>
      * @return The email.
      */
     public java.lang.String getEmail() {
@@ -1037,7 +1090,7 @@ public final class UserProto {
       }
     }
     /**
-     * <code>string email = 2;</code>
+     * <code>string email = 4;</code>
      * @return The bytes for email.
      */
     public com.google.protobuf.ByteString
@@ -1054,180 +1107,72 @@ public final class UserProto {
       }
     }
 
-    public static final int NAME_FIELD_NUMBER = 3;
-    private volatile java.lang.Object name_;
+    public static final int CLAVE_FIELD_NUMBER = 5;
+    private volatile java.lang.Object clave_;
     /**
-     * <code>string name = 3;</code>
-     * @return The name.
+     * <code>string clave = 5;</code>
+     * @return The clave.
      */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
+    public java.lang.String getClave() {
+      java.lang.Object ref = clave_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        name_ = s;
+        clave_ = s;
         return s;
       }
     }
     /**
-     * <code>string name = 3;</code>
-     * @return The bytes for name.
+     * <code>string clave = 5;</code>
+     * @return The bytes for clave.
      */
     public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
+        getClaveBytes() {
+      java.lang.Object ref = clave_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        name_ = b;
+        clave_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int NICK_FIELD_NUMBER = 4;
-    private volatile java.lang.Object nick_;
+    public static final int ROL_FIELD_NUMBER = 6;
+    private volatile java.lang.Object rol_;
     /**
-     * <code>string nick = 4;</code>
-     * @return The nick.
+     * <code>string rol = 6;</code>
+     * @return The rol.
      */
-    public java.lang.String getNick() {
-      java.lang.Object ref = nick_;
+    public java.lang.String getRol() {
+      java.lang.Object ref = rol_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        nick_ = s;
+        rol_ = s;
         return s;
       }
     }
     /**
-     * <code>string nick = 4;</code>
-     * @return The bytes for nick.
+     * <code>string rol = 6;</code>
+     * @return The bytes for rol.
      */
     public com.google.protobuf.ByteString
-        getNickBytes() {
-      java.lang.Object ref = nick_;
+        getRolBytes() {
+      java.lang.Object ref = rol_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        nick_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int PASSWORD_FIELD_NUMBER = 5;
-    private volatile java.lang.Object password_;
-    /**
-     * <code>string password = 5;</code>
-     * @return The password.
-     */
-    public java.lang.String getPassword() {
-      java.lang.Object ref = password_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        password_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string password = 5;</code>
-     * @return The bytes for password.
-     */
-    public com.google.protobuf.ByteString
-        getPasswordBytes() {
-      java.lang.Object ref = password_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        password_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int ROLE_FIELD_NUMBER = 6;
-    private volatile java.lang.Object role_;
-    /**
-     * <code>string role = 6;</code>
-     * @return The role.
-     */
-    public java.lang.String getRole() {
-      java.lang.Object ref = role_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        role_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string role = 6;</code>
-     * @return The bytes for role.
-     */
-    public com.google.protobuf.ByteString
-        getRoleBytes() {
-      java.lang.Object ref = role_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        role_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int SURNAME_FIELD_NUMBER = 7;
-    private volatile java.lang.Object surname_;
-    /**
-     * <code>string surname = 7;</code>
-     * @return The surname.
-     */
-    public java.lang.String getSurname() {
-      java.lang.Object ref = surname_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        surname_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string surname = 7;</code>
-     * @return The bytes for surname.
-     */
-    public com.google.protobuf.ByteString
-        getSurnameBytes() {
-      java.lang.Object ref = surname_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        surname_ = b;
+        rol_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -1251,23 +1196,20 @@ public final class UserProto {
       if (id_ != 0) {
         output.writeInt32(1, id_);
       }
+      if (!getNombreBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nombre_);
+      }
+      if (!getApellidoBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, apellido_);
+      }
       if (!getEmailBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, email_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, email_);
       }
-      if (!getNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, name_);
+      if (!getClaveBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, clave_);
       }
-      if (!getNickBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, nick_);
-      }
-      if (!getPasswordBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, password_);
-      }
-      if (!getRoleBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, role_);
-      }
-      if (!getSurnameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, surname_);
+      if (!getRolBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, rol_);
       }
       unknownFields.writeTo(output);
     }
@@ -1282,23 +1224,20 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, id_);
       }
+      if (!getNombreBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nombre_);
+      }
+      if (!getApellidoBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, apellido_);
+      }
       if (!getEmailBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, email_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, email_);
       }
-      if (!getNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, name_);
+      if (!getClaveBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, clave_);
       }
-      if (!getNickBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, nick_);
-      }
-      if (!getPasswordBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, password_);
-      }
-      if (!getRoleBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, role_);
-      }
-      if (!getSurnameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, surname_);
+      if (!getRolBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, rol_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1317,18 +1256,16 @@ public final class UserProto {
 
       if (getId()
           != other.getId()) return false;
+      if (!getNombre()
+          .equals(other.getNombre())) return false;
+      if (!getApellido()
+          .equals(other.getApellido())) return false;
       if (!getEmail()
           .equals(other.getEmail())) return false;
-      if (!getName()
-          .equals(other.getName())) return false;
-      if (!getNick()
-          .equals(other.getNick())) return false;
-      if (!getPassword()
-          .equals(other.getPassword())) return false;
-      if (!getRole()
-          .equals(other.getRole())) return false;
-      if (!getSurname()
-          .equals(other.getSurname())) return false;
+      if (!getClave()
+          .equals(other.getClave())) return false;
+      if (!getRol()
+          .equals(other.getRol())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1342,18 +1279,16 @@ public final class UserProto {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId();
+      hash = (37 * hash) + NOMBRE_FIELD_NUMBER;
+      hash = (53 * hash) + getNombre().hashCode();
+      hash = (37 * hash) + APELLIDO_FIELD_NUMBER;
+      hash = (53 * hash) + getApellido().hashCode();
       hash = (37 * hash) + EMAIL_FIELD_NUMBER;
       hash = (53 * hash) + getEmail().hashCode();
-      hash = (37 * hash) + NAME_FIELD_NUMBER;
-      hash = (53 * hash) + getName().hashCode();
-      hash = (37 * hash) + NICK_FIELD_NUMBER;
-      hash = (53 * hash) + getNick().hashCode();
-      hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
-      hash = (53 * hash) + getPassword().hashCode();
-      hash = (37 * hash) + ROLE_FIELD_NUMBER;
-      hash = (53 * hash) + getRole().hashCode();
-      hash = (37 * hash) + SURNAME_FIELD_NUMBER;
-      hash = (53 * hash) + getSurname().hashCode();
+      hash = (37 * hash) + CLAVE_FIELD_NUMBER;
+      hash = (53 * hash) + getClave().hashCode();
+      hash = (37 * hash) + ROL_FIELD_NUMBER;
+      hash = (53 * hash) + getRol().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1489,17 +1424,15 @@ public final class UserProto {
         super.clear();
         id_ = 0;
 
+        nombre_ = "";
+
+        apellido_ = "";
+
         email_ = "";
 
-        name_ = "";
+        clave_ = "";
 
-        nick_ = "";
-
-        password_ = "";
-
-        role_ = "";
-
-        surname_ = "";
+        rol_ = "";
 
         return this;
       }
@@ -1528,12 +1461,11 @@ public final class UserProto {
       public com.chefencasa.model.UserProto.User buildPartial() {
         com.chefencasa.model.UserProto.User result = new com.chefencasa.model.UserProto.User(this);
         result.id_ = id_;
+        result.nombre_ = nombre_;
+        result.apellido_ = apellido_;
         result.email_ = email_;
-        result.name_ = name_;
-        result.nick_ = nick_;
-        result.password_ = password_;
-        result.role_ = role_;
-        result.surname_ = surname_;
+        result.clave_ = clave_;
+        result.rol_ = rol_;
         onBuilt();
         return result;
       }
@@ -1585,28 +1517,24 @@ public final class UserProto {
         if (other.getId() != 0) {
           setId(other.getId());
         }
+        if (!other.getNombre().isEmpty()) {
+          nombre_ = other.nombre_;
+          onChanged();
+        }
+        if (!other.getApellido().isEmpty()) {
+          apellido_ = other.apellido_;
+          onChanged();
+        }
         if (!other.getEmail().isEmpty()) {
           email_ = other.email_;
           onChanged();
         }
-        if (!other.getName().isEmpty()) {
-          name_ = other.name_;
+        if (!other.getClave().isEmpty()) {
+          clave_ = other.clave_;
           onChanged();
         }
-        if (!other.getNick().isEmpty()) {
-          nick_ = other.nick_;
-          onChanged();
-        }
-        if (!other.getPassword().isEmpty()) {
-          password_ = other.password_;
-          onChanged();
-        }
-        if (!other.getRole().isEmpty()) {
-          role_ = other.role_;
-          onChanged();
-        }
-        if (!other.getSurname().isEmpty()) {
-          surname_ = other.surname_;
+        if (!other.getRol().isEmpty()) {
+          rol_ = other.rol_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -1668,9 +1596,161 @@ public final class UserProto {
         return this;
       }
 
+      private java.lang.Object nombre_ = "";
+      /**
+       * <code>string nombre = 2;</code>
+       * @return The nombre.
+       */
+      public java.lang.String getNombre() {
+        java.lang.Object ref = nombre_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          nombre_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string nombre = 2;</code>
+       * @return The bytes for nombre.
+       */
+      public com.google.protobuf.ByteString
+          getNombreBytes() {
+        java.lang.Object ref = nombre_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          nombre_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string nombre = 2;</code>
+       * @param value The nombre to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNombre(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        nombre_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string nombre = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearNombre() {
+        
+        nombre_ = getDefaultInstance().getNombre();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string nombre = 2;</code>
+       * @param value The bytes for nombre to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNombreBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        nombre_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object apellido_ = "";
+      /**
+       * <code>string apellido = 3;</code>
+       * @return The apellido.
+       */
+      public java.lang.String getApellido() {
+        java.lang.Object ref = apellido_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          apellido_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string apellido = 3;</code>
+       * @return The bytes for apellido.
+       */
+      public com.google.protobuf.ByteString
+          getApellidoBytes() {
+        java.lang.Object ref = apellido_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          apellido_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string apellido = 3;</code>
+       * @param value The apellido to set.
+       * @return This builder for chaining.
+       */
+      public Builder setApellido(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        apellido_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string apellido = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearApellido() {
+        
+        apellido_ = getDefaultInstance().getApellido();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string apellido = 3;</code>
+       * @param value The bytes for apellido to set.
+       * @return This builder for chaining.
+       */
+      public Builder setApellidoBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        apellido_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object email_ = "";
       /**
-       * <code>string email = 2;</code>
+       * <code>string email = 4;</code>
        * @return The email.
        */
       public java.lang.String getEmail() {
@@ -1686,7 +1766,7 @@ public final class UserProto {
         }
       }
       /**
-       * <code>string email = 2;</code>
+       * <code>string email = 4;</code>
        * @return The bytes for email.
        */
       public com.google.protobuf.ByteString
@@ -1703,7 +1783,7 @@ public final class UserProto {
         }
       }
       /**
-       * <code>string email = 2;</code>
+       * <code>string email = 4;</code>
        * @param value The email to set.
        * @return This builder for chaining.
        */
@@ -1718,7 +1798,7 @@ public final class UserProto {
         return this;
       }
       /**
-       * <code>string email = 2;</code>
+       * <code>string email = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearEmail() {
@@ -1728,7 +1808,7 @@ public final class UserProto {
         return this;
       }
       /**
-       * <code>string email = 2;</code>
+       * <code>string email = 4;</code>
        * @param value The bytes for email to set.
        * @return This builder for chaining.
        */
@@ -1744,382 +1824,154 @@ public final class UserProto {
         return this;
       }
 
-      private java.lang.Object name_ = "";
+      private java.lang.Object clave_ = "";
       /**
-       * <code>string name = 3;</code>
-       * @return The name.
+       * <code>string clave = 5;</code>
+       * @return The clave.
        */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
+      public java.lang.String getClave() {
+        java.lang.Object ref = clave_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          name_ = s;
+          clave_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string name = 3;</code>
-       * @return The bytes for name.
+       * <code>string clave = 5;</code>
+       * @return The bytes for clave.
        */
       public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
+          getClaveBytes() {
+        java.lang.Object ref = clave_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          name_ = b;
+          clave_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string name = 3;</code>
-       * @param value The name to set.
+       * <code>string clave = 5;</code>
+       * @param value The clave to set.
        * @return This builder for chaining.
        */
-      public Builder setName(
+      public Builder setClave(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        name_ = value;
+        clave_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string name = 3;</code>
+       * <code>string clave = 5;</code>
        * @return This builder for chaining.
        */
-      public Builder clearName() {
+      public Builder clearClave() {
         
-        name_ = getDefaultInstance().getName();
+        clave_ = getDefaultInstance().getClave();
         onChanged();
         return this;
       }
       /**
-       * <code>string name = 3;</code>
-       * @param value The bytes for name to set.
+       * <code>string clave = 5;</code>
+       * @param value The bytes for clave to set.
        * @return This builder for chaining.
        */
-      public Builder setNameBytes(
+      public Builder setClaveBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        name_ = value;
+        clave_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object nick_ = "";
+      private java.lang.Object rol_ = "";
       /**
-       * <code>string nick = 4;</code>
-       * @return The nick.
+       * <code>string rol = 6;</code>
+       * @return The rol.
        */
-      public java.lang.String getNick() {
-        java.lang.Object ref = nick_;
+      public java.lang.String getRol() {
+        java.lang.Object ref = rol_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          nick_ = s;
+          rol_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string nick = 4;</code>
-       * @return The bytes for nick.
+       * <code>string rol = 6;</code>
+       * @return The bytes for rol.
        */
       public com.google.protobuf.ByteString
-          getNickBytes() {
-        java.lang.Object ref = nick_;
+          getRolBytes() {
+        java.lang.Object ref = rol_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          nick_ = b;
+          rol_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string nick = 4;</code>
-       * @param value The nick to set.
+       * <code>string rol = 6;</code>
+       * @param value The rol to set.
        * @return This builder for chaining.
        */
-      public Builder setNick(
+      public Builder setRol(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        nick_ = value;
+        rol_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string nick = 4;</code>
+       * <code>string rol = 6;</code>
        * @return This builder for chaining.
        */
-      public Builder clearNick() {
+      public Builder clearRol() {
         
-        nick_ = getDefaultInstance().getNick();
+        rol_ = getDefaultInstance().getRol();
         onChanged();
         return this;
       }
       /**
-       * <code>string nick = 4;</code>
-       * @param value The bytes for nick to set.
+       * <code>string rol = 6;</code>
+       * @param value The bytes for rol to set.
        * @return This builder for chaining.
        */
-      public Builder setNickBytes(
+      public Builder setRolBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        nick_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object password_ = "";
-      /**
-       * <code>string password = 5;</code>
-       * @return The password.
-       */
-      public java.lang.String getPassword() {
-        java.lang.Object ref = password_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          password_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string password = 5;</code>
-       * @return The bytes for password.
-       */
-      public com.google.protobuf.ByteString
-          getPasswordBytes() {
-        java.lang.Object ref = password_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          password_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string password = 5;</code>
-       * @param value The password to set.
-       * @return This builder for chaining.
-       */
-      public Builder setPassword(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        password_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string password = 5;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearPassword() {
-        
-        password_ = getDefaultInstance().getPassword();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string password = 5;</code>
-       * @param value The bytes for password to set.
-       * @return This builder for chaining.
-       */
-      public Builder setPasswordBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        password_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object role_ = "";
-      /**
-       * <code>string role = 6;</code>
-       * @return The role.
-       */
-      public java.lang.String getRole() {
-        java.lang.Object ref = role_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          role_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string role = 6;</code>
-       * @return The bytes for role.
-       */
-      public com.google.protobuf.ByteString
-          getRoleBytes() {
-        java.lang.Object ref = role_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          role_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string role = 6;</code>
-       * @param value The role to set.
-       * @return This builder for chaining.
-       */
-      public Builder setRole(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        role_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string role = 6;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearRole() {
-        
-        role_ = getDefaultInstance().getRole();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string role = 6;</code>
-       * @param value The bytes for role to set.
-       * @return This builder for chaining.
-       */
-      public Builder setRoleBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        role_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object surname_ = "";
-      /**
-       * <code>string surname = 7;</code>
-       * @return The surname.
-       */
-      public java.lang.String getSurname() {
-        java.lang.Object ref = surname_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          surname_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string surname = 7;</code>
-       * @return The bytes for surname.
-       */
-      public com.google.protobuf.ByteString
-          getSurnameBytes() {
-        java.lang.Object ref = surname_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          surname_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string surname = 7;</code>
-       * @param value The surname to set.
-       * @return This builder for chaining.
-       */
-      public Builder setSurname(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        surname_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string surname = 7;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearSurname() {
-        
-        surname_ = getDefaultInstance().getSurname();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string surname = 7;</code>
-       * @param value The bytes for surname to set.
-       * @return This builder for chaining.
-       */
-      public Builder setSurnameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        surname_ = value;
+        rol_ = value;
         onChanged();
         return this;
       }
@@ -2197,14 +2049,14 @@ public final class UserProto {
     java.lang.String[] descriptorData = {
       "\n\nuser.proto\022\005model\032\033google/protobuf/emp" +
       "ty.proto\032\036google/protobuf/wrappers.proto" +
-      "\"\"\n\005Users\022\031\n\004user\030\001 \003(\0132\013.model.User\"n\n\004" +
-      "User\022\n\n\002id\030\001 \001(\005\022\r\n\005email\030\002 \001(\t\022\014\n\004name\030" +
-      "\003 \001(\t\022\014\n\004nick\030\004 \001(\t\022\020\n\010password\030\005 \001(\t\022\014\n" +
-      "\004role\030\006 \001(\t\022\017\n\007surname\030\007 \001(\t2h\n\014UsersSer" +
-      "vice\022%\n\007AddUser\022\013.model.User\032\013.model.Use" +
-      "r\"\000\0221\n\023ValidarCredenciales\022\013.model.User\032" +
-      "\013.model.User\"\000B!\n\024com.chefencasa.modelB\t" +
-      "UserProtob\006proto3"
+      "\"\"\n\005Users\022\031\n\004user\030\001 \003(\0132\013.model.User\"_\n\004" +
+      "User\022\n\n\002id\030\001 \001(\005\022\016\n\006nombre\030\002 \001(\t\022\020\n\010apel" +
+      "lido\030\003 \001(\t\022\r\n\005email\030\004 \001(\t\022\r\n\005clave\030\005 \001(\t" +
+      "\022\013\n\003rol\030\006 \001(\t2h\n\014UsersService\022%\n\007AddUser" +
+      "\022\013.model.User\032\013.model.User\"\000\0221\n\023ValidarC" +
+      "redenciales\022\013.model.User\032\013.model.User\"\000B" +
+      "!\n\024com.chefencasa.modelB\tUserProtob\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2223,7 +2075,7 @@ public final class UserProto {
     internal_static_model_User_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_User_descriptor,
-        new java.lang.String[] { "Id", "Email", "Name", "Nick", "Password", "Role", "Surname", });
+        new java.lang.String[] { "Id", "Nombre", "Apellido", "Email", "Clave", "Rol", });
     com.google.protobuf.EmptyProto.getDescriptor();
     com.google.protobuf.WrappersProto.getDescriptor();
   }

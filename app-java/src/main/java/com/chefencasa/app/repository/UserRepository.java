@@ -12,8 +12,8 @@ import com.chefencasa.app.entities.User;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Serializable> {
 
-	@Query("SELECT u FROM User u WHERE (u.name LIKE :name AND u.password LIKE :password) OR (u.email LIKE :email AND u.password LIKE :password)")
-	public abstract User validarCredenciales(@Param("name") String name, @Param("email") String email,
-			@Param("password") String password);
+	@Query("SELECT u FROM User u WHERE (u.nombre LIKE :nombre AND u.clave LIKE :clave) OR (u.email LIKE :email AND u.clave LIKE :clave)")
+	public abstract User validarCredenciales(@Param("nombre") String nombre, @Param("email") String email,
+			@Param("clave") String clave);
 
 }

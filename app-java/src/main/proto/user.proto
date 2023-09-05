@@ -20,10 +20,9 @@ message Users {
 
 message User {
   int32 id = 1;
-  string email = 2;
-  string name = 3;
-  string nick = 4;
-  string password = 5;
-  string role = 6;
-  string surname = 7;
+  string nombre = 2;
+  string apellido = 3;
+  string email = 4;
+  string clave = 5;
+  string rol = 6;
 }
