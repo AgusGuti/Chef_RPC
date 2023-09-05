@@ -34,15 +34,14 @@ DROP TABLE IF EXISTS `chefencasa`.`user` ;
 
 CREATE TABLE IF NOT EXISTS `chefencasa`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `surname` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
+  `apellido` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `nick` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  `role` INT NOT NULL,
+  `clave` VARCHAR(45) NOT NULL,
+  `rol` INT NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_usuario_rol1`
-    FOREIGN KEY (`role`)
+    FOREIGN KEY (`rol`)
     REFERENCES `chefencasa`.`rol` (`idRol`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -52,7 +51,7 @@ CREATE UNIQUE INDEX `email_UNIQUE` ON `chefencasa`.`user` (`email` ASC) VISIBLE;
 
 CREATE UNIQUE INDEX `idUsuario_UNIQUE` ON `chefencasa`.`user` (`id` ASC) VISIBLE;
 
-CREATE INDEX `fk_usuario_rol1_idx` ON `chefencasa`.`user` (`role` ASC) VISIBLE;
+CREATE INDEX `fk_usuario_rol1_idx` ON `chefencasa`.`user` (`rol` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
