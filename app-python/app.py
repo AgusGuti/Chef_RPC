@@ -17,8 +17,8 @@ import account_pb2_grpc
 import user_pb2
 import user_pb2_grpc
 
-import rol_pb2
-import rol_pb2_grpc
+import receta_pb2
+import receta_pb2_grpc
 
 import os
 from dotenv import load_dotenv
@@ -112,6 +112,41 @@ def logout():
     app.logger.info("/logout")
     return redirect('/')
 
+
+
+@app.route("/recetas",methods = ['GET'])
+def recetas():
+    app.logger.info("/recetas")
+    return render_template('abm-receta.html')
+
+
+@app.route("/index",methods = ['GET'])
+def index():
+    app.logger.info("/index")
+    return render_template('index.html')
+
+
+@app.route("/altaReceta",methods = ['POST'])
+def altaReceta():
+    app.logger.info("/altaReceta")
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = receta_pb2_grpc.RecetasServiceStub(channel)
+        response = stub.AddReceta(receta_pb2.Receta(tituloReceta=request.form['tituloReceta'],descripcion=request.form['descripcion'],pasos=request.form['pasos'],foto1=request.form['foto1']))
+    print("Greeter client received: " + str(response))    
+    receta={"receta":MessageToJson(response)}
+    app.logger.info("receta registrada %s",receta)
+    if receta["receta"]=="{}":
+        flash('Error al intentar cargar el usuario')
+        return redirect('/altaReceta')
+    else:
+        flash('Receta creada exitosamente!')
+        return redirect('/')
+
+@app.route("/altaReceta",methods = ['GET'])
+def nuevaReceta():
+    app.logger.info("/altaReceta")
+    return render_template('alta-receta.html')
+
 @app.route('/new_user')
 def add_user_view():
 	return render_template('add.html')
@@ -174,29 +209,6 @@ def addUser():
     user=request.get_json()
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = user_pb2_grpc.UsersServiceStub(channel)
-        response = stub.AddUser(user_pb2.User(id=user['id'],email=user['email'],name=user['email'],nick=user['nick'],password=user['password'],role=user['role'],surname=user['surname']))
+        response = stub.AddUser(user_pb2.User(id=user['id'],email=user['email'],name=user['email'],nick=user['nick'],password=user['password'],surname=user['surname']))
     print("Greeter client received: " + str(response))    
     return MessageToJson(response)
-
-
-
-# ROL
-@app.route('/rols')
-def rols():
-	table = ItemTable(items)
-	table.border = True
-	return render_template('rols.html', table=table)
-
-@app.route('/new_rol')
-def add_rol_view():
-	return render_template('addRol.html')
-
-@app.route('/addRol', methods=['POST'])
-def add_rol():
-	_rol = request.form['inputRol']
-	# validate the received values
-	if _rol.method == 'POST':
-		flash('Rol added successfully!')
-		return redirect('/')
-	else:
-		return 'Error while adding rol'
