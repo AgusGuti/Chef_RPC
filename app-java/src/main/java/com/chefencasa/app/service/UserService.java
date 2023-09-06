@@ -1,7 +1,11 @@
 package com.chefencasa.app.service;
 
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.util.DigestUtils;
 
 import com.chefencasa.app.entities.User;
 import com.chefencasa.app.repository.UserRepository;
@@ -12,6 +16,7 @@ import net.devh.boot.grpc.server.service.GrpcService;
 
 @GrpcService
 public class UserService extends UsersServiceGrpc.UsersServiceImplBase { 
+    AtomicInteger id = new AtomicInteger();
 
 
 	@Autowired
@@ -22,7 +27,7 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
     public void addUser(UserProto.User request, StreamObserver<UserProto.User> responseObserver) {
        
         try {
-			usuarioRepository.save(new User(request.getId(),request.getEmail(),request.getName(),request.getNick(),request.getPassword(),request.getRole(),request.getSurname()));
+			usuarioRepository.save(new User(request.getNombre(),request.getApellido(),request.getEmail(),request.getClave(),request.getRol()));
 		} catch (Exception e) {
 			try {
                 throw new Exception("No se pudo completar la operación,error al ingresar los datos o el usuario ya existe");
@@ -33,14 +38,38 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
 		}
         UserProto.User a = UserProto.User.newBuilder()
         .setId(request.getId())
+        .setNombre(request.getNombre())
+        .setApellido(request.getApellido())
         .setEmail(request.getEmail())
-        .setName(request.getName())
-        .setNick(request.getNick())
-        .setPassword(request.getPassword())
-        .setRole(request.getRole())
-        .setSurname(request.getSurname())
+        .setClave(request.getClave())
+        .setRol(request.getRol())
         .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();
     }
+    
+    @Override
+    public void validarCredenciales(UserProto.User request, StreamObserver<UserProto.User> responseObserver) {
+
+    User user= usuarioRepository.validarCredenciales(request.getNombre(),request.getEmail(),request.getClave());
+
+    if (user==null) {
+        UserProto.User a = UserProto.User.newBuilder()
+        .build();
+        responseObserver.onNext(a);
+        responseObserver.onCompleted();
+    } else {
+        UserProto.User a = UserProto.User.newBuilder()
+        .setId(request.getId())
+        .setNombre(request.getNombre())
+        .setApellido(request.getApellido())
+        .setEmail(request.getEmail())
+        .setClave(request.getClave())
+        .setRol(request.getRol())
+        .build();
+        responseObserver.onNext(a);
+        responseObserver.onCompleted();
+        }
+    }
+    
 }

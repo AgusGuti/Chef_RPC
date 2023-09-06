@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package model;
+
+option java_package = "com.chefencasa.model";
+option java_outer_classname = "RecetaProto";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+service RecetasService {
+  rpc AddReceta(Receta) returns (RecetaResponse) {}
+  rpc getByFilter(RecetaFiltro) returns (RecetasResponse) {}
+  rpc getAllRecetas(Empty) returns (RecetasResponse) {}
+  rpc getAllRecetasByUser(UsuarioId) returns (RecetasResponse) {}
+  rpc updateReceta(RecetaId) returns (RecetaResponse) {}
+}
+
+message Empty {
+}
+
+message Ingrediente {
+  int32 idIngrediente = 1;
+  string ingrediente = 2;
+}
+
+message Receta {
+  int32 idReceta = 1;
+  int32 idUsuario = 2;
+  string tituloReceta = 3;
+  string descripcion = 4;
+  string Categoria = 5;
+  string pasos = 6;
+  google.protobuf.Timestamp fechaCreacion = 7;
+  repeated string ingredientes = 8;
+  int32 tiempoPreparacion = 9;
+  string foto1 = 10;
+  string foto2 = 11;
+  string foto3 = 12;
+  string foto4 = 13;
+  string foto5 = 14;
+}
+
+message RecetaResponse {
+  Receta receta = 1;
+  string mensaje = 2;
+}
+
+message RecetasResponse {
+  repeated Receta receta = 1;
+  string mensaje = 2;
+}
+
+message UsuarioId {
+  int32 idUsuario = 1;
+}
+
+message RecetaId {
+  int32 idReceta = 1;
+}
+
+
+message RecetaFiltro{
+    int32 categoria = 1;
+	string nombre = 2;
+	repeated Ingrediente ingredientes = 3;
+	int32 tiempoPrepDesde = 4;
+	int32 tiempoPrepHasta = 5;
+}

@@ -10,6 +10,6 @@ import com.chefencasa.app.entities.Categoria;
 @Repository("categoriaRepository")
 public interface CategoriaRepository extends JpaRepository<Categoria, Serializable> {
 
-
+	public abstract Categoria findByCategoria(String categoria);
 
 }

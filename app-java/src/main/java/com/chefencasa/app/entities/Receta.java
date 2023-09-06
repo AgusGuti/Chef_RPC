@@ -24,35 +24,35 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.util.DigestUtils;
 
-
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "receta")
-@Data @NoArgsConstructor
+@Data
+@NoArgsConstructor
 public class Receta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	@NotNull(message="Campo requerido.")
+	@NotNull(message = "Campo requerido.")
 	private User user;
+
+	@ManyToMany(mappedBy = "recetas")
+	private Set<Ingrediente> ingredientes;
 	
-
-    @ManyToMany(mappedBy = "recetas")
-    private Set<Ingrediente> ingredientes;
-
+	@ManyToOne
+	@JoinColumn(name = "categoria_id")
+	private Categoria categoria;
 
 	@Column(name = "tituloReceta", nullable = false, length = 60)
 	private String tituloReceta;
-
 
 	@Column(name = "descripcion", nullable = false)
 	private String descripcion;
@@ -60,31 +60,49 @@ public class Receta implements Serializable {
 	@Column(name = "pasos", nullable = false)
 	private String pasos;
 
-
 	@Column(name = "tiempoPreparacion", unique = true, nullable = false)
 	private int tiempoPreparacion;
 
 	@Column(name = "fechaCreacion", unique = true, nullable = false)
-	private LocalDate fechaCreacion;
-	
+	private LocalDateTime fechaCreacion;
+
 	@Column(name = "foto1", nullable = true)
 	private String foto1;
-	
+
 	@Column(name = "foto2", nullable = true)
 	private String foto2;
-	
+
 	@Column(name = "foto3", nullable = true)
 	private String foto3;
-	
+
 	@Column(name = "foto4", nullable = true)
 	private String foto4;
-	
+
 	@Column(name = "foto5", nullable = true)
 	private String foto5;
 
-	public Receta(int id, String tituloReceta, String descripcion, String pasos, int tiempoPreparacion, String foto1, String foto2, String foto3, String foto4, String foto5) {
-		
+	public Receta(int id, String tituloReceta, String descripcion, String pasos, int tiempoPreparacion, String foto1,
+			String foto2, String foto3, String foto4, String foto5) {
+
 		this.id = id;
+		this.tituloReceta = tituloReceta;
+		this.descripcion = descripcion;
+		this.pasos = pasos;
+		this.tiempoPreparacion = tiempoPreparacion;
+		this.fechaCreacion = fechaCreacion;
+		this.foto1 = foto1;
+		this.foto2 = foto2;
+		this.foto3 = foto3;
+		this.foto4 = foto4;
+		this.foto5 = foto5;
+	}
+
+	public Receta(User usuario, Set<Ingrediente> ingredientes, Categoria categoria, String tituloReceta, String descripcion, String pasos, int tiempoPreparacion, LocalDateTime fechaCreacion, String foto1,
+			String foto2, String foto3, String foto4, String foto5) {
+
+		this.user = usuario;
+		this.setIngredientes(ingredientes);
+		this.categoria = categoria;
 		this.tituloReceta = tituloReceta;
 		this.descripcion = descripcion;
 		this.pasos = pasos;
@@ -101,6 +119,4 @@ public class Receta implements Serializable {
 		return serialVersionUID;
 	}
 
-
-    
 }
