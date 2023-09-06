@@ -12,7 +12,7 @@ Clases creadas en capa servidor:
 
 ## SERVIDOR JAVA GRPC
 
-Comandos terminal:
+### Comandos terminal:
 
 1. cd app-java
 2. mvn clean install -DskipTests
@@ -20,10 +20,10 @@ Comandos terminal:
 
 ## CLIENTE/SERVIDOR PYTHON 
 
-Version python:  
+### Version python:  
 - Python 3.9.13
 
-Comandos terminal:
+### Comandos terminal:
 
 1. cd app-python
 2. pip install -r requirements.txt
@@ -36,3 +36,11 @@ Comandos terminal:
    python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/receta.proto
 
 4. flask run
+
+## BD MYSQL
+
+1. Crear base de datos chefencasa en mysql antes de ejecutar los servicios.
+
+## EJECUCIÓN
+
+1. Una vez corriendo ambos servicios se accede al front desde: http://localhost:5000
