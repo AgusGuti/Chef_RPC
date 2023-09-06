@@ -807,10 +807,10 @@ public final class RolProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>int32 idRol = 1;</code>
-     * @return The idRol.
+     * <code>int32 id = 1;</code>
+     * @return The id.
      */
-    int getIdRol();
+    int getId();
 
     /**
      * <code>string rol = 2;</code>
@@ -872,7 +872,7 @@ public final class RolProto {
               break;
             case 8: {
 
-              idRol_ = input.readInt32();
+              id_ = input.readInt32();
               break;
             }
             case 18: {
@@ -913,14 +913,14 @@ public final class RolProto {
               com.chefencasa.model.RolProto.Rol.class, com.chefencasa.model.RolProto.Rol.Builder.class);
     }
 
-    public static final int IDROL_FIELD_NUMBER = 1;
-    private int idRol_;
+    public static final int ID_FIELD_NUMBER = 1;
+    private int id_;
     /**
-     * <code>int32 idRol = 1;</code>
-     * @return The idRol.
+     * <code>int32 id = 1;</code>
+     * @return The id.
      */
-    public int getIdRol() {
-      return idRol_;
+    public int getId() {
+      return id_;
     }
 
     public static final int ROL_FIELD_NUMBER = 2;
@@ -973,8 +973,8 @@ public final class RolProto {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (idRol_ != 0) {
-        output.writeInt32(1, idRol_);
+      if (id_ != 0) {
+        output.writeInt32(1, id_);
       }
       if (!getRolBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, rol_);
@@ -988,9 +988,9 @@ public final class RolProto {
       if (size != -1) return size;
 
       size = 0;
-      if (idRol_ != 0) {
+      if (id_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, idRol_);
+          .computeInt32Size(1, id_);
       }
       if (!getRolBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, rol_);
@@ -1010,8 +1010,8 @@ public final class RolProto {
       }
       com.chefencasa.model.RolProto.Rol other = (com.chefencasa.model.RolProto.Rol) obj;
 
-      if (getIdRol()
-          != other.getIdRol()) return false;
+      if (getId()
+          != other.getId()) return false;
       if (!getRol()
           .equals(other.getRol())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -1025,8 +1025,8 @@ public final class RolProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + IDROL_FIELD_NUMBER;
-      hash = (53 * hash) + getIdRol();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getId();
       hash = (37 * hash) + ROL_FIELD_NUMBER;
       hash = (53 * hash) + getRol().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -1162,7 +1162,7 @@ public final class RolProto {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        idRol_ = 0;
+        id_ = 0;
 
         rol_ = "";
 
@@ -1192,7 +1192,7 @@ public final class RolProto {
       @java.lang.Override
       public com.chefencasa.model.RolProto.Rol buildPartial() {
         com.chefencasa.model.RolProto.Rol result = new com.chefencasa.model.RolProto.Rol(this);
-        result.idRol_ = idRol_;
+        result.id_ = id_;
         result.rol_ = rol_;
         onBuilt();
         return result;
@@ -1242,8 +1242,8 @@ public final class RolProto {
 
       public Builder mergeFrom(com.chefencasa.model.RolProto.Rol other) {
         if (other == com.chefencasa.model.RolProto.Rol.getDefaultInstance()) return this;
-        if (other.getIdRol() != 0) {
-          setIdRol(other.getIdRol());
+        if (other.getId() != 0) {
+          setId(other.getId());
         }
         if (!other.getRol().isEmpty()) {
           rol_ = other.rol_;
@@ -1278,32 +1278,32 @@ public final class RolProto {
         return this;
       }
 
-      private int idRol_ ;
+      private int id_ ;
       /**
-       * <code>int32 idRol = 1;</code>
-       * @return The idRol.
+       * <code>int32 id = 1;</code>
+       * @return The id.
        */
-      public int getIdRol() {
-        return idRol_;
+      public int getId() {
+        return id_;
       }
       /**
-       * <code>int32 idRol = 1;</code>
-       * @param value The idRol to set.
+       * <code>int32 id = 1;</code>
+       * @param value The id to set.
        * @return This builder for chaining.
        */
-      public Builder setIdRol(int value) {
+      public Builder setId(int value) {
         
-        idRol_ = value;
+        id_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int32 idRol = 1;</code>
+       * <code>int32 id = 1;</code>
        * @return This builder for chaining.
        */
-      public Builder clearIdRol() {
+      public Builder clearId() {
         
-        idRol_ = 0;
+        id_ = 0;
         onChanged();
         return this;
       }
@@ -1457,10 +1457,10 @@ public final class RolProto {
     java.lang.String[] descriptorData = {
       "\n\trol.proto\022\005model\032\033google/protobuf/empt" +
       "y.proto\032\036google/protobuf/wrappers.proto\"" +
-      "\037\n\004Rols\022\027\n\003rol\030\001 \003(\0132\n.model.Rol\"!\n\003Rol\022" +
-      "\r\n\005idRol\030\001 \001(\005\022\013\n\003rol\030\002 \001(\t21\n\013RolsServi" +
-      "ce\022\"\n\006AddRol\022\n.model.Rol\032\n.model.Rol\"\000B " +
-      "\n\024com.chefencasa.modelB\010RolProtob\006proto3"
+      "\037\n\004Rols\022\027\n\003rol\030\001 \003(\0132\n.model.Rol\"\036\n\003Rol\022" +
+      "\n\n\002id\030\001 \001(\005\022\013\n\003rol\030\002 \001(\t21\n\013RolsService\022" +
+      "\"\n\006AddRol\022\n.model.Rol\032\n.model.Rol\"\000B \n\024c" +
+      "om.chefencasa.modelB\010RolProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1479,7 +1479,7 @@ public final class RolProto {
     internal_static_model_Rol_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_Rol_descriptor,
-        new java.lang.String[] { "IdRol", "Rol", });
+        new java.lang.String[] { "Id", "Rol", });
     com.google.protobuf.EmptyProto.getDescriptor();
     com.google.protobuf.WrappersProto.getDescriptor();
   }
