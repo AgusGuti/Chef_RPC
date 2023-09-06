@@ -23,7 +23,9 @@ public class RolService extends RolsServiceGrpc.RolsServiceImplBase {
     public void addRol(RolProto.Rol request, StreamObserver<RolProto.Rol> responseObserver) {
        
         try {
+
 			rolRepository.save(new Rol(request.getId(),request.getRol()));
+
 		} catch (Exception e) {
 			try {
                 throw new Exception("No se pudo completar la operación, error al ingresar los datos o el Rol ya existe");
@@ -33,7 +35,9 @@ public class RolService extends RolsServiceGrpc.RolsServiceImplBase {
             }
 		}
         RolProto.Rol a = RolProto.Rol.newBuilder()
+
         .setId(request.getId())
+
         .setRol(request.getRol())
         .build();
         responseObserver.onNext(a);

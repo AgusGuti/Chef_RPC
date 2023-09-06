@@ -7,10 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.chefencasa.app.repository.AccountRepository;
 import com.chefencasa.model.AccountProto;
 import com.chefencasa.model.AccountsServiceGrpc;
-import com.google.protobuf.Empty;
 
-import io.grpc.stub.StreamObserver;
-import net.devh.boot.grpc.server.service.GrpcService;
+import java.util.List;
+
 
 @GrpcService
 public class AccountsService extends AccountsServiceGrpc.AccountsServiceImplBase {
