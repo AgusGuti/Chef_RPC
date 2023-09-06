@@ -1,18 +1,16 @@
 package com.chefencasa.app;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
-import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
 
-import com.chefencasa.model.AccountProto;
 import com.chefencasa.app.repository.AccountRepository;
+import com.chefencasa.model.AccountProto;
+
 
 
 @SpringBootApplication

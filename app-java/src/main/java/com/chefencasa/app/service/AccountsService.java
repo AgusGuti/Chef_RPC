@@ -1,10 +1,7 @@
 package com.chefencasa.app.service;
 
-import com.google.protobuf.Empty;
-import com.google.protobuf.Int32Value;
-import com.google.protobuf.StringValue;
-import io.grpc.stub.StreamObserver;
-import net.devh.boot.grpc.server.service.GrpcService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.chefencasa.app.repository.AccountRepository;
@@ -12,6 +9,7 @@ import com.chefencasa.model.AccountProto;
 import com.chefencasa.model.AccountsServiceGrpc;
 
 import java.util.List;
+
 
 @GrpcService
 public class AccountsService extends AccountsServiceGrpc.AccountsServiceImplBase {

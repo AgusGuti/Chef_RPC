@@ -1,16 +1,16 @@
 package com.chefencasa.app.service;
 
-import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.util.DigestUtils;
+
 
 import com.chefencasa.app.entities.User;
 import com.chefencasa.app.repository.UserRepository;
 import com.chefencasa.model.UserProto;
 import com.chefencasa.model.UsersServiceGrpc;
+
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 

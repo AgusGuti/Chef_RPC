@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "4de1cd09-2585-40d2-9f68-48f807ee4201",
+		"name": "chefEnCasa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19005031"
+	},
+	"item": [
+		{
+			"name": "addUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\" : 1,\r\n  \"email\" : \"sofiasa@live.com.ar\",\r\n  \"name\" : \"Sofía\",\r\n  \"nick\" : \"Sofi\",\r\n  \"password\" : \"sofia123\",\r\n  \"role\" : \"ROL_USER\",\r\n  \"surname\" :\"Sanchez Antelo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/addUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"addUser"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
