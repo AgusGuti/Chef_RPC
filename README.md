@@ -12,6 +12,10 @@ Clases creadas en capa servidor:
 
 ## SERVIDOR JAVA GRPC
 
+### Version JAVA:
+
+- JDK 17
+
 ### Comandos terminal:
 
 1. cd app-java
@@ -20,7 +24,7 @@ Clases creadas en capa servidor:
 
 ## CLIENTE/SERVIDOR PYTHON 
 
-### Version python:  
+### Version Python:  
 - Python 3.9.13
 
 ### Comandos terminal:
