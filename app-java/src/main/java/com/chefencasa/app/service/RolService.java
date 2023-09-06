@@ -7,6 +7,7 @@ import com.chefencasa.app.entities.Rol;
 import com.chefencasa.app.repository.RolRepository;
 import com.chefencasa.model.RolProto;
 import com.chefencasa.model.RolsServiceGrpc;
+
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 
@@ -22,7 +23,7 @@ public class RolService extends RolsServiceGrpc.RolsServiceImplBase {
     public void addRol(RolProto.Rol request, StreamObserver<RolProto.Rol> responseObserver) {
        
         try {
-			rolRepository.save(new Rol(request.getIdRol(),request.getRol()));
+			rolRepository.save(new Rol(request.getId(),request.getRol()));
 		} catch (Exception e) {
 			try {
                 throw new Exception("No se pudo completar la operación, error al ingresar los datos o el Rol ya existe");
@@ -32,7 +33,7 @@ public class RolService extends RolsServiceGrpc.RolsServiceImplBase {
             }
 		}
         RolProto.Rol a = RolProto.Rol.newBuilder()
-        .setIdRol(request.getIdRol())
+        .setId(request.getId())
         .setRol(request.getRol())
         .build();
         responseObserver.onNext(a);

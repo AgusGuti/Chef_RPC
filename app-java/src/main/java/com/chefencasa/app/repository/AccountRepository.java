@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.springframework.context.annotation.Bean;
-
 import com.chefencasa.model.AccountProto;
 import com.chefencasa.model.AccountProto.Account;
 

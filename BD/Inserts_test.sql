@@ -5,7 +5,7 @@
 INSERT INTO chefencasa.rol (rol)
 VALUES 
 	('Admin'),
-	('Tecnico'), 
+	('Tecnico'),
     ('user');
 
 -- select * from chefencasa.rol;
@@ -65,7 +65,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- -----------------------------------------------------
 
 SET FOREIGN_KEY_CHECKS = 0;
-INSERT INTO chefencasa.receta (usuario_idUsuario, tituloReceta, descripcion, pasos, tiempoPreparacion, categoria_idCategoria, fechaCreacion)
+INSERT INTO chefencasa.receta (user_id, titulo_receta, descripcion, pasos, tiempo_preparacion, categoria_id, fecha_creacion)
 VALUES
 (1, 'Receta 1', 'Descripción de la Receta 1', 'Pasos de la Receta 1', 30, 3, '2023-09-03 12:00:00'),
 (3, 'Receta 2', 'Descripción de la Receta 2', 'Pasos de la Receta 2', 45, 1, '2022-07-01 15:30:00'),
@@ -91,7 +91,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Table chefencasa.favoritos
 -- -----------------------------------------------------
 
-INSERT INTO chefencasa.favoritos (user_id, receta_idReceta)
+INSERT INTO chefencasa.favoritos (user_id, receta_id)
 VALUES
   (1, 5),
   (1, 3),
@@ -141,7 +141,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Table chefencasa.receta_has_ingrediente
 -- -----------------------------------------------------
 
-INSERT INTO chefencasa.receta_has_ingrediente (receta_idReceta, ingrediente_idIngrediente)
+INSERT INTO chefencasa.receta_has_ingrediente (receta_id, ingrediente_id)
 VALUES
 	 -- Receta 1 con ingredientes
 	(1, 1), -- Receta 1 con Ingrediente 1

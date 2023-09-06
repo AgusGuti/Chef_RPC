@@ -17,6 +17,6 @@ message Rols {
 }
 
 message Rol {
-  int32 idRol = 1;
+  int32 id = 1;
   string rol = 2;
 }
