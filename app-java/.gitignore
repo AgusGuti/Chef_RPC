@@ -37,3 +37,5 @@ build/
 .mvn/
 
 .classpath
+
+app-java/src/main/generated/com/chefencasa/model/
