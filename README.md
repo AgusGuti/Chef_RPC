@@ -12,7 +12,7 @@ Clases creadas en capa servidor:
 
 ## SERVIDOR JAVA GRPC
 
-comandos terminal:
+Comandos terminal:
 
 1. cd app-java
 2. mvn clean install -DskipTests
@@ -21,9 +21,9 @@ comandos terminal:
 ## CLIENTE/SERVIDOR PYTHON 
 
 Version python:  
-Python 3.9.13
+- Python 3.9.13
 
-comandos terminal:
+Comandos terminal:
 
 1. cd app-python
 2. pip install -r requirements.txt
