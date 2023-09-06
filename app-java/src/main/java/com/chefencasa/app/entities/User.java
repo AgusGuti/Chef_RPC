@@ -44,15 +44,11 @@ public class User implements Serializable {
 	@Column(name = "clave", nullable = false, length = 45)
 	private String clave;
 
-	@Column(name = "rol", nullable = false, length = 45)
-	private String rol;
-
-	public User(String nombre, String apellido, String email, String clave, String rol) {
+	public User(String nombre, String apellido, String email, String clave) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
 		this.clave = clave;
-		this.rol = rol;
 	}
 
 	@Override

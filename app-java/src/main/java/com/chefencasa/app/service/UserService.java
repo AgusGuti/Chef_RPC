@@ -27,7 +27,7 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
     public void addUser(UserProto.User request, StreamObserver<UserProto.User> responseObserver) {
        
         try {
-			usuarioRepository.save(new User(request.getNombre(),request.getApellido(),request.getEmail(),request.getClave(),request.getRol()));
+			usuarioRepository.save(new User(request.getNombre(),request.getApellido(),request.getEmail(),request.getClave()));
 		} catch (Exception e) {
 			try {
                 throw new Exception("No se pudo completar la operación,error al ingresar los datos o el usuario ya existe");
@@ -42,7 +42,6 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
         .setApellido(request.getApellido())
         .setEmail(request.getEmail())
         .setClave(request.getClave())
-        .setRol(request.getRol())
         .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();
@@ -65,7 +64,6 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
         .setApellido(request.getApellido())
         .setEmail(request.getEmail())
         .setClave(request.getClave())
-        .setRol(request.getRol())
         .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();
