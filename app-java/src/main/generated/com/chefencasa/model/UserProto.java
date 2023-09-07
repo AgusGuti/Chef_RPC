@@ -859,18 +859,6 @@ public final class UserProto {
      */
     com.google.protobuf.ByteString
         getClaveBytes();
-
-    /**
-     * <code>string rol = 6;</code>
-     * @return The rol.
-     */
-    java.lang.String getRol();
-    /**
-     * <code>string rol = 6;</code>
-     * @return The bytes for rol.
-     */
-    com.google.protobuf.ByteString
-        getRolBytes();
   }
   /**
    * Protobuf type {@code model.User}
@@ -889,7 +877,6 @@ public final class UserProto {
       apellido_ = "";
       email_ = "";
       clave_ = "";
-      rol_ = "";
     }
 
     @java.lang.Override
@@ -949,12 +936,6 @@ public final class UserProto {
               java.lang.String s = input.readStringRequireUtf8();
 
               clave_ = s;
-              break;
-            }
-            case 50: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              rol_ = s;
               break;
             }
             default: {
@@ -1143,42 +1124,6 @@ public final class UserProto {
       }
     }
 
-    public static final int ROL_FIELD_NUMBER = 6;
-    private volatile java.lang.Object rol_;
-    /**
-     * <code>string rol = 6;</code>
-     * @return The rol.
-     */
-    public java.lang.String getRol() {
-      java.lang.Object ref = rol_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        rol_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string rol = 6;</code>
-     * @return The bytes for rol.
-     */
-    public com.google.protobuf.ByteString
-        getRolBytes() {
-      java.lang.Object ref = rol_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        rol_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1208,9 +1153,6 @@ public final class UserProto {
       if (!getClaveBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, clave_);
       }
-      if (!getRolBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, rol_);
-      }
       unknownFields.writeTo(output);
     }
 
@@ -1235,9 +1177,6 @@ public final class UserProto {
       }
       if (!getClaveBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, clave_);
-      }
-      if (!getRolBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, rol_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1264,8 +1203,6 @@ public final class UserProto {
           .equals(other.getEmail())) return false;
       if (!getClave()
           .equals(other.getClave())) return false;
-      if (!getRol()
-          .equals(other.getRol())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1287,8 +1224,6 @@ public final class UserProto {
       hash = (53 * hash) + getEmail().hashCode();
       hash = (37 * hash) + CLAVE_FIELD_NUMBER;
       hash = (53 * hash) + getClave().hashCode();
-      hash = (37 * hash) + ROL_FIELD_NUMBER;
-      hash = (53 * hash) + getRol().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1432,8 +1367,6 @@ public final class UserProto {
 
         clave_ = "";
 
-        rol_ = "";
-
         return this;
       }
 
@@ -1465,7 +1398,6 @@ public final class UserProto {
         result.apellido_ = apellido_;
         result.email_ = email_;
         result.clave_ = clave_;
-        result.rol_ = rol_;
         onBuilt();
         return result;
       }
@@ -1531,10 +1463,6 @@ public final class UserProto {
         }
         if (!other.getClave().isEmpty()) {
           clave_ = other.clave_;
-          onChanged();
-        }
-        if (!other.getRol().isEmpty()) {
-          rol_ = other.rol_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -1899,82 +1827,6 @@ public final class UserProto {
         onChanged();
         return this;
       }
-
-      private java.lang.Object rol_ = "";
-      /**
-       * <code>string rol = 6;</code>
-       * @return The rol.
-       */
-      public java.lang.String getRol() {
-        java.lang.Object ref = rol_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          rol_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string rol = 6;</code>
-       * @return The bytes for rol.
-       */
-      public com.google.protobuf.ByteString
-          getRolBytes() {
-        java.lang.Object ref = rol_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          rol_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string rol = 6;</code>
-       * @param value The rol to set.
-       * @return This builder for chaining.
-       */
-      public Builder setRol(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        rol_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string rol = 6;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearRol() {
-        
-        rol_ = getDefaultInstance().getRol();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string rol = 6;</code>
-       * @param value The bytes for rol to set.
-       * @return This builder for chaining.
-       */
-      public Builder setRolBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        rol_ = value;
-        onChanged();
-        return this;
-      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2049,14 +1901,13 @@ public final class UserProto {
     java.lang.String[] descriptorData = {
       "\n\nuser.proto\022\005model\032\033google/protobuf/emp" +
       "ty.proto\032\036google/protobuf/wrappers.proto" +
-      "\"\"\n\005Users\022\031\n\004user\030\001 \003(\0132\013.model.User\"_\n\004" +
+      "\"\"\n\005Users\022\031\n\004user\030\001 \003(\0132\013.model.User\"R\n\004" +
       "User\022\n\n\002id\030\001 \001(\005\022\016\n\006nombre\030\002 \001(\t\022\020\n\010apel" +
       "lido\030\003 \001(\t\022\r\n\005email\030\004 \001(\t\022\r\n\005clave\030\005 \001(\t" +
-      "\022\013\n\003rol\030\006 \001(\t2h\n\014UsersService\022%\n\007AddUser" +
-      "\022\013.model.User\032\013.model.User\"\000\0221\n\023ValidarC" +
-      "redenciales\022\013.model.User\032\013.model.User\"\000B" +
-      "!\n\024com.chefencasa.modelB\tUserProtob\006prot" +
-      "o3"
+      "2h\n\014UsersService\022%\n\007AddUser\022\013.model.User" +
+      "\032\013.model.User\"\000\0221\n\023ValidarCredenciales\022\013" +
+      ".model.User\032\013.model.User\"\000B!\n\024com.chefen" +
+      "casa.modelB\tUserProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2075,7 +1926,7 @@ public final class UserProto {
     internal_static_model_User_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_User_descriptor,
-        new java.lang.String[] { "Id", "Nombre", "Apellido", "Email", "Clave", "Rol", });
+        new java.lang.String[] { "Id", "Nombre", "Apellido", "Email", "Clave", });
     com.google.protobuf.EmptyProto.getDescriptor();
     com.google.protobuf.WrappersProto.getDescriptor();
   }
