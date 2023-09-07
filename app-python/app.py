@@ -14,8 +14,8 @@ import grpc
 import account_pb2
 import account_pb2_grpc
 
-import user_pb2
-import user_pb2_grpc
+import proto.user_pb2
+import proto.user_pb2_grpc
 
 import receta_pb2
 import receta_pb2_grpc
