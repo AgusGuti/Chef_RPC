@@ -25,13 +25,15 @@ Clases creadas en capa servidor:
 ## CLIENTE/SERVIDOR PYTHON 
 
 ### Version Python:  
+
 - Python 3.9.13
 
 ### Comandos terminal:
 
 1. cd app-python
 2. pip install -r requirements.txt
-3. python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/account.proto
+3. Si se modifica del lado del server de las clases ejecutar nuevamente:
+   python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/account.proto
 
    python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/user.proto
 
