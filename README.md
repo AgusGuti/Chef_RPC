@@ -21,6 +21,8 @@ Clases creadas en capa servidor:
 1. cd app-java
 2. mvn clean install -DskipTests
 3. mvn spring-boot:run
+   
+4. Correr Inserts_alt.sql (para tener para test) (OPCIONAL)
 
 ## CLIENTE/SERVIDOR PYTHON 
 
