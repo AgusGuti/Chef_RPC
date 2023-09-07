@@ -1,20 +1,3 @@
--- -----------------------------------------------------
--- Table chefencasa.rol
--- -----------------------------------------------------
-
-INSERT INTO chefencasa.rol (rol)
-VALUES 
-	('Admin'),
-	('Tecnico'),
-    ('user');
-
--- select * from chefencasa.rol;
-
-/*
-SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE chefencasa.rol;
-SET FOREIGN_KEY_CHECKS = 1;
-*/
 
 -- -----------------------------------------------------
 -- Table chefencasa.categoria
@@ -24,7 +7,10 @@ INSERT INTO chefencasa.categoria (categoria)
 VALUES 
 	('Entrada'),
 	('Plato principal'),
-	('Postre');
+	('Postre'),
+	('Brunch'),
+	('Vegetariano'),
+	('Vegano');
 
 -- select * from chefencasa.categoria;
 
@@ -38,18 +24,18 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Table chefencasa.categoria
 -- -----------------------------------------------------
 
-INSERT INTO chefencasa.`user` (`nombre`, `apellido`, `email`, `clave`, `rol`)
+INSERT INTO chefencasa.`user` (`nombre`, `apellido`, `email`, `clave`)
 VALUES
-	('Juan', 'Gonzalez', 'User1234@volcanmail.com', 'cl4ve01', 1),
-	('Maria', 'Fernandez', 'ByteGeek@volcanmail.com', 'cl4ve02', 2),
-	('Carlos', 'Martinez', 'CodeNerd@volcanmail.com', 'cl4ve03', 1),
-	('Ana', 'Rodriguez', 'QuickFox@volcanmail.com', 'cl4ve04', 3),
-	('Luis', 'Perez', 'PixelArt@volcanmail.com', 'cl4ve05', 2),
-	('Laura', 'Diaz', 'DataGuru@volcanmail.com', 'cl4ve06', 1),
-	('Lucía', 'Lopez', 'TechWhiz@volcanmail.com', 'cl4ve07', 3),
-	('Diego', 'Sanchez', 'CodeHero@volcanmail.com', 'cl4ve08', 2),
-	('Silvia', 'Gomez', 'NeonStar@volcanmail.com', 'cl4ve09', 1),
-	('Mariano', 'Torres', 'ByteBoss@volcanmail.com', 'cl4ve010', 3);
+	('Juan', 'Gonzalez', 'User1234@volcanmail.com', 'cl4ve01'),
+	('Maria', 'Fernandez', 'ByteGeek@volcanmail.com', 'cl4ve02'),
+	('Carlos', 'Martinez', 'CodeNerd@volcanmail.com', 'cl4ve03'),
+	('Ana', 'Rodriguez', 'QuickFox@volcanmail.com', 'cl4ve04'),
+	('Luis', 'Perez', 'PixelArt@volcanmail.com', 'cl4ve05'),
+	('Laura', 'Diaz', 'DataGuru@volcanmail.com', 'cl4ve06'),
+	('Lucía', 'Lopez', 'TechWhiz@volcanmail.com', 'cl4ve07'),
+	('Diego', 'Sanchez', 'CodeHero@volcanmail.com', 'cl4ve08'),
+	('Silvia', 'Gomez', 'NeonStar@volcanmail.com', 'cl4ve09'),
+	('Mariano', 'Torres', 'ByteBoss@volcanmail.com', 'cl4ve010');
 
 
 -- select * from chefencasa.user;
@@ -71,11 +57,11 @@ VALUES
 (3, 'Receta 2', 'Descripción de la Receta 2', 'Pasos de la Receta 2', 45, 1, '2022-07-01 15:30:00'),
 (2, 'Receta 3', 'Descripción de la Receta 3', 'Pasos de la Receta 3', 60, 2, '2023-08-15 08:45:00'),
 (3, 'Receta 4', 'Descripción de la Receta 4', 'Pasos de la Receta 4', 40, 3, '2022-11-20 19:15:00'),
-(4, 'Receta 5', 'Descripción de la Receta 5', 'Pasos de la Receta 5', 55, 1, '2022-07-25 10:00:00'),
+(4, 'Receta 5', 'Descripción de la Receta 5', 'Pasos de la Receta 5', 55, 4, '2022-07-25 10:00:00'),
 (1, 'Receta 6', 'Descripción de la Receta 6', 'Pasos de la Receta 6', 25, 2, '2023-06-05 14:20:00'),
 (3, 'Receta 7', 'Descripción de la Receta 7', 'Pasos de la Receta 7', 50, 3, '2022-09-18 16:40:00'),
 (7, 'Receta 8', 'Descripción de la Receta 8', 'Pasos de la Receta 8', 35, 1, '2023-01-10 09:55:00'),
-(8, 'Receta 9', 'Descripción de la Receta 9', 'Pasos de la Receta 9', 70, 2, '2023-07-30 21:05:00'),
+(8, 'Receta 9', 'Descripción de la Receta 9', 'Pasos de la Receta 9', 70, 5, '2023-07-30 21:05:00'),
 (7, 'Receta 10', 'Descripción de la Receta 10', 'Pasos de la Receta 10', 45, 3, '2022-12-15 18:30:00');
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -91,7 +77,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Table chefencasa.favoritos
 -- -----------------------------------------------------
 
-INSERT INTO chefencasa.favoritos (user_id, receta_id)
+INSERT INTO chefencasa.favorito (user_id, receta_id)
 VALUES
   (1, 5),
   (1, 3),
@@ -141,7 +127,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Table chefencasa.receta_has_ingrediente
 -- -----------------------------------------------------
 
-INSERT INTO chefencasa.receta_has_ingrediente (receta_id, ingrediente_id)
+INSERT INTO chefencasa.ingrediente_receta (receta_id, ingrediente_id)
 VALUES
 	 -- Receta 1 con ingredientes
 	(1, 1), -- Receta 1 con Ingrediente 1
@@ -208,7 +194,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Table chefencasa.seguido
 -- -----------------------------------------------------
 
-INSERT INTO chefencasa.seguido (seguidor, seguido)
+INSERT INTO chefencasa.seguidos (user_id, seguido_id)
 VALUES
 	(1, 2),
 	(3, 4),
@@ -228,10 +214,9 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- CONSULTA ENTERA
 -- -----------------------------------------------------
 
-select * from chefencasa.rol;
 select * from chefencasa.user;
 select * from chefencasa.receta;
-select * from chefencasa.favoritos;
+select * from chefencasa.favorito;
 select * from chefencasa.categoria;
 select * from chefencasa.ingrediente;
 select * from chefencasa.receta_has_ingrediente;

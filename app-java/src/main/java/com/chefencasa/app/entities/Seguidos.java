@@ -31,7 +31,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "seguidores")
+@Table(name = "seguidos")
 @Data @NoArgsConstructor
 public class Seguidos implements Serializable {
 
@@ -42,19 +42,27 @@ public class Seguidos implements Serializable {
 	private int id;
 
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	private User user;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user_id;
 
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "seguido_id", nullable = false)
+	private User seguido_id;
 
 	
-	public Seguidos(int id) {
+	public Seguidos(int id) {		
 		
-		this.id = id;
-		
-		
+		this.id = id;		
 	}
 	
+	
+	public Seguidos(int id, User user_id, User seguido_id) {		
+		
+		this.id = id;
+		this.user_id = user_id;
+		this.seguido_id = seguido_id;	
+	}
 	
 
 	public static long getSerialversionuid() {

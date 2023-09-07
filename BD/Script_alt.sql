@@ -29,42 +29,23 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `chefencasa`.`rol`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `chefencasa`.`rol` ;
-
-CREATE TABLE IF NOT EXISTS `chefencasa`.`rol` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `rol` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3;
-
-
--- -----------------------------------------------------
 -- Table `chefencasa`.`user`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `chefencasa`.`user` ;
 
 CREATE TABLE IF NOT EXISTS `chefencasa`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(60) NOT NULL,
   `apellido` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
   `clave` VARCHAR(45) NOT NULL,
-  `rol` INT NULL DEFAULT 3,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_usuario_rol1`
-    FOREIGN KEY (`rol`)
-    REFERENCES `chefencasa`.`rol` (`id`))
+  `email` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(60) NOT NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
-CREATE UNIQUE INDEX `email_UNIQUE` ON `chefencasa`.`user` (`email` ASC) VISIBLE;
+CREATE UNIQUE INDEX `UK_le6e9ohs2inu3gbxbgg8e9dfa` ON `chefencasa`.`user` (`apellido` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `idUsuario_UNIQUE` ON `chefencasa`.`user` (`id` ASC) VISIBLE;
-
-CREATE INDEX `fk_usuario_rol1_idx` ON `chefencasa`.`user` (`rol` ASC) VISIBLE;
+CREATE UNIQUE INDEX `UK_ob8kqyqqgmefl0aco34akdtpe` ON `chefencasa`.`user` (`email` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
@@ -74,54 +55,55 @@ DROP TABLE IF EXISTS `chefencasa`.`receta` ;
 
 CREATE TABLE IF NOT EXISTS `chefencasa`.`receta` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `user_id` INT NOT NULL,
-  `titulo_receta` VARCHAR(45) NOT NULL,
-  `descripcion` VARCHAR(255) NOT NULL,
-  `categoria_id` INT NOT NULL,
-  `pasos` VARCHAR(45) NOT NULL,
-  `tiempo_preparacion` INT NOT NULL,
-  `fecha_creacion` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `descripcion` VARCHAR(1000) NOT NULL,
+  `fecha_creacion` DATETIME(6) NOT NULL,
   `foto1` VARCHAR(255) NULL DEFAULT NULL,
   `foto2` VARCHAR(255) NULL DEFAULT NULL,
   `foto3` VARCHAR(255) NULL DEFAULT NULL,
   `foto4` VARCHAR(255) NULL DEFAULT NULL,
   `foto5` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_receta_categoria1`
-    FOREIGN KEY (`categoria_id`)
-    REFERENCES `chefencasa`.`categoria` (`id`),
-  CONSTRAINT `fk_receta_usuario1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `chefencasa`.`user` (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3;
-
-CREATE INDEX `fk_receta_usuario1_idx` ON `chefencasa`.`receta` (`user_id` ASC) VISIBLE;
-
-CREATE INDEX `fk_receta_categoria1_idx` ON `chefencasa`.`receta` (`categoria_id` ASC) VISIBLE;
-
-
--- -----------------------------------------------------
--- Table `chefencasa`.`favoritos`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `chefencasa`.`favoritos` ;
-
-CREATE TABLE IF NOT EXISTS `chefencasa`.`favoritos` (
+  `pasos` VARCHAR(255) NOT NULL,
+  `tiempo_preparacion` INT NOT NULL,
+  `titulo_receta` VARCHAR(100) NOT NULL,
+  `categoria_id` INT NOT NULL,
   `user_id` INT NOT NULL,
-  `receta_id` INT NOT NULL,
-  PRIMARY KEY (`user_id`, `receta_id`),
-  CONSTRAINT `fk_user_has_receta_receta1`
-    FOREIGN KEY (`receta_id`)
-    REFERENCES `chefencasa`.`receta` (`id`),
-  CONSTRAINT `fk_user_has_receta_user1`
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK43n2nquvmo9rvy6hrpya4142l`
     FOREIGN KEY (`user_id`)
-    REFERENCES `chefencasa`.`user` (`id`))
+    REFERENCES `chefencasa`.`user` (`id`),
+  CONSTRAINT `FKiietmot1luu7pnieopyxnj8ge`
+    FOREIGN KEY (`categoria_id`)
+    REFERENCES `chefencasa`.`categoria` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
-CREATE INDEX `fk_user_has_receta_receta1_idx` ON `chefencasa`.`favoritos` (`receta_id` ASC) VISIBLE;
+CREATE INDEX `FKiietmot1luu7pnieopyxnj8ge` ON `chefencasa`.`receta` (`categoria_id` ASC) VISIBLE;
 
-CREATE INDEX `fk_user_has_receta_user1_idx` ON `chefencasa`.`favoritos` (`user_id` ASC) VISIBLE;
+CREATE INDEX `FK43n2nquvmo9rvy6hrpya4142l` ON `chefencasa`.`receta` (`user_id` ASC) VISIBLE;
+
+
+-- -----------------------------------------------------
+-- Table `chefencasa`.`favorito`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `chefencasa`.`favorito` ;
+
+CREATE TABLE IF NOT EXISTS `chefencasa`.`favorito` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `receta_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FKfx7pcmnhqgt2rcppq978bclxv`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `chefencasa`.`user` (`id`),
+  CONSTRAINT `FKsp6x16gw0bgmo4trgdc3xvc22`
+    FOREIGN KEY (`receta_id`)
+    REFERENCES `chefencasa`.`receta` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+CREATE INDEX `FKsp6x16gw0bgmo4trgdc3xvc22` ON `chefencasa`.`favorito` (`receta_id` ASC) VISIBLE;
+
+CREATE INDEX `FKfx7pcmnhqgt2rcppq978bclxv` ON `chefencasa`.`favorito` (`user_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
@@ -159,26 +141,27 @@ CREATE INDEX `FKd789xl9q0ljewdsu5r8ualqr5` ON `chefencasa`.`ingrediente_receta` 
 
 
 -- -----------------------------------------------------
--- Table `chefencasa`.`seguido`
+-- Table `chefencasa`.`seguidos`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `chefencasa`.`seguido` ;
+DROP TABLE IF EXISTS `chefencasa`.`seguidos` ;
 
-CREATE TABLE IF NOT EXISTS `chefencasa`.`seguido` (
-  `seguidor` INT NOT NULL,
-  `seguido` INT NOT NULL,
-  PRIMARY KEY (`seguidor`, `seguido`),
-  CONSTRAINT `fk_user_has_user_user1`
-    FOREIGN KEY (`seguidor`)
+CREATE TABLE IF NOT EXISTS `chefencasa`.`seguidos` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `seguido_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FKd4lgy1f0srr610f0ebq0p5fmq`
+    FOREIGN KEY (`user_id`)
     REFERENCES `chefencasa`.`user` (`id`),
-  CONSTRAINT `fk_user_has_user_user2`
-    FOREIGN KEY (`seguido`)
+  CONSTRAINT `FKocsdh6x45tlpkxceh692ublpn`
+    FOREIGN KEY (`seguido_id`)
     REFERENCES `chefencasa`.`user` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
-CREATE INDEX `fk_user_has_user_user2_idx` ON `chefencasa`.`seguido` (`seguido` ASC) VISIBLE;
+CREATE INDEX `FKocsdh6x45tlpkxceh692ublpn` ON `chefencasa`.`seguidos` (`seguido_id` ASC) VISIBLE;
 
-CREATE INDEX `fk_user_has_user_user1_idx` ON `chefencasa`.`seguido` (`seguidor` ASC) VISIBLE;
+CREATE INDEX `FKd4lgy1f0srr610f0ebq0p5fmq` ON `chefencasa`.`seguidos` (`user_id` ASC) VISIBLE;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
