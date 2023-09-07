@@ -14,17 +14,15 @@ class Users(_message.Message):
     def __init__(self, user: _Optional[_Iterable[_Union[User, _Mapping]]] = ...) -> None: ...
 
 class User(_message.Message):
-    __slots__ = ["id", "nombre", "apellido", "email", "clave", "rol"]
+    __slots__ = ["id", "nombre", "apellido", "email", "clave"]
     ID_FIELD_NUMBER: _ClassVar[int]
     NOMBRE_FIELD_NUMBER: _ClassVar[int]
     APELLIDO_FIELD_NUMBER: _ClassVar[int]
     EMAIL_FIELD_NUMBER: _ClassVar[int]
     CLAVE_FIELD_NUMBER: _ClassVar[int]
-    ROL_FIELD_NUMBER: _ClassVar[int]
     id: int
     nombre: str
     apellido: str
     email: str
     clave: str
-    rol: str
-    def __init__(self, id: _Optional[int] = ..., nombre: _Optional[str] = ..., apellido: _Optional[str] = ..., email: _Optional[str] = ..., clave: _Optional[str] = ..., rol: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[int] = ..., nombre: _Optional[str] = ..., apellido: _Optional[str] = ..., email: _Optional[str] = ..., clave: _Optional[str] = ...) -> None: ...
