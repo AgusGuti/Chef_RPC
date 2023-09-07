@@ -33,16 +33,16 @@ public class Receta implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "user_id", nullable = false)
 	@NotNull(message = "Campo requerido.")
 	private User user;
 
 	@ManyToMany(mappedBy = "recetas")
 	private Set<Ingrediente> ingredientes;
 	
-	@ManyToOne
-	@JoinColumn(name = "categoria_id")
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "categoria_id", nullable = false)
 	private Categoria categoria;
 
 
@@ -56,10 +56,10 @@ public class Receta implements Serializable {
 	@Column(name = "pasos", nullable = false)
 	private String pasos;
 
-	@Column(name = "tiempoPreparacion", unique = true, nullable = false)
+	@Column(name = "tiempoPreparacion", nullable = false)
 	private int tiempoPreparacion;
 
-	@Column(name = "fechaCreacion", unique = true, nullable = false)
+	@Column(name = "fechaCreacion", nullable = false)
 	private LocalDateTime fechaCreacion;
 
 	@Column(name = "foto1", nullable = true)
