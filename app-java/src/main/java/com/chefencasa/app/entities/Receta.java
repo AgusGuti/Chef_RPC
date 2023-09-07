@@ -7,7 +7,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,6 +40,7 @@ public class Receta implements Serializable {
 	@NotNull(message = "Campo requerido.")
 	private User user;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "recetas")
 	private Set<Ingrediente> ingredientes;
 	
@@ -98,6 +101,23 @@ public class Receta implements Serializable {
 
 		this.user = usuario;
 		this.setIngredientes(ingredientes);
+		this.categoria = categoria;
+		this.tituloReceta = tituloReceta;
+		this.descripcion = descripcion;
+		this.pasos = pasos;
+		this.tiempoPreparacion = tiempoPreparacion;
+		this.fechaCreacion = fechaCreacion;
+		this.foto1 = foto1;
+		this.foto2 = foto2;
+		this.foto3 = foto3;
+		this.foto4 = foto4;
+		this.foto5 = foto5;
+	}
+	
+	public Receta(User usuario, Categoria categoria, String tituloReceta, String descripcion, String pasos, int tiempoPreparacion, LocalDateTime fechaCreacion, String foto1,
+			String foto2, String foto3, String foto4, String foto5) {
+
+		this.user = usuario;
 		this.categoria = categoria;
 		this.tituloReceta = tituloReceta;
 		this.descripcion = descripcion;
