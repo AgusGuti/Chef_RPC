@@ -7,11 +7,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chefencasa.app.entities.Categoria;
 import com.chefencasa.app.repository.CategoriaRepository;
+import com.chefencasa.app.repository.IngredienteRepository;
 import com.chefencasa.app.repository.RecetaRepository;
 import com.chefencasa.app.repository.UserRepository;
 import com.chefencasa.model.RecetaProto;
@@ -44,24 +47,27 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 	@Autowired
 	@Qualifier("categoriaRepository")
 	private CategoriaRepository categoriaRepository;
+	
+	@Autowired
+	@Qualifier("ingredienteRepository")
+	private IngredienteRepository ingredienteRepository;
 
 	@Override
+	@Transactional
 	public void addReceta(Receta request, StreamObserver<RecetaResponse> responseObserver) {
 		RecetaResponse.Builder response = RecetaResponse.newBuilder();
 		try {
-			Receta receta = response.getReceta();
+			Receta receta = request;
 			Instant instant = Instant.ofEpochSecond(receta.getFechaCreacion().getSeconds(),
 					receta.getFechaCreacion().getNanos());
 			LocalDateTime localDateTime = instant.atZone(ZoneOffset.UTC).toLocalDateTime();
-			// hay que ver la zona horaria si se guarda bien
-			Categoria cat = categoriaRepository.findByCategoria(receta.getCategoria());
-			if (cat == null) {
-				cat = categoriaRepository.save(new Categoria(receta.getCategoria()));
-			}
-			recetaRepository.save(new com.chefencasa.app.entities.Receta(userRepository.findById(receta.getIdUsuario()),
-					convertirIngredientesProtoASet(receta.getIngredientesList()), cat, receta.getTituloReceta(),
+			com.chefencasa.app.entities.Receta recetita = new com.chefencasa.app.entities.Receta(userRepository.findById(receta.getIdUsuario()),
+				 categoriaRepository.findByCategoria(receta.getCategoria()), receta.getTituloReceta(),
 					receta.getDescripcion(), receta.getPasos(), receta.getTiempoPreparacion(), localDateTime,
-					receta.getFoto1(), receta.getFoto2(), receta.getFoto3(), receta.getFoto4(), receta.getFoto5()));
+					receta.getFoto1(), receta.getFoto2(), receta.getFoto3(), receta.getFoto4(), receta.getFoto5());
+			recetita.setIngredientes(new HashSet<>());
+			recetita.setIngredientes(ingresarIngredientesYObtenerLista(receta.getIngredientesList(),recetita));
+			recetaRepository.save(recetita);
 			response.setReceta(receta);
 			response.setMensaje("Receta agregada exitosamente");
 		} catch (Exception e) {
@@ -227,6 +233,27 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 			ingredientes.add(ingrediente);
 		}
 		return ingredientes;
+	}
+	
+	@Transactional
+	public Set<com.chefencasa.app.entities.Ingrediente> ingresarIngredientesYObtenerLista(List<String> ingredientesProto, com.chefencasa.app.entities.Receta receta) {
+	    Set<com.chefencasa.app.entities.Ingrediente> ingredientesEnDB = new HashSet<>();
+	    
+	    for (String nombreIngrediente : ingredientesProto) {
+	    	com.chefencasa.app.entities.Ingrediente ingrediente = ingredienteRepository.findByIngrediente(nombreIngrediente);
+	        if (ingrediente == null) {
+	            ingrediente = new com.chefencasa.app.entities.Ingrediente();
+	            ingrediente.setIngrediente(nombreIngrediente);
+	            ingrediente.setRecetas(new HashSet<>());
+	            ingredienteRepository.save(ingrediente);
+	        }
+	        receta.getIngredientes().add(ingrediente);
+	        ingrediente.getRecetas().add(receta); 
+	        ingredientesEnDB.add(ingrediente);
+	        
+	    }
+	    
+	    return ingredientesEnDB;
 	}
 
 }

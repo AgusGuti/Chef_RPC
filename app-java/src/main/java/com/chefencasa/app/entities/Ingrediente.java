@@ -1,7 +1,8 @@
 package com.chefencasa.app.entities;
 
 import java.io.Serializable;
-
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -40,14 +41,11 @@ public class Ingrediente implements Serializable {
 	            joinColumns = {@JoinColumn(name = "ingrediente_id")},
 	            inverseJoinColumns = {@JoinColumn(name = "receta_id")}
 	    )
-	    private Set<Receta> recetas;
+	    private Set<Receta> recetas  = new HashSet<Receta>();
 
 
 	@Column(name = "ingrediente", nullable = false)
 	private String ingrediente;
-
-
-	
 
 	public Ingrediente(int id, String ingrediente) {
 		
@@ -55,10 +53,35 @@ public class Ingrediente implements Serializable {
 		this.ingrediente = ingrediente;
 		
 	}
+	
+
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Ingrediente other = (Ingrediente) obj;
+		return id == other.id && Objects.equals(ingrediente, other.ingrediente)
+				&& Objects.equals(recetas, other.recetas);
+	}
+
+	public int hashCode() {
+		return Objects.hash(ingrediente);
+	}
+
+
+
+	
+	
+	
 
 
     
