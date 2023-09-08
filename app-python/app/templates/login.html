@@ -22,15 +22,13 @@
                     <div class="login-form">
                         <form action="/autenticar" method="post">
                             <div class="form-outline mb-4">
-                                    {% with messages = get_flashed_messages() %}
-                                    {% if messages %}
-                                      <div class="alert alert-secondary text-center">
-                                      {% for message in messages %}
-                                        <li>{{ message }}</li>
-                                      {% endfor %}
-                                      </div>
-                                    {% endif %}
-                                    {% endwith %}
+                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                {% if messages %}
+                                  {% for category, message in messages %}
+                                     <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
+                                  {% endfor %}
+                                {% endif %}
+                              {% endwith %}
                             </div>
                             <div class="form-outline mb-4">
                                 <img src="{{ url_for('static', filename='unla-logo.png') }}" alt="Smiley face" style="vertical-align: Stickman; margin: 0px 90px" />

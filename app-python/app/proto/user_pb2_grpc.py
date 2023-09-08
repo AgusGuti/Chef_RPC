@@ -4,6 +4,7 @@ import grpc
 
 from . import user_pb2 as user__pb2
 
+
 class UsersServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 

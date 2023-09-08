@@ -23,7 +23,7 @@ def autenticar():
     user={"user":MessageToJson(response)}
     logger.info("user %s",user)
     if user["user"]=="{}":
-        flash('Usuario y/o clave incorrectos')
+        flash('Usuario y/o clave incorrectos','danger')
         return redirect('/')
     else:
         return render_template('index.html', user=request.form['username'])
@@ -38,10 +38,10 @@ def registrarUser():
     user={"user":MessageToJson(response)}
     logger.info("user registrado %s",user)
     if user["user"]=="{}":
-        flash('Error al intentar cargar el usuario')
+        flash('Error al intentar cargar el usuario','danger')
         return redirect('/registrar')
     else:
-        flash('Usuario creado exitosamente!')
+        flash('Usuario creado exitosamente!','success')
         return redirect('/')
 
 @user_blueprint.route("/registrar",methods = ['GET'])

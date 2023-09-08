@@ -4,6 +4,7 @@ import grpc
 
 from . import receta_pb2 as receta__pb2
 
+
 class RecetasServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 
