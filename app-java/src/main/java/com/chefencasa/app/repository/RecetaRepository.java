@@ -14,5 +14,7 @@ public interface RecetaRepository extends JpaRepository<Receta, Serializable> {
 	public abstract List<Receta> findAll();
 	
 	public abstract List<Receta> findByUserId(int userId);
+	
+	public abstract Receta findById(int id);
 
 }
