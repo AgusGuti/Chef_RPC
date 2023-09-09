@@ -20,11 +20,6 @@ service RecetasService {
 message Empty {
 }
 
-message Ingrediente {
-  int32 idIngrediente = 1;
-  string ingrediente = 2;
-}
-
 message Receta {
   int32 idReceta = 1;
   int32 idUsuario = 2;
@@ -74,7 +69,7 @@ message UsuarioId {
 message RecetaFiltro{
     string categoria = 1;
 	string nombre = 2;
-	repeated Ingrediente ingredientes = 3;
+	repeated string ingredientes = 3;
 	int32 tiempoPrepDesde = 4;
 	int32 tiempoPrepHasta = 5;
 }

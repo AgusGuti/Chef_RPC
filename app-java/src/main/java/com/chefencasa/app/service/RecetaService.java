@@ -3,12 +3,17 @@ package com.chefencasa.app.service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.chefencasa.app.repository.CategoriaRepository;
@@ -77,18 +82,51 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 	public void getByFilter(RecetaFiltro request, StreamObserver<RecetasResponse> responseObserver) {
 		RecetasResponse.Builder response = RecetasResponse.newBuilder();
 		try {
-			/*
-			 * List<Receta> recetas =
-			 * RecetaDao.getByFilter(request.getCategoria(),request.getNombre(),request.
-			 * getIngredientesList(),request.getTiempoPrepDesde(),request.getTiempoPrepHasta
-			 * ()); //se tiene que hacer en el Dao
-			 * 
-			 * response.addAllReceta(recetas);
-			 * 
-			 * if (recetas.isEmpty()) {
-			 * response.setMensaje("No se encontraron recetas que coincidan con el filtro."
-			 * ); } else { response.setMensaje("Recetas obtenidas exitosamente."); }
-			 */
+			Specification<com.chefencasa.app.entities.Receta> specification = (root, query, criteriaBuilder) -> {
+	            List<Predicate> predicates = new ArrayList<>();
+
+	            if (!request.getCategoria().isEmpty()) {
+	            	Join<com.chefencasa.app.entities.Receta, com.chefencasa.app.entities.Categoria> categoriaJoin = root.join("categoria");
+	                predicates.add(criteriaBuilder.equal(categoriaJoin.get("categoria"), request.getCategoria()));
+	            }
+	            if (!request.getNombre().isEmpty()) {
+	                predicates.add(criteriaBuilder.like(root.get("nombre"), "%" + request.getNombre() + "%"));
+	            }
+	            if (request.getTiempoPrepDesde()!=0 && request.getTiempoPrepHasta()!=0) {
+	                predicates.add(criteriaBuilder.between(
+	                    root.get("tiempoPreparacion"),
+	                    request.getTiempoPrepDesde(),
+	                    request.getTiempoPrepHasta()
+	                ));
+	            } else if (request.getTiempoPrepDesde()!=0) {
+	                predicates.add(criteriaBuilder.greaterThanOrEqualTo(
+	                    root.get("tiempoPreparacion"),
+	                    request.getTiempoPrepDesde()
+	                ));
+	            } else if (request.getTiempoPrepHasta()!=0) {
+	                predicates.add(criteriaBuilder.lessThanOrEqualTo(
+	                    root.get("tiempoPreparacion"),
+	                    request.getTiempoPrepHasta()
+	                ));
+	            }
+	            if (request.getIngredientesCount() > 0) {
+	                Set<String> ingredientes = new HashSet<>(request.getIngredientesList());
+	                Join<com.chefencasa.app.entities.Receta, com.chefencasa.app.entities.Ingrediente> ingredientesJoin = root.joinSet("ingredientes");
+	                predicates.add(ingredientesJoin.get("nombre").in(ingredientes));
+	            }
+	            query.orderBy(criteriaBuilder.desc(root.get("fechaCreacion")));
+	            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+	        };
+	        List<com.chefencasa.app.entities.Receta> result = recetaRepository.findAll(specification);
+	        if (result.isEmpty()) {
+	        	response.setMensaje("No hay recetas con esos criterios");
+	        } else {
+	        	for (com.chefencasa.app.entities.Receta receta : result) {
+		        	response.addReceta(convertirRecetaARecetaProto(receta));
+		        }
+	        	response.setMensaje("Recetas obtenidas satisfactoriamente");
+	        }
+
 		} catch (Exception e) {
 			response.setMensaje("Ha ocurrido un error al obtener las recetas.");
 		}
@@ -184,6 +222,8 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 				receta.setFoto5(request.getFoto5());
 			}
 			recetaRepository.save(receta);
+			response.setReceta(convertirRecetaARecetaProto(receta));
+			response.setMensaje("Receta actualizada satisfactoriamente");
 		} catch (Exception e) {
 			response.setMensaje("Ha ocurrido un error al actualizar la receta.");
 		}
