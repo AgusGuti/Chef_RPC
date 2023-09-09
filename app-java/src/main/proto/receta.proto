@@ -14,15 +14,10 @@ service RecetasService {
   rpc getByFilter(RecetaFiltro) returns (RecetasResponse) {}
   rpc getAllRecetas(Empty) returns (RecetasResponse) {}
   rpc getAllRecetasByUser(UsuarioId) returns (RecetasResponse) {}
-  rpc updateReceta(RecetaId) returns (RecetaResponse) {}
+  rpc updateReceta(UpdateRecetaRequest) returns (RecetaResponse) {}
 }
 
 message Empty {
-}
-
-message Ingrediente {
-  int32 idIngrediente = 1;
-  string ingrediente = 2;
 }
 
 message Receta {
@@ -35,6 +30,21 @@ message Receta {
   google.protobuf.Timestamp fechaCreacion = 7;
   repeated string ingredientes = 8;
   int32 tiempoPreparacion = 9;
+  string foto1 = 10;
+  string foto2 = 11;
+  string foto3 = 12;
+  string foto4 = 13;
+  string foto5 = 14;
+}
+
+message UpdateRecetaRequest {
+  int32 idReceta = 1;
+  string tituloReceta = 2;
+  string descripcion = 3;
+  string categoria = 4;
+  string pasos = 5;
+  repeated string ingredientes = 6;
+  int32 tiempoPreparacion = 7;
   string foto1 = 10;
   string foto2 = 11;
   string foto3 = 12;
@@ -56,15 +66,10 @@ message UsuarioId {
   int32 idUsuario = 1;
 }
 
-message RecetaId {
-  int32 idReceta = 1;
-}
-
-
 message RecetaFiltro{
-    int32 categoria = 1;
+    string categoria = 1;
 	string nombre = 2;
-	repeated Ingrediente ingredientes = 3;
+	repeated string ingredientes = 3;
 	int32 tiempoPrepDesde = 4;
 	int32 tiempoPrepHasta = 5;
 }
