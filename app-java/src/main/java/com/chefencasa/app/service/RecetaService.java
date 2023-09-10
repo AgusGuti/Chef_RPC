@@ -83,49 +83,44 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 		RecetasResponse.Builder response = RecetasResponse.newBuilder();
 		try {
 			Specification<com.chefencasa.app.entities.Receta> specification = (root, query, criteriaBuilder) -> {
-	            List<Predicate> predicates = new ArrayList<>();
+				List<Predicate> predicates = new ArrayList<>();
 
-	            if (!request.getCategoria().isEmpty()) {
-	            	Join<com.chefencasa.app.entities.Receta, com.chefencasa.app.entities.Categoria> categoriaJoin = root.join("categoria");
-	                predicates.add(criteriaBuilder.equal(categoriaJoin.get("categoria"), request.getCategoria()));
-	            }
-	            if (!request.getNombre().isEmpty()) {
-	                predicates.add(criteriaBuilder.like(root.get("nombre"), "%" + request.getNombre() + "%"));
-	            }
-	            if (request.getTiempoPrepDesde()!=0 && request.getTiempoPrepHasta()!=0) {
-	                predicates.add(criteriaBuilder.between(
-	                    root.get("tiempoPreparacion"),
-	                    request.getTiempoPrepDesde(),
-	                    request.getTiempoPrepHasta()
-	                ));
-	            } else if (request.getTiempoPrepDesde()!=0) {
-	                predicates.add(criteriaBuilder.greaterThanOrEqualTo(
-	                    root.get("tiempoPreparacion"),
-	                    request.getTiempoPrepDesde()
-	                ));
-	            } else if (request.getTiempoPrepHasta()!=0) {
-	                predicates.add(criteriaBuilder.lessThanOrEqualTo(
-	                    root.get("tiempoPreparacion"),
-	                    request.getTiempoPrepHasta()
-	                ));
-	            }
-	            if (request.getIngredientesCount() > 0) {
-	                Set<String> ingredientes = new HashSet<>(request.getIngredientesList());
-	                Join<com.chefencasa.app.entities.Receta, com.chefencasa.app.entities.Ingrediente> ingredientesJoin = root.joinSet("ingredientes");
-	                predicates.add(ingredientesJoin.get("nombre").in(ingredientes));
-	            }
-	            query.orderBy(criteriaBuilder.desc(root.get("fechaCreacion")));
-	            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-	        };
-	        List<com.chefencasa.app.entities.Receta> result = recetaRepository.findAll(specification);
-	        if (result.isEmpty()) {
-	        	response.setMensaje("No hay recetas con esos criterios");
-	        } else {
-	        	for (com.chefencasa.app.entities.Receta receta : result) {
-		        	response.addReceta(convertirRecetaARecetaProto(receta));
-		        }
-	        	response.setMensaje("Recetas obtenidas satisfactoriamente");
-	        }
+				if (!request.getCategoria().isEmpty()) {
+					Join<com.chefencasa.app.entities.Receta, com.chefencasa.app.entities.Categoria> categoriaJoin = root
+							.join("categoria");
+					predicates.add(criteriaBuilder.equal(categoriaJoin.get("categoria"), request.getCategoria()));
+				}
+				if (!request.getNombre().isEmpty()) {
+					predicates.add(criteriaBuilder.like(root.get("nombre"), "%" + request.getNombre() + "%"));
+				}
+				if (request.getTiempoPrepDesde() != 0 && request.getTiempoPrepHasta() != 0) {
+					predicates.add(criteriaBuilder.between(root.get("tiempoPreparacion"), request.getTiempoPrepDesde(),
+							request.getTiempoPrepHasta()));
+				} else if (request.getTiempoPrepDesde() != 0) {
+					predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("tiempoPreparacion"),
+							request.getTiempoPrepDesde()));
+				} else if (request.getTiempoPrepHasta() != 0) {
+					predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("tiempoPreparacion"),
+							request.getTiempoPrepHasta()));
+				}
+				if (request.getIngredientesCount() > 0) {
+					Set<String> ingredientes = new HashSet<>(request.getIngredientesList());
+					Join<com.chefencasa.app.entities.Receta, com.chefencasa.app.entities.Ingrediente> ingredientesJoin = root
+							.joinSet("ingredientes");
+					predicates.add(ingredientesJoin.get("nombre").in(ingredientes));
+				}
+				query.orderBy(criteriaBuilder.desc(root.get("fechaCreacion")));
+				return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+			};
+			List<com.chefencasa.app.entities.Receta> result = recetaRepository.findAll(specification);
+			if (result.isEmpty()) {
+				response.setMensaje("No hay recetas con esos criterios");
+			} else {
+				for (com.chefencasa.app.entities.Receta receta : result) {
+					response.addReceta(convertirRecetaARecetaProto(receta));
+				}
+				response.setMensaje("Recetas obtenidas satisfactoriamente");
+			}
 
 		} catch (Exception e) {
 			response.setMensaje("Ha ocurrido un error al obtener las recetas.");
@@ -146,8 +141,9 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 			}
 			if (recetas.isEmpty()) {
 				response.setMensaje("No se encontraron recetas.");
+			} else {
+				response.setMensaje("Recetas obtenidas exitosamente");
 			}
-			response.setMensaje("Recetas obtenidas exitosamente");
 		} catch (Exception e) {
 			response.setMensaje("Ha ocurrido un error al obtener las recetas.");
 		}
@@ -161,15 +157,17 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 		RecetasResponse.Builder response = RecetasResponse.newBuilder();
 		try {
 			int userId = request.getIdUsuario();
-			List<com.chefencasa.app.entities.Receta> recetasDelUsuario = recetaRepository.findByUserId(userId);
+			List<com.chefencasa.app.entities.Receta> recetasDelUsuario = recetaRepository
+					.findByUserIdOrderByFechaCreacionDesc(userId);
 			for (com.chefencasa.app.entities.Receta receta : recetasDelUsuario) {
 				RecetaProto.Receta recetaProto = convertirRecetaARecetaProto(receta);
 				response.addReceta(recetaProto);
 			}
 			if (recetasDelUsuario.isEmpty()) {
 				response.setMensaje("No se encontraron recetas.");
+			} else {
+				response.setMensaje("Recetas obtenidas exitosamente");
 			}
-			response.setMensaje("Recetas obtenidas exitosamente");
 		} catch (Exception e) {
 			response.setMensaje("Ha ocurrido un error al obtener las recetas del usuario.");
 		}
@@ -226,6 +224,51 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 			response.setMensaje("Receta actualizada satisfactoriamente");
 		} catch (Exception e) {
 			response.setMensaje("Ha ocurrido un error al actualizar la receta.");
+		}
+		responseObserver.onNext(response.build());
+		responseObserver.onCompleted();
+	}
+
+	@Override
+	public void getRecetasOfSeguidos(UsuarioId request, StreamObserver<RecetasResponse> responseObserver) {
+		RecetasResponse.Builder response = RecetasResponse.newBuilder();
+		try {
+			List<com.chefencasa.app.entities.Receta> recetasDeSeguidos = recetaRepository
+					.findAllRecetasOfSeguidosByUserId(request.getIdUsuario());
+			for (com.chefencasa.app.entities.Receta receta : recetasDeSeguidos) {
+				RecetaProto.Receta recetaProto = convertirRecetaARecetaProto(receta);
+				response.addReceta(recetaProto);
+			}
+			if (recetasDeSeguidos.isEmpty()) {
+				response.setMensaje("No se encontraron recetas.");
+			} else {
+				response.setMensaje("Recetas obtenidas exitosamente");
+			}
+		} catch (Exception e) {
+			response.setMensaje("Ha ocurrido un error al obtener las recetas del usuario.");
+		}
+
+		responseObserver.onNext(response.build());
+		responseObserver.onCompleted();
+	}
+
+	@Override
+	public void getFavoritos(UsuarioId request, StreamObserver<RecetasResponse> responseObserver) {
+		RecetasResponse.Builder response = RecetasResponse.newBuilder();
+		try {
+			List<com.chefencasa.app.entities.Receta> recetasFavoritas = recetaRepository
+					.findAllFavoritosByUserId(request.getIdUsuario());
+			for (com.chefencasa.app.entities.Receta receta : recetasFavoritas) {
+				RecetaProto.Receta recetaProto = convertirRecetaARecetaProto(receta);
+				response.addReceta(recetaProto);
+			}
+			if (recetasFavoritas.isEmpty()) {
+				response.setMensaje("No se encontraron recetas.");
+			} else {
+				response.setMensaje("Recetas obtenidas exitosamente");
+			}
+		} catch (Exception e) {
+			response.setMensaje("Ha ocurrido un error al obtener las recetas del usuario.");
 		}
 
 		responseObserver.onNext(response.build());
