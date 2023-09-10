@@ -16,7 +16,7 @@ from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0creceta.proto\x12\x05model\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x07\n\x05\x45mpty\"9\n\x0bIngrediente\x12\x15\n\ridIngrediente\x18\x01 \x01(\x05\x12\x13\n\x0bingrediente\x18\x02 \x01(\t\"\xa9\x02\n\x06Receta\x12\x10\n\x08idReceta\x18\x01 \x01(\x05\x12\x11\n\tidUsuario\x18\x02 \x01(\x05\x12\x14\n\x0ctituloReceta\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scripcion\x18\x04 \x01(\t\x12\x11\n\tCategoria\x18\x05 \x01(\t\x12\r\n\x05pasos\x18\x06 \x01(\t\x12\x31\n\rfechaCreacion\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x14\n\x0cingredientes\x18\x08 \x03(\t\x12\x19\n\x11tiempoPreparacion\x18\t \x01(\x05\x12\r\n\x05\x66oto1\x18\n \x01(\t\x12\r\n\x05\x66oto2\x18\x0b \x01(\t\x12\r\n\x05\x66oto3\x18\x0c \x01(\t\x12\r\n\x05\x66oto4\x18\r \x01(\t\x12\r\n\x05\x66oto5\x18\x0e \x01(\t\"@\n\x0eRecetaResponse\x12\x1d\n\x06receta\x18\x01 \x01(\x0b\x32\r.model.Receta\x12\x0f\n\x07mensaje\x18\x02 \x01(\t\"A\n\x0fRecetasResponse\x12\x1d\n\x06receta\x18\x01 \x03(\x0b\x32\r.model.Receta\x12\x0f\n\x07mensaje\x18\x02 \x01(\t\"\x1e\n\tUsuarioId\x12\x11\n\tidUsuario\x18\x01 \x01(\x05\"\x1c\n\x08RecetaId\x12\x10\n\x08idReceta\x18\x01 \x01(\x05\"\x8d\x01\n\x0cRecetaFiltro\x12\x11\n\tcategoria\x18\x01 \x01(\x05\x12\x0e\n\x06nombre\x18\x02 \x01(\t\x12(\n\x0cingredientes\x18\x03 \x03(\x0b\x32\x12.model.Ingrediente\x12\x17\n\x0ftiempoPrepDesde\x18\x04 \x01(\x05\x12\x17\n\x0ftiempoPrepHasta\x18\x05 \x01(\x05\x32\xb9\x02\n\x0eRecetasService\x12\x33\n\tAddReceta\x12\r.model.Receta\x1a\x15.model.RecetaResponse\"\x00\x12<\n\x0bgetByFilter\x12\x13.model.RecetaFiltro\x1a\x16.model.RecetasResponse\"\x00\x12\x37\n\rgetAllRecetas\x12\x0c.model.Empty\x1a\x16.model.RecetasResponse\"\x00\x12\x41\n\x13getAllRecetasByUser\x12\x10.model.UsuarioId\x1a\x16.model.RecetasResponse\"\x00\x12\x38\n\x0cupdateReceta\x12\x0f.model.RecetaId\x1a\x15.model.RecetaResponse\"\x00\x42#\n\x14\x63om.chefencasa.modelB\x0bRecetaProtob\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0creceta.proto\x12\x05model\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x07\n\x05\x45mpty\"\xa9\x02\n\x06Receta\x12\x10\n\x08idReceta\x18\x01 \x01(\x05\x12\x11\n\tidUsuario\x18\x02 \x01(\x05\x12\x14\n\x0ctituloReceta\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scripcion\x18\x04 \x01(\t\x12\x11\n\tCategoria\x18\x05 \x01(\t\x12\r\n\x05pasos\x18\x06 \x01(\t\x12\x31\n\rfechaCreacion\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x14\n\x0cingredientes\x18\x08 \x03(\t\x12\x19\n\x11tiempoPreparacion\x18\t \x01(\x05\x12\r\n\x05\x66oto1\x18\n \x01(\t\x12\r\n\x05\x66oto2\x18\x0b \x01(\t\x12\r\n\x05\x66oto3\x18\x0c \x01(\t\x12\r\n\x05\x66oto4\x18\r \x01(\t\x12\r\n\x05\x66oto5\x18\x0e \x01(\t\"\xf0\x01\n\x13UpdateRecetaRequest\x12\x10\n\x08idReceta\x18\x01 \x01(\x05\x12\x14\n\x0ctituloReceta\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scripcion\x18\x03 \x01(\t\x12\x11\n\tcategoria\x18\x04 \x01(\t\x12\r\n\x05pasos\x18\x05 \x01(\t\x12\x14\n\x0cingredientes\x18\x06 \x03(\t\x12\x19\n\x11tiempoPreparacion\x18\x07 \x01(\x05\x12\r\n\x05\x66oto1\x18\n \x01(\t\x12\r\n\x05\x66oto2\x18\x0b \x01(\t\x12\r\n\x05\x66oto3\x18\x0c \x01(\t\x12\r\n\x05\x66oto4\x18\r \x01(\t\x12\r\n\x05\x66oto5\x18\x0e \x01(\t\"@\n\x0eRecetaResponse\x12\x1d\n\x06receta\x18\x01 \x01(\x0b\x32\r.model.Receta\x12\x0f\n\x07mensaje\x18\x02 \x01(\t\"A\n\x0fRecetasResponse\x12\x1d\n\x06receta\x18\x01 \x03(\x0b\x32\r.model.Receta\x12\x0f\n\x07mensaje\x18\x02 \x01(\t\"\x1e\n\tUsuarioId\x12\x11\n\tidUsuario\x18\x01 \x01(\x05\"y\n\x0cRecetaFiltro\x12\x11\n\tcategoria\x18\x01 \x01(\t\x12\x0e\n\x06nombre\x18\x02 \x01(\t\x12\x14\n\x0cingredientes\x18\x03 \x03(\t\x12\x17\n\x0ftiempoPrepDesde\x18\x04 \x01(\x05\x12\x17\n\x0ftiempoPrepHasta\x18\x05 \x01(\x05\x32\xc4\x03\n\x0eRecetasService\x12\x33\n\tAddReceta\x12\r.model.Receta\x1a\x15.model.RecetaResponse\"\x00\x12<\n\x0bgetByFilter\x12\x13.model.RecetaFiltro\x1a\x16.model.RecetasResponse\"\x00\x12\x37\n\rgetAllRecetas\x12\x0c.model.Empty\x1a\x16.model.RecetasResponse\"\x00\x12\x41\n\x13getAllRecetasByUser\x12\x10.model.UsuarioId\x1a\x16.model.RecetasResponse\"\x00\x12\x43\n\x0cupdateReceta\x12\x1a.model.UpdateRecetaRequest\x1a\x15.model.RecetaResponse\"\x00\x12\x42\n\x14getRecetasOfSeguidos\x12\x10.model.UsuarioId\x1a\x16.model.RecetasResponse\"\x00\x12:\n\x0cgetFavoritos\x12\x10.model.UsuarioId\x1a\x16.model.RecetasResponse\"\x00\x42#\n\x14\x63om.chefencasa.modelB\x0bRecetaProtob\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -27,20 +27,18 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._serialized_options = b'\n\024com.chefencasa.modelB\013RecetaProto'
   _globals['_EMPTY']._serialized_start=117
   _globals['_EMPTY']._serialized_end=124
-  _globals['_INGREDIENTE']._serialized_start=126
-  _globals['_INGREDIENTE']._serialized_end=183
-  _globals['_RECETA']._serialized_start=186
-  _globals['_RECETA']._serialized_end=483
-  _globals['_RECETARESPONSE']._serialized_start=485
-  _globals['_RECETARESPONSE']._serialized_end=549
-  _globals['_RECETASRESPONSE']._serialized_start=551
-  _globals['_RECETASRESPONSE']._serialized_end=616
-  _globals['_USUARIOID']._serialized_start=618
-  _globals['_USUARIOID']._serialized_end=648
-  _globals['_RECETAID']._serialized_start=650
-  _globals['_RECETAID']._serialized_end=678
-  _globals['_RECETAFILTRO']._serialized_start=681
-  _globals['_RECETAFILTRO']._serialized_end=822
-  _globals['_RECETASSERVICE']._serialized_start=825
-  _globals['_RECETASSERVICE']._serialized_end=1138
+  _globals['_RECETA']._serialized_start=127
+  _globals['_RECETA']._serialized_end=424
+  _globals['_UPDATERECETAREQUEST']._serialized_start=427
+  _globals['_UPDATERECETAREQUEST']._serialized_end=667
+  _globals['_RECETARESPONSE']._serialized_start=669
+  _globals['_RECETARESPONSE']._serialized_end=733
+  _globals['_RECETASRESPONSE']._serialized_start=735
+  _globals['_RECETASRESPONSE']._serialized_end=800
+  _globals['_USUARIOID']._serialized_start=802
+  _globals['_USUARIOID']._serialized_end=832
+  _globals['_RECETAFILTRO']._serialized_start=834
+  _globals['_RECETAFILTRO']._serialized_end=955
+  _globals['_RECETASSERVICE']._serialized_start=958
+  _globals['_RECETASSERVICE']._serialized_end=1410
 # @@protoc_insertion_point(module_scope)

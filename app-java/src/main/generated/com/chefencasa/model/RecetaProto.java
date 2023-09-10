@@ -432,640 +432,6 @@ public final class RecetaProto {
 
   }
 
-  public interface IngredienteOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:model.Ingrediente)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>int32 idIngrediente = 1;</code>
-     * @return The idIngrediente.
-     */
-    int getIdIngrediente();
-
-    /**
-     * <code>string ingrediente = 2;</code>
-     * @return The ingrediente.
-     */
-    java.lang.String getIngrediente();
-    /**
-     * <code>string ingrediente = 2;</code>
-     * @return The bytes for ingrediente.
-     */
-    com.google.protobuf.ByteString
-        getIngredienteBytes();
-  }
-  /**
-   * Protobuf type {@code model.Ingrediente}
-   */
-  public  static final class Ingrediente extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:model.Ingrediente)
-      IngredienteOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use Ingrediente.newBuilder() to construct.
-    private Ingrediente(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private Ingrediente() {
-      ingrediente_ = "";
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new Ingrediente();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private Ingrediente(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-
-              idIngrediente_ = input.readInt32();
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              ingrediente_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.chefencasa.model.RecetaProto.internal_static_model_Ingrediente_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.chefencasa.model.RecetaProto.internal_static_model_Ingrediente_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.chefencasa.model.RecetaProto.Ingrediente.class, com.chefencasa.model.RecetaProto.Ingrediente.Builder.class);
-    }
-
-    public static final int IDINGREDIENTE_FIELD_NUMBER = 1;
-    private int idIngrediente_;
-    /**
-     * <code>int32 idIngrediente = 1;</code>
-     * @return The idIngrediente.
-     */
-    public int getIdIngrediente() {
-      return idIngrediente_;
-    }
-
-    public static final int INGREDIENTE_FIELD_NUMBER = 2;
-    private volatile java.lang.Object ingrediente_;
-    /**
-     * <code>string ingrediente = 2;</code>
-     * @return The ingrediente.
-     */
-    public java.lang.String getIngrediente() {
-      java.lang.Object ref = ingrediente_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        ingrediente_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string ingrediente = 2;</code>
-     * @return The bytes for ingrediente.
-     */
-    public com.google.protobuf.ByteString
-        getIngredienteBytes() {
-      java.lang.Object ref = ingrediente_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        ingrediente_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (idIngrediente_ != 0) {
-        output.writeInt32(1, idIngrediente_);
-      }
-      if (!getIngredienteBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ingrediente_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (idIngrediente_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, idIngrediente_);
-      }
-      if (!getIngredienteBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, ingrediente_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.chefencasa.model.RecetaProto.Ingrediente)) {
-        return super.equals(obj);
-      }
-      com.chefencasa.model.RecetaProto.Ingrediente other = (com.chefencasa.model.RecetaProto.Ingrediente) obj;
-
-      if (getIdIngrediente()
-          != other.getIdIngrediente()) return false;
-      if (!getIngrediente()
-          .equals(other.getIngrediente())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + IDINGREDIENTE_FIELD_NUMBER;
-      hash = (53 * hash) + getIdIngrediente();
-      hash = (37 * hash) + INGREDIENTE_FIELD_NUMBER;
-      hash = (53 * hash) + getIngrediente().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.chefencasa.model.RecetaProto.Ingrediente parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.chefencasa.model.RecetaProto.Ingrediente parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.chefencasa.model.RecetaProto.Ingrediente parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.chefencasa.model.RecetaProto.Ingrediente parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.chefencasa.model.RecetaProto.Ingrediente parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.chefencasa.model.RecetaProto.Ingrediente parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.chefencasa.model.RecetaProto.Ingrediente parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.chefencasa.model.RecetaProto.Ingrediente parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.chefencasa.model.RecetaProto.Ingrediente parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.chefencasa.model.RecetaProto.Ingrediente parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.chefencasa.model.RecetaProto.Ingrediente parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.chefencasa.model.RecetaProto.Ingrediente parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.chefencasa.model.RecetaProto.Ingrediente prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code model.Ingrediente}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:model.Ingrediente)
-        com.chefencasa.model.RecetaProto.IngredienteOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.chefencasa.model.RecetaProto.internal_static_model_Ingrediente_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.chefencasa.model.RecetaProto.internal_static_model_Ingrediente_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.chefencasa.model.RecetaProto.Ingrediente.class, com.chefencasa.model.RecetaProto.Ingrediente.Builder.class);
-      }
-
-      // Construct using com.chefencasa.model.RecetaProto.Ingrediente.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        idIngrediente_ = 0;
-
-        ingrediente_ = "";
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.chefencasa.model.RecetaProto.internal_static_model_Ingrediente_descriptor;
-      }
-
-      @java.lang.Override
-      public com.chefencasa.model.RecetaProto.Ingrediente getDefaultInstanceForType() {
-        return com.chefencasa.model.RecetaProto.Ingrediente.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public com.chefencasa.model.RecetaProto.Ingrediente build() {
-        com.chefencasa.model.RecetaProto.Ingrediente result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public com.chefencasa.model.RecetaProto.Ingrediente buildPartial() {
-        com.chefencasa.model.RecetaProto.Ingrediente result = new com.chefencasa.model.RecetaProto.Ingrediente(this);
-        result.idIngrediente_ = idIngrediente_;
-        result.ingrediente_ = ingrediente_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.chefencasa.model.RecetaProto.Ingrediente) {
-          return mergeFrom((com.chefencasa.model.RecetaProto.Ingrediente)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.chefencasa.model.RecetaProto.Ingrediente other) {
-        if (other == com.chefencasa.model.RecetaProto.Ingrediente.getDefaultInstance()) return this;
-        if (other.getIdIngrediente() != 0) {
-          setIdIngrediente(other.getIdIngrediente());
-        }
-        if (!other.getIngrediente().isEmpty()) {
-          ingrediente_ = other.ingrediente_;
-          onChanged();
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.chefencasa.model.RecetaProto.Ingrediente parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.chefencasa.model.RecetaProto.Ingrediente) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int idIngrediente_ ;
-      /**
-       * <code>int32 idIngrediente = 1;</code>
-       * @return The idIngrediente.
-       */
-      public int getIdIngrediente() {
-        return idIngrediente_;
-      }
-      /**
-       * <code>int32 idIngrediente = 1;</code>
-       * @param value The idIngrediente to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIdIngrediente(int value) {
-        
-        idIngrediente_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 idIngrediente = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearIdIngrediente() {
-        
-        idIngrediente_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object ingrediente_ = "";
-      /**
-       * <code>string ingrediente = 2;</code>
-       * @return The ingrediente.
-       */
-      public java.lang.String getIngrediente() {
-        java.lang.Object ref = ingrediente_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          ingrediente_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string ingrediente = 2;</code>
-       * @return The bytes for ingrediente.
-       */
-      public com.google.protobuf.ByteString
-          getIngredienteBytes() {
-        java.lang.Object ref = ingrediente_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          ingrediente_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string ingrediente = 2;</code>
-       * @param value The ingrediente to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIngrediente(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        ingrediente_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string ingrediente = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearIngrediente() {
-        
-        ingrediente_ = getDefaultInstance().getIngrediente();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string ingrediente = 2;</code>
-       * @param value The bytes for ingrediente to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIngredienteBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        ingrediente_ = value;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:model.Ingrediente)
-    }
-
-    // @@protoc_insertion_point(class_scope:model.Ingrediente)
-    private static final com.chefencasa.model.RecetaProto.Ingrediente DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.chefencasa.model.RecetaProto.Ingrediente();
-    }
-
-    public static com.chefencasa.model.RecetaProto.Ingrediente getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<Ingrediente>
-        PARSER = new com.google.protobuf.AbstractParser<Ingrediente>() {
-      @java.lang.Override
-      public Ingrediente parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Ingrediente(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<Ingrediente> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Ingrediente> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.chefencasa.model.RecetaProto.Ingrediente getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface RecetaOrBuilder extends
       // @@protoc_insertion_point(interface_extends:model.Receta)
       com.google.protobuf.MessageOrBuilder {
@@ -3440,6 +2806,2112 @@ public final class RecetaProto {
 
   }
 
+  public interface UpdateRecetaRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:model.UpdateRecetaRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int32 idReceta = 1;</code>
+     * @return The idReceta.
+     */
+    int getIdReceta();
+
+    /**
+     * <code>string tituloReceta = 2;</code>
+     * @return The tituloReceta.
+     */
+    java.lang.String getTituloReceta();
+    /**
+     * <code>string tituloReceta = 2;</code>
+     * @return The bytes for tituloReceta.
+     */
+    com.google.protobuf.ByteString
+        getTituloRecetaBytes();
+
+    /**
+     * <code>string descripcion = 3;</code>
+     * @return The descripcion.
+     */
+    java.lang.String getDescripcion();
+    /**
+     * <code>string descripcion = 3;</code>
+     * @return The bytes for descripcion.
+     */
+    com.google.protobuf.ByteString
+        getDescripcionBytes();
+
+    /**
+     * <code>string categoria = 4;</code>
+     * @return The categoria.
+     */
+    java.lang.String getCategoria();
+    /**
+     * <code>string categoria = 4;</code>
+     * @return The bytes for categoria.
+     */
+    com.google.protobuf.ByteString
+        getCategoriaBytes();
+
+    /**
+     * <code>string pasos = 5;</code>
+     * @return The pasos.
+     */
+    java.lang.String getPasos();
+    /**
+     * <code>string pasos = 5;</code>
+     * @return The bytes for pasos.
+     */
+    com.google.protobuf.ByteString
+        getPasosBytes();
+
+    /**
+     * <code>repeated string ingredientes = 6;</code>
+     * @return A list containing the ingredientes.
+     */
+    java.util.List<java.lang.String>
+        getIngredientesList();
+    /**
+     * <code>repeated string ingredientes = 6;</code>
+     * @return The count of ingredientes.
+     */
+    int getIngredientesCount();
+    /**
+     * <code>repeated string ingredientes = 6;</code>
+     * @param index The index of the element to return.
+     * @return The ingredientes at the given index.
+     */
+    java.lang.String getIngredientes(int index);
+    /**
+     * <code>repeated string ingredientes = 6;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the ingredientes at the given index.
+     */
+    com.google.protobuf.ByteString
+        getIngredientesBytes(int index);
+
+    /**
+     * <code>int32 tiempoPreparacion = 7;</code>
+     * @return The tiempoPreparacion.
+     */
+    int getTiempoPreparacion();
+
+    /**
+     * <code>string foto1 = 10;</code>
+     * @return The foto1.
+     */
+    java.lang.String getFoto1();
+    /**
+     * <code>string foto1 = 10;</code>
+     * @return The bytes for foto1.
+     */
+    com.google.protobuf.ByteString
+        getFoto1Bytes();
+
+    /**
+     * <code>string foto2 = 11;</code>
+     * @return The foto2.
+     */
+    java.lang.String getFoto2();
+    /**
+     * <code>string foto2 = 11;</code>
+     * @return The bytes for foto2.
+     */
+    com.google.protobuf.ByteString
+        getFoto2Bytes();
+
+    /**
+     * <code>string foto3 = 12;</code>
+     * @return The foto3.
+     */
+    java.lang.String getFoto3();
+    /**
+     * <code>string foto3 = 12;</code>
+     * @return The bytes for foto3.
+     */
+    com.google.protobuf.ByteString
+        getFoto3Bytes();
+
+    /**
+     * <code>string foto4 = 13;</code>
+     * @return The foto4.
+     */
+    java.lang.String getFoto4();
+    /**
+     * <code>string foto4 = 13;</code>
+     * @return The bytes for foto4.
+     */
+    com.google.protobuf.ByteString
+        getFoto4Bytes();
+
+    /**
+     * <code>string foto5 = 14;</code>
+     * @return The foto5.
+     */
+    java.lang.String getFoto5();
+    /**
+     * <code>string foto5 = 14;</code>
+     * @return The bytes for foto5.
+     */
+    com.google.protobuf.ByteString
+        getFoto5Bytes();
+  }
+  /**
+   * Protobuf type {@code model.UpdateRecetaRequest}
+   */
+  public  static final class UpdateRecetaRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:model.UpdateRecetaRequest)
+      UpdateRecetaRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use UpdateRecetaRequest.newBuilder() to construct.
+    private UpdateRecetaRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private UpdateRecetaRequest() {
+      tituloReceta_ = "";
+      descripcion_ = "";
+      categoria_ = "";
+      pasos_ = "";
+      ingredientes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      foto1_ = "";
+      foto2_ = "";
+      foto3_ = "";
+      foto4_ = "";
+      foto5_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new UpdateRecetaRequest();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UpdateRecetaRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              idReceta_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              tituloReceta_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              descripcion_ = s;
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              categoria_ = s;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              pasos_ = s;
+              break;
+            }
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                ingredientes_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              ingredientes_.add(s);
+              break;
+            }
+            case 56: {
+
+              tiempoPreparacion_ = input.readInt32();
+              break;
+            }
+            case 82: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              foto1_ = s;
+              break;
+            }
+            case 90: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              foto2_ = s;
+              break;
+            }
+            case 98: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              foto3_ = s;
+              break;
+            }
+            case 106: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              foto4_ = s;
+              break;
+            }
+            case 114: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              foto5_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          ingredientes_ = ingredientes_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.chefencasa.model.RecetaProto.internal_static_model_UpdateRecetaRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.chefencasa.model.RecetaProto.internal_static_model_UpdateRecetaRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.chefencasa.model.RecetaProto.UpdateRecetaRequest.class, com.chefencasa.model.RecetaProto.UpdateRecetaRequest.Builder.class);
+    }
+
+    public static final int IDRECETA_FIELD_NUMBER = 1;
+    private int idReceta_;
+    /**
+     * <code>int32 idReceta = 1;</code>
+     * @return The idReceta.
+     */
+    public int getIdReceta() {
+      return idReceta_;
+    }
+
+    public static final int TITULORECETA_FIELD_NUMBER = 2;
+    private volatile java.lang.Object tituloReceta_;
+    /**
+     * <code>string tituloReceta = 2;</code>
+     * @return The tituloReceta.
+     */
+    public java.lang.String getTituloReceta() {
+      java.lang.Object ref = tituloReceta_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        tituloReceta_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string tituloReceta = 2;</code>
+     * @return The bytes for tituloReceta.
+     */
+    public com.google.protobuf.ByteString
+        getTituloRecetaBytes() {
+      java.lang.Object ref = tituloReceta_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tituloReceta_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DESCRIPCION_FIELD_NUMBER = 3;
+    private volatile java.lang.Object descripcion_;
+    /**
+     * <code>string descripcion = 3;</code>
+     * @return The descripcion.
+     */
+    public java.lang.String getDescripcion() {
+      java.lang.Object ref = descripcion_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        descripcion_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string descripcion = 3;</code>
+     * @return The bytes for descripcion.
+     */
+    public com.google.protobuf.ByteString
+        getDescripcionBytes() {
+      java.lang.Object ref = descripcion_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        descripcion_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CATEGORIA_FIELD_NUMBER = 4;
+    private volatile java.lang.Object categoria_;
+    /**
+     * <code>string categoria = 4;</code>
+     * @return The categoria.
+     */
+    public java.lang.String getCategoria() {
+      java.lang.Object ref = categoria_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        categoria_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string categoria = 4;</code>
+     * @return The bytes for categoria.
+     */
+    public com.google.protobuf.ByteString
+        getCategoriaBytes() {
+      java.lang.Object ref = categoria_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        categoria_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PASOS_FIELD_NUMBER = 5;
+    private volatile java.lang.Object pasos_;
+    /**
+     * <code>string pasos = 5;</code>
+     * @return The pasos.
+     */
+    public java.lang.String getPasos() {
+      java.lang.Object ref = pasos_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        pasos_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string pasos = 5;</code>
+     * @return The bytes for pasos.
+     */
+    public com.google.protobuf.ByteString
+        getPasosBytes() {
+      java.lang.Object ref = pasos_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        pasos_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int INGREDIENTES_FIELD_NUMBER = 6;
+    private com.google.protobuf.LazyStringList ingredientes_;
+    /**
+     * <code>repeated string ingredientes = 6;</code>
+     * @return A list containing the ingredientes.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getIngredientesList() {
+      return ingredientes_;
+    }
+    /**
+     * <code>repeated string ingredientes = 6;</code>
+     * @return The count of ingredientes.
+     */
+    public int getIngredientesCount() {
+      return ingredientes_.size();
+    }
+    /**
+     * <code>repeated string ingredientes = 6;</code>
+     * @param index The index of the element to return.
+     * @return The ingredientes at the given index.
+     */
+    public java.lang.String getIngredientes(int index) {
+      return ingredientes_.get(index);
+    }
+    /**
+     * <code>repeated string ingredientes = 6;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the ingredientes at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getIngredientesBytes(int index) {
+      return ingredientes_.getByteString(index);
+    }
+
+    public static final int TIEMPOPREPARACION_FIELD_NUMBER = 7;
+    private int tiempoPreparacion_;
+    /**
+     * <code>int32 tiempoPreparacion = 7;</code>
+     * @return The tiempoPreparacion.
+     */
+    public int getTiempoPreparacion() {
+      return tiempoPreparacion_;
+    }
+
+    public static final int FOTO1_FIELD_NUMBER = 10;
+    private volatile java.lang.Object foto1_;
+    /**
+     * <code>string foto1 = 10;</code>
+     * @return The foto1.
+     */
+    public java.lang.String getFoto1() {
+      java.lang.Object ref = foto1_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        foto1_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string foto1 = 10;</code>
+     * @return The bytes for foto1.
+     */
+    public com.google.protobuf.ByteString
+        getFoto1Bytes() {
+      java.lang.Object ref = foto1_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        foto1_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FOTO2_FIELD_NUMBER = 11;
+    private volatile java.lang.Object foto2_;
+    /**
+     * <code>string foto2 = 11;</code>
+     * @return The foto2.
+     */
+    public java.lang.String getFoto2() {
+      java.lang.Object ref = foto2_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        foto2_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string foto2 = 11;</code>
+     * @return The bytes for foto2.
+     */
+    public com.google.protobuf.ByteString
+        getFoto2Bytes() {
+      java.lang.Object ref = foto2_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        foto2_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FOTO3_FIELD_NUMBER = 12;
+    private volatile java.lang.Object foto3_;
+    /**
+     * <code>string foto3 = 12;</code>
+     * @return The foto3.
+     */
+    public java.lang.String getFoto3() {
+      java.lang.Object ref = foto3_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        foto3_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string foto3 = 12;</code>
+     * @return The bytes for foto3.
+     */
+    public com.google.protobuf.ByteString
+        getFoto3Bytes() {
+      java.lang.Object ref = foto3_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        foto3_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FOTO4_FIELD_NUMBER = 13;
+    private volatile java.lang.Object foto4_;
+    /**
+     * <code>string foto4 = 13;</code>
+     * @return The foto4.
+     */
+    public java.lang.String getFoto4() {
+      java.lang.Object ref = foto4_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        foto4_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string foto4 = 13;</code>
+     * @return The bytes for foto4.
+     */
+    public com.google.protobuf.ByteString
+        getFoto4Bytes() {
+      java.lang.Object ref = foto4_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        foto4_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FOTO5_FIELD_NUMBER = 14;
+    private volatile java.lang.Object foto5_;
+    /**
+     * <code>string foto5 = 14;</code>
+     * @return The foto5.
+     */
+    public java.lang.String getFoto5() {
+      java.lang.Object ref = foto5_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        foto5_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string foto5 = 14;</code>
+     * @return The bytes for foto5.
+     */
+    public com.google.protobuf.ByteString
+        getFoto5Bytes() {
+      java.lang.Object ref = foto5_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        foto5_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (idReceta_ != 0) {
+        output.writeInt32(1, idReceta_);
+      }
+      if (!getTituloRecetaBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, tituloReceta_);
+      }
+      if (!getDescripcionBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, descripcion_);
+      }
+      if (!getCategoriaBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, categoria_);
+      }
+      if (!getPasosBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, pasos_);
+      }
+      for (int i = 0; i < ingredientes_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, ingredientes_.getRaw(i));
+      }
+      if (tiempoPreparacion_ != 0) {
+        output.writeInt32(7, tiempoPreparacion_);
+      }
+      if (!getFoto1Bytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, foto1_);
+      }
+      if (!getFoto2Bytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 11, foto2_);
+      }
+      if (!getFoto3Bytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 12, foto3_);
+      }
+      if (!getFoto4Bytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 13, foto4_);
+      }
+      if (!getFoto5Bytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, foto5_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (idReceta_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, idReceta_);
+      }
+      if (!getTituloRecetaBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, tituloReceta_);
+      }
+      if (!getDescripcionBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, descripcion_);
+      }
+      if (!getCategoriaBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, categoria_);
+      }
+      if (!getPasosBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, pasos_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < ingredientes_.size(); i++) {
+          dataSize += computeStringSizeNoTag(ingredientes_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getIngredientesList().size();
+      }
+      if (tiempoPreparacion_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, tiempoPreparacion_);
+      }
+      if (!getFoto1Bytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, foto1_);
+      }
+      if (!getFoto2Bytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, foto2_);
+      }
+      if (!getFoto3Bytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, foto3_);
+      }
+      if (!getFoto4Bytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(13, foto4_);
+      }
+      if (!getFoto5Bytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, foto5_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.chefencasa.model.RecetaProto.UpdateRecetaRequest)) {
+        return super.equals(obj);
+      }
+      com.chefencasa.model.RecetaProto.UpdateRecetaRequest other = (com.chefencasa.model.RecetaProto.UpdateRecetaRequest) obj;
+
+      if (getIdReceta()
+          != other.getIdReceta()) return false;
+      if (!getTituloReceta()
+          .equals(other.getTituloReceta())) return false;
+      if (!getDescripcion()
+          .equals(other.getDescripcion())) return false;
+      if (!getCategoria()
+          .equals(other.getCategoria())) return false;
+      if (!getPasos()
+          .equals(other.getPasos())) return false;
+      if (!getIngredientesList()
+          .equals(other.getIngredientesList())) return false;
+      if (getTiempoPreparacion()
+          != other.getTiempoPreparacion()) return false;
+      if (!getFoto1()
+          .equals(other.getFoto1())) return false;
+      if (!getFoto2()
+          .equals(other.getFoto2())) return false;
+      if (!getFoto3()
+          .equals(other.getFoto3())) return false;
+      if (!getFoto4()
+          .equals(other.getFoto4())) return false;
+      if (!getFoto5()
+          .equals(other.getFoto5())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + IDRECETA_FIELD_NUMBER;
+      hash = (53 * hash) + getIdReceta();
+      hash = (37 * hash) + TITULORECETA_FIELD_NUMBER;
+      hash = (53 * hash) + getTituloReceta().hashCode();
+      hash = (37 * hash) + DESCRIPCION_FIELD_NUMBER;
+      hash = (53 * hash) + getDescripcion().hashCode();
+      hash = (37 * hash) + CATEGORIA_FIELD_NUMBER;
+      hash = (53 * hash) + getCategoria().hashCode();
+      hash = (37 * hash) + PASOS_FIELD_NUMBER;
+      hash = (53 * hash) + getPasos().hashCode();
+      if (getIngredientesCount() > 0) {
+        hash = (37 * hash) + INGREDIENTES_FIELD_NUMBER;
+        hash = (53 * hash) + getIngredientesList().hashCode();
+      }
+      hash = (37 * hash) + TIEMPOPREPARACION_FIELD_NUMBER;
+      hash = (53 * hash) + getTiempoPreparacion();
+      hash = (37 * hash) + FOTO1_FIELD_NUMBER;
+      hash = (53 * hash) + getFoto1().hashCode();
+      hash = (37 * hash) + FOTO2_FIELD_NUMBER;
+      hash = (53 * hash) + getFoto2().hashCode();
+      hash = (37 * hash) + FOTO3_FIELD_NUMBER;
+      hash = (53 * hash) + getFoto3().hashCode();
+      hash = (37 * hash) + FOTO4_FIELD_NUMBER;
+      hash = (53 * hash) + getFoto4().hashCode();
+      hash = (37 * hash) + FOTO5_FIELD_NUMBER;
+      hash = (53 * hash) + getFoto5().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.chefencasa.model.RecetaProto.UpdateRecetaRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.chefencasa.model.RecetaProto.UpdateRecetaRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.chefencasa.model.RecetaProto.UpdateRecetaRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.chefencasa.model.RecetaProto.UpdateRecetaRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.chefencasa.model.RecetaProto.UpdateRecetaRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.chefencasa.model.RecetaProto.UpdateRecetaRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.chefencasa.model.RecetaProto.UpdateRecetaRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.chefencasa.model.RecetaProto.UpdateRecetaRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.chefencasa.model.RecetaProto.UpdateRecetaRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.chefencasa.model.RecetaProto.UpdateRecetaRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.chefencasa.model.RecetaProto.UpdateRecetaRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.chefencasa.model.RecetaProto.UpdateRecetaRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.chefencasa.model.RecetaProto.UpdateRecetaRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code model.UpdateRecetaRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:model.UpdateRecetaRequest)
+        com.chefencasa.model.RecetaProto.UpdateRecetaRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.chefencasa.model.RecetaProto.internal_static_model_UpdateRecetaRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.chefencasa.model.RecetaProto.internal_static_model_UpdateRecetaRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.chefencasa.model.RecetaProto.UpdateRecetaRequest.class, com.chefencasa.model.RecetaProto.UpdateRecetaRequest.Builder.class);
+      }
+
+      // Construct using com.chefencasa.model.RecetaProto.UpdateRecetaRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        idReceta_ = 0;
+
+        tituloReceta_ = "";
+
+        descripcion_ = "";
+
+        categoria_ = "";
+
+        pasos_ = "";
+
+        ingredientes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        tiempoPreparacion_ = 0;
+
+        foto1_ = "";
+
+        foto2_ = "";
+
+        foto3_ = "";
+
+        foto4_ = "";
+
+        foto5_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.chefencasa.model.RecetaProto.internal_static_model_UpdateRecetaRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public com.chefencasa.model.RecetaProto.UpdateRecetaRequest getDefaultInstanceForType() {
+        return com.chefencasa.model.RecetaProto.UpdateRecetaRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.chefencasa.model.RecetaProto.UpdateRecetaRequest build() {
+        com.chefencasa.model.RecetaProto.UpdateRecetaRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.chefencasa.model.RecetaProto.UpdateRecetaRequest buildPartial() {
+        com.chefencasa.model.RecetaProto.UpdateRecetaRequest result = new com.chefencasa.model.RecetaProto.UpdateRecetaRequest(this);
+        int from_bitField0_ = bitField0_;
+        result.idReceta_ = idReceta_;
+        result.tituloReceta_ = tituloReceta_;
+        result.descripcion_ = descripcion_;
+        result.categoria_ = categoria_;
+        result.pasos_ = pasos_;
+        if (((bitField0_ & 0x00000001) != 0)) {
+          ingredientes_ = ingredientes_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.ingredientes_ = ingredientes_;
+        result.tiempoPreparacion_ = tiempoPreparacion_;
+        result.foto1_ = foto1_;
+        result.foto2_ = foto2_;
+        result.foto3_ = foto3_;
+        result.foto4_ = foto4_;
+        result.foto5_ = foto5_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.chefencasa.model.RecetaProto.UpdateRecetaRequest) {
+          return mergeFrom((com.chefencasa.model.RecetaProto.UpdateRecetaRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.chefencasa.model.RecetaProto.UpdateRecetaRequest other) {
+        if (other == com.chefencasa.model.RecetaProto.UpdateRecetaRequest.getDefaultInstance()) return this;
+        if (other.getIdReceta() != 0) {
+          setIdReceta(other.getIdReceta());
+        }
+        if (!other.getTituloReceta().isEmpty()) {
+          tituloReceta_ = other.tituloReceta_;
+          onChanged();
+        }
+        if (!other.getDescripcion().isEmpty()) {
+          descripcion_ = other.descripcion_;
+          onChanged();
+        }
+        if (!other.getCategoria().isEmpty()) {
+          categoria_ = other.categoria_;
+          onChanged();
+        }
+        if (!other.getPasos().isEmpty()) {
+          pasos_ = other.pasos_;
+          onChanged();
+        }
+        if (!other.ingredientes_.isEmpty()) {
+          if (ingredientes_.isEmpty()) {
+            ingredientes_ = other.ingredientes_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureIngredientesIsMutable();
+            ingredientes_.addAll(other.ingredientes_);
+          }
+          onChanged();
+        }
+        if (other.getTiempoPreparacion() != 0) {
+          setTiempoPreparacion(other.getTiempoPreparacion());
+        }
+        if (!other.getFoto1().isEmpty()) {
+          foto1_ = other.foto1_;
+          onChanged();
+        }
+        if (!other.getFoto2().isEmpty()) {
+          foto2_ = other.foto2_;
+          onChanged();
+        }
+        if (!other.getFoto3().isEmpty()) {
+          foto3_ = other.foto3_;
+          onChanged();
+        }
+        if (!other.getFoto4().isEmpty()) {
+          foto4_ = other.foto4_;
+          onChanged();
+        }
+        if (!other.getFoto5().isEmpty()) {
+          foto5_ = other.foto5_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.chefencasa.model.RecetaProto.UpdateRecetaRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.chefencasa.model.RecetaProto.UpdateRecetaRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int idReceta_ ;
+      /**
+       * <code>int32 idReceta = 1;</code>
+       * @return The idReceta.
+       */
+      public int getIdReceta() {
+        return idReceta_;
+      }
+      /**
+       * <code>int32 idReceta = 1;</code>
+       * @param value The idReceta to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIdReceta(int value) {
+        
+        idReceta_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 idReceta = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIdReceta() {
+        
+        idReceta_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object tituloReceta_ = "";
+      /**
+       * <code>string tituloReceta = 2;</code>
+       * @return The tituloReceta.
+       */
+      public java.lang.String getTituloReceta() {
+        java.lang.Object ref = tituloReceta_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          tituloReceta_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string tituloReceta = 2;</code>
+       * @return The bytes for tituloReceta.
+       */
+      public com.google.protobuf.ByteString
+          getTituloRecetaBytes() {
+        java.lang.Object ref = tituloReceta_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tituloReceta_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string tituloReceta = 2;</code>
+       * @param value The tituloReceta to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTituloReceta(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        tituloReceta_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string tituloReceta = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTituloReceta() {
+        
+        tituloReceta_ = getDefaultInstance().getTituloReceta();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string tituloReceta = 2;</code>
+       * @param value The bytes for tituloReceta to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTituloRecetaBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        tituloReceta_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object descripcion_ = "";
+      /**
+       * <code>string descripcion = 3;</code>
+       * @return The descripcion.
+       */
+      public java.lang.String getDescripcion() {
+        java.lang.Object ref = descripcion_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          descripcion_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string descripcion = 3;</code>
+       * @return The bytes for descripcion.
+       */
+      public com.google.protobuf.ByteString
+          getDescripcionBytes() {
+        java.lang.Object ref = descripcion_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          descripcion_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string descripcion = 3;</code>
+       * @param value The descripcion to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDescripcion(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        descripcion_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string descripcion = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDescripcion() {
+        
+        descripcion_ = getDefaultInstance().getDescripcion();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string descripcion = 3;</code>
+       * @param value The bytes for descripcion to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDescripcionBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        descripcion_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object categoria_ = "";
+      /**
+       * <code>string categoria = 4;</code>
+       * @return The categoria.
+       */
+      public java.lang.String getCategoria() {
+        java.lang.Object ref = categoria_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          categoria_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string categoria = 4;</code>
+       * @return The bytes for categoria.
+       */
+      public com.google.protobuf.ByteString
+          getCategoriaBytes() {
+        java.lang.Object ref = categoria_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          categoria_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string categoria = 4;</code>
+       * @param value The categoria to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCategoria(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        categoria_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string categoria = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCategoria() {
+        
+        categoria_ = getDefaultInstance().getCategoria();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string categoria = 4;</code>
+       * @param value The bytes for categoria to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCategoriaBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        categoria_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object pasos_ = "";
+      /**
+       * <code>string pasos = 5;</code>
+       * @return The pasos.
+       */
+      public java.lang.String getPasos() {
+        java.lang.Object ref = pasos_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          pasos_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string pasos = 5;</code>
+       * @return The bytes for pasos.
+       */
+      public com.google.protobuf.ByteString
+          getPasosBytes() {
+        java.lang.Object ref = pasos_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          pasos_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string pasos = 5;</code>
+       * @param value The pasos to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPasos(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        pasos_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string pasos = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPasos() {
+        
+        pasos_ = getDefaultInstance().getPasos();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string pasos = 5;</code>
+       * @param value The bytes for pasos to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPasosBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        pasos_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList ingredientes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureIngredientesIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          ingredientes_ = new com.google.protobuf.LazyStringArrayList(ingredientes_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated string ingredientes = 6;</code>
+       * @return A list containing the ingredientes.
+       */
+      public com.google.protobuf.ProtocolStringList
+          getIngredientesList() {
+        return ingredientes_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string ingredientes = 6;</code>
+       * @return The count of ingredientes.
+       */
+      public int getIngredientesCount() {
+        return ingredientes_.size();
+      }
+      /**
+       * <code>repeated string ingredientes = 6;</code>
+       * @param index The index of the element to return.
+       * @return The ingredientes at the given index.
+       */
+      public java.lang.String getIngredientes(int index) {
+        return ingredientes_.get(index);
+      }
+      /**
+       * <code>repeated string ingredientes = 6;</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the ingredientes at the given index.
+       */
+      public com.google.protobuf.ByteString
+          getIngredientesBytes(int index) {
+        return ingredientes_.getByteString(index);
+      }
+      /**
+       * <code>repeated string ingredientes = 6;</code>
+       * @param index The index to set the value at.
+       * @param value The ingredientes to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIngredientes(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureIngredientesIsMutable();
+        ingredientes_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ingredientes = 6;</code>
+       * @param value The ingredientes to add.
+       * @return This builder for chaining.
+       */
+      public Builder addIngredientes(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureIngredientesIsMutable();
+        ingredientes_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ingredientes = 6;</code>
+       * @param values The ingredientes to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllIngredientes(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureIngredientesIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, ingredientes_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ingredientes = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIngredientes() {
+        ingredientes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ingredientes = 6;</code>
+       * @param value The bytes of the ingredientes to add.
+       * @return This builder for chaining.
+       */
+      public Builder addIngredientesBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureIngredientesIsMutable();
+        ingredientes_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private int tiempoPreparacion_ ;
+      /**
+       * <code>int32 tiempoPreparacion = 7;</code>
+       * @return The tiempoPreparacion.
+       */
+      public int getTiempoPreparacion() {
+        return tiempoPreparacion_;
+      }
+      /**
+       * <code>int32 tiempoPreparacion = 7;</code>
+       * @param value The tiempoPreparacion to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTiempoPreparacion(int value) {
+        
+        tiempoPreparacion_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 tiempoPreparacion = 7;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTiempoPreparacion() {
+        
+        tiempoPreparacion_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object foto1_ = "";
+      /**
+       * <code>string foto1 = 10;</code>
+       * @return The foto1.
+       */
+      public java.lang.String getFoto1() {
+        java.lang.Object ref = foto1_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          foto1_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string foto1 = 10;</code>
+       * @return The bytes for foto1.
+       */
+      public com.google.protobuf.ByteString
+          getFoto1Bytes() {
+        java.lang.Object ref = foto1_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          foto1_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string foto1 = 10;</code>
+       * @param value The foto1 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFoto1(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        foto1_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string foto1 = 10;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFoto1() {
+        
+        foto1_ = getDefaultInstance().getFoto1();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string foto1 = 10;</code>
+       * @param value The bytes for foto1 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFoto1Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        foto1_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object foto2_ = "";
+      /**
+       * <code>string foto2 = 11;</code>
+       * @return The foto2.
+       */
+      public java.lang.String getFoto2() {
+        java.lang.Object ref = foto2_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          foto2_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string foto2 = 11;</code>
+       * @return The bytes for foto2.
+       */
+      public com.google.protobuf.ByteString
+          getFoto2Bytes() {
+        java.lang.Object ref = foto2_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          foto2_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string foto2 = 11;</code>
+       * @param value The foto2 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFoto2(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        foto2_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string foto2 = 11;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFoto2() {
+        
+        foto2_ = getDefaultInstance().getFoto2();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string foto2 = 11;</code>
+       * @param value The bytes for foto2 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFoto2Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        foto2_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object foto3_ = "";
+      /**
+       * <code>string foto3 = 12;</code>
+       * @return The foto3.
+       */
+      public java.lang.String getFoto3() {
+        java.lang.Object ref = foto3_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          foto3_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string foto3 = 12;</code>
+       * @return The bytes for foto3.
+       */
+      public com.google.protobuf.ByteString
+          getFoto3Bytes() {
+        java.lang.Object ref = foto3_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          foto3_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string foto3 = 12;</code>
+       * @param value The foto3 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFoto3(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        foto3_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string foto3 = 12;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFoto3() {
+        
+        foto3_ = getDefaultInstance().getFoto3();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string foto3 = 12;</code>
+       * @param value The bytes for foto3 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFoto3Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        foto3_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object foto4_ = "";
+      /**
+       * <code>string foto4 = 13;</code>
+       * @return The foto4.
+       */
+      public java.lang.String getFoto4() {
+        java.lang.Object ref = foto4_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          foto4_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string foto4 = 13;</code>
+       * @return The bytes for foto4.
+       */
+      public com.google.protobuf.ByteString
+          getFoto4Bytes() {
+        java.lang.Object ref = foto4_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          foto4_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string foto4 = 13;</code>
+       * @param value The foto4 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFoto4(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        foto4_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string foto4 = 13;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFoto4() {
+        
+        foto4_ = getDefaultInstance().getFoto4();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string foto4 = 13;</code>
+       * @param value The bytes for foto4 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFoto4Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        foto4_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object foto5_ = "";
+      /**
+       * <code>string foto5 = 14;</code>
+       * @return The foto5.
+       */
+      public java.lang.String getFoto5() {
+        java.lang.Object ref = foto5_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          foto5_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string foto5 = 14;</code>
+       * @return The bytes for foto5.
+       */
+      public com.google.protobuf.ByteString
+          getFoto5Bytes() {
+        java.lang.Object ref = foto5_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          foto5_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string foto5 = 14;</code>
+       * @param value The foto5 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFoto5(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        foto5_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string foto5 = 14;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFoto5() {
+        
+        foto5_ = getDefaultInstance().getFoto5();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string foto5 = 14;</code>
+       * @param value The bytes for foto5 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFoto5Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        foto5_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:model.UpdateRecetaRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:model.UpdateRecetaRequest)
+    private static final com.chefencasa.model.RecetaProto.UpdateRecetaRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.chefencasa.model.RecetaProto.UpdateRecetaRequest();
+    }
+
+    public static com.chefencasa.model.RecetaProto.UpdateRecetaRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<UpdateRecetaRequest>
+        PARSER = new com.google.protobuf.AbstractParser<UpdateRecetaRequest>() {
+      @java.lang.Override
+      public UpdateRecetaRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UpdateRecetaRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<UpdateRecetaRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UpdateRecetaRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.chefencasa.model.RecetaProto.UpdateRecetaRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface RecetaResponseOrBuilder extends
       // @@protoc_insertion_point(interface_extends:model.RecetaResponse)
       com.google.protobuf.MessageOrBuilder {
@@ -5628,501 +7100,21 @@ public final class RecetaProto {
 
   }
 
-  public interface RecetaIdOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:model.RecetaId)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>int32 idReceta = 1;</code>
-     * @return The idReceta.
-     */
-    int getIdReceta();
-  }
-  /**
-   * Protobuf type {@code model.RecetaId}
-   */
-  public  static final class RecetaId extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:model.RecetaId)
-      RecetaIdOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use RecetaId.newBuilder() to construct.
-    private RecetaId(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private RecetaId() {
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new RecetaId();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private RecetaId(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-
-              idReceta_ = input.readInt32();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.chefencasa.model.RecetaProto.internal_static_model_RecetaId_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.chefencasa.model.RecetaProto.internal_static_model_RecetaId_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.chefencasa.model.RecetaProto.RecetaId.class, com.chefencasa.model.RecetaProto.RecetaId.Builder.class);
-    }
-
-    public static final int IDRECETA_FIELD_NUMBER = 1;
-    private int idReceta_;
-    /**
-     * <code>int32 idReceta = 1;</code>
-     * @return The idReceta.
-     */
-    public int getIdReceta() {
-      return idReceta_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (idReceta_ != 0) {
-        output.writeInt32(1, idReceta_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (idReceta_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, idReceta_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.chefencasa.model.RecetaProto.RecetaId)) {
-        return super.equals(obj);
-      }
-      com.chefencasa.model.RecetaProto.RecetaId other = (com.chefencasa.model.RecetaProto.RecetaId) obj;
-
-      if (getIdReceta()
-          != other.getIdReceta()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + IDRECETA_FIELD_NUMBER;
-      hash = (53 * hash) + getIdReceta();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.chefencasa.model.RecetaProto.RecetaId parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.chefencasa.model.RecetaProto.RecetaId parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.chefencasa.model.RecetaProto.RecetaId parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.chefencasa.model.RecetaProto.RecetaId parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.chefencasa.model.RecetaProto.RecetaId parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.chefencasa.model.RecetaProto.RecetaId parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.chefencasa.model.RecetaProto.RecetaId parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.chefencasa.model.RecetaProto.RecetaId parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.chefencasa.model.RecetaProto.RecetaId parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.chefencasa.model.RecetaProto.RecetaId parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.chefencasa.model.RecetaProto.RecetaId parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.chefencasa.model.RecetaProto.RecetaId parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.chefencasa.model.RecetaProto.RecetaId prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code model.RecetaId}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:model.RecetaId)
-        com.chefencasa.model.RecetaProto.RecetaIdOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.chefencasa.model.RecetaProto.internal_static_model_RecetaId_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.chefencasa.model.RecetaProto.internal_static_model_RecetaId_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.chefencasa.model.RecetaProto.RecetaId.class, com.chefencasa.model.RecetaProto.RecetaId.Builder.class);
-      }
-
-      // Construct using com.chefencasa.model.RecetaProto.RecetaId.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        idReceta_ = 0;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.chefencasa.model.RecetaProto.internal_static_model_RecetaId_descriptor;
-      }
-
-      @java.lang.Override
-      public com.chefencasa.model.RecetaProto.RecetaId getDefaultInstanceForType() {
-        return com.chefencasa.model.RecetaProto.RecetaId.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public com.chefencasa.model.RecetaProto.RecetaId build() {
-        com.chefencasa.model.RecetaProto.RecetaId result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public com.chefencasa.model.RecetaProto.RecetaId buildPartial() {
-        com.chefencasa.model.RecetaProto.RecetaId result = new com.chefencasa.model.RecetaProto.RecetaId(this);
-        result.idReceta_ = idReceta_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.chefencasa.model.RecetaProto.RecetaId) {
-          return mergeFrom((com.chefencasa.model.RecetaProto.RecetaId)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.chefencasa.model.RecetaProto.RecetaId other) {
-        if (other == com.chefencasa.model.RecetaProto.RecetaId.getDefaultInstance()) return this;
-        if (other.getIdReceta() != 0) {
-          setIdReceta(other.getIdReceta());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.chefencasa.model.RecetaProto.RecetaId parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.chefencasa.model.RecetaProto.RecetaId) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int idReceta_ ;
-      /**
-       * <code>int32 idReceta = 1;</code>
-       * @return The idReceta.
-       */
-      public int getIdReceta() {
-        return idReceta_;
-      }
-      /**
-       * <code>int32 idReceta = 1;</code>
-       * @param value The idReceta to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIdReceta(int value) {
-        
-        idReceta_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 idReceta = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearIdReceta() {
-        
-        idReceta_ = 0;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:model.RecetaId)
-    }
-
-    // @@protoc_insertion_point(class_scope:model.RecetaId)
-    private static final com.chefencasa.model.RecetaProto.RecetaId DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.chefencasa.model.RecetaProto.RecetaId();
-    }
-
-    public static com.chefencasa.model.RecetaProto.RecetaId getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<RecetaId>
-        PARSER = new com.google.protobuf.AbstractParser<RecetaId>() {
-      @java.lang.Override
-      public RecetaId parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new RecetaId(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<RecetaId> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<RecetaId> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.chefencasa.model.RecetaProto.RecetaId getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface RecetaFiltroOrBuilder extends
       // @@protoc_insertion_point(interface_extends:model.RecetaFiltro)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>int32 categoria = 1;</code>
+     * <code>string categoria = 1;</code>
      * @return The categoria.
      */
-    int getCategoria();
+    java.lang.String getCategoria();
+    /**
+     * <code>string categoria = 1;</code>
+     * @return The bytes for categoria.
+     */
+    com.google.protobuf.ByteString
+        getCategoriaBytes();
 
     /**
      * <code>string nombre = 2;</code>
@@ -6137,28 +7129,29 @@ public final class RecetaProto {
         getNombreBytes();
 
     /**
-     * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+     * <code>repeated string ingredientes = 3;</code>
+     * @return A list containing the ingredientes.
      */
-    java.util.List<com.chefencasa.model.RecetaProto.Ingrediente> 
+    java.util.List<java.lang.String>
         getIngredientesList();
     /**
-     * <code>repeated .model.Ingrediente ingredientes = 3;</code>
-     */
-    com.chefencasa.model.RecetaProto.Ingrediente getIngredientes(int index);
-    /**
-     * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+     * <code>repeated string ingredientes = 3;</code>
+     * @return The count of ingredientes.
      */
     int getIngredientesCount();
     /**
-     * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+     * <code>repeated string ingredientes = 3;</code>
+     * @param index The index of the element to return.
+     * @return The ingredientes at the given index.
      */
-    java.util.List<? extends com.chefencasa.model.RecetaProto.IngredienteOrBuilder> 
-        getIngredientesOrBuilderList();
+    java.lang.String getIngredientes(int index);
     /**
-     * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+     * <code>repeated string ingredientes = 3;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the ingredientes at the given index.
      */
-    com.chefencasa.model.RecetaProto.IngredienteOrBuilder getIngredientesOrBuilder(
-        int index);
+    com.google.protobuf.ByteString
+        getIngredientesBytes(int index);
 
     /**
      * <code>int32 tiempoPrepDesde = 4;</code>
@@ -6185,8 +7178,9 @@ public final class RecetaProto {
       super(builder);
     }
     private RecetaFiltro() {
+      categoria_ = "";
       nombre_ = "";
-      ingredientes_ = java.util.Collections.emptyList();
+      ingredientes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
     @java.lang.Override
@@ -6220,9 +7214,10 @@ public final class RecetaProto {
             case 0:
               done = true;
               break;
-            case 8: {
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              categoria_ = input.readInt32();
+              categoria_ = s;
               break;
             }
             case 18: {
@@ -6232,12 +7227,12 @@ public final class RecetaProto {
               break;
             }
             case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                ingredientes_ = new java.util.ArrayList<com.chefencasa.model.RecetaProto.Ingrediente>();
+                ingredientes_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000001;
               }
-              ingredientes_.add(
-                  input.readMessage(com.chefencasa.model.RecetaProto.Ingrediente.parser(), extensionRegistry));
+              ingredientes_.add(s);
               break;
             }
             case 32: {
@@ -6266,7 +7261,7 @@ public final class RecetaProto {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          ingredientes_ = java.util.Collections.unmodifiableList(ingredientes_);
+          ingredientes_ = ingredientes_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -6286,13 +7281,39 @@ public final class RecetaProto {
     }
 
     public static final int CATEGORIA_FIELD_NUMBER = 1;
-    private int categoria_;
+    private volatile java.lang.Object categoria_;
     /**
-     * <code>int32 categoria = 1;</code>
+     * <code>string categoria = 1;</code>
      * @return The categoria.
      */
-    public int getCategoria() {
-      return categoria_;
+    public java.lang.String getCategoria() {
+      java.lang.Object ref = categoria_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        categoria_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string categoria = 1;</code>
+     * @return The bytes for categoria.
+     */
+    public com.google.protobuf.ByteString
+        getCategoriaBytes() {
+      java.lang.Object ref = categoria_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        categoria_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int NOMBRE_FIELD_NUMBER = 2;
@@ -6332,38 +7353,38 @@ public final class RecetaProto {
     }
 
     public static final int INGREDIENTES_FIELD_NUMBER = 3;
-    private java.util.List<com.chefencasa.model.RecetaProto.Ingrediente> ingredientes_;
+    private com.google.protobuf.LazyStringList ingredientes_;
     /**
-     * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+     * <code>repeated string ingredientes = 3;</code>
+     * @return A list containing the ingredientes.
      */
-    public java.util.List<com.chefencasa.model.RecetaProto.Ingrediente> getIngredientesList() {
+    public com.google.protobuf.ProtocolStringList
+        getIngredientesList() {
       return ingredientes_;
     }
     /**
-     * <code>repeated .model.Ingrediente ingredientes = 3;</code>
-     */
-    public java.util.List<? extends com.chefencasa.model.RecetaProto.IngredienteOrBuilder> 
-        getIngredientesOrBuilderList() {
-      return ingredientes_;
-    }
-    /**
-     * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+     * <code>repeated string ingredientes = 3;</code>
+     * @return The count of ingredientes.
      */
     public int getIngredientesCount() {
       return ingredientes_.size();
     }
     /**
-     * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+     * <code>repeated string ingredientes = 3;</code>
+     * @param index The index of the element to return.
+     * @return The ingredientes at the given index.
      */
-    public com.chefencasa.model.RecetaProto.Ingrediente getIngredientes(int index) {
+    public java.lang.String getIngredientes(int index) {
       return ingredientes_.get(index);
     }
     /**
-     * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+     * <code>repeated string ingredientes = 3;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the ingredientes at the given index.
      */
-    public com.chefencasa.model.RecetaProto.IngredienteOrBuilder getIngredientesOrBuilder(
-        int index) {
-      return ingredientes_.get(index);
+    public com.google.protobuf.ByteString
+        getIngredientesBytes(int index) {
+      return ingredientes_.getByteString(index);
     }
 
     public static final int TIEMPOPREPDESDE_FIELD_NUMBER = 4;
@@ -6400,14 +7421,14 @@ public final class RecetaProto {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (categoria_ != 0) {
-        output.writeInt32(1, categoria_);
+      if (!getCategoriaBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, categoria_);
       }
       if (!getNombreBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nombre_);
       }
       for (int i = 0; i < ingredientes_.size(); i++) {
-        output.writeMessage(3, ingredientes_.get(i));
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, ingredientes_.getRaw(i));
       }
       if (tiempoPrepDesde_ != 0) {
         output.writeInt32(4, tiempoPrepDesde_);
@@ -6424,16 +7445,19 @@ public final class RecetaProto {
       if (size != -1) return size;
 
       size = 0;
-      if (categoria_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, categoria_);
+      if (!getCategoriaBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, categoria_);
       }
       if (!getNombreBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nombre_);
       }
-      for (int i = 0; i < ingredientes_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, ingredientes_.get(i));
+      {
+        int dataSize = 0;
+        for (int i = 0; i < ingredientes_.size(); i++) {
+          dataSize += computeStringSizeNoTag(ingredientes_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getIngredientesList().size();
       }
       if (tiempoPrepDesde_ != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -6458,8 +7482,8 @@ public final class RecetaProto {
       }
       com.chefencasa.model.RecetaProto.RecetaFiltro other = (com.chefencasa.model.RecetaProto.RecetaFiltro) obj;
 
-      if (getCategoria()
-          != other.getCategoria()) return false;
+      if (!getCategoria()
+          .equals(other.getCategoria())) return false;
       if (!getNombre()
           .equals(other.getNombre())) return false;
       if (!getIngredientesList()
@@ -6480,7 +7504,7 @@ public final class RecetaProto {
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CATEGORIA_FIELD_NUMBER;
-      hash = (53 * hash) + getCategoria();
+      hash = (53 * hash) + getCategoria().hashCode();
       hash = (37 * hash) + NOMBRE_FIELD_NUMBER;
       hash = (53 * hash) + getNombre().hashCode();
       if (getIngredientesCount() > 0) {
@@ -6619,22 +7643,17 @@ public final class RecetaProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getIngredientesFieldBuilder();
         }
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        categoria_ = 0;
+        categoria_ = "";
 
         nombre_ = "";
 
-        if (ingredientesBuilder_ == null) {
-          ingredientes_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
-        } else {
-          ingredientesBuilder_.clear();
-        }
+        ingredientes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
         tiempoPrepDesde_ = 0;
 
         tiempoPrepHasta_ = 0;
@@ -6668,15 +7687,11 @@ public final class RecetaProto {
         int from_bitField0_ = bitField0_;
         result.categoria_ = categoria_;
         result.nombre_ = nombre_;
-        if (ingredientesBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
-            ingredientes_ = java.util.Collections.unmodifiableList(ingredientes_);
-            bitField0_ = (bitField0_ & ~0x00000001);
-          }
-          result.ingredientes_ = ingredientes_;
-        } else {
-          result.ingredientes_ = ingredientesBuilder_.build();
+        if (((bitField0_ & 0x00000001) != 0)) {
+          ingredientes_ = ingredientes_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000001);
         }
+        result.ingredientes_ = ingredientes_;
         result.tiempoPrepDesde_ = tiempoPrepDesde_;
         result.tiempoPrepHasta_ = tiempoPrepHasta_;
         onBuilt();
@@ -6727,38 +7742,23 @@ public final class RecetaProto {
 
       public Builder mergeFrom(com.chefencasa.model.RecetaProto.RecetaFiltro other) {
         if (other == com.chefencasa.model.RecetaProto.RecetaFiltro.getDefaultInstance()) return this;
-        if (other.getCategoria() != 0) {
-          setCategoria(other.getCategoria());
+        if (!other.getCategoria().isEmpty()) {
+          categoria_ = other.categoria_;
+          onChanged();
         }
         if (!other.getNombre().isEmpty()) {
           nombre_ = other.nombre_;
           onChanged();
         }
-        if (ingredientesBuilder_ == null) {
-          if (!other.ingredientes_.isEmpty()) {
-            if (ingredientes_.isEmpty()) {
-              ingredientes_ = other.ingredientes_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-            } else {
-              ensureIngredientesIsMutable();
-              ingredientes_.addAll(other.ingredientes_);
-            }
-            onChanged();
+        if (!other.ingredientes_.isEmpty()) {
+          if (ingredientes_.isEmpty()) {
+            ingredientes_ = other.ingredientes_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureIngredientesIsMutable();
+            ingredientes_.addAll(other.ingredientes_);
           }
-        } else {
-          if (!other.ingredientes_.isEmpty()) {
-            if (ingredientesBuilder_.isEmpty()) {
-              ingredientesBuilder_.dispose();
-              ingredientesBuilder_ = null;
-              ingredientes_ = other.ingredientes_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-              ingredientesBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getIngredientesFieldBuilder() : null;
-            } else {
-              ingredientesBuilder_.addAllMessages(other.ingredientes_);
-            }
-          }
+          onChanged();
         }
         if (other.getTiempoPrepDesde() != 0) {
           setTiempoPrepDesde(other.getTiempoPrepDesde());
@@ -6796,32 +7796,78 @@ public final class RecetaProto {
       }
       private int bitField0_;
 
-      private int categoria_ ;
+      private java.lang.Object categoria_ = "";
       /**
-       * <code>int32 categoria = 1;</code>
+       * <code>string categoria = 1;</code>
        * @return The categoria.
        */
-      public int getCategoria() {
-        return categoria_;
+      public java.lang.String getCategoria() {
+        java.lang.Object ref = categoria_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          categoria_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>int32 categoria = 1;</code>
+       * <code>string categoria = 1;</code>
+       * @return The bytes for categoria.
+       */
+      public com.google.protobuf.ByteString
+          getCategoriaBytes() {
+        java.lang.Object ref = categoria_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          categoria_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string categoria = 1;</code>
        * @param value The categoria to set.
        * @return This builder for chaining.
        */
-      public Builder setCategoria(int value) {
-        
+      public Builder setCategoria(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
         categoria_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int32 categoria = 1;</code>
+       * <code>string categoria = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearCategoria() {
         
-        categoria_ = 0;
+        categoria_ = getDefaultInstance().getCategoria();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string categoria = 1;</code>
+       * @param value The bytes for categoria to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCategoriaBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        categoria_ = value;
         onChanged();
         return this;
       }
@@ -6902,244 +7948,114 @@ public final class RecetaProto {
         return this;
       }
 
-      private java.util.List<com.chefencasa.model.RecetaProto.Ingrediente> ingredientes_ =
-        java.util.Collections.emptyList();
+      private com.google.protobuf.LazyStringList ingredientes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureIngredientesIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          ingredientes_ = new java.util.ArrayList<com.chefencasa.model.RecetaProto.Ingrediente>(ingredientes_);
+          ingredientes_ = new com.google.protobuf.LazyStringArrayList(ingredientes_);
           bitField0_ |= 0x00000001;
          }
       }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.chefencasa.model.RecetaProto.Ingrediente, com.chefencasa.model.RecetaProto.Ingrediente.Builder, com.chefencasa.model.RecetaProto.IngredienteOrBuilder> ingredientesBuilder_;
-
       /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+       * <code>repeated string ingredientes = 3;</code>
+       * @return A list containing the ingredientes.
        */
-      public java.util.List<com.chefencasa.model.RecetaProto.Ingrediente> getIngredientesList() {
-        if (ingredientesBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(ingredientes_);
-        } else {
-          return ingredientesBuilder_.getMessageList();
-        }
+      public com.google.protobuf.ProtocolStringList
+          getIngredientesList() {
+        return ingredientes_.getUnmodifiableView();
       }
       /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+       * <code>repeated string ingredientes = 3;</code>
+       * @return The count of ingredientes.
        */
       public int getIngredientesCount() {
-        if (ingredientesBuilder_ == null) {
-          return ingredientes_.size();
-        } else {
-          return ingredientesBuilder_.getCount();
-        }
+        return ingredientes_.size();
       }
       /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+       * <code>repeated string ingredientes = 3;</code>
+       * @param index The index of the element to return.
+       * @return The ingredientes at the given index.
        */
-      public com.chefencasa.model.RecetaProto.Ingrediente getIngredientes(int index) {
-        if (ingredientesBuilder_ == null) {
-          return ingredientes_.get(index);
-        } else {
-          return ingredientesBuilder_.getMessage(index);
-        }
+      public java.lang.String getIngredientes(int index) {
+        return ingredientes_.get(index);
       }
       /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+       * <code>repeated string ingredientes = 3;</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the ingredientes at the given index.
        */
-      public Builder setIngredientes(
-          int index, com.chefencasa.model.RecetaProto.Ingrediente value) {
-        if (ingredientesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureIngredientesIsMutable();
-          ingredientes_.set(index, value);
-          onChanged();
-        } else {
-          ingredientesBuilder_.setMessage(index, value);
-        }
-        return this;
+      public com.google.protobuf.ByteString
+          getIngredientesBytes(int index) {
+        return ingredientes_.getByteString(index);
       }
       /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+       * <code>repeated string ingredientes = 3;</code>
+       * @param index The index to set the value at.
+       * @param value The ingredientes to set.
+       * @return This builder for chaining.
        */
       public Builder setIngredientes(
-          int index, com.chefencasa.model.RecetaProto.Ingrediente.Builder builderForValue) {
-        if (ingredientesBuilder_ == null) {
-          ensureIngredientesIsMutable();
-          ingredientes_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          ingredientesBuilder_.setMessage(index, builderForValue.build());
-        }
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureIngredientesIsMutable();
+        ingredientes_.set(index, value);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
-       */
-      public Builder addIngredientes(com.chefencasa.model.RecetaProto.Ingrediente value) {
-        if (ingredientesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureIngredientesIsMutable();
-          ingredientes_.add(value);
-          onChanged();
-        } else {
-          ingredientesBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+       * <code>repeated string ingredientes = 3;</code>
+       * @param value The ingredientes to add.
+       * @return This builder for chaining.
        */
       public Builder addIngredientes(
-          int index, com.chefencasa.model.RecetaProto.Ingrediente value) {
-        if (ingredientesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureIngredientesIsMutable();
-          ingredientes_.add(index, value);
-          onChanged();
-        } else {
-          ingredientesBuilder_.addMessage(index, value);
-        }
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureIngredientesIsMutable();
+        ingredientes_.add(value);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
-       */
-      public Builder addIngredientes(
-          com.chefencasa.model.RecetaProto.Ingrediente.Builder builderForValue) {
-        if (ingredientesBuilder_ == null) {
-          ensureIngredientesIsMutable();
-          ingredientes_.add(builderForValue.build());
-          onChanged();
-        } else {
-          ingredientesBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
-       */
-      public Builder addIngredientes(
-          int index, com.chefencasa.model.RecetaProto.Ingrediente.Builder builderForValue) {
-        if (ingredientesBuilder_ == null) {
-          ensureIngredientesIsMutable();
-          ingredientes_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          ingredientesBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+       * <code>repeated string ingredientes = 3;</code>
+       * @param values The ingredientes to add.
+       * @return This builder for chaining.
        */
       public Builder addAllIngredientes(
-          java.lang.Iterable<? extends com.chefencasa.model.RecetaProto.Ingrediente> values) {
-        if (ingredientesBuilder_ == null) {
-          ensureIngredientesIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, ingredientes_);
-          onChanged();
-        } else {
-          ingredientesBuilder_.addAllMessages(values);
-        }
+          java.lang.Iterable<java.lang.String> values) {
+        ensureIngredientesIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, ingredientes_);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+       * <code>repeated string ingredientes = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearIngredientes() {
-        if (ingredientesBuilder_ == null) {
-          ingredientes_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
-          onChanged();
-        } else {
-          ingredientesBuilder_.clear();
-        }
+        ingredientes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
+       * <code>repeated string ingredientes = 3;</code>
+       * @param value The bytes of the ingredientes to add.
+       * @return This builder for chaining.
        */
-      public Builder removeIngredientes(int index) {
-        if (ingredientesBuilder_ == null) {
-          ensureIngredientesIsMutable();
-          ingredientes_.remove(index);
-          onChanged();
-        } else {
-          ingredientesBuilder_.remove(index);
-        }
+      public Builder addIngredientesBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureIngredientesIsMutable();
+        ingredientes_.add(value);
+        onChanged();
         return this;
-      }
-      /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
-       */
-      public com.chefencasa.model.RecetaProto.Ingrediente.Builder getIngredientesBuilder(
-          int index) {
-        return getIngredientesFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
-       */
-      public com.chefencasa.model.RecetaProto.IngredienteOrBuilder getIngredientesOrBuilder(
-          int index) {
-        if (ingredientesBuilder_ == null) {
-          return ingredientes_.get(index);  } else {
-          return ingredientesBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
-       */
-      public java.util.List<? extends com.chefencasa.model.RecetaProto.IngredienteOrBuilder> 
-           getIngredientesOrBuilderList() {
-        if (ingredientesBuilder_ != null) {
-          return ingredientesBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(ingredientes_);
-        }
-      }
-      /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
-       */
-      public com.chefencasa.model.RecetaProto.Ingrediente.Builder addIngredientesBuilder() {
-        return getIngredientesFieldBuilder().addBuilder(
-            com.chefencasa.model.RecetaProto.Ingrediente.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
-       */
-      public com.chefencasa.model.RecetaProto.Ingrediente.Builder addIngredientesBuilder(
-          int index) {
-        return getIngredientesFieldBuilder().addBuilder(
-            index, com.chefencasa.model.RecetaProto.Ingrediente.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .model.Ingrediente ingredientes = 3;</code>
-       */
-      public java.util.List<com.chefencasa.model.RecetaProto.Ingrediente.Builder> 
-           getIngredientesBuilderList() {
-        return getIngredientesFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.chefencasa.model.RecetaProto.Ingrediente, com.chefencasa.model.RecetaProto.Ingrediente.Builder, com.chefencasa.model.RecetaProto.IngredienteOrBuilder> 
-          getIngredientesFieldBuilder() {
-        if (ingredientesBuilder_ == null) {
-          ingredientesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.chefencasa.model.RecetaProto.Ingrediente, com.chefencasa.model.RecetaProto.Ingrediente.Builder, com.chefencasa.model.RecetaProto.IngredienteOrBuilder>(
-                  ingredientes_,
-                  ((bitField0_ & 0x00000001) != 0),
-                  getParentForChildren(),
-                  isClean());
-          ingredientes_ = null;
-        }
-        return ingredientesBuilder_;
       }
 
       private int tiempoPrepDesde_ ;
@@ -7260,15 +8176,15 @@ public final class RecetaProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_model_Empty_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_model_Ingrediente_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_model_Ingrediente_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_model_Receta_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_model_Receta_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_model_UpdateRecetaRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_model_UpdateRecetaRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_model_RecetaResponse_descriptor;
   private static final 
@@ -7284,11 +8200,6 @@ public final class RecetaProto {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_model_UsuarioId_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_model_RecetaId_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_model_RecetaId_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_model_RecetaFiltro_descriptor;
   private static final 
@@ -7306,33 +8217,40 @@ public final class RecetaProto {
       "\n\014receta.proto\022\005model\032\033google/protobuf/e" +
       "mpty.proto\032\036google/protobuf/wrappers.pro" +
       "to\032\037google/protobuf/timestamp.proto\"\007\n\005E" +
-      "mpty\"9\n\013Ingrediente\022\025\n\ridIngrediente\030\001 \001" +
-      "(\005\022\023\n\013ingrediente\030\002 \001(\t\"\251\002\n\006Receta\022\020\n\010id" +
-      "Receta\030\001 \001(\005\022\021\n\tidUsuario\030\002 \001(\005\022\024\n\014titul" +
-      "oReceta\030\003 \001(\t\022\023\n\013descripcion\030\004 \001(\t\022\021\n\tCa" +
-      "tegoria\030\005 \001(\t\022\r\n\005pasos\030\006 \001(\t\0221\n\rfechaCre" +
-      "acion\030\007 \001(\0132\032.google.protobuf.Timestamp\022" +
-      "\024\n\014ingredientes\030\010 \003(\t\022\031\n\021tiempoPreparaci" +
-      "on\030\t \001(\005\022\r\n\005foto1\030\n \001(\t\022\r\n\005foto2\030\013 \001(\t\022\r" +
-      "\n\005foto3\030\014 \001(\t\022\r\n\005foto4\030\r \001(\t\022\r\n\005foto5\030\016 " +
-      "\001(\t\"@\n\016RecetaResponse\022\035\n\006receta\030\001 \001(\0132\r." +
-      "model.Receta\022\017\n\007mensaje\030\002 \001(\t\"A\n\017Recetas" +
-      "Response\022\035\n\006receta\030\001 \003(\0132\r.model.Receta\022" +
-      "\017\n\007mensaje\030\002 \001(\t\"\036\n\tUsuarioId\022\021\n\tidUsuar" +
-      "io\030\001 \001(\005\"\034\n\010RecetaId\022\020\n\010idReceta\030\001 \001(\005\"\215" +
-      "\001\n\014RecetaFiltro\022\021\n\tcategoria\030\001 \001(\005\022\016\n\006no" +
-      "mbre\030\002 \001(\t\022(\n\014ingredientes\030\003 \003(\0132\022.model" +
-      ".Ingrediente\022\027\n\017tiempoPrepDesde\030\004 \001(\005\022\027\n" +
-      "\017tiempoPrepHasta\030\005 \001(\0052\271\002\n\016RecetasServic" +
-      "e\0223\n\tAddReceta\022\r.model.Receta\032\025.model.Re" +
-      "cetaResponse\"\000\022<\n\013getByFilter\022\023.model.Re" +
-      "cetaFiltro\032\026.model.RecetasResponse\"\000\0227\n\r" +
-      "getAllRecetas\022\014.model.Empty\032\026.model.Rece" +
-      "tasResponse\"\000\022A\n\023getAllRecetasByUser\022\020.m" +
-      "odel.UsuarioId\032\026.model.RecetasResponse\"\000" +
-      "\0228\n\014updateReceta\022\017.model.RecetaId\032\025.mode" +
-      "l.RecetaResponse\"\000B#\n\024com.chefencasa.mod" +
-      "elB\013RecetaProtob\006proto3"
+      "mpty\"\251\002\n\006Receta\022\020\n\010idReceta\030\001 \001(\005\022\021\n\tidU" +
+      "suario\030\002 \001(\005\022\024\n\014tituloReceta\030\003 \001(\t\022\023\n\013de" +
+      "scripcion\030\004 \001(\t\022\021\n\tCategoria\030\005 \001(\t\022\r\n\005pa" +
+      "sos\030\006 \001(\t\0221\n\rfechaCreacion\030\007 \001(\0132\032.googl" +
+      "e.protobuf.Timestamp\022\024\n\014ingredientes\030\010 \003" +
+      "(\t\022\031\n\021tiempoPreparacion\030\t \001(\005\022\r\n\005foto1\030\n" +
+      " \001(\t\022\r\n\005foto2\030\013 \001(\t\022\r\n\005foto3\030\014 \001(\t\022\r\n\005fo" +
+      "to4\030\r \001(\t\022\r\n\005foto5\030\016 \001(\t\"\360\001\n\023UpdateRecet" +
+      "aRequest\022\020\n\010idReceta\030\001 \001(\005\022\024\n\014tituloRece" +
+      "ta\030\002 \001(\t\022\023\n\013descripcion\030\003 \001(\t\022\021\n\tcategor" +
+      "ia\030\004 \001(\t\022\r\n\005pasos\030\005 \001(\t\022\024\n\014ingredientes\030" +
+      "\006 \003(\t\022\031\n\021tiempoPreparacion\030\007 \001(\005\022\r\n\005foto" +
+      "1\030\n \001(\t\022\r\n\005foto2\030\013 \001(\t\022\r\n\005foto3\030\014 \001(\t\022\r\n" +
+      "\005foto4\030\r \001(\t\022\r\n\005foto5\030\016 \001(\t\"@\n\016RecetaRes" +
+      "ponse\022\035\n\006receta\030\001 \001(\0132\r.model.Receta\022\017\n\007" +
+      "mensaje\030\002 \001(\t\"A\n\017RecetasResponse\022\035\n\006rece" +
+      "ta\030\001 \003(\0132\r.model.Receta\022\017\n\007mensaje\030\002 \001(\t" +
+      "\"\036\n\tUsuarioId\022\021\n\tidUsuario\030\001 \001(\005\"y\n\014Rece" +
+      "taFiltro\022\021\n\tcategoria\030\001 \001(\t\022\016\n\006nombre\030\002 " +
+      "\001(\t\022\024\n\014ingredientes\030\003 \003(\t\022\027\n\017tiempoPrepD" +
+      "esde\030\004 \001(\005\022\027\n\017tiempoPrepHasta\030\005 \001(\0052\304\003\n\016" +
+      "RecetasService\0223\n\tAddReceta\022\r.model.Rece" +
+      "ta\032\025.model.RecetaResponse\"\000\022<\n\013getByFilt" +
+      "er\022\023.model.RecetaFiltro\032\026.model.RecetasR" +
+      "esponse\"\000\0227\n\rgetAllRecetas\022\014.model.Empty" +
+      "\032\026.model.RecetasResponse\"\000\022A\n\023getAllRece" +
+      "tasByUser\022\020.model.UsuarioId\032\026.model.Rece" +
+      "tasResponse\"\000\022C\n\014updateReceta\022\032.model.Up" +
+      "dateRecetaRequest\032\025.model.RecetaResponse" +
+      "\"\000\022B\n\024getRecetasOfSeguidos\022\020.model.Usuar" +
+      "ioId\032\026.model.RecetasResponse\"\000\022:\n\014getFav" +
+      "oritos\022\020.model.UsuarioId\032\026.model.Recetas" +
+      "Response\"\000B#\n\024com.chefencasa.modelB\013Rece" +
+      "taProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -7347,18 +8265,18 @@ public final class RecetaProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_Empty_descriptor,
         new java.lang.String[] { });
-    internal_static_model_Ingrediente_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_model_Ingrediente_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_model_Ingrediente_descriptor,
-        new java.lang.String[] { "IdIngrediente", "Ingrediente", });
     internal_static_model_Receta_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(1);
     internal_static_model_Receta_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_Receta_descriptor,
         new java.lang.String[] { "IdReceta", "IdUsuario", "TituloReceta", "Descripcion", "Categoria", "Pasos", "FechaCreacion", "Ingredientes", "TiempoPreparacion", "Foto1", "Foto2", "Foto3", "Foto4", "Foto5", });
+    internal_static_model_UpdateRecetaRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_model_UpdateRecetaRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_model_UpdateRecetaRequest_descriptor,
+        new java.lang.String[] { "IdReceta", "TituloReceta", "Descripcion", "Categoria", "Pasos", "Ingredientes", "TiempoPreparacion", "Foto1", "Foto2", "Foto3", "Foto4", "Foto5", });
     internal_static_model_RecetaResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_model_RecetaResponse_fieldAccessorTable = new
@@ -7377,14 +8295,8 @@ public final class RecetaProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_UsuarioId_descriptor,
         new java.lang.String[] { "IdUsuario", });
-    internal_static_model_RecetaId_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_model_RecetaId_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_model_RecetaId_descriptor,
-        new java.lang.String[] { "IdReceta", });
     internal_static_model_RecetaFiltro_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_model_RecetaFiltro_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_RecetaFiltro_descriptor,

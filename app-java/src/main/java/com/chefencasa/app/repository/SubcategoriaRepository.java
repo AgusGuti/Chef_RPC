@@ -12,6 +12,6 @@ import java.util.List;
 public interface SubcategoriaRepository extends JpaRepository<Subcategoria, Serializable> {
 
 	public abstract Subcategoria findByCategoria(String subcategoria);
-    List<Subcategoria> findAllByMarca(Subcategoria subcategoria);
+    /*List<Subcategoria> findAllByMarca(Subcategoria subcategoria); */
 
 }

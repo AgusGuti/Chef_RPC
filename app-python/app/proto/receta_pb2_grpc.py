@@ -36,8 +36,18 @@ class RecetasServiceStub(object):
                 )
         self.updateReceta = channel.unary_unary(
                 '/model.RecetasService/updateReceta',
-                request_serializer=receta__pb2.RecetaId.SerializeToString,
+                request_serializer=receta__pb2.UpdateRecetaRequest.SerializeToString,
                 response_deserializer=receta__pb2.RecetaResponse.FromString,
+                )
+        self.getRecetasOfSeguidos = channel.unary_unary(
+                '/model.RecetasService/getRecetasOfSeguidos',
+                request_serializer=receta__pb2.UsuarioId.SerializeToString,
+                response_deserializer=receta__pb2.RecetasResponse.FromString,
+                )
+        self.getFavoritos = channel.unary_unary(
+                '/model.RecetasService/getFavoritos',
+                request_serializer=receta__pb2.UsuarioId.SerializeToString,
+                response_deserializer=receta__pb2.RecetasResponse.FromString,
                 )
 
 
@@ -74,6 +84,18 @@ class RecetasServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def getRecetasOfSeguidos(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def getFavoritos(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_RecetasServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -99,8 +121,18 @@ def add_RecetasServiceServicer_to_server(servicer, server):
             ),
             'updateReceta': grpc.unary_unary_rpc_method_handler(
                     servicer.updateReceta,
-                    request_deserializer=receta__pb2.RecetaId.FromString,
+                    request_deserializer=receta__pb2.UpdateRecetaRequest.FromString,
                     response_serializer=receta__pb2.RecetaResponse.SerializeToString,
+            ),
+            'getRecetasOfSeguidos': grpc.unary_unary_rpc_method_handler(
+                    servicer.getRecetasOfSeguidos,
+                    request_deserializer=receta__pb2.UsuarioId.FromString,
+                    response_serializer=receta__pb2.RecetasResponse.SerializeToString,
+            ),
+            'getFavoritos': grpc.unary_unary_rpc_method_handler(
+                    servicer.getFavoritos,
+                    request_deserializer=receta__pb2.UsuarioId.FromString,
+                    response_serializer=receta__pb2.RecetasResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -192,7 +224,41 @@ class RecetasService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/model.RecetasService/updateReceta',
-            receta__pb2.RecetaId.SerializeToString,
+            receta__pb2.UpdateRecetaRequest.SerializeToString,
             receta__pb2.RecetaResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def getRecetasOfSeguidos(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.RecetasService/getRecetasOfSeguidos',
+            receta__pb2.UsuarioId.SerializeToString,
+            receta__pb2.RecetasResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def getFavoritos(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.RecetasService/getFavoritos',
+            receta__pb2.UsuarioId.SerializeToString,
+            receta__pb2.RecetasResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
