@@ -9,6 +9,8 @@ Clases creadas en capa servidor:
 .Seguidos
 .Favoritos
 .Ingredientes
+.Subcategoria
+
 
 ## SERVIDOR JAVA GRPC
 
