@@ -109,6 +109,18 @@
                                 <label>Descripcion </label> <input type="text" 
                                     class="form-control form-control-sm" id="descripcion" name="descripcion" required>
                             </div>
+
+                            <div class="form-group">
+                                <label for="categoría">Categoría</label><br>
+                                <select name="Categoría" id="lang">
+                                    <option value="Entrada">Entrada</option>
+                                    <option value="Plato principal">Plato Principal</option>
+                                    <option value="postre">Postre</option>
+                                    <option value="Brunch">Brunch</option>
+                                    <option value="Vegetariano">Vegetariano</option>
+                                    <option value="Vegano">Vegano</option>                                
+                                  </select>
+                                </div>
                             
                             <div class="form-group">
                             <label for="pasos">Pasos</label><br>
@@ -117,9 +129,16 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Tiempo de Preparacion </label> <input type="text" 
-                                    class="form-control form-control-sm" id="tiempoPreparacion" name="tiempoPreparacion" required>
-                            </div>
+                                <label for="tiempoPreparacion">Tiempo de preparación</label><br>
+                                <select name="tiempoPreparacion" id="tiempoPreparacion">
+                                    <option value="1">De 0 a 15 minutos</option>
+                                    <option value="2">De 15 a 30 minutos</option>
+                                    <option value="3">De 30 a 45 minutos</option>
+                                    <option value="4">De 45 a 60 minutos</option>
+                                    <option value="5">De 60 a 90 minutos</option>
+                                    <option value="6">De 90 a 120 minutos</option>                                
+                                  </select>
+                                </div>
 
                             <div class="form-group">
                                 <label for="start">Fecha de Creación</label>
