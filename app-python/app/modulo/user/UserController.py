@@ -49,6 +49,11 @@ def registrar():
     logger.info("/registrar")
     return render_template('registrar.html')
 
+@user_blueprint.route("/myprofile",methods = ['GET'])
+def myprofile():
+    logger.info("/myprofile")
+    return render_template('myprofile.html')
+
 
 @user_blueprint.route("/logout",methods = ['GET'])
 def logout():
