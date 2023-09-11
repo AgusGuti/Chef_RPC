@@ -1,184 +1,112 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" class="h-75">
+  <head>
     <title>Website Grupo E</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" />
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-    <link href="https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='receta_styles.css') }}" />
-    <!-- jQuery (asegúrate de cargarlo antes de Bootstrap) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-<body class="h-100">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='index_styles.css')}}"
+    />
+  </head>
+  <body class="h-100">
     <div class="form-outline">
-        <img src="{{ url_for('static', filename='unla-logo.png') }}" alt="Universidad Nacional de Lanús" style="margin: 0px; padding: 16px" />
+      <img
+        src="{{ url_for('static', filename='chefencasa.png.jpg') }}"
+        alt="Universidad Nacional de Lanús"
+        style="vertical-align: Stickman; margin: 0px; padding: 16px"
+      />
     </div>
-
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="/index">Inicio</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark nav-bk">
+      <a class="navbar-brand d-flex gap-lg-1 mx-lg-3" href="#">
+        <i class="bi bi-house-fill text-white"></i> Inicio
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapsibleNavbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse d-flex align-items-center"
+        id="collapsibleNavbar"
+      >
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/storyline">Historias</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/recetas">Recetas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/myprofile">Perfil</a>
+          </li>
+        </ul>
     
-    <div class="container-xl">
-        <div class="table-responsive">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <h2><b>Recetas</b></h2>
-                        </div>
-                    </div>
-                </div>
-                <table class="table table-striped table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Título</th>
-                            <th>Descripción</th>
-                            <th>Foto 1</th>
-                            <th>Foto 2</th>
-                            <th>Foto 3</th>
-                            <th>Foto 4</th>
-                            <th>Foto 5</th>
-                            <th>Ingredientes</th>
-                            <th>Categoría</th>
-                            <th>Pasos</th>
-                            <th>Tiempo de Preparación</th>
-                            <th>Fecha de Creación</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>{{ titulo }}</td>
-                            <td>{{ descripcion }}</td>
-                            <td><img src="{{ foto1 }}" alt="Foto 1" width="100"></td>
-                            <td><img src="{{ foto2 }}" alt="Foto 2" width="100"></td>
-                            <td><img src="{{ foto3 }}" alt="Foto 3" width="100"></td>
-                            <td><img src="{{ foto4 }}" alt="Foto 4" width="100"></td>
-                            <td><img src="{{ foto5 }}" alt="Foto 5" width="100"></td>
-                            <td>
-                                <ul>
-                                    {% for ingrediente in ingredientes %}
-                                    <li>{{ ingrediente }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                            <td>{{ categoria }}</td>
-                            <td>{{ pasos }}</td>
-                            <td>{{ tiempo_preparacion }} minutos</td>
-                            <td>{{ fecha_creacion }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="13">Sin recetas en el sistema</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarReceta">
-                    Agregar Receta
-                </button>
+      </div>
+      <div class="nav navbar-nav navbar-right" id="collapsibleNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="nav-item">
+            <a class="nav-link" href="/logout"
+              >Cerrar Sesión
+              <i class="bi bi-box-arrow-left" style="vertical-align: -1px"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </body>
+</html>
 
-                <!-- Modal para agregar una receta -->
-                <div class="modal fade" id="modalAgregarReceta" tabindex="-1" role="dialog" aria-labelledby="modalAgregarRecetaLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <form action="/altaReceta" method="post"> <!-- Formulario principal -->
-                                <div class="modal-header">
-                                    <div class="form-outline mb-4">
-                                        {% with messages = get_flashed_messages(with_categories=true) %}
-                                        {% if messages %}
-                                        {% for category, message in messages %}
-                                        <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                        {% endwith %}
-                                    </div>
-                                    <h5 class="modal-title" id="modalAgregarRecetaLabel">Agregar Receta</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <!-- Formulario para agregar una receta -->
-                                    <div class="form-group">
-                                        <label for="tituloReceta">Título:</label>
-                                        <input type="text" class="form-control" id="tituloReceta" name="tituloReceta" placeholder="Ingrese el título">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="descripcion">Descripción:</label>
-                                        <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese la descripción"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="foto1">Foto 1 (URL):</label>
-                                        <input type="text" class="form-control" id="foto1" name="foto1" placeholder="URL de la foto 1">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="foto2">Foto 2 (URL):</label>
-                                        <input type="text" class="form-control" id="foto2" name="foto2" placeholder="URL de la foto 2">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="foto3">Foto 3 (URL):</label>
-                                        <input type="text" class="form-control" id="foto3" name="foto3" placeholder="URL de la foto 3">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="foto4">Foto 4 (URL):</label>
-                                        <input type="text" class="form-control" id="foto4" name="foto4" placeholder="URL de la foto 4">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="foto5">Foto 5 (URL):</label>
-                                        <input type="text" class="form-control" id="foto5" name="foto5" placeholder="URL de la foto 5">
-                                    </div>
-                                    <!-- Ingredientes (Puedes utilizar un textarea para ingresar varios ingredientes) -->
-                                    <div class="form-group">
-                                        <label for="ingredientes">Ingredientes:</label>
-                                        <textarea class="form-control" id="ingredientes" name="ingredientes" placeholder="Ingrese los ingredientes"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="categoria">Categoría:</label>
-                                        <select class="form-control" id="categoria" name="categoria">
-                                            <option value="Entrada">Entrada</option>
-                                            <option value="Plato Principal">Plato Principal</option>
-                                            <option value="Postre">Postre</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="pasos">Pasos de Preparación:</label>
-                                        <textarea class="form-control" id="pasos" name="pasos" placeholder="Ingrese los pasos de preparación"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tiempoPreparacion">Tiempo de Preparación (minutos):</label>
-                                        <input type="number" class="form-control" id="tiempoPreparacion" name="tiempoPreparacion" placeholder="Ingrese el tiempo de preparación en minutos">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="fechaCreacion">Fecha de Creación:</label>
-                                        <input type="date" class="form-control" id="fechaCreacion" name="fechaCreacion" required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
-                                </div>
-                            </form>               
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
-                    </ul>
-                </div>
+        <div class="col-8">
+			<h3>Recetas</h3>
+			<!--tabla-->
+			<div style="overflow-x: auto;">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Titulo</th>
+							<th scope="col">Descripcion</th>
+							<th scope="col">Pasos</th>
+							<th scope="col">Tiempo de Preparacion</th>
+							<th scope="col">Fecha de creacion</th>
+                            <th scope="col">Foto</th>
+						</tr>
+					</thead>
+					<tbody >
+						<tr>
+							<td colspan="2">Sin roles en el sistema</td>
+							
+						</tr>
+					</tbody>
+					
+				</table>
+
+                <div align="left" class="btn_crear mb-3">
+                    <a href="/altaReceta" type="button" class="btn btn-primary">Añadir receta</a>
+                  </div>
+			
+			</div>
+    </body>
+</html>
             </div>
         </div>
     </div>
