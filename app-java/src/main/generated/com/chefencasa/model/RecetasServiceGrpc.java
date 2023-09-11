@@ -16,220 +16,34 @@ public final class RecetasServiceGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.Receta,
-      com.chefencasa.model.RecetaProto.RecetaResponse> getAddRecetaMethod;
+      com.chefencasa.model.RecetaProto.Receta> getAddRecetaMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "AddReceta",
       requestType = com.chefencasa.model.RecetaProto.Receta.class,
-      responseType = com.chefencasa.model.RecetaProto.RecetaResponse.class,
+      responseType = com.chefencasa.model.RecetaProto.Receta.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.Receta,
-      com.chefencasa.model.RecetaProto.RecetaResponse> getAddRecetaMethod() {
-    io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.RecetaResponse> getAddRecetaMethod;
+      com.chefencasa.model.RecetaProto.Receta> getAddRecetaMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.Receta> getAddRecetaMethod;
     if ((getAddRecetaMethod = RecetasServiceGrpc.getAddRecetaMethod) == null) {
       synchronized (RecetasServiceGrpc.class) {
         if ((getAddRecetaMethod = RecetasServiceGrpc.getAddRecetaMethod) == null) {
           RecetasServiceGrpc.getAddRecetaMethod = getAddRecetaMethod =
-              io.grpc.MethodDescriptor.<com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.RecetaResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.Receta>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "AddReceta"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.chefencasa.model.RecetaProto.Receta.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.RecetaProto.RecetaResponse.getDefaultInstance()))
+                  com.chefencasa.model.RecetaProto.Receta.getDefaultInstance()))
               .setSchemaDescriptor(new RecetasServiceMethodDescriptorSupplier("AddReceta"))
               .build();
         }
       }
     }
     return getAddRecetaMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.RecetaFiltro,
-      com.chefencasa.model.RecetaProto.RecetasResponse> getGetByFilterMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "getByFilter",
-      requestType = com.chefencasa.model.RecetaProto.RecetaFiltro.class,
-      responseType = com.chefencasa.model.RecetaProto.RecetasResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.RecetaFiltro,
-      com.chefencasa.model.RecetaProto.RecetasResponse> getGetByFilterMethod() {
-    io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.RecetaFiltro, com.chefencasa.model.RecetaProto.RecetasResponse> getGetByFilterMethod;
-    if ((getGetByFilterMethod = RecetasServiceGrpc.getGetByFilterMethod) == null) {
-      synchronized (RecetasServiceGrpc.class) {
-        if ((getGetByFilterMethod = RecetasServiceGrpc.getGetByFilterMethod) == null) {
-          RecetasServiceGrpc.getGetByFilterMethod = getGetByFilterMethod =
-              io.grpc.MethodDescriptor.<com.chefencasa.model.RecetaProto.RecetaFiltro, com.chefencasa.model.RecetaProto.RecetasResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getByFilter"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.RecetaProto.RecetaFiltro.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.RecetaProto.RecetasResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new RecetasServiceMethodDescriptorSupplier("getByFilter"))
-              .build();
-        }
-      }
-    }
-    return getGetByFilterMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.Empty,
-      com.chefencasa.model.RecetaProto.RecetasResponse> getGetAllRecetasMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "getAllRecetas",
-      requestType = com.chefencasa.model.RecetaProto.Empty.class,
-      responseType = com.chefencasa.model.RecetaProto.RecetasResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.Empty,
-      com.chefencasa.model.RecetaProto.RecetasResponse> getGetAllRecetasMethod() {
-    io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.Empty, com.chefencasa.model.RecetaProto.RecetasResponse> getGetAllRecetasMethod;
-    if ((getGetAllRecetasMethod = RecetasServiceGrpc.getGetAllRecetasMethod) == null) {
-      synchronized (RecetasServiceGrpc.class) {
-        if ((getGetAllRecetasMethod = RecetasServiceGrpc.getGetAllRecetasMethod) == null) {
-          RecetasServiceGrpc.getGetAllRecetasMethod = getGetAllRecetasMethod =
-              io.grpc.MethodDescriptor.<com.chefencasa.model.RecetaProto.Empty, com.chefencasa.model.RecetaProto.RecetasResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getAllRecetas"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.RecetaProto.Empty.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.RecetaProto.RecetasResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new RecetasServiceMethodDescriptorSupplier("getAllRecetas"))
-              .build();
-        }
-      }
-    }
-    return getGetAllRecetasMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.UsuarioId,
-      com.chefencasa.model.RecetaProto.RecetasResponse> getGetAllRecetasByUserMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "getAllRecetasByUser",
-      requestType = com.chefencasa.model.RecetaProto.UsuarioId.class,
-      responseType = com.chefencasa.model.RecetaProto.RecetasResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.UsuarioId,
-      com.chefencasa.model.RecetaProto.RecetasResponse> getGetAllRecetasByUserMethod() {
-    io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.UsuarioId, com.chefencasa.model.RecetaProto.RecetasResponse> getGetAllRecetasByUserMethod;
-    if ((getGetAllRecetasByUserMethod = RecetasServiceGrpc.getGetAllRecetasByUserMethod) == null) {
-      synchronized (RecetasServiceGrpc.class) {
-        if ((getGetAllRecetasByUserMethod = RecetasServiceGrpc.getGetAllRecetasByUserMethod) == null) {
-          RecetasServiceGrpc.getGetAllRecetasByUserMethod = getGetAllRecetasByUserMethod =
-              io.grpc.MethodDescriptor.<com.chefencasa.model.RecetaProto.UsuarioId, com.chefencasa.model.RecetaProto.RecetasResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getAllRecetasByUser"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.RecetaProto.UsuarioId.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.RecetaProto.RecetasResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new RecetasServiceMethodDescriptorSupplier("getAllRecetasByUser"))
-              .build();
-        }
-      }
-    }
-    return getGetAllRecetasByUserMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.UpdateRecetaRequest,
-      com.chefencasa.model.RecetaProto.RecetaResponse> getUpdateRecetaMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "updateReceta",
-      requestType = com.chefencasa.model.RecetaProto.UpdateRecetaRequest.class,
-      responseType = com.chefencasa.model.RecetaProto.RecetaResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.UpdateRecetaRequest,
-      com.chefencasa.model.RecetaProto.RecetaResponse> getUpdateRecetaMethod() {
-    io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.UpdateRecetaRequest, com.chefencasa.model.RecetaProto.RecetaResponse> getUpdateRecetaMethod;
-    if ((getUpdateRecetaMethod = RecetasServiceGrpc.getUpdateRecetaMethod) == null) {
-      synchronized (RecetasServiceGrpc.class) {
-        if ((getUpdateRecetaMethod = RecetasServiceGrpc.getUpdateRecetaMethod) == null) {
-          RecetasServiceGrpc.getUpdateRecetaMethod = getUpdateRecetaMethod =
-              io.grpc.MethodDescriptor.<com.chefencasa.model.RecetaProto.UpdateRecetaRequest, com.chefencasa.model.RecetaProto.RecetaResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "updateReceta"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.RecetaProto.UpdateRecetaRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.RecetaProto.RecetaResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new RecetasServiceMethodDescriptorSupplier("updateReceta"))
-              .build();
-        }
-      }
-    }
-    return getUpdateRecetaMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.UsuarioId,
-      com.chefencasa.model.RecetaProto.RecetasResponse> getGetRecetasOfSeguidosMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "getRecetasOfSeguidos",
-      requestType = com.chefencasa.model.RecetaProto.UsuarioId.class,
-      responseType = com.chefencasa.model.RecetaProto.RecetasResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.UsuarioId,
-      com.chefencasa.model.RecetaProto.RecetasResponse> getGetRecetasOfSeguidosMethod() {
-    io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.UsuarioId, com.chefencasa.model.RecetaProto.RecetasResponse> getGetRecetasOfSeguidosMethod;
-    if ((getGetRecetasOfSeguidosMethod = RecetasServiceGrpc.getGetRecetasOfSeguidosMethod) == null) {
-      synchronized (RecetasServiceGrpc.class) {
-        if ((getGetRecetasOfSeguidosMethod = RecetasServiceGrpc.getGetRecetasOfSeguidosMethod) == null) {
-          RecetasServiceGrpc.getGetRecetasOfSeguidosMethod = getGetRecetasOfSeguidosMethod =
-              io.grpc.MethodDescriptor.<com.chefencasa.model.RecetaProto.UsuarioId, com.chefencasa.model.RecetaProto.RecetasResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getRecetasOfSeguidos"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.RecetaProto.UsuarioId.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.RecetaProto.RecetasResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new RecetasServiceMethodDescriptorSupplier("getRecetasOfSeguidos"))
-              .build();
-        }
-      }
-    }
-    return getGetRecetasOfSeguidosMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.UsuarioId,
-      com.chefencasa.model.RecetaProto.RecetasResponse> getGetFavoritosMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "getFavoritos",
-      requestType = com.chefencasa.model.RecetaProto.UsuarioId.class,
-      responseType = com.chefencasa.model.RecetaProto.RecetasResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.UsuarioId,
-      com.chefencasa.model.RecetaProto.RecetasResponse> getGetFavoritosMethod() {
-    io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.UsuarioId, com.chefencasa.model.RecetaProto.RecetasResponse> getGetFavoritosMethod;
-    if ((getGetFavoritosMethod = RecetasServiceGrpc.getGetFavoritosMethod) == null) {
-      synchronized (RecetasServiceGrpc.class) {
-        if ((getGetFavoritosMethod = RecetasServiceGrpc.getGetFavoritosMethod) == null) {
-          RecetasServiceGrpc.getGetFavoritosMethod = getGetFavoritosMethod =
-              io.grpc.MethodDescriptor.<com.chefencasa.model.RecetaProto.UsuarioId, com.chefencasa.model.RecetaProto.RecetasResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getFavoritos"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.RecetaProto.UsuarioId.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.RecetaProto.RecetasResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new RecetasServiceMethodDescriptorSupplier("getFavoritos"))
-              .build();
-        }
-      }
-    }
-    return getGetFavoritosMethod;
   }
 
   /**
@@ -283,50 +97,8 @@ public final class RecetasServiceGrpc {
     /**
      */
     default void addReceta(com.chefencasa.model.RecetaProto.Receta request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetaResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Receta> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddRecetaMethod(), responseObserver);
-    }
-
-    /**
-     */
-    default void getByFilter(com.chefencasa.model.RecetaProto.RecetaFiltro request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetByFilterMethod(), responseObserver);
-    }
-
-    /**
-     */
-    default void getAllRecetas(com.chefencasa.model.RecetaProto.Empty request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllRecetasMethod(), responseObserver);
-    }
-
-    /**
-     */
-    default void getAllRecetasByUser(com.chefencasa.model.RecetaProto.UsuarioId request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllRecetasByUserMethod(), responseObserver);
-    }
-
-    /**
-     */
-    default void updateReceta(com.chefencasa.model.RecetaProto.UpdateRecetaRequest request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetaResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateRecetaMethod(), responseObserver);
-    }
-
-    /**
-     */
-    default void getRecetasOfSeguidos(com.chefencasa.model.RecetaProto.UsuarioId request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetRecetasOfSeguidosMethod(), responseObserver);
-    }
-
-    /**
-     */
-    default void getFavoritos(com.chefencasa.model.RecetaProto.UsuarioId request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetFavoritosMethod(), responseObserver);
     }
   }
 
@@ -360,57 +132,9 @@ public final class RecetasServiceGrpc {
     /**
      */
     public void addReceta(com.chefencasa.model.RecetaProto.Receta request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetaResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Receta> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getAddRecetaMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void getByFilter(com.chefencasa.model.RecetaProto.RecetaFiltro request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getGetByFilterMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void getAllRecetas(com.chefencasa.model.RecetaProto.Empty request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getGetAllRecetasMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void getAllRecetasByUser(com.chefencasa.model.RecetaProto.UsuarioId request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getGetAllRecetasByUserMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void updateReceta(com.chefencasa.model.RecetaProto.UpdateRecetaRequest request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetaResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getUpdateRecetaMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void getRecetasOfSeguidos(com.chefencasa.model.RecetaProto.UsuarioId request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getGetRecetasOfSeguidosMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void getFavoritos(com.chefencasa.model.RecetaProto.UsuarioId request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getGetFavoritosMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -432,51 +156,9 @@ public final class RecetasServiceGrpc {
 
     /**
      */
-    public com.chefencasa.model.RecetaProto.RecetaResponse addReceta(com.chefencasa.model.RecetaProto.Receta request) {
+    public com.chefencasa.model.RecetaProto.Receta addReceta(com.chefencasa.model.RecetaProto.Receta request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getAddRecetaMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
-    public com.chefencasa.model.RecetaProto.RecetasResponse getByFilter(com.chefencasa.model.RecetaProto.RecetaFiltro request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getGetByFilterMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
-    public com.chefencasa.model.RecetaProto.RecetasResponse getAllRecetas(com.chefencasa.model.RecetaProto.Empty request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getGetAllRecetasMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
-    public com.chefencasa.model.RecetaProto.RecetasResponse getAllRecetasByUser(com.chefencasa.model.RecetaProto.UsuarioId request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getGetAllRecetasByUserMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
-    public com.chefencasa.model.RecetaProto.RecetaResponse updateReceta(com.chefencasa.model.RecetaProto.UpdateRecetaRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getUpdateRecetaMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
-    public com.chefencasa.model.RecetaProto.RecetasResponse getRecetasOfSeguidos(com.chefencasa.model.RecetaProto.UsuarioId request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getGetRecetasOfSeguidosMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
-    public com.chefencasa.model.RecetaProto.RecetasResponse getFavoritos(com.chefencasa.model.RecetaProto.UsuarioId request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getGetFavoritosMethod(), getCallOptions(), request);
     }
   }
 
@@ -498,68 +180,14 @@ public final class RecetasServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.RecetaProto.RecetaResponse> addReceta(
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.RecetaProto.Receta> addReceta(
         com.chefencasa.model.RecetaProto.Receta request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getAddRecetaMethod(), getCallOptions()), request);
     }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.RecetaProto.RecetasResponse> getByFilter(
-        com.chefencasa.model.RecetaProto.RecetaFiltro request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getGetByFilterMethod(), getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.RecetaProto.RecetasResponse> getAllRecetas(
-        com.chefencasa.model.RecetaProto.Empty request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getGetAllRecetasMethod(), getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.RecetaProto.RecetasResponse> getAllRecetasByUser(
-        com.chefencasa.model.RecetaProto.UsuarioId request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getGetAllRecetasByUserMethod(), getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.RecetaProto.RecetaResponse> updateReceta(
-        com.chefencasa.model.RecetaProto.UpdateRecetaRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getUpdateRecetaMethod(), getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.RecetaProto.RecetasResponse> getRecetasOfSeguidos(
-        com.chefencasa.model.RecetaProto.UsuarioId request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getGetRecetasOfSeguidosMethod(), getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.RecetaProto.RecetasResponse> getFavoritos(
-        com.chefencasa.model.RecetaProto.UsuarioId request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getGetFavoritosMethod(), getCallOptions()), request);
-    }
   }
 
   private static final int METHODID_ADD_RECETA = 0;
-  private static final int METHODID_GET_BY_FILTER = 1;
-  private static final int METHODID_GET_ALL_RECETAS = 2;
-  private static final int METHODID_GET_ALL_RECETAS_BY_USER = 3;
-  private static final int METHODID_UPDATE_RECETA = 4;
-  private static final int METHODID_GET_RECETAS_OF_SEGUIDOS = 5;
-  private static final int METHODID_GET_FAVORITOS = 6;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -580,31 +208,7 @@ public final class RecetasServiceGrpc {
       switch (methodId) {
         case METHODID_ADD_RECETA:
           serviceImpl.addReceta((com.chefencasa.model.RecetaProto.Receta) request,
-              (io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetaResponse>) responseObserver);
-          break;
-        case METHODID_GET_BY_FILTER:
-          serviceImpl.getByFilter((com.chefencasa.model.RecetaProto.RecetaFiltro) request,
-              (io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse>) responseObserver);
-          break;
-        case METHODID_GET_ALL_RECETAS:
-          serviceImpl.getAllRecetas((com.chefencasa.model.RecetaProto.Empty) request,
-              (io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse>) responseObserver);
-          break;
-        case METHODID_GET_ALL_RECETAS_BY_USER:
-          serviceImpl.getAllRecetasByUser((com.chefencasa.model.RecetaProto.UsuarioId) request,
-              (io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse>) responseObserver);
-          break;
-        case METHODID_UPDATE_RECETA:
-          serviceImpl.updateReceta((com.chefencasa.model.RecetaProto.UpdateRecetaRequest) request,
-              (io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetaResponse>) responseObserver);
-          break;
-        case METHODID_GET_RECETAS_OF_SEGUIDOS:
-          serviceImpl.getRecetasOfSeguidos((com.chefencasa.model.RecetaProto.UsuarioId) request,
-              (io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse>) responseObserver);
-          break;
-        case METHODID_GET_FAVORITOS:
-          serviceImpl.getFavoritos((com.chefencasa.model.RecetaProto.UsuarioId) request,
-              (io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.RecetasResponse>) responseObserver);
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Receta>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -629,50 +233,8 @@ public final class RecetasServiceGrpc {
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
               com.chefencasa.model.RecetaProto.Receta,
-              com.chefencasa.model.RecetaProto.RecetaResponse>(
+              com.chefencasa.model.RecetaProto.Receta>(
                 service, METHODID_ADD_RECETA)))
-        .addMethod(
-          getGetByFilterMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
-            new MethodHandlers<
-              com.chefencasa.model.RecetaProto.RecetaFiltro,
-              com.chefencasa.model.RecetaProto.RecetasResponse>(
-                service, METHODID_GET_BY_FILTER)))
-        .addMethod(
-          getGetAllRecetasMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
-            new MethodHandlers<
-              com.chefencasa.model.RecetaProto.Empty,
-              com.chefencasa.model.RecetaProto.RecetasResponse>(
-                service, METHODID_GET_ALL_RECETAS)))
-        .addMethod(
-          getGetAllRecetasByUserMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
-            new MethodHandlers<
-              com.chefencasa.model.RecetaProto.UsuarioId,
-              com.chefencasa.model.RecetaProto.RecetasResponse>(
-                service, METHODID_GET_ALL_RECETAS_BY_USER)))
-        .addMethod(
-          getUpdateRecetaMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
-            new MethodHandlers<
-              com.chefencasa.model.RecetaProto.UpdateRecetaRequest,
-              com.chefencasa.model.RecetaProto.RecetaResponse>(
-                service, METHODID_UPDATE_RECETA)))
-        .addMethod(
-          getGetRecetasOfSeguidosMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
-            new MethodHandlers<
-              com.chefencasa.model.RecetaProto.UsuarioId,
-              com.chefencasa.model.RecetaProto.RecetasResponse>(
-                service, METHODID_GET_RECETAS_OF_SEGUIDOS)))
-        .addMethod(
-          getGetFavoritosMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
-            new MethodHandlers<
-              com.chefencasa.model.RecetaProto.UsuarioId,
-              com.chefencasa.model.RecetaProto.RecetasResponse>(
-                service, METHODID_GET_FAVORITOS)))
         .build();
   }
 
@@ -722,12 +284,6 @@ public final class RecetasServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new RecetasServiceFileDescriptorSupplier())
               .addMethod(getAddRecetaMethod())
-              .addMethod(getGetByFilterMethod())
-              .addMethod(getGetAllRecetasMethod())
-              .addMethod(getGetAllRecetasByUserMethod())
-              .addMethod(getUpdateRecetaMethod())
-              .addMethod(getGetRecetasOfSeguidosMethod())
-              .addMethod(getGetFavoritosMethod())
               .build();
         }
       }

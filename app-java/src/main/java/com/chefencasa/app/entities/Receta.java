@@ -3,6 +3,8 @@ package com.chefencasa.app.entities;
 import java.io.Serializable;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -17,6 +19,8 @@ import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -42,7 +46,7 @@ public class Receta implements Serializable {
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "recetas")
-	private Set<Ingrediente> ingredientes;
+	private Set<Ingrediente> ingredientes= new HashSet<Ingrediente>();
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "categoria_id", nullable = false)
@@ -62,7 +66,8 @@ public class Receta implements Serializable {
 	@Column(name = "tiempoPreparacion", nullable = false)
 	private int tiempoPreparacion;
 
-	@Column(name = "fechaCreacion", nullable = false)
+	@Column(name = "fechaCreacion", updatable = false)
+	@CreationTimestamp
 	private LocalDateTime fechaCreacion;
 
 	@Column(name = "foto1", nullable = true)
@@ -80,50 +85,17 @@ public class Receta implements Serializable {
 	@Column(name = "foto5", nullable = true)
 	private String foto5;
 
-	public Receta(int id, String tituloReceta, String descripcion, String pasos, int tiempoPreparacion, String foto1,
-			String foto2, String foto3, String foto4, String foto5) {
-
-		this.id = id;
-		this.tituloReceta = tituloReceta;
-		this.descripcion = descripcion;
-		this.pasos = pasos;
-		this.tiempoPreparacion = tiempoPreparacion;
-		this.fechaCreacion = fechaCreacion;
-		this.foto1 = foto1;
-		this.foto2 = foto2;
-		this.foto3 = foto3;
-		this.foto4 = foto4;
-		this.foto5 = foto5;
-	}
-
-	public Receta(User usuario, Set<Ingrediente> ingredientes, Categoria categoria, String tituloReceta, String descripcion, String pasos, int tiempoPreparacion, LocalDateTime fechaCreacion, String foto1,
-			String foto2, String foto3, String foto4, String foto5) {
-
-		this.user = usuario;
-		this.setIngredientes(ingredientes);
-		this.categoria = categoria;
-		this.tituloReceta = tituloReceta;
-		this.descripcion = descripcion;
-		this.pasos = pasos;
-		this.tiempoPreparacion = tiempoPreparacion;
-		this.fechaCreacion = fechaCreacion;
-		this.foto1 = foto1;
-		this.foto2 = foto2;
-		this.foto3 = foto3;
-		this.foto4 = foto4;
-		this.foto5 = foto5;
-	}
 	
-	public Receta(User usuario, Categoria categoria, String tituloReceta, String descripcion, String pasos, int tiempoPreparacion, LocalDateTime fechaCreacion, String foto1,
-			String foto2, String foto3, String foto4, String foto5) {
-
-		this.user = usuario;
+	
+	public Receta(User user, Categoria categoria,
+			String tituloReceta, String descripcion, String pasos, int tiempoPreparacion,
+			String foto1, String foto2, String foto3, String foto4, String foto5) {
+		this.user = user;
 		this.categoria = categoria;
 		this.tituloReceta = tituloReceta;
 		this.descripcion = descripcion;
 		this.pasos = pasos;
 		this.tiempoPreparacion = tiempoPreparacion;
-		this.fechaCreacion = fechaCreacion;
 		this.foto1 = foto1;
 		this.foto2 = foto2;
 		this.foto3 = foto3;

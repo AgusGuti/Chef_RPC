@@ -79,6 +79,11 @@ public class Ingrediente implements Serializable {
 
 
 
+    public Ingrediente(String ingrediente2) {
+    }
+
+
+
 	
 	
 	
