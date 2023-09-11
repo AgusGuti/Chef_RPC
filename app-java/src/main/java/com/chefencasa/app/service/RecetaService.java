@@ -15,12 +15,13 @@ import com.chefencasa.app.entities.Receta;
 import com.chefencasa.app.repository.CategoriaRepository;
 import com.chefencasa.app.repository.RecetaRepository;
 import com.chefencasa.app.repository.UserRepository;
+import com.chefencasa.model.AccountProto;
+import com.chefencasa.model.AccountProto.Account;
 import com.chefencasa.model.CategoriaProto;
 import com.chefencasa.model.IngredienteProto;
 import com.chefencasa.model.RecetaProto;
 import com.chefencasa.model.RecetasServiceGrpc;
-
-
+import com.google.protobuf.Empty;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -80,6 +81,34 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 			responseObserver.onNext(r);
 			responseObserver.onCompleted();
 	}
+
+	public void findAll(Empty request, StreamObserver<RecetaProto.Recetas> responseObserver) {
+    List<RecetaProto.Receta> recetadb = new ArrayList<>();
+    for (Receta receta : recetaRepository.findAll()) {
+        RecetaProto.Receta recetaProto = RecetaProto.Receta.newBuilder()
+            .setCategoria(CategoriaProto.Categoria.newBuilder()
+                .setCategoria(receta.getCategoria().getCategoria())
+                .build())
+            .setDescripcion(receta.getDescripcion())
+            .setIdReceta(receta.getId())
+            .setTituloReceta(receta.getTituloReceta())
+            .setPasos(receta.getPasos())
+            .setTiempoPreparacion(receta.getTiempoPreparacion())
+            .setFoto1(receta.getFoto1())
+            .setFoto2(receta.getFoto2())
+            .setFoto3(receta.getFoto3())
+            .setFoto4(receta.getFoto4())
+            .setFoto5(receta.getFoto5())
+            .build();
+
+        recetadb.add(recetaProto);
+    }
+
+    RecetaProto.Recetas a = RecetaProto.Recetas.newBuilder()
+        .addAllReceta(recetadb)
+        .build();
+    responseObserver.onNext(a);
+    responseObserver.onCompleted();
 	}
 
-	
+}

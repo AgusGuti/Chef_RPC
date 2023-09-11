@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect
+from flask import Flask, render_template, request, flash, redirect,json
 from . import receta_blueprint 
 
 from google.protobuf.json_format import MessageToJson
@@ -24,7 +24,11 @@ logger = logging.getLogger(__name__)
 @receta_blueprint.route("/recetas",methods = ['GET'])
 def recetas():
     logger.info("/recetas")
-    return render_template('abm-receta.html')
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = RecetasServiceStub(channel)
+        response = stub.FindAll(Receta())
+        recetas = response.receta
+    return render_template('abm-receta.html', recetas=recetas)
 
 
 @receta_blueprint.route("/index",methods = ['GET'])
@@ -53,5 +57,15 @@ def altaReceta():
         flash('Error al intentar cargar la receta','danger')
         return redirect('/altaReceta')
     else:
-        flash('Receta creada exitosamente!')
+        flash('Receta creada exitosamente!','success')
         return redirect('/altaReceta')
+
+
+@receta_blueprint.route("/findAll",methods = ['GET'])
+def findAll():
+    logger.info("/findAll")
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = RecetasServiceStub(channel)
+        response = stub.FindAll(Receta()) 
+    print("Greeter client received: " + str(response))    
+    return MessageToJson(response)

@@ -46,6 +46,37 @@ public final class RecetasServiceGrpc {
     return getAddRecetaMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      com.chefencasa.model.RecetaProto.Recetas> getFindAllMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "FindAll",
+      requestType = com.google.protobuf.Empty.class,
+      responseType = com.chefencasa.model.RecetaProto.Recetas.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      com.chefencasa.model.RecetaProto.Recetas> getFindAllMethod() {
+    io.grpc.MethodDescriptor<com.google.protobuf.Empty, com.chefencasa.model.RecetaProto.Recetas> getFindAllMethod;
+    if ((getFindAllMethod = RecetasServiceGrpc.getFindAllMethod) == null) {
+      synchronized (RecetasServiceGrpc.class) {
+        if ((getFindAllMethod = RecetasServiceGrpc.getFindAllMethod) == null) {
+          RecetasServiceGrpc.getFindAllMethod = getFindAllMethod =
+              io.grpc.MethodDescriptor.<com.google.protobuf.Empty, com.chefencasa.model.RecetaProto.Recetas>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FindAll"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.RecetaProto.Recetas.getDefaultInstance()))
+              .setSchemaDescriptor(new RecetasServiceMethodDescriptorSupplier("FindAll"))
+              .build();
+        }
+      }
+    }
+    return getFindAllMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -100,6 +131,13 @@ public final class RecetasServiceGrpc {
         io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Receta> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddRecetaMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void findAll(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Recetas> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindAllMethod(), responseObserver);
+    }
   }
 
   /**
@@ -136,6 +174,14 @@ public final class RecetasServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getAddRecetaMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void findAll(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Recetas> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getFindAllMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -159,6 +205,13 @@ public final class RecetasServiceGrpc {
     public com.chefencasa.model.RecetaProto.Receta addReceta(com.chefencasa.model.RecetaProto.Receta request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getAddRecetaMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.RecetaProto.Recetas findAll(com.google.protobuf.Empty request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getFindAllMethod(), getCallOptions(), request);
     }
   }
 
@@ -185,9 +238,18 @@ public final class RecetasServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getAddRecetaMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.RecetaProto.Recetas> findAll(
+        com.google.protobuf.Empty request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getFindAllMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_ADD_RECETA = 0;
+  private static final int METHODID_FIND_ALL = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -209,6 +271,10 @@ public final class RecetasServiceGrpc {
         case METHODID_ADD_RECETA:
           serviceImpl.addReceta((com.chefencasa.model.RecetaProto.Receta) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Receta>) responseObserver);
+          break;
+        case METHODID_FIND_ALL:
+          serviceImpl.findAll((com.google.protobuf.Empty) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Recetas>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -235,6 +301,13 @@ public final class RecetasServiceGrpc {
               com.chefencasa.model.RecetaProto.Receta,
               com.chefencasa.model.RecetaProto.Receta>(
                 service, METHODID_ADD_RECETA)))
+        .addMethod(
+          getFindAllMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.google.protobuf.Empty,
+              com.chefencasa.model.RecetaProto.Recetas>(
+                service, METHODID_FIND_ALL)))
         .build();
   }
 
@@ -284,6 +357,7 @@ public final class RecetasServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new RecetasServiceFileDescriptorSupplier())
               .addMethod(getAddRecetaMethod())
+              .addMethod(getFindAllMethod())
               .build();
         }
       }

@@ -5334,10 +5334,11 @@ public final class RecetaProto {
       "d\022\021\n\tidUsuario\030\001 \001(\005\"y\n\014RecetaFiltro\022\021\n\t" +
       "categoria\030\001 \001(\t\022\016\n\006nombre\030\002 \001(\t\022\024\n\014ingre" +
       "dientes\030\003 \003(\t\022\027\n\017tiempoPrepDesde\030\004 \001(\005\022\027" +
-      "\n\017tiempoPrepHasta\030\005 \001(\0052=\n\016RecetasServic" +
+      "\n\017tiempoPrepHasta\030\005 \001(\0052r\n\016RecetasServic" +
       "e\022+\n\tAddReceta\022\r.model.Receta\032\r.model.Re" +
-      "ceta\"\000B#\n\024com.chefencasa.modelB\013RecetaPr" +
-      "otob\006proto3"
+      "ceta\"\000\0223\n\007FindAll\022\026.google.protobuf.Empt" +
+      "y\032\016.model.Recetas\"\000B#\n\024com.chefencasa.mo" +
+      "delB\013RecetaProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
