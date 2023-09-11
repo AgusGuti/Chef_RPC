@@ -2,12 +2,10 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from . import categoria_pb2 as categoria__pb2
 from . import ingrediente_pb2 as ingrediente__pb2
-from . import receta_pb2 as receta__pb2
 
 
-class RecetasServiceStub(object):
+class IngredientesServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -16,42 +14,42 @@ class RecetasServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.AddReceta = channel.unary_unary(
-                '/model.RecetasService/AddReceta',
-                request_serializer=receta__pb2.Receta.SerializeToString,
-                response_deserializer=receta__pb2.Receta.FromString,
+        self.TraerIngrediente = channel.unary_unary(
+                '/model.IngredientesService/TraerIngrediente',
+                request_serializer=ingrediente__pb2.Ingrediente.SerializeToString,
+                response_deserializer=ingrediente__pb2.Ingrediente.FromString,
                 )
 
 
-class RecetasServiceServicer(object):
+class IngredientesServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def AddReceta(self, request, context):
+    def TraerIngrediente(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_RecetasServiceServicer_to_server(servicer, server):
+def add_IngredientesServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'AddReceta': grpc.unary_unary_rpc_method_handler(
-                    servicer.AddReceta,
-                    request_deserializer=receta__pb2.Receta.FromString,
-                    response_serializer=receta__pb2.Receta.SerializeToString,
+            'TraerIngrediente': grpc.unary_unary_rpc_method_handler(
+                    servicer.TraerIngrediente,
+                    request_deserializer=ingrediente__pb2.Ingrediente.FromString,
+                    response_serializer=ingrediente__pb2.Ingrediente.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'model.RecetasService', rpc_method_handlers)
+            'model.IngredientesService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class RecetasService(object):
+class IngredientesService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def AddReceta(request,
+    def TraerIngrediente(request,
             target,
             options=(),
             channel_credentials=None,
@@ -61,8 +59,8 @@ class RecetasService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/model.RecetasService/AddReceta',
-            receta__pb2.Receta.SerializeToString,
-            receta__pb2.Receta.FromString,
+        return grpc.experimental.unary_unary(request, target, '/model.IngredientesService/TraerIngrediente',
+            ingrediente__pb2.Ingrediente.SerializeToString,
+            ingrediente__pb2.Ingrediente.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
