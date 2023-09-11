@@ -14,6 +14,8 @@ Clases creadas en capa servidor:
 
 ## SERVIDOR JAVA GRPC
 
+*IMPORTANTE* Agregar atributo "fotoPerfil" (nulleable porque no estaría en el formulario de registro, pero sí en el perfil principal) a user, nos re olvidamos. O no sé si es mucho quilombo una clase "Perfil" unida a "User" (relación un perfil por cada usuario) que tenga un nickname y una foto de perfil.
+
 ### Version JAVA:
 
 - JDK 17
