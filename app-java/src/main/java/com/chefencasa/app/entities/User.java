@@ -44,6 +44,26 @@ public class User implements Serializable {
 	@Column(name = "clave", nullable = false, length = 45)
 	private String clave;
 
+	@Column(name = "fotoPerfil", nullable = true, length = 255)
+	private String fotoPerfil;
+
+	public User(int id, String nombre, String apellido, String email, String clave, String fotoPerfil) {
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.clave = clave;
+		this.fotoPerfil = fotoPerfil;
+	}
+
+	public User(String nombre, String apellido, String email, String clave, String fotoPerfil) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.clave = clave;
+		this.fotoPerfil = fotoPerfil;
+	}
+
 	public User(String nombre, String apellido, String email, String clave) {
 		this.nombre = nombre;
 		this.apellido = apellido;
