@@ -29,6 +29,10 @@ def create_app(config_filename=None):
 def register_blueprints(app):
     from app.modulo.user import user_blueprint
     from app.modulo.receta import receta_blueprint
+    from app.modulo.ingrediente import ingrediente_blueprint
+    from app.modulo.categoria import categoria_blueprint
     app.register_blueprint(user_blueprint)
     app.register_blueprint(receta_blueprint)
+    app.register_blueprint(ingrediente_blueprint)
+    app.register_blueprint(categoria_blueprint)
     

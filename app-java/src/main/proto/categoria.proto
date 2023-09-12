@@ -10,6 +10,7 @@ import "google/protobuf/wrappers.proto";
 
 service CategoriasService {
   rpc TraerCategoria(Categoria) returns (Categoria) {}
+  rpc FindAll(google.protobuf.Empty) returns (Categorias) {}
 }
 
 message Categorias {

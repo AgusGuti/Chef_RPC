@@ -3,6 +3,7 @@
 import grpc
 
 from . import categoria_pb2 as categoria__pb2
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
 class CategoriasServiceStub(object):
@@ -19,12 +20,23 @@ class CategoriasServiceStub(object):
                 request_serializer=categoria__pb2.Categoria.SerializeToString,
                 response_deserializer=categoria__pb2.Categoria.FromString,
                 )
+        self.FindAll = channel.unary_unary(
+                '/model.CategoriasService/FindAll',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=categoria__pb2.Categorias.FromString,
+                )
 
 
 class CategoriasServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def TraerCategoria(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def FindAll(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +49,11 @@ def add_CategoriasServiceServicer_to_server(servicer, server):
                     servicer.TraerCategoria,
                     request_deserializer=categoria__pb2.Categoria.FromString,
                     response_serializer=categoria__pb2.Categoria.SerializeToString,
+            ),
+            'FindAll': grpc.unary_unary_rpc_method_handler(
+                    servicer.FindAll,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=categoria__pb2.Categorias.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,5 +79,22 @@ class CategoriasService(object):
         return grpc.experimental.unary_unary(request, target, '/model.CategoriasService/TraerCategoria',
             categoria__pb2.Categoria.SerializeToString,
             categoria__pb2.Categoria.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def FindAll(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.CategoriasService/FindAll',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            categoria__pb2.Categorias.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -1459,10 +1459,12 @@ public final class CategoriaProto {
       "f/empty.proto\032\036google/protobuf/wrappers." +
       "proto\"1\n\nCategorias\022#\n\tcategoria\030\001 \003(\0132\020" +
       ".model.Categoria\"*\n\tCategoria\022\n\n\002id\030\001 \001(" +
-      "\005\022\021\n\tcategoria\030\002 \001(\t2K\n\021CategoriasServic" +
-      "e\0226\n\016TraerCategoria\022\020.model.Categoria\032\020." +
-      "model.Categoria\"\000B&\n\024com.chefencasa.mode" +
-      "lB\016CategoriaProtob\006proto3"
+      "\005\022\021\n\tcategoria\030\002 \001(\t2\203\001\n\021CategoriasServi" +
+      "ce\0226\n\016TraerCategoria\022\020.model.Categoria\032\020" +
+      ".model.Categoria\"\000\0226\n\007FindAll\022\026.google.p" +
+      "rotobuf.Empty\032\021.model.Categorias\"\000B&\n\024co" +
+      "m.chefencasa.modelB\016CategoriaProtob\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

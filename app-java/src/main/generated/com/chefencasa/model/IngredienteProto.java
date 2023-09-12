@@ -1459,11 +1459,12 @@ public final class IngredienteProto {
       "buf/empty.proto\032\036google/protobuf/wrapper" +
       "s.proto\"7\n\014Ingredientes\022\'\n\013ingrediente\030\001" +
       " \003(\0132\022.model.Ingrediente\".\n\013Ingrediente\022" +
-      "\n\n\002id\030\001 \001(\005\022\023\n\013ingrediente\030\002 \001(\t2S\n\023Ingr" +
-      "edientesService\022<\n\020TraerIngrediente\022\022.mo" +
-      "del.Ingrediente\032\022.model.Ingrediente\"\000B(\n" +
-      "\024com.chefencasa.modelB\020IngredienteProtob" +
-      "\006proto3"
+      "\n\n\002id\030\001 \001(\005\022\023\n\013ingrediente\030\002 \001(\t2\215\001\n\023Ing" +
+      "redientesService\022<\n\020TraerIngrediente\022\022.m" +
+      "odel.Ingrediente\032\022.model.Ingrediente\"\000\0228" +
+      "\n\007FindAll\022\026.google.protobuf.Empty\032\023.mode" +
+      "l.Ingredientes\"\000B(\n\024com.chefencasa.model" +
+      "B\020IngredienteProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

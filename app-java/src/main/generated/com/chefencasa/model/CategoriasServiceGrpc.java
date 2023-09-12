@@ -46,6 +46,37 @@ public final class CategoriasServiceGrpc {
     return getTraerCategoriaMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      com.chefencasa.model.CategoriaProto.Categorias> getFindAllMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "FindAll",
+      requestType = com.google.protobuf.Empty.class,
+      responseType = com.chefencasa.model.CategoriaProto.Categorias.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      com.chefencasa.model.CategoriaProto.Categorias> getFindAllMethod() {
+    io.grpc.MethodDescriptor<com.google.protobuf.Empty, com.chefencasa.model.CategoriaProto.Categorias> getFindAllMethod;
+    if ((getFindAllMethod = CategoriasServiceGrpc.getFindAllMethod) == null) {
+      synchronized (CategoriasServiceGrpc.class) {
+        if ((getFindAllMethod = CategoriasServiceGrpc.getFindAllMethod) == null) {
+          CategoriasServiceGrpc.getFindAllMethod = getFindAllMethod =
+              io.grpc.MethodDescriptor.<com.google.protobuf.Empty, com.chefencasa.model.CategoriaProto.Categorias>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FindAll"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.CategoriaProto.Categorias.getDefaultInstance()))
+              .setSchemaDescriptor(new CategoriasServiceMethodDescriptorSupplier("FindAll"))
+              .build();
+        }
+      }
+    }
+    return getFindAllMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -100,6 +131,13 @@ public final class CategoriasServiceGrpc {
         io.grpc.stub.StreamObserver<com.chefencasa.model.CategoriaProto.Categoria> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getTraerCategoriaMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void findAll(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.CategoriaProto.Categorias> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindAllMethod(), responseObserver);
+    }
   }
 
   /**
@@ -136,6 +174,14 @@ public final class CategoriasServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getTraerCategoriaMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void findAll(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.CategoriaProto.Categorias> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getFindAllMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -159,6 +205,13 @@ public final class CategoriasServiceGrpc {
     public com.chefencasa.model.CategoriaProto.Categoria traerCategoria(com.chefencasa.model.CategoriaProto.Categoria request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getTraerCategoriaMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.CategoriaProto.Categorias findAll(com.google.protobuf.Empty request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getFindAllMethod(), getCallOptions(), request);
     }
   }
 
@@ -185,9 +238,18 @@ public final class CategoriasServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getTraerCategoriaMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.CategoriaProto.Categorias> findAll(
+        com.google.protobuf.Empty request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getFindAllMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_TRAER_CATEGORIA = 0;
+  private static final int METHODID_FIND_ALL = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -209,6 +271,10 @@ public final class CategoriasServiceGrpc {
         case METHODID_TRAER_CATEGORIA:
           serviceImpl.traerCategoria((com.chefencasa.model.CategoriaProto.Categoria) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.CategoriaProto.Categoria>) responseObserver);
+          break;
+        case METHODID_FIND_ALL:
+          serviceImpl.findAll((com.google.protobuf.Empty) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.CategoriaProto.Categorias>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -235,6 +301,13 @@ public final class CategoriasServiceGrpc {
               com.chefencasa.model.CategoriaProto.Categoria,
               com.chefencasa.model.CategoriaProto.Categoria>(
                 service, METHODID_TRAER_CATEGORIA)))
+        .addMethod(
+          getFindAllMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.google.protobuf.Empty,
+              com.chefencasa.model.CategoriaProto.Categorias>(
+                service, METHODID_FIND_ALL)))
         .build();
   }
 
@@ -284,6 +357,7 @@ public final class CategoriasServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new CategoriasServiceFileDescriptorSupplier())
               .addMethod(getTraerCategoriaMethod())
+              .addMethod(getFindAllMethod())
               .build();
         }
       }

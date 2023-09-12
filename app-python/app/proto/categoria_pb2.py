@@ -15,7 +15,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0f\x63\x61tegoria.proto\x12\x05model\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\"1\n\nCategorias\x12#\n\tcategoria\x18\x01 \x03(\x0b\x32\x10.model.Categoria\"*\n\tCategoria\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x11\n\tcategoria\x18\x02 \x01(\t2K\n\x11\x43\x61tegoriasService\x12\x36\n\x0eTraerCategoria\x12\x10.model.Categoria\x1a\x10.model.Categoria\"\x00\x42&\n\x14\x63om.chefencasa.modelB\x0e\x43\x61tegoriaProtob\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0f\x63\x61tegoria.proto\x12\x05model\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\"1\n\nCategorias\x12#\n\tcategoria\x18\x01 \x03(\x0b\x32\x10.model.Categoria\"*\n\tCategoria\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x11\n\tcategoria\x18\x02 \x01(\t2\x83\x01\n\x11\x43\x61tegoriasService\x12\x36\n\x0eTraerCategoria\x12\x10.model.Categoria\x1a\x10.model.Categoria\"\x00\x12\x36\n\x07\x46indAll\x12\x16.google.protobuf.Empty\x1a\x11.model.Categorias\"\x00\x42&\n\x14\x63om.chefencasa.modelB\x0e\x43\x61tegoriaProtob\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -28,6 +28,6 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_CATEGORIAS']._serialized_end=136
   _globals['_CATEGORIA']._serialized_start=138
   _globals['_CATEGORIA']._serialized_end=180
-  _globals['_CATEGORIASSERVICE']._serialized_start=182
-  _globals['_CATEGORIASSERVICE']._serialized_end=257
+  _globals['_CATEGORIASSERVICE']._serialized_start=183
+  _globals['_CATEGORIASSERVICE']._serialized_end=314
 # @@protoc_insertion_point(module_scope)

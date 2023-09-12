@@ -45,11 +45,12 @@ def nuevaReceta():
 @receta_blueprint.route("/altaReceta",methods = ['POST'])
 def altaReceta():
     logger.info("/altaReceta")
+    
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = RecetasServiceStub(channel)
-        response = stub.AddReceta(Receta(user=User(id=1),categoria=Categoria(id=1),tituloReceta=request.form["tituloReceta"],descripcion=request.form["descripcion"],pasos=request.form["pasos"],
-                                         tiempoPreparacion=int(request.form["tiempoPreparacion"]),foto1=request.form["foto1"],foto2=request.form["foto2"],
-                                         foto3=request.form["foto3"],foto4=request.form["foto4"],foto5=request.form["foto5"]))
+        response = stub.AddReceta(Receta(user=User(id=1),categoria=Categoria.request.form["categoria"],tituloReceta=request.form["tituloReceta"],descripcion=request.form["descripcion"],pasos=request.form["pasos"],
+                                        tiempoPreparacion=int(request.form["tiempoPreparacion"]),foto1=request.form["foto1"],foto2=request.form["foto2"],
+                                        foto3=request.form["foto3"],foto4=request.form["foto4"],foto5=request.form["foto5"]))
     print("Greeter client received: " + str(response))    
     receta={"receta":MessageToJson(response)}
     logger.info("receta registrada %s",receta)
@@ -59,7 +60,6 @@ def altaReceta():
     else:
         flash('Receta creada exitosamente!','success')
         return redirect('/altaReceta')
-
 
 @receta_blueprint.route("/findAll",methods = ['GET'])
 def findAll():

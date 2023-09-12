@@ -2,6 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from . import ingrediente_pb2 as ingrediente__pb2
 
 
@@ -19,12 +20,23 @@ class IngredientesServiceStub(object):
                 request_serializer=ingrediente__pb2.Ingrediente.SerializeToString,
                 response_deserializer=ingrediente__pb2.Ingrediente.FromString,
                 )
+        self.FindAll = channel.unary_unary(
+                '/model.IngredientesService/FindAll',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=ingrediente__pb2.Ingredientes.FromString,
+                )
 
 
 class IngredientesServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def TraerIngrediente(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def FindAll(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +49,11 @@ def add_IngredientesServiceServicer_to_server(servicer, server):
                     servicer.TraerIngrediente,
                     request_deserializer=ingrediente__pb2.Ingrediente.FromString,
                     response_serializer=ingrediente__pb2.Ingrediente.SerializeToString,
+            ),
+            'FindAll': grpc.unary_unary_rpc_method_handler(
+                    servicer.FindAll,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=ingrediente__pb2.Ingredientes.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,5 +79,22 @@ class IngredientesService(object):
         return grpc.experimental.unary_unary(request, target, '/model.IngredientesService/TraerIngrediente',
             ingrediente__pb2.Ingrediente.SerializeToString,
             ingrediente__pb2.Ingrediente.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def FindAll(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.IngredientesService/FindAll',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ingrediente__pb2.Ingredientes.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

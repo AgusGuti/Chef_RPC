@@ -46,6 +46,37 @@ public final class IngredientesServiceGrpc {
     return getTraerIngredienteMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      com.chefencasa.model.IngredienteProto.Ingredientes> getFindAllMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "FindAll",
+      requestType = com.google.protobuf.Empty.class,
+      responseType = com.chefencasa.model.IngredienteProto.Ingredientes.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      com.chefencasa.model.IngredienteProto.Ingredientes> getFindAllMethod() {
+    io.grpc.MethodDescriptor<com.google.protobuf.Empty, com.chefencasa.model.IngredienteProto.Ingredientes> getFindAllMethod;
+    if ((getFindAllMethod = IngredientesServiceGrpc.getFindAllMethod) == null) {
+      synchronized (IngredientesServiceGrpc.class) {
+        if ((getFindAllMethod = IngredientesServiceGrpc.getFindAllMethod) == null) {
+          IngredientesServiceGrpc.getFindAllMethod = getFindAllMethod =
+              io.grpc.MethodDescriptor.<com.google.protobuf.Empty, com.chefencasa.model.IngredienteProto.Ingredientes>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FindAll"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.IngredienteProto.Ingredientes.getDefaultInstance()))
+              .setSchemaDescriptor(new IngredientesServiceMethodDescriptorSupplier("FindAll"))
+              .build();
+        }
+      }
+    }
+    return getFindAllMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -100,6 +131,13 @@ public final class IngredientesServiceGrpc {
         io.grpc.stub.StreamObserver<com.chefencasa.model.IngredienteProto.Ingrediente> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getTraerIngredienteMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void findAll(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.IngredienteProto.Ingredientes> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindAllMethod(), responseObserver);
+    }
   }
 
   /**
@@ -136,6 +174,14 @@ public final class IngredientesServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getTraerIngredienteMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void findAll(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.IngredienteProto.Ingredientes> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getFindAllMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -159,6 +205,13 @@ public final class IngredientesServiceGrpc {
     public com.chefencasa.model.IngredienteProto.Ingrediente traerIngrediente(com.chefencasa.model.IngredienteProto.Ingrediente request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getTraerIngredienteMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.IngredienteProto.Ingredientes findAll(com.google.protobuf.Empty request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getFindAllMethod(), getCallOptions(), request);
     }
   }
 
@@ -185,9 +238,18 @@ public final class IngredientesServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getTraerIngredienteMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.IngredienteProto.Ingredientes> findAll(
+        com.google.protobuf.Empty request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getFindAllMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_TRAER_INGREDIENTE = 0;
+  private static final int METHODID_FIND_ALL = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -209,6 +271,10 @@ public final class IngredientesServiceGrpc {
         case METHODID_TRAER_INGREDIENTE:
           serviceImpl.traerIngrediente((com.chefencasa.model.IngredienteProto.Ingrediente) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.IngredienteProto.Ingrediente>) responseObserver);
+          break;
+        case METHODID_FIND_ALL:
+          serviceImpl.findAll((com.google.protobuf.Empty) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.IngredienteProto.Ingredientes>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -235,6 +301,13 @@ public final class IngredientesServiceGrpc {
               com.chefencasa.model.IngredienteProto.Ingrediente,
               com.chefencasa.model.IngredienteProto.Ingrediente>(
                 service, METHODID_TRAER_INGREDIENTE)))
+        .addMethod(
+          getFindAllMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.google.protobuf.Empty,
+              com.chefencasa.model.IngredienteProto.Ingredientes>(
+                service, METHODID_FIND_ALL)))
         .build();
   }
 
@@ -284,6 +357,7 @@ public final class IngredientesServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new IngredientesServiceFileDescriptorSupplier())
               .addMethod(getTraerIngredienteMethod())
+              .addMethod(getFindAllMethod())
               .build();
         }
       }
