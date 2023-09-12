@@ -59,7 +59,7 @@ def altaReceta():
         return redirect('/altaReceta')
     else:
         flash('Receta creada exitosamente!','success')
-        return redirect('/altaReceta')
+        return redirect('/recetas')
 
 @receta_blueprint.route("/findAll",methods = ['GET'])
 def findAll():
