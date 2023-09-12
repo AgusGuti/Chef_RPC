@@ -13,6 +13,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 @categoria_blueprint.route("/categoria/<int:id>", methods=["GET", "POST"])
 def categoriaById(id):
     logger.info("/categoriaById &s"+str(id))
