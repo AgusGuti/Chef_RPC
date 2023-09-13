@@ -54,6 +54,15 @@ def myprofile():
     logger.info("/myprofile")
     return render_template('myprofile.html')
 
+@user_blueprint.route("/seguidos",methods = ['GET'])
+def seguidos():
+    logger.info("/seguidos")
+    return render_template('seguidos.html')
+
+@user_blueprint.route("/seguidores",methods = ['GET'])
+def seguidores():
+    logger.info("/seguidores")
+    return render_template('seguidores.html')
 
 @user_blueprint.route("/logout",methods = ['GET'])
 def logout():
