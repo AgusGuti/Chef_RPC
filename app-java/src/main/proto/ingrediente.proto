@@ -19,5 +19,5 @@ message Ingredientes {
 
 message Ingrediente {
   int32 id = 1;
-  string ingrediente = 2;
+  string nombre = 2;
 }

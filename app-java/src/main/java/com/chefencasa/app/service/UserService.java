@@ -1,15 +1,17 @@
 package com.chefencasa.app.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-
 import com.chefencasa.app.entities.User;
 import com.chefencasa.app.repository.UserRepository;
 import com.chefencasa.model.UserProto;
 import com.chefencasa.model.UsersServiceGrpc;
+import com.google.protobuf.Empty;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -68,6 +70,37 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
         responseObserver.onNext(a);
         responseObserver.onCompleted();
         }
+    }
+
+    @Override
+    public void traerUser(UserProto.User request,StreamObserver<UserProto.User> responseObserver) {
+
+        User user =usuarioRepository.findById(request.getId());
+
+        UserProto.User a = UserProto.User.newBuilder()
+                    .setId(user.getId())
+                    .build();
+
+        responseObserver.onNext(a);
+        responseObserver.onCompleted();
+        
+    }
+
+   	@Override
+	public void findAll(Empty request, StreamObserver<UserProto.Users> responseObserver) {
+        List<UserProto.User> userdb = new ArrayList<>();
+        for (User user : usuarioRepository.findAll()) {
+            UserProto.User userProto = UserProto.User.newBuilder()
+                    .setId(user.getId())
+                    .build();
+            userdb.add(userProto);
+        }
+
+        UserProto.Users a = UserProto.Users.newBuilder()
+            .addAllUser(userdb)
+            .build();
+        responseObserver.onNext(a);
+        responseObserver.onCompleted();
     }
     
 }

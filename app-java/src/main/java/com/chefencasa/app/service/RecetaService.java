@@ -6,17 +6,25 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
+import javax.transaction.Transactional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.chefencasa.app.entities.Ingrediente;
 import com.chefencasa.app.entities.Receta;
+import com.chefencasa.app.entities.User;
+import com.chefencasa.app.entities.Categoria;
+import com.chefencasa.app.entities.Ingrediente;
 import com.chefencasa.app.repository.CategoriaRepository;
+import com.chefencasa.app.repository.IngredienteRepository;
 import com.chefencasa.app.repository.RecetaRepository;
 import com.chefencasa.app.repository.UserRepository;
-import com.chefencasa.model.AccountProto;
-import com.chefencasa.model.AccountProto.Account;
 import com.chefencasa.model.CategoriaProto;
 import com.chefencasa.model.IngredienteProto;
 import com.chefencasa.model.RecetaProto;
@@ -41,45 +49,59 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
 
+	@Autowired
+	@Qualifier("ingredienteRepository")
+	private IngredienteRepository ingredienteRepository;
 
-	@Override
+	Logger logger = LoggerFactory.getLogger(RecetaService.class);
+
+    @Transactional
 	public void addReceta(RecetaProto.Receta request, StreamObserver<RecetaProto.Receta> responseObserver) {
+		 
+		try {
+
+			Receta receta = new Receta(userRepository.findById(request.getUser().getId()),
+            categoriaRepository.findById(request.getCategoria().getId()).get(),
+            request.getTituloReceta(),
+            request.getDescripcion(),
+            request.getPasos(),
+            request.getTiempoPreparacion(),
+            request.getFoto1(),
+            request.getFoto2(),
+            request.getFoto3(),
+            request.getFoto4(),
+            request.getFoto5()
+			);
+			for (IngredienteProto.Ingrediente ingrediente :request.getIngredientesList())
+				receta.getIngredientes().add(ingredienteRepository.findById(ingrediente.getId()));
+
+			recetaRepository.saveAndFlush(receta);
+
+		} catch (Exception e) {
+			System.err.println("Error al agregar la receta: " + e.getMessage());
 
 			try {
-			recetaRepository.save(new Receta(userRepository.findById(request.getUser().getId()),
-			        categoriaRepository.findById(request.getCategoria().getId()).get(),
-					request.getTituloReceta(),
-					request.getDescripcion(),
-					request.getPasos(),
-					request.getTiempoPreparacion(),
-					request.getFoto1(),
-					request.getFoto2(),
-					request.getFoto3(),
-					request.getFoto4(),
-					request.getFoto5()));
-				} catch (Exception e) {
-					try {
-					   throw new Exception("No se pudo completar la operación,error al ingresar los datos o la receta ya existe");
-
+                throw new Exception("No se pudo completar la operación,error al ingresar los datos o el usuario ya existe");
             } catch (Exception e1) {
                 // TODO Auto-generated catch block
-                e1.printStackTrace();             
-			}
+                e1.printStackTrace();
+            }
 		}
-			RecetaProto.Receta r= RecetaProto.Receta.newBuilder()
-			.setCategoria(CategoriaProto.Categoria.newBuilder().setCategoria(request.getCategoria().getCategoria()).build())
-			.setTituloReceta(request.getTituloReceta())
-			.setDescripcion(request.getDescripcion())
-			.setPasos(request.getPasos())
-			.setTiempoPreparacion(request.getTiempoPreparacion())
-			.setFoto1(request.getFoto1())
-			.setFoto2(request.getFoto2())
-			.setFoto3(request.getFoto3())
-			.setFoto4(request.getFoto4())
-			.setFoto5(request.getFoto5())
-			.build();
-			responseObserver.onNext(r);
-			responseObserver.onCompleted();
+
+		RecetaProto.Receta r= RecetaProto.Receta.newBuilder()
+		.setCategoria(CategoriaProto.Categoria.newBuilder().setCategoria(request.getCategoria().getCategoria()).build())
+		.setTituloReceta(request.getTituloReceta())
+		.setDescripcion(request.getDescripcion())
+		.setPasos(request.getPasos())
+		.setTiempoPreparacion(request.getTiempoPreparacion())
+		.setFoto1(request.getFoto1())
+		.setFoto2(request.getFoto2())
+		.setFoto3(request.getFoto3())
+		.setFoto4(request.getFoto4())
+		.setFoto5(request.getFoto5())
+		.build();
+		responseObserver.onNext(r);
+		responseObserver.onCompleted();
 	}
 
 	public void findAll(Empty request, StreamObserver<RecetaProto.Recetas> responseObserver) {
@@ -110,5 +132,7 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
     responseObserver.onNext(a);
     responseObserver.onCompleted();
 	}
+
+
 
 }

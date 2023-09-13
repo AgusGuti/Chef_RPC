@@ -813,16 +813,16 @@ public final class IngredienteProto {
     int getId();
 
     /**
-     * <code>string ingrediente = 2;</code>
-     * @return The ingrediente.
+     * <code>string nombre = 2;</code>
+     * @return The nombre.
      */
-    java.lang.String getIngrediente();
+    java.lang.String getNombre();
     /**
-     * <code>string ingrediente = 2;</code>
-     * @return The bytes for ingrediente.
+     * <code>string nombre = 2;</code>
+     * @return The bytes for nombre.
      */
     com.google.protobuf.ByteString
-        getIngredienteBytes();
+        getNombreBytes();
   }
   /**
    * Protobuf type {@code model.Ingrediente}
@@ -837,7 +837,7 @@ public final class IngredienteProto {
       super(builder);
     }
     private Ingrediente() {
-      ingrediente_ = "";
+      nombre_ = "";
     }
 
     @java.lang.Override
@@ -878,7 +878,7 @@ public final class IngredienteProto {
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              ingrediente_ = s;
+              nombre_ = s;
               break;
             }
             default: {
@@ -923,36 +923,36 @@ public final class IngredienteProto {
       return id_;
     }
 
-    public static final int INGREDIENTE_FIELD_NUMBER = 2;
-    private volatile java.lang.Object ingrediente_;
+    public static final int NOMBRE_FIELD_NUMBER = 2;
+    private volatile java.lang.Object nombre_;
     /**
-     * <code>string ingrediente = 2;</code>
-     * @return The ingrediente.
+     * <code>string nombre = 2;</code>
+     * @return The nombre.
      */
-    public java.lang.String getIngrediente() {
-      java.lang.Object ref = ingrediente_;
+    public java.lang.String getNombre() {
+      java.lang.Object ref = nombre_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        ingrediente_ = s;
+        nombre_ = s;
         return s;
       }
     }
     /**
-     * <code>string ingrediente = 2;</code>
-     * @return The bytes for ingrediente.
+     * <code>string nombre = 2;</code>
+     * @return The bytes for nombre.
      */
     public com.google.protobuf.ByteString
-        getIngredienteBytes() {
-      java.lang.Object ref = ingrediente_;
+        getNombreBytes() {
+      java.lang.Object ref = nombre_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        ingrediente_ = b;
+        nombre_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -976,8 +976,8 @@ public final class IngredienteProto {
       if (id_ != 0) {
         output.writeInt32(1, id_);
       }
-      if (!getIngredienteBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ingrediente_);
+      if (!getNombreBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nombre_);
       }
       unknownFields.writeTo(output);
     }
@@ -992,8 +992,8 @@ public final class IngredienteProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, id_);
       }
-      if (!getIngredienteBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, ingrediente_);
+      if (!getNombreBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nombre_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1012,8 +1012,8 @@ public final class IngredienteProto {
 
       if (getId()
           != other.getId()) return false;
-      if (!getIngrediente()
-          .equals(other.getIngrediente())) return false;
+      if (!getNombre()
+          .equals(other.getNombre())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1027,8 +1027,8 @@ public final class IngredienteProto {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId();
-      hash = (37 * hash) + INGREDIENTE_FIELD_NUMBER;
-      hash = (53 * hash) + getIngrediente().hashCode();
+      hash = (37 * hash) + NOMBRE_FIELD_NUMBER;
+      hash = (53 * hash) + getNombre().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1164,7 +1164,7 @@ public final class IngredienteProto {
         super.clear();
         id_ = 0;
 
-        ingrediente_ = "";
+        nombre_ = "";
 
         return this;
       }
@@ -1193,7 +1193,7 @@ public final class IngredienteProto {
       public com.chefencasa.model.IngredienteProto.Ingrediente buildPartial() {
         com.chefencasa.model.IngredienteProto.Ingrediente result = new com.chefencasa.model.IngredienteProto.Ingrediente(this);
         result.id_ = id_;
-        result.ingrediente_ = ingrediente_;
+        result.nombre_ = nombre_;
         onBuilt();
         return result;
       }
@@ -1245,8 +1245,8 @@ public final class IngredienteProto {
         if (other.getId() != 0) {
           setId(other.getId());
         }
-        if (!other.getIngrediente().isEmpty()) {
-          ingrediente_ = other.ingrediente_;
+        if (!other.getNombre().isEmpty()) {
+          nombre_ = other.nombre_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -1308,78 +1308,78 @@ public final class IngredienteProto {
         return this;
       }
 
-      private java.lang.Object ingrediente_ = "";
+      private java.lang.Object nombre_ = "";
       /**
-       * <code>string ingrediente = 2;</code>
-       * @return The ingrediente.
+       * <code>string nombre = 2;</code>
+       * @return The nombre.
        */
-      public java.lang.String getIngrediente() {
-        java.lang.Object ref = ingrediente_;
+      public java.lang.String getNombre() {
+        java.lang.Object ref = nombre_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          ingrediente_ = s;
+          nombre_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string ingrediente = 2;</code>
-       * @return The bytes for ingrediente.
+       * <code>string nombre = 2;</code>
+       * @return The bytes for nombre.
        */
       public com.google.protobuf.ByteString
-          getIngredienteBytes() {
-        java.lang.Object ref = ingrediente_;
+          getNombreBytes() {
+        java.lang.Object ref = nombre_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          ingrediente_ = b;
+          nombre_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string ingrediente = 2;</code>
-       * @param value The ingrediente to set.
+       * <code>string nombre = 2;</code>
+       * @param value The nombre to set.
        * @return This builder for chaining.
        */
-      public Builder setIngrediente(
+      public Builder setNombre(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        ingrediente_ = value;
+        nombre_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string ingrediente = 2;</code>
+       * <code>string nombre = 2;</code>
        * @return This builder for chaining.
        */
-      public Builder clearIngrediente() {
+      public Builder clearNombre() {
         
-        ingrediente_ = getDefaultInstance().getIngrediente();
+        nombre_ = getDefaultInstance().getNombre();
         onChanged();
         return this;
       }
       /**
-       * <code>string ingrediente = 2;</code>
-       * @param value The bytes for ingrediente to set.
+       * <code>string nombre = 2;</code>
+       * @param value The bytes for nombre to set.
        * @return This builder for chaining.
        */
-      public Builder setIngredienteBytes(
+      public Builder setNombreBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        ingrediente_ = value;
+        nombre_ = value;
         onChanged();
         return this;
       }
@@ -1458,13 +1458,13 @@ public final class IngredienteProto {
       "\n\021ingrediente.proto\022\005model\032\033google/proto" +
       "buf/empty.proto\032\036google/protobuf/wrapper" +
       "s.proto\"7\n\014Ingredientes\022\'\n\013ingrediente\030\001" +
-      " \003(\0132\022.model.Ingrediente\".\n\013Ingrediente\022" +
-      "\n\n\002id\030\001 \001(\005\022\023\n\013ingrediente\030\002 \001(\t2\215\001\n\023Ing" +
-      "redientesService\022<\n\020TraerIngrediente\022\022.m" +
-      "odel.Ingrediente\032\022.model.Ingrediente\"\000\0228" +
-      "\n\007FindAll\022\026.google.protobuf.Empty\032\023.mode" +
-      "l.Ingredientes\"\000B(\n\024com.chefencasa.model" +
-      "B\020IngredienteProtob\006proto3"
+      " \003(\0132\022.model.Ingrediente\")\n\013Ingrediente\022" +
+      "\n\n\002id\030\001 \001(\005\022\016\n\006nombre\030\002 \001(\t2\215\001\n\023Ingredie" +
+      "ntesService\022<\n\020TraerIngrediente\022\022.model." +
+      "Ingrediente\032\022.model.Ingrediente\"\000\0228\n\007Fin" +
+      "dAll\022\026.google.protobuf.Empty\032\023.model.Ing" +
+      "redientes\"\000B(\n\024com.chefencasa.modelB\020Ing" +
+      "redienteProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1483,7 +1483,7 @@ public final class IngredienteProto {
     internal_static_model_Ingrediente_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_Ingrediente_descriptor,
-        new java.lang.String[] { "Id", "Ingrediente", });
+        new java.lang.String[] { "Id", "Nombre", });
     com.google.protobuf.EmptyProto.getDescriptor();
     com.google.protobuf.WrappersProto.getDescriptor();
   }

@@ -1904,10 +1904,13 @@ public final class UserProto {
       "\"\"\n\005Users\022\031\n\004user\030\001 \003(\0132\013.model.User\"R\n\004" +
       "User\022\n\n\002id\030\001 \001(\005\022\016\n\006nombre\030\002 \001(\t\022\020\n\010apel" +
       "lido\030\003 \001(\t\022\r\n\005email\030\004 \001(\t\022\r\n\005clave\030\005 \001(\t" +
-      "2h\n\014UsersService\022%\n\007AddUser\022\013.model.User" +
-      "\032\013.model.User\"\000\0221\n\023ValidarCredenciales\022\013" +
-      ".model.User\032\013.model.User\"\000B!\n\024com.chefen" +
-      "casa.modelB\tUserProtob\006proto3"
+      "2\304\001\n\014UsersService\022%\n\007AddUser\022\013.model.Use" +
+      "r\032\013.model.User\"\000\0221\n\023ValidarCredenciales\022" +
+      "\013.model.User\032\013.model.User\"\000\022\'\n\tTraerUser" +
+      "\022\013.model.User\032\013.model.User\"\000\0221\n\007FindAll\022" +
+      "\026.google.protobuf.Empty\032\014.model.Users\"\000B" +
+      "!\n\024com.chefencasa.modelB\tUserProtob\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

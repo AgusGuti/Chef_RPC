@@ -31,63 +31,18 @@ public class Ingrediente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	 @ManyToMany(cascade = {
-	            CascadeType.PERSIST,
-	            CascadeType.MERGE
-	    })
-	    @JoinTable(
-	            name = "ingrediente_receta",
-	            joinColumns = {@JoinColumn(name = "ingrediente_id")},
-	            inverseJoinColumns = {@JoinColumn(name = "receta_id")}
-	    )
-	    private Set<Receta> recetas  = new HashSet<Receta>();
 
+	@Column(name = "nombre", nullable = false)
+	private String nombre;
 
-	@Column(name = "ingrediente", nullable = false)
-	private String ingrediente;
-
-	public Ingrediente(int id, String ingrediente) {
+	public Ingrediente(int id, String nombre) {
 		
 		this.id = id;
-		this.ingrediente = ingrediente;
+		this.nombre = nombre;
 		
 	}
 	
-
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Ingrediente other = (Ingrediente) obj;
-		return id == other.id && Objects.equals(ingrediente, other.ingrediente)
-				&& Objects.equals(recetas, other.recetas);
-	}
-
-	public int hashCode() {
-		return Objects.hash(ingrediente);
-	}
-
-
-
-    public Ingrediente(String ingrediente2) {
-    }
-
-
-
-	
-	
-	
-
-
-    
 }

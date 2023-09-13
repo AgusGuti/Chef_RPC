@@ -12,6 +12,8 @@ import com.chefencasa.app.entities.Ingrediente;
 public interface IngredienteRepository extends JpaRepository<Ingrediente, Serializable> {
 	
 	@EntityGraph(attributePaths = "recetas")
-	public abstract Ingrediente findByIngrediente(String ingrediente);
+	public abstract Ingrediente findByNombre(String nombre);
+
+	public abstract Ingrediente findById(int id);
 
 }
