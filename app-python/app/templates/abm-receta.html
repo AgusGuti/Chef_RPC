@@ -49,10 +49,14 @@
     }
   </style>
 </head>
-<body onload="inicio()" class="h-100">
+
+
+<body onload="inicio();"  class="h-100">
   <script>
     function inicio() {
       categorias();
+      cargarIngredientes();
+      cargarUsuario();
     }
     //select Categoria
     function categorias() {
@@ -72,7 +76,63 @@
       }
       document.getElementById("categoria").innerHTML = out;
     }
+    // Cargar la lista de ingredientes al cargar la página
+    function cargarIngredientes() {
+      console.log("cargarIngredientes function called");
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/ingredientes", true);
+
+      // Define ingredientesSelect para seleccionar el elemento HTML
+      var ingredientesSelect = document.getElementById("ingredientes");
+
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var response = JSON.parse(xhr.responseText);
+              var ingredientes = response.ingrediente; // Accede a response.ingrediente
+
+              console.log("Respuesta del servidor:", ingredientes);
+
+              // Verifica si ingredientes es un array y luego itera sobre él
+              if (Array.isArray(ingredientes)) {
+                  ingredientes.forEach(function (ingrediente) {
+                      var option = document.createElement("option");
+                      option.value = ingrediente.id;
+                      option.text = ingrediente.nombre;
+                      ingredientesSelect.appendChild(option);
+                  });
+              } else {
+                  console.error("La respuesta del servidor no contiene una lista de ingredientes válida:", response);
+              }
+          }
+      };
+      xhr.send();
+    }
+
+    // Cargar el usuario desde el endpoint /user/<int:id>
+    function cargarUsuario() {
+      console.log("cargarUsuario function called");
+      var userId = "{{ usuario_id }}"; // Aquí obtén el ID del usuario de tu aplicación
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", `/user/${userId}`, true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var usuario = JSON.parse(xhr.responseText);
+          
+          // Aquí puedes utilizar la información del usuario para prellenar la base de datos
+          // por ejemplo, enviarla al servidor con el formulario de creación de recetas
+          document.getElementById("usuario_id").value = usuario.id;// Asigna el ID del usuario al campo oculto
+          // Puedes asignar otros datos del usuario a otros campos del formulario si es necesario
+        }
+      };
+      xhr.send();
+      }
+
+
+    window.onload = inicio;
+
   </script>
+
+  
 
   <div class="form-outline">
     <img
@@ -262,6 +322,15 @@
           <div class="modal-body">
             <!-- Formulario para agregar una receta -->
             <div class="form-group">
+              <label for="usuario_id"></label>
+              <input
+                type="hidden"
+                id="usuario_id"
+                name="usuario_id"
+                value=""
+              >
+            </div>
+            <div class="form-group">
               <label for="tituloReceta">Título:</label>
               <input
                 type="text"
@@ -330,15 +399,14 @@
                 placeholder="URL de la foto 5"
               >
             </div>
-            <!-- Ingredientes (Puedes utilizar un textarea para ingresar varios ingredientes) -->
             <div class="form-group">
               <label for="ingredientes">Ingredientes:</label>
-              <textarea
+              <select
                 class="form-control"
                 id="ingredientes"
                 name="ingredientes"
-                placeholder="Ingrese los ingredientes"
-              ></textarea>
+                multiple
+              ></select>
             </div>
             <div class="form-group">
               <label for="categoria-form">Categoría:</label>

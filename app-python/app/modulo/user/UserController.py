@@ -59,3 +59,22 @@ def myprofile():
 def logout():
     logger.info("/logout")
     return redirect('/')
+
+
+@user_blueprint.route("/user/<int:id>", methods=["GET", "POST"])
+def userById(id):
+    logger.info("/userById &s"+str(id))
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = UsersServiceStub(channel)
+        response = stub.TraerUser(User(id=id)) 
+    print("Greeter client received: " + str(response))    
+    return MessageToJson(response)
+
+@user_blueprint.route("/users",methods = ['GET'])
+def findAll():
+    logger.info("/users")
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = UsersServiceStub(channel)
+        response = stub.FindAll(User()) 
+    print("Greeter client received: " + str(response))    
+    return MessageToJson(response)

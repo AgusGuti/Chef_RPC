@@ -22,14 +22,14 @@ class Recetas(_message.Message):
     def __init__(self, receta: _Optional[_Iterable[_Union[Receta, _Mapping]]] = ...) -> None: ...
 
 class Receta(_message.Message):
-    __slots__ = ["idReceta", "user", "tituloReceta", "descripcion", "categoria", "pasos", "ingrediente", "tiempoPreparacion", "foto1", "foto2", "foto3", "foto4", "foto5"]
+    __slots__ = ["idReceta", "user", "tituloReceta", "descripcion", "categoria", "pasos", "ingredientes", "tiempoPreparacion", "foto1", "foto2", "foto3", "foto4", "foto5"]
     IDRECETA_FIELD_NUMBER: _ClassVar[int]
     USER_FIELD_NUMBER: _ClassVar[int]
     TITULORECETA_FIELD_NUMBER: _ClassVar[int]
     DESCRIPCION_FIELD_NUMBER: _ClassVar[int]
     CATEGORIA_FIELD_NUMBER: _ClassVar[int]
     PASOS_FIELD_NUMBER: _ClassVar[int]
-    INGREDIENTE_FIELD_NUMBER: _ClassVar[int]
+    INGREDIENTES_FIELD_NUMBER: _ClassVar[int]
     TIEMPOPREPARACION_FIELD_NUMBER: _ClassVar[int]
     FOTO1_FIELD_NUMBER: _ClassVar[int]
     FOTO2_FIELD_NUMBER: _ClassVar[int]
@@ -42,14 +42,14 @@ class Receta(_message.Message):
     descripcion: str
     categoria: _categoria_pb2.Categoria
     pasos: str
-    ingrediente: _containers.RepeatedCompositeFieldContainer[_ingrediente_pb2.Ingrediente]
+    ingredientes: _containers.RepeatedCompositeFieldContainer[_ingrediente_pb2.Ingrediente]
     tiempoPreparacion: int
     foto1: str
     foto2: str
     foto3: str
     foto4: str
     foto5: str
-    def __init__(self, idReceta: _Optional[int] = ..., user: _Optional[_Union[_user_pb2.User, _Mapping]] = ..., tituloReceta: _Optional[str] = ..., descripcion: _Optional[str] = ..., categoria: _Optional[_Union[_categoria_pb2.Categoria, _Mapping]] = ..., pasos: _Optional[str] = ..., ingrediente: _Optional[_Iterable[_Union[_ingrediente_pb2.Ingrediente, _Mapping]]] = ..., tiempoPreparacion: _Optional[int] = ..., foto1: _Optional[str] = ..., foto2: _Optional[str] = ..., foto3: _Optional[str] = ..., foto4: _Optional[str] = ..., foto5: _Optional[str] = ...) -> None: ...
+    def __init__(self, idReceta: _Optional[int] = ..., user: _Optional[_Union[_user_pb2.User, _Mapping]] = ..., tituloReceta: _Optional[str] = ..., descripcion: _Optional[str] = ..., categoria: _Optional[_Union[_categoria_pb2.Categoria, _Mapping]] = ..., pasos: _Optional[str] = ..., ingredientes: _Optional[_Iterable[_Union[_ingrediente_pb2.Ingrediente, _Mapping]]] = ..., tiempoPreparacion: _Optional[int] = ..., foto1: _Optional[str] = ..., foto2: _Optional[str] = ..., foto3: _Optional[str] = ..., foto4: _Optional[str] = ..., foto5: _Optional[str] = ...) -> None: ...
 
 class UsuarioId(_message.Message):
     __slots__ = ["idUsuario"]
