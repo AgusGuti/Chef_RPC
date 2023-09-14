@@ -61,11 +61,11 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
         responseObserver.onCompleted();
     } else {
         UserProto.User a = UserProto.User.newBuilder()
-        .setId(request.getId())
-        .setNombre(request.getNombre())
-        .setApellido(request.getApellido())
-        .setEmail(request.getEmail())
-        .setClave(request.getClave())
+        .setId(user.getId())
+        .setNombre(user.getNombre())
+        .setApellido(user.getApellido())
+        .setEmail(user.getEmail())
+        .setClave(user.getClave())
         .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();
