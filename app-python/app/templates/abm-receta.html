@@ -111,7 +111,7 @@
     // Cargar el usuario desde el endpoint /user/<int:id>
     function cargarUsuario() {
       console.log("cargarUsuario function called");
-      var userId = "{{ usuario_id }}"; // Aquí obtén el ID del usuario de tu aplicación
+      var userId = "{{ user_id }}"; // Aquí obtén el ID del usuario de tu aplicación
       var xhr = new XMLHttpRequest();
       xhr.open("GET", `/user/${userId}`, true);
       xhr.onreadystatechange = function () {
@@ -120,7 +120,7 @@
           
           // Aquí puedes utilizar la información del usuario para prellenar la base de datos
           // por ejemplo, enviarla al servidor con el formulario de creación de recetas
-          document.getElementById("usuario_id").value = usuario.id;// Asigna el ID del usuario al campo oculto
+          document.getElementById("user_id").value = user.id;// Asigna el ID del usuario al campo oculto
           // Puedes asignar otros datos del usuario a otros campos del formulario si es necesario
         }
       };
@@ -322,11 +322,11 @@
           <div class="modal-body">
             <!-- Formulario para agregar una receta -->
             <div class="form-group">
-              <label for="usuario_id"></label>
+              <label for="user_id"></label>
               <input
                 type="hidden"
-                id="usuario_id"
-                name="usuario_id"
+                id="user_id"
+                name="user_id"
                 value=""
               >
             </div>
