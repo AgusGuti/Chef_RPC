@@ -26,4 +26,5 @@ message User {
   string apellido = 3;
   string email = 4;
   string clave = 5;
+  string fotoPerfil = 6;
 }

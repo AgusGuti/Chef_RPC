@@ -124,7 +124,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 */
 
 -- -----------------------------------------------------
--- Table chefencasa.receta_has_ingrediente
+-- Table chefencasa.ingrediente_receta
 -- -----------------------------------------------------
 
 INSERT INTO chefencasa.ingrediente_receta (receta_id, ingrediente_id)
@@ -182,11 +182,11 @@ VALUES
 	(10, 8),
 	(10, 10);
 
--- select * from chefencasa.receta_has_ingrediente;
+-- select * from chefencasa.ingrediente_receta;
 
 /*
 SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE chefencasa.receta_has_ingrediente;
+TRUNCATE chefencasa.ingrediente_receta;
 SET FOREIGN_KEY_CHECKS = 1;
 */
 
@@ -219,5 +219,5 @@ select * from chefencasa.receta;
 select * from chefencasa.favorito;
 select * from chefencasa.categoria;
 select * from chefencasa.ingrediente;
-select * from chefencasa.receta_has_ingrediente;
-select * from chefencasa.seguido;
+select * from chefencasa.ingrediente_receta;
+select * from chefencasa.seguidos;

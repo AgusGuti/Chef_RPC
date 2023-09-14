@@ -859,6 +859,18 @@ public final class UserProto {
      */
     com.google.protobuf.ByteString
         getClaveBytes();
+
+    /**
+     * <code>string fotoPerfil = 6;</code>
+     * @return The fotoPerfil.
+     */
+    java.lang.String getFotoPerfil();
+    /**
+     * <code>string fotoPerfil = 6;</code>
+     * @return The bytes for fotoPerfil.
+     */
+    com.google.protobuf.ByteString
+        getFotoPerfilBytes();
   }
   /**
    * Protobuf type {@code model.User}
@@ -877,6 +889,7 @@ public final class UserProto {
       apellido_ = "";
       email_ = "";
       clave_ = "";
+      fotoPerfil_ = "";
     }
 
     @java.lang.Override
@@ -936,6 +949,12 @@ public final class UserProto {
               java.lang.String s = input.readStringRequireUtf8();
 
               clave_ = s;
+              break;
+            }
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              fotoPerfil_ = s;
               break;
             }
             default: {
@@ -1124,6 +1143,42 @@ public final class UserProto {
       }
     }
 
+    public static final int FOTOPERFIL_FIELD_NUMBER = 6;
+    private volatile java.lang.Object fotoPerfil_;
+    /**
+     * <code>string fotoPerfil = 6;</code>
+     * @return The fotoPerfil.
+     */
+    public java.lang.String getFotoPerfil() {
+      java.lang.Object ref = fotoPerfil_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        fotoPerfil_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string fotoPerfil = 6;</code>
+     * @return The bytes for fotoPerfil.
+     */
+    public com.google.protobuf.ByteString
+        getFotoPerfilBytes() {
+      java.lang.Object ref = fotoPerfil_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        fotoPerfil_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1153,6 +1208,9 @@ public final class UserProto {
       if (!getClaveBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, clave_);
       }
+      if (!getFotoPerfilBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, fotoPerfil_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -1177,6 +1235,9 @@ public final class UserProto {
       }
       if (!getClaveBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, clave_);
+      }
+      if (!getFotoPerfilBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, fotoPerfil_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1203,6 +1264,8 @@ public final class UserProto {
           .equals(other.getEmail())) return false;
       if (!getClave()
           .equals(other.getClave())) return false;
+      if (!getFotoPerfil()
+          .equals(other.getFotoPerfil())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1224,6 +1287,8 @@ public final class UserProto {
       hash = (53 * hash) + getEmail().hashCode();
       hash = (37 * hash) + CLAVE_FIELD_NUMBER;
       hash = (53 * hash) + getClave().hashCode();
+      hash = (37 * hash) + FOTOPERFIL_FIELD_NUMBER;
+      hash = (53 * hash) + getFotoPerfil().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1367,6 +1432,8 @@ public final class UserProto {
 
         clave_ = "";
 
+        fotoPerfil_ = "";
+
         return this;
       }
 
@@ -1398,6 +1465,7 @@ public final class UserProto {
         result.apellido_ = apellido_;
         result.email_ = email_;
         result.clave_ = clave_;
+        result.fotoPerfil_ = fotoPerfil_;
         onBuilt();
         return result;
       }
@@ -1463,6 +1531,10 @@ public final class UserProto {
         }
         if (!other.getClave().isEmpty()) {
           clave_ = other.clave_;
+          onChanged();
+        }
+        if (!other.getFotoPerfil().isEmpty()) {
+          fotoPerfil_ = other.fotoPerfil_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -1827,6 +1899,82 @@ public final class UserProto {
         onChanged();
         return this;
       }
+
+      private java.lang.Object fotoPerfil_ = "";
+      /**
+       * <code>string fotoPerfil = 6;</code>
+       * @return The fotoPerfil.
+       */
+      public java.lang.String getFotoPerfil() {
+        java.lang.Object ref = fotoPerfil_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          fotoPerfil_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string fotoPerfil = 6;</code>
+       * @return The bytes for fotoPerfil.
+       */
+      public com.google.protobuf.ByteString
+          getFotoPerfilBytes() {
+        java.lang.Object ref = fotoPerfil_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fotoPerfil_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string fotoPerfil = 6;</code>
+       * @param value The fotoPerfil to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFotoPerfil(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        fotoPerfil_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string fotoPerfil = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFotoPerfil() {
+        
+        fotoPerfil_ = getDefaultInstance().getFotoPerfil();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string fotoPerfil = 6;</code>
+       * @param value The bytes for fotoPerfil to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFotoPerfilBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        fotoPerfil_ = value;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -1901,9 +2049,10 @@ public final class UserProto {
     java.lang.String[] descriptorData = {
       "\n\nuser.proto\022\005model\032\033google/protobuf/emp" +
       "ty.proto\032\036google/protobuf/wrappers.proto" +
-      "\"\"\n\005Users\022\031\n\004user\030\001 \003(\0132\013.model.User\"R\n\004" +
+      "\"\"\n\005Users\022\031\n\004user\030\001 \003(\0132\013.model.User\"f\n\004" +
       "User\022\n\n\002id\030\001 \001(\005\022\016\n\006nombre\030\002 \001(\t\022\020\n\010apel" +
       "lido\030\003 \001(\t\022\r\n\005email\030\004 \001(\t\022\r\n\005clave\030\005 \001(\t" +
+<<<<<<< HEAD
       "2\304\001\n\014UsersService\022%\n\007AddUser\022\013.model.Use" +
       "r\032\013.model.User\"\000\0221\n\023ValidarCredenciales\022" +
       "\013.model.User\032\013.model.User\"\000\022\'\n\tTraerUser" +
@@ -1911,6 +2060,13 @@ public final class UserProto {
       "\026.google.protobuf.Empty\032\014.model.Users\"\000B" +
       "!\n\024com.chefencasa.modelB\tUserProtob\006prot" +
       "o3"
+=======
+      "\022\022\n\nfotoPerfil\030\006 \001(\t2h\n\014UsersService\022%\n\007" +
+      "AddUser\022\013.model.User\032\013.model.User\"\000\0221\n\023V" +
+      "alidarCredenciales\022\013.model.User\032\013.model." +
+      "User\"\000B!\n\024com.chefencasa.modelB\tUserProt" +
+      "ob\006proto3"
+>>>>>>> 442b25185f33db02602ac90129ca54b808b34f81
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1929,7 +2085,7 @@ public final class UserProto {
     internal_static_model_User_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_User_descriptor,
-        new java.lang.String[] { "Id", "Nombre", "Apellido", "Email", "Clave", });
+        new java.lang.String[] { "Id", "Nombre", "Apellido", "Email", "Clave", "FotoPerfil", });
     com.google.protobuf.EmptyProto.getDescriptor();
     com.google.protobuf.WrappersProto.getDescriptor();
   }
