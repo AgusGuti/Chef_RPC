@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,34 +107,45 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 	}
 
 	public void findAll(Empty request, StreamObserver<RecetaProto.Recetas> responseObserver) {
-    List<RecetaProto.Receta> recetadb = new ArrayList<>();
-    for (Receta receta : recetaRepository.findAll()) {
-        RecetaProto.Receta recetaProto = RecetaProto.Receta.newBuilder()
-            .setCategoria(CategoriaProto.Categoria.newBuilder()
-                .setCategoria(receta.getCategoria().getCategoria())
-                .build())
-            .setDescripcion(receta.getDescripcion())
-            .setIdReceta(receta.getId())
-            .setTituloReceta(receta.getTituloReceta())
-            .setPasos(receta.getPasos())
-            .setTiempoPreparacion(receta.getTiempoPreparacion())
-            .setFoto1(receta.getFoto1())
-            .setFoto2(receta.getFoto2())
-            .setFoto3(receta.getFoto3())
-            .setFoto4(receta.getFoto4())
-            .setFoto5(receta.getFoto5())
-            .build();
-
-        recetadb.add(recetaProto);
-    }
-
-    RecetaProto.Recetas a = RecetaProto.Recetas.newBuilder()
-        .addAllReceta(recetadb)
-        .build();
-    responseObserver.onNext(a);
-    responseObserver.onCompleted();
+		List<RecetaProto.Receta> recetadb = new ArrayList<>();
+		for (Receta receta : recetaRepository.findAllRecetasIngredientes()) {
+			List<IngredienteProto.Ingrediente> lstIngredientes = new ArrayList<>();
+			
+			if (receta.getIngredientes() != null) {
+				lstIngredientes.addAll(receta.getIngredientes().stream()
+					.map(ingrediente -> IngredienteProto.Ingrediente.newBuilder()
+						.setId(ingrediente.getId())
+						.setNombre(ingrediente.getNombre())
+						.build())
+					.collect(Collectors.toList()));
+			}
+			
+			RecetaProto.Receta recetaProto = RecetaProto.Receta.newBuilder()
+				.setCategoria(CategoriaProto.Categoria.newBuilder()
+					.setCategoria(receta.getCategoria().getCategoria())
+					.build())
+				.setDescripcion(receta.getDescripcion())
+				.setIdReceta(receta.getId())
+				.setTituloReceta(receta.getTituloReceta())
+				.setPasos(receta.getPasos())
+				.setTiempoPreparacion(receta.getTiempoPreparacion())
+				.setFoto1(receta.getFoto1())
+				.setFoto2(receta.getFoto2())
+				.setFoto3(receta.getFoto3())
+				.setFoto4(receta.getFoto4())
+				.setFoto5(receta.getFoto5())
+				.addAllIngredientes(lstIngredientes) // Agrega los ingredientes a la receta
+				.build();
+			
+			recetadb.add(recetaProto);
+		}
+	
+		RecetaProto.Recetas a = RecetaProto.Recetas.newBuilder()
+			.addAllReceta(recetadb)
+			.build();
+		
+		responseObserver.onNext(a);
+		responseObserver.onCompleted();
 	}
-
-
 
 }
