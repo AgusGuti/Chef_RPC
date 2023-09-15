@@ -95,22 +95,20 @@ def findById(id):
 @receta_blueprint.route("/modificarReceta",methods=['POST'])
 def modificarReceta():
     logger.info("/modificarReceta")
-    ingredientes_seleccionados = request.form.getlist("ingredientes")
+    ingredientes_seleccionados = request.form.getlist("mod_ingredientes")
     
     ingredientes = []
     for ingrediente in ingredientes_seleccionados:
         ingrediente_obj = Ingrediente(id=int(ingrediente))
         ingredientes.append(ingrediente_obj)
     
-    user_id=session['user_id']
-    
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = RecetasServiceStub(channel)
-        response = stub.modificarReceta(
-            Receta(ingredientes=ingredientes,user=User(id=int(user_id)),categoria=Categoria(id=int(request.form["categoria"])),tituloReceta=request.form["tituloReceta"],
-                descripcion=request.form["descripcion"],pasos=request.form["pasos"],tiempoPreparacion=int(request.form["tiempoPreparacion"]),foto1=request.form["foto1"],
-                foto2=request.form["foto2"],foto3=request.form["foto3"],foto4=request.form["foto4"],
-                foto5=request.form["foto5"]))
+        response = stub.ModificarReceta(
+            Receta(idReceta=int(request.form["receta_id"]),ingredientes=ingredientes,categoria=Categoria(id=int(request.form["mod_categoria"])) ,tituloReceta=request.form["mod_tituloReceta"],
+                descripcion=request.form["mod_descripcion"],pasos=request.form["mod_pasos"],tiempoPreparacion=int(request.form["mod_tiempoPreparacion"]),foto1=request.form["mod_foto1"],
+                foto2=request.form["mod_foto2"],foto3=request.form["mod_foto3"],foto4=request.form["mod_foto4"],
+                foto5=request.form["mod_foto5"]))
         print("Greeter client received: " + str(response))    
         receta={"receta":MessageToJson(response)}
         logger.info("receta modificada %s",receta)
@@ -120,6 +118,5 @@ def modificarReceta():
         else:
             flash('Receta modificada exitosamente!','success')
             return redirect('/recetas')
-
     
 

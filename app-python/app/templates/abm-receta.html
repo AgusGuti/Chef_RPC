@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" class="h-75">
 <head>
   <title>Website Grupo E</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -212,36 +211,82 @@
               document.getElementById("mod_foto4").value = response.foto4;
               document.getElementById("mod_foto5").value = response.foto5;
               document.getElementById("mod_pasos").value = response.pasos;
-              document.getElementById("mod_tiempoPreparacion").value = response.tiemPreparacion;
-
+              document.getElementById("mod_tiempoPreparacion").value = response.tiempoPreparacion;
               // Llenar la lista de ingredientes en el elemento select "mod_ingredientes"
               var modIngredientesSelect = document.getElementById("mod_ingredientes");
               modIngredientesSelect.innerHTML = ""; // Limpia el contenido actual
-
+      
               var ingredientes = response.ingredientes;
               if (Array.isArray(ingredientes)) {
-                ingredientes.forEach(function (ingrediente) {
-                  var option = document.createElement("option");
-                  option.value = ingrediente.id;
-                  option.text = ingrediente.nombre;
-                  modIngredientesSelect.appendChild(option);
-                });
+                // Obtén todos los ingredientes disponibles
+                var xhrIngredientes = new XMLHttpRequest();
+                xhrIngredientes.open("GET", "/ingredientes", true);
+      
+                xhrIngredientes.onreadystatechange = function () {
+                  if (xhrIngredientes.readyState === 4) {
+                    if (xhrIngredientes.status === 200) {
+                      var responseIngredientes = JSON.parse(xhrIngredientes.responseText);
+                      var ingredientesDisponibles = responseIngredientes.ingrediente;
+      
+                      // Agrega las opciones de ingredientes al desplegable y marca como seleccionados los ingredientes asociados a la receta
+                      ingredientesDisponibles.forEach(function (ingredienteDisponible) {
+                        var option = document.createElement("option");
+                        option.value = ingredienteDisponible.id;
+                        option.text = ingredienteDisponible.nombre;
+                        
+                        // Verifica si este ingrediente está asociado a la receta
+                        if (ingredientes.find(ingrediente => ingrediente.id === ingredienteDisponible.id)) {
+                          option.selected = true; // Marcar como seleccionado
+                        }
+                        
+                        modIngredientesSelect.appendChild(option);
+                      });
+                    } else {
+                      console.error("Error al cargar ingredientes:", xhrIngredientes.status);
+                    }
+                  }
+                };
+      
+                xhrIngredientes.send();
               } else {
                 console.error("La respuesta del servidor no contiene una lista de ingredientes válida:", response);
               }
-              
-              // Llenar el campo de categoría en el elemento select "mod_categoria"
-              var modCategoriaSelect = document.getElementById("mod_categoria");
-              modCategoriaSelect.innerHTML = ""; // Limpia el contenido actual
-              var categoria = response.categoria;
-              if (categoria) {
-                var optionCategoria = document.createElement("option");
-                optionCategoria.value = categoria.id;
-                optionCategoria.text = categoria.categoria;
-                modCategoriaSelect.appendChild(optionCategoria);
-              } else {
-                console.error("La respuesta del servidor no contiene una categoría válida:", response);
+      
+             // Llenar el campo de categoría en el elemento select "mod_categoria" con todas las categorías disponibles
+            var modCategoriaSelect = document.getElementById("mod_categoria");
+            modCategoriaSelect.innerHTML = ""; // Limpia el contenido actual
+
+            // Obtener todas las categorías disponibles
+            var xhrCategorias = new XMLHttpRequest();
+            xhrCategorias.open("GET", "/categorias", true);
+
+            xhrCategorias.onreadystatechange = function () {
+              if (xhrCategorias.readyState === 4) {
+                if (xhrCategorias.status === 200) {
+                  var responseCategorias = JSON.parse(xhrCategorias.responseText);
+                  var categoriasDisponibles = responseCategorias.categoria;
+
+                  // Agregar las opciones de categorías al desplegable
+                  categoriasDisponibles.forEach(function (categoriaDisponible) {
+                    var option = document.createElement("option");
+                    option.value = categoriaDisponible.id;
+                    option.text = categoriaDisponible.categoria;
+
+                    modCategoriaSelect.appendChild(option);
+                  });
+                  
+                  // Establecer el valor seleccionado en función de la categoría actual de la receta
+                  var categoriaActual = response.categoria;
+                  if (categoriaActual && categoriaActual.id) {
+                    modCategoriaSelect.value = categoriaActual.id;
+                  }
+                } else {
+                  console.error("Error al cargar categorías:", xhrCategorias.status);
+                }
               }
+            };
+
+            xhrCategorias.send();
 
               // Abre el modal de modificar
               $("#modalModificarReceta").modal("show");
@@ -252,7 +297,6 @@
         };
         xhr.send();
       }
-
     window.onload = inicio;
 
   </script>
