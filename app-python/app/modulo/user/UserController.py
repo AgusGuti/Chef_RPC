@@ -16,18 +16,23 @@ logger = logging.getLogger(__name__)
 @user_blueprint.route("/autenticar", methods=['POST'])
 def autenticar():
     logger.info("/autenticar  %s",request.form['username'])
+    
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = UsersServiceStub(channel)
         response = stub.ValidarCredenciales(User(nombre=request.form['username'],email=request.form['username'],clave=request.form['password']))
+        user=MessageToJson(response)
     
-    user=MessageToJson(response)
     logger.info("user : %s",response.nombre)
+    
     if user=="":
         flash('Usuario y/o clave incorrectos','danger')
         return redirect('/')
     else:
         session['user_id']=response.id
         session['nombre']=response.nombre
+        session['apellido']=response.apellido
+        session['email']=response.email
+#       session['fotoPerfil']=response.foto_perfil
         return render_template('index.html', nombre=response.nombre)
 
 @user_blueprint.route("/registrar", methods=['POST'])
@@ -54,7 +59,20 @@ def registrar():
 @user_blueprint.route("/myprofile",methods = ['GET'])
 def myprofile():
     logger.info("/myprofile")
-    return render_template('myprofile.html')
+
+    logger.info("user_id: %d",session['user_id'])
+    logger.info("nombre: %s",session['nombre'])
+    logger.info("apellido: %s",session['apellido'])
+    logger.info("email: %s",session['email'])
+
+
+    return render_template('myprofile.html', 
+                user_id=session['user_id'],
+                nombre=session['nombre'],
+                apellido=session['apellido'],
+                email=session['email'])
+#               fotoPerfil=session['fotoPerfil'])
+
 
 @user_blueprint.route("/seguidos",methods = ['GET'])
 def seguidos():
@@ -71,6 +89,9 @@ def logout():
     logger.info("/logout")
     session.pop('user_id', None)
     session.pop('nombre', None)
+    session.pop('apellido', None)
+    session.pop('email', None)
+    session.pop('fotoPerfil', None)
     return redirect('/')
 
 
