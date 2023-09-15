@@ -30,8 +30,8 @@ public class CategoriaService extends CategoriasServiceGrpc.CategoriasServiceImp
         Categoria categoria =categoriaRepository.findById(request.getId()).get();
 
         CategoriaProto.Categoria a = CategoriaProto.Categoria.newBuilder()
-                    .setCategoria(categoria.getCategoria())
                     .setId(categoria.getId())
+                    .setCategoria(categoria.getCategoria())
                     .build();
 
         responseObserver.onNext(a);
@@ -44,8 +44,8 @@ public class CategoriaService extends CategoriasServiceGrpc.CategoriasServiceImp
         List<CategoriaProto.Categoria> categoriadb = new ArrayList<>();
         for (Categoria categoria : categoriaRepository.findAll()) {
             CategoriaProto.Categoria categoriaProto = CategoriaProto.Categoria.newBuilder()
-                    .setCategoria(categoria.getCategoria())
                     .setId(categoria.getId())
+                    .setCategoria(categoria.getCategoria())
                     .build();
             categoriadb.add(categoriaProto);
         }
