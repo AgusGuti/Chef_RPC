@@ -102,7 +102,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Table chefencasa.ingrediente
 -- -----------------------------------------------------
 
-INSERT INTO chefencasa.ingrediente (ingrediente)
+INSERT INTO chefencasa.ingrediente (nombre)
 VALUES
 ('Tomate'),
 ('Cebolla'),
@@ -124,10 +124,10 @@ SET FOREIGN_KEY_CHECKS = 1;
 */
 
 -- -----------------------------------------------------
--- Table chefencasa.ingrediente_receta
+-- Table chefencasa.receta_ingredientes
 -- -----------------------------------------------------
 
-INSERT INTO chefencasa.ingrediente_receta (receta_id, ingrediente_id)
+INSERT INTO chefencasa.receta_ingredientes (receta_id, ingredientes_id)
 VALUES
 	 -- Receta 1 con ingredientes
 	(1, 1), -- Receta 1 con Ingrediente 1
@@ -182,11 +182,11 @@ VALUES
 	(10, 8),
 	(10, 10);
 
--- select * from chefencasa.ingrediente_receta;
+-- select * from chefencasa.receta_ingredientes;
 
 /*
 SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE chefencasa.ingrediente_receta;
+TRUNCATE chefencasa.receta_ingredientes;
 SET FOREIGN_KEY_CHECKS = 1;
 */
 
@@ -219,5 +219,5 @@ select * from chefencasa.receta;
 select * from chefencasa.favorito;
 select * from chefencasa.categoria;
 select * from chefencasa.ingrediente;
-select * from chefencasa.ingrediente_receta;
+select * from chefencasa.receta_ingredientes;
 select * from chefencasa.seguidos;
