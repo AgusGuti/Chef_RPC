@@ -32,7 +32,7 @@ def autenticar():
         session['nombre']=response.nombre
         session['apellido']=response.apellido
         session['email']=response.email
-#       session['fotoPerfil']=response.foto_perfil
+        session['fotoPerfil']=response.fotoPerfil
         return render_template('index.html', nombre=response.nombre)
 
 @user_blueprint.route("/registrar", methods=['POST'])
@@ -64,14 +64,15 @@ def myprofile():
     logger.info("nombre: %s",session['nombre'])
     logger.info("apellido: %s",session['apellido'])
     logger.info("email: %s",session['email'])
+    logger.info("fotoPerfil: %s",session['fotoPerfil'])
 
 
     return render_template('myprofile.html', 
                 user_id=session['user_id'],
                 nombre=session['nombre'],
                 apellido=session['apellido'],
-                email=session['email'])
-#               fotoPerfil=session['fotoPerfil'])
+                email=session['email'],
+                fotoPerfil=session['fotoPerfil'])
 
 
 @user_blueprint.route("/seguidos",methods = ['GET'])

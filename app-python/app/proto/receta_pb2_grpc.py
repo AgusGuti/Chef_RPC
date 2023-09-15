@@ -3,9 +3,7 @@
 import grpc
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
-from . import categoria_pb2 as categoria__pb2
-from . import ingrediente_pb2 as ingrediente__pb2
-from . import receta_pb2 as receta__pb2
+import receta_pb2 as receta__pb2
 
 
 class RecetasServiceStub(object):
