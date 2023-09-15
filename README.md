@@ -14,9 +14,6 @@ Clases creadas en capa servidor:
 ## Restante
 
 -Solucionar la carga del objeto categoría dentro de la clase receta.
--Cambiar atributo de Receta/tiempoPreparacion de int a String para que pueda leer el nuevo select y guardar en la BDD
--Guardar las recetas de usuario en la vista abm-recetas.
--Corregir en la base el id_user (siempre carga el id 1 pese a tener otro perfil abierto)
 -Validación (alta quizás con algún boolean) de seguidores y seguidos. Hacer <list> de seguidores y seguidos, y volcarlos a sus respectivas vistas.
 
 

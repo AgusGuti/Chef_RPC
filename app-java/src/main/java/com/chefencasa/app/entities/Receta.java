@@ -3,10 +3,12 @@ package com.chefencasa.app.entities;
 import java.io.Serializable;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,8 +46,7 @@ public class Receta implements Serializable {
 	@NotNull(message = "Campo requerido.")
 	private User user;
 
-	@JsonIgnore
-	@ManyToMany(mappedBy = "recetas")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Ingrediente> ingredientes= new HashSet<Ingrediente>();
 	
 	@ManyToOne(optional = false)

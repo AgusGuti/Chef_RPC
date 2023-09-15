@@ -32,7 +32,7 @@ message Receta {
   string descripcion = 4;
   Categoria categoria = 5;
   string pasos = 6;
-  repeated Ingrediente ingrediente = 8;
+  repeated Ingrediente ingredientes = 8;
   int32 tiempoPreparacion = 9;
   string foto1 = 10;
   string foto2 = 11;

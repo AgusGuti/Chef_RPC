@@ -11,6 +11,8 @@ import "google/protobuf/wrappers.proto";
 service UsersService {
   rpc AddUser(User) returns (User) {}
   rpc ValidarCredenciales(User) returns (User) {}
+  rpc TraerUser(User) returns (User) {}
+  rpc FindAll(google.protobuf.Empty) returns (Users) {}
 
 }
 

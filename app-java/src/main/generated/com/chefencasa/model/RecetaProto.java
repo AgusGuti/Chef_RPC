@@ -1297,27 +1297,27 @@ public final class RecetaProto {
         getPasosBytes();
 
     /**
-     * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+     * <code>repeated .model.Ingrediente ingredientes = 8;</code>
      */
     java.util.List<com.chefencasa.model.IngredienteProto.Ingrediente> 
-        getIngredienteList();
+        getIngredientesList();
     /**
-     * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+     * <code>repeated .model.Ingrediente ingredientes = 8;</code>
      */
-    com.chefencasa.model.IngredienteProto.Ingrediente getIngrediente(int index);
+    com.chefencasa.model.IngredienteProto.Ingrediente getIngredientes(int index);
     /**
-     * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+     * <code>repeated .model.Ingrediente ingredientes = 8;</code>
      */
-    int getIngredienteCount();
+    int getIngredientesCount();
     /**
-     * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+     * <code>repeated .model.Ingrediente ingredientes = 8;</code>
      */
     java.util.List<? extends com.chefencasa.model.IngredienteProto.IngredienteOrBuilder> 
-        getIngredienteOrBuilderList();
+        getIngredientesOrBuilderList();
     /**
-     * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+     * <code>repeated .model.Ingrediente ingredientes = 8;</code>
      */
-    com.chefencasa.model.IngredienteProto.IngredienteOrBuilder getIngredienteOrBuilder(
+    com.chefencasa.model.IngredienteProto.IngredienteOrBuilder getIngredientesOrBuilder(
         int index);
 
     /**
@@ -1402,7 +1402,7 @@ public final class RecetaProto {
       tituloReceta_ = "";
       descripcion_ = "";
       pasos_ = "";
-      ingrediente_ = java.util.Collections.emptyList();
+      ingredientes_ = java.util.Collections.emptyList();
       foto1_ = "";
       foto2_ = "";
       foto3_ = "";
@@ -1492,10 +1492,10 @@ public final class RecetaProto {
             }
             case 66: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                ingrediente_ = new java.util.ArrayList<com.chefencasa.model.IngredienteProto.Ingrediente>();
+                ingredientes_ = new java.util.ArrayList<com.chefencasa.model.IngredienteProto.Ingrediente>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              ingrediente_.add(
+              ingredientes_.add(
                   input.readMessage(com.chefencasa.model.IngredienteProto.Ingrediente.parser(), extensionRegistry));
               break;
             }
@@ -1550,7 +1550,7 @@ public final class RecetaProto {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          ingrediente_ = java.util.Collections.unmodifiableList(ingrediente_);
+          ingredientes_ = java.util.Collections.unmodifiableList(ingredientes_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1733,39 +1733,39 @@ public final class RecetaProto {
       }
     }
 
-    public static final int INGREDIENTE_FIELD_NUMBER = 8;
-    private java.util.List<com.chefencasa.model.IngredienteProto.Ingrediente> ingrediente_;
+    public static final int INGREDIENTES_FIELD_NUMBER = 8;
+    private java.util.List<com.chefencasa.model.IngredienteProto.Ingrediente> ingredientes_;
     /**
-     * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+     * <code>repeated .model.Ingrediente ingredientes = 8;</code>
      */
-    public java.util.List<com.chefencasa.model.IngredienteProto.Ingrediente> getIngredienteList() {
-      return ingrediente_;
+    public java.util.List<com.chefencasa.model.IngredienteProto.Ingrediente> getIngredientesList() {
+      return ingredientes_;
     }
     /**
-     * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+     * <code>repeated .model.Ingrediente ingredientes = 8;</code>
      */
     public java.util.List<? extends com.chefencasa.model.IngredienteProto.IngredienteOrBuilder> 
-        getIngredienteOrBuilderList() {
-      return ingrediente_;
+        getIngredientesOrBuilderList() {
+      return ingredientes_;
     }
     /**
-     * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+     * <code>repeated .model.Ingrediente ingredientes = 8;</code>
      */
-    public int getIngredienteCount() {
-      return ingrediente_.size();
+    public int getIngredientesCount() {
+      return ingredientes_.size();
     }
     /**
-     * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+     * <code>repeated .model.Ingrediente ingredientes = 8;</code>
      */
-    public com.chefencasa.model.IngredienteProto.Ingrediente getIngrediente(int index) {
-      return ingrediente_.get(index);
+    public com.chefencasa.model.IngredienteProto.Ingrediente getIngredientes(int index) {
+      return ingredientes_.get(index);
     }
     /**
-     * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+     * <code>repeated .model.Ingrediente ingredientes = 8;</code>
      */
-    public com.chefencasa.model.IngredienteProto.IngredienteOrBuilder getIngredienteOrBuilder(
+    public com.chefencasa.model.IngredienteProto.IngredienteOrBuilder getIngredientesOrBuilder(
         int index) {
-      return ingrediente_.get(index);
+      return ingredientes_.get(index);
     }
 
     public static final int TIEMPOPREPARACION_FIELD_NUMBER = 9;
@@ -1990,8 +1990,8 @@ public final class RecetaProto {
       if (!getPasosBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 6, pasos_);
       }
-      for (int i = 0; i < ingrediente_.size(); i++) {
-        output.writeMessage(8, ingrediente_.get(i));
+      for (int i = 0; i < ingredientes_.size(); i++) {
+        output.writeMessage(8, ingredientes_.get(i));
       }
       if (tiempoPreparacion_ != 0) {
         output.writeInt32(9, tiempoPreparacion_);
@@ -2041,9 +2041,9 @@ public final class RecetaProto {
       if (!getPasosBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, pasos_);
       }
-      for (int i = 0; i < ingrediente_.size(); i++) {
+      for (int i = 0; i < ingredientes_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, ingrediente_.get(i));
+          .computeMessageSize(8, ingredientes_.get(i));
       }
       if (tiempoPreparacion_ != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -2097,8 +2097,8 @@ public final class RecetaProto {
       }
       if (!getPasos()
           .equals(other.getPasos())) return false;
-      if (!getIngredienteList()
-          .equals(other.getIngredienteList())) return false;
+      if (!getIngredientesList()
+          .equals(other.getIngredientesList())) return false;
       if (getTiempoPreparacion()
           != other.getTiempoPreparacion()) return false;
       if (!getFoto1()
@@ -2138,9 +2138,9 @@ public final class RecetaProto {
       }
       hash = (37 * hash) + PASOS_FIELD_NUMBER;
       hash = (53 * hash) + getPasos().hashCode();
-      if (getIngredienteCount() > 0) {
-        hash = (37 * hash) + INGREDIENTE_FIELD_NUMBER;
-        hash = (53 * hash) + getIngredienteList().hashCode();
+      if (getIngredientesCount() > 0) {
+        hash = (37 * hash) + INGREDIENTES_FIELD_NUMBER;
+        hash = (53 * hash) + getIngredientesList().hashCode();
       }
       hash = (37 * hash) + TIEMPOPREPARACION_FIELD_NUMBER;
       hash = (53 * hash) + getTiempoPreparacion();
@@ -2282,7 +2282,7 @@ public final class RecetaProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getIngredienteFieldBuilder();
+          getIngredientesFieldBuilder();
         }
       }
       @java.lang.Override
@@ -2308,11 +2308,11 @@ public final class RecetaProto {
         }
         pasos_ = "";
 
-        if (ingredienteBuilder_ == null) {
-          ingrediente_ = java.util.Collections.emptyList();
+        if (ingredientesBuilder_ == null) {
+          ingredientes_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          ingredienteBuilder_.clear();
+          ingredientesBuilder_.clear();
         }
         tiempoPreparacion_ = 0;
 
@@ -2367,14 +2367,14 @@ public final class RecetaProto {
           result.categoria_ = categoriaBuilder_.build();
         }
         result.pasos_ = pasos_;
-        if (ingredienteBuilder_ == null) {
+        if (ingredientesBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
-            ingrediente_ = java.util.Collections.unmodifiableList(ingrediente_);
+            ingredientes_ = java.util.Collections.unmodifiableList(ingredientes_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
-          result.ingrediente_ = ingrediente_;
+          result.ingredientes_ = ingredientes_;
         } else {
-          result.ingrediente_ = ingredienteBuilder_.build();
+          result.ingredientes_ = ingredientesBuilder_.build();
         }
         result.tiempoPreparacion_ = tiempoPreparacion_;
         result.foto1_ = foto1_;
@@ -2451,29 +2451,29 @@ public final class RecetaProto {
           pasos_ = other.pasos_;
           onChanged();
         }
-        if (ingredienteBuilder_ == null) {
-          if (!other.ingrediente_.isEmpty()) {
-            if (ingrediente_.isEmpty()) {
-              ingrediente_ = other.ingrediente_;
+        if (ingredientesBuilder_ == null) {
+          if (!other.ingredientes_.isEmpty()) {
+            if (ingredientes_.isEmpty()) {
+              ingredientes_ = other.ingredientes_;
               bitField0_ = (bitField0_ & ~0x00000001);
             } else {
-              ensureIngredienteIsMutable();
-              ingrediente_.addAll(other.ingrediente_);
+              ensureIngredientesIsMutable();
+              ingredientes_.addAll(other.ingredientes_);
             }
             onChanged();
           }
         } else {
-          if (!other.ingrediente_.isEmpty()) {
-            if (ingredienteBuilder_.isEmpty()) {
-              ingredienteBuilder_.dispose();
-              ingredienteBuilder_ = null;
-              ingrediente_ = other.ingrediente_;
+          if (!other.ingredientes_.isEmpty()) {
+            if (ingredientesBuilder_.isEmpty()) {
+              ingredientesBuilder_.dispose();
+              ingredientesBuilder_ = null;
+              ingredientes_ = other.ingredientes_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              ingredienteBuilder_ = 
+              ingredientesBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getIngredienteFieldBuilder() : null;
+                   getIngredientesFieldBuilder() : null;
             } else {
-              ingredienteBuilder_.addAllMessages(other.ingrediente_);
+              ingredientesBuilder_.addAllMessages(other.ingredientes_);
             }
           }
         }
@@ -3026,244 +3026,244 @@ public final class RecetaProto {
         return this;
       }
 
-      private java.util.List<com.chefencasa.model.IngredienteProto.Ingrediente> ingrediente_ =
+      private java.util.List<com.chefencasa.model.IngredienteProto.Ingrediente> ingredientes_ =
         java.util.Collections.emptyList();
-      private void ensureIngredienteIsMutable() {
+      private void ensureIngredientesIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          ingrediente_ = new java.util.ArrayList<com.chefencasa.model.IngredienteProto.Ingrediente>(ingrediente_);
+          ingredientes_ = new java.util.ArrayList<com.chefencasa.model.IngredienteProto.Ingrediente>(ingredientes_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.chefencasa.model.IngredienteProto.Ingrediente, com.chefencasa.model.IngredienteProto.Ingrediente.Builder, com.chefencasa.model.IngredienteProto.IngredienteOrBuilder> ingredienteBuilder_;
+          com.chefencasa.model.IngredienteProto.Ingrediente, com.chefencasa.model.IngredienteProto.Ingrediente.Builder, com.chefencasa.model.IngredienteProto.IngredienteOrBuilder> ingredientesBuilder_;
 
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public java.util.List<com.chefencasa.model.IngredienteProto.Ingrediente> getIngredienteList() {
-        if (ingredienteBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(ingrediente_);
+      public java.util.List<com.chefencasa.model.IngredienteProto.Ingrediente> getIngredientesList() {
+        if (ingredientesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(ingredientes_);
         } else {
-          return ingredienteBuilder_.getMessageList();
+          return ingredientesBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public int getIngredienteCount() {
-        if (ingredienteBuilder_ == null) {
-          return ingrediente_.size();
+      public int getIngredientesCount() {
+        if (ingredientesBuilder_ == null) {
+          return ingredientes_.size();
         } else {
-          return ingredienteBuilder_.getCount();
+          return ingredientesBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public com.chefencasa.model.IngredienteProto.Ingrediente getIngrediente(int index) {
-        if (ingredienteBuilder_ == null) {
-          return ingrediente_.get(index);
+      public com.chefencasa.model.IngredienteProto.Ingrediente getIngredientes(int index) {
+        if (ingredientesBuilder_ == null) {
+          return ingredientes_.get(index);
         } else {
-          return ingredienteBuilder_.getMessage(index);
+          return ingredientesBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public Builder setIngrediente(
+      public Builder setIngredientes(
           int index, com.chefencasa.model.IngredienteProto.Ingrediente value) {
-        if (ingredienteBuilder_ == null) {
+        if (ingredientesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureIngredienteIsMutable();
-          ingrediente_.set(index, value);
+          ensureIngredientesIsMutable();
+          ingredientes_.set(index, value);
           onChanged();
         } else {
-          ingredienteBuilder_.setMessage(index, value);
+          ingredientesBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public Builder setIngrediente(
+      public Builder setIngredientes(
           int index, com.chefencasa.model.IngredienteProto.Ingrediente.Builder builderForValue) {
-        if (ingredienteBuilder_ == null) {
-          ensureIngredienteIsMutable();
-          ingrediente_.set(index, builderForValue.build());
+        if (ingredientesBuilder_ == null) {
+          ensureIngredientesIsMutable();
+          ingredientes_.set(index, builderForValue.build());
           onChanged();
         } else {
-          ingredienteBuilder_.setMessage(index, builderForValue.build());
+          ingredientesBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public Builder addIngrediente(com.chefencasa.model.IngredienteProto.Ingrediente value) {
-        if (ingredienteBuilder_ == null) {
+      public Builder addIngredientes(com.chefencasa.model.IngredienteProto.Ingrediente value) {
+        if (ingredientesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureIngredienteIsMutable();
-          ingrediente_.add(value);
+          ensureIngredientesIsMutable();
+          ingredientes_.add(value);
           onChanged();
         } else {
-          ingredienteBuilder_.addMessage(value);
+          ingredientesBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public Builder addIngrediente(
+      public Builder addIngredientes(
           int index, com.chefencasa.model.IngredienteProto.Ingrediente value) {
-        if (ingredienteBuilder_ == null) {
+        if (ingredientesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureIngredienteIsMutable();
-          ingrediente_.add(index, value);
+          ensureIngredientesIsMutable();
+          ingredientes_.add(index, value);
           onChanged();
         } else {
-          ingredienteBuilder_.addMessage(index, value);
+          ingredientesBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public Builder addIngrediente(
+      public Builder addIngredientes(
           com.chefencasa.model.IngredienteProto.Ingrediente.Builder builderForValue) {
-        if (ingredienteBuilder_ == null) {
-          ensureIngredienteIsMutable();
-          ingrediente_.add(builderForValue.build());
+        if (ingredientesBuilder_ == null) {
+          ensureIngredientesIsMutable();
+          ingredientes_.add(builderForValue.build());
           onChanged();
         } else {
-          ingredienteBuilder_.addMessage(builderForValue.build());
+          ingredientesBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public Builder addIngrediente(
+      public Builder addIngredientes(
           int index, com.chefencasa.model.IngredienteProto.Ingrediente.Builder builderForValue) {
-        if (ingredienteBuilder_ == null) {
-          ensureIngredienteIsMutable();
-          ingrediente_.add(index, builderForValue.build());
+        if (ingredientesBuilder_ == null) {
+          ensureIngredientesIsMutable();
+          ingredientes_.add(index, builderForValue.build());
           onChanged();
         } else {
-          ingredienteBuilder_.addMessage(index, builderForValue.build());
+          ingredientesBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public Builder addAllIngrediente(
+      public Builder addAllIngredientes(
           java.lang.Iterable<? extends com.chefencasa.model.IngredienteProto.Ingrediente> values) {
-        if (ingredienteBuilder_ == null) {
-          ensureIngredienteIsMutable();
+        if (ingredientesBuilder_ == null) {
+          ensureIngredientesIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, ingrediente_);
+              values, ingredientes_);
           onChanged();
         } else {
-          ingredienteBuilder_.addAllMessages(values);
+          ingredientesBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public Builder clearIngrediente() {
-        if (ingredienteBuilder_ == null) {
-          ingrediente_ = java.util.Collections.emptyList();
+      public Builder clearIngredientes() {
+        if (ingredientesBuilder_ == null) {
+          ingredientes_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          ingredienteBuilder_.clear();
+          ingredientesBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public Builder removeIngrediente(int index) {
-        if (ingredienteBuilder_ == null) {
-          ensureIngredienteIsMutable();
-          ingrediente_.remove(index);
+      public Builder removeIngredientes(int index) {
+        if (ingredientesBuilder_ == null) {
+          ensureIngredientesIsMutable();
+          ingredientes_.remove(index);
           onChanged();
         } else {
-          ingredienteBuilder_.remove(index);
+          ingredientesBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public com.chefencasa.model.IngredienteProto.Ingrediente.Builder getIngredienteBuilder(
+      public com.chefencasa.model.IngredienteProto.Ingrediente.Builder getIngredientesBuilder(
           int index) {
-        return getIngredienteFieldBuilder().getBuilder(index);
+        return getIngredientesFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public com.chefencasa.model.IngredienteProto.IngredienteOrBuilder getIngredienteOrBuilder(
+      public com.chefencasa.model.IngredienteProto.IngredienteOrBuilder getIngredientesOrBuilder(
           int index) {
-        if (ingredienteBuilder_ == null) {
-          return ingrediente_.get(index);  } else {
-          return ingredienteBuilder_.getMessageOrBuilder(index);
+        if (ingredientesBuilder_ == null) {
+          return ingredientes_.get(index);  } else {
+          return ingredientesBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
       public java.util.List<? extends com.chefencasa.model.IngredienteProto.IngredienteOrBuilder> 
-           getIngredienteOrBuilderList() {
-        if (ingredienteBuilder_ != null) {
-          return ingredienteBuilder_.getMessageOrBuilderList();
+           getIngredientesOrBuilderList() {
+        if (ingredientesBuilder_ != null) {
+          return ingredientesBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(ingrediente_);
+          return java.util.Collections.unmodifiableList(ingredientes_);
         }
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public com.chefencasa.model.IngredienteProto.Ingrediente.Builder addIngredienteBuilder() {
-        return getIngredienteFieldBuilder().addBuilder(
+      public com.chefencasa.model.IngredienteProto.Ingrediente.Builder addIngredientesBuilder() {
+        return getIngredientesFieldBuilder().addBuilder(
             com.chefencasa.model.IngredienteProto.Ingrediente.getDefaultInstance());
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
-      public com.chefencasa.model.IngredienteProto.Ingrediente.Builder addIngredienteBuilder(
+      public com.chefencasa.model.IngredienteProto.Ingrediente.Builder addIngredientesBuilder(
           int index) {
-        return getIngredienteFieldBuilder().addBuilder(
+        return getIngredientesFieldBuilder().addBuilder(
             index, com.chefencasa.model.IngredienteProto.Ingrediente.getDefaultInstance());
       }
       /**
-       * <code>repeated .model.Ingrediente ingrediente = 8;</code>
+       * <code>repeated .model.Ingrediente ingredientes = 8;</code>
        */
       public java.util.List<com.chefencasa.model.IngredienteProto.Ingrediente.Builder> 
-           getIngredienteBuilderList() {
-        return getIngredienteFieldBuilder().getBuilderList();
+           getIngredientesBuilderList() {
+        return getIngredientesFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
           com.chefencasa.model.IngredienteProto.Ingrediente, com.chefencasa.model.IngredienteProto.Ingrediente.Builder, com.chefencasa.model.IngredienteProto.IngredienteOrBuilder> 
-          getIngredienteFieldBuilder() {
-        if (ingredienteBuilder_ == null) {
-          ingredienteBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          getIngredientesFieldBuilder() {
+        if (ingredientesBuilder_ == null) {
+          ingredientesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.chefencasa.model.IngredienteProto.Ingrediente, com.chefencasa.model.IngredienteProto.Ingrediente.Builder, com.chefencasa.model.IngredienteProto.IngredienteOrBuilder>(
-                  ingrediente_,
+                  ingredientes_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
-          ingrediente_ = null;
+          ingredientes_ = null;
         }
-        return ingredienteBuilder_;
+        return ingredientesBuilder_;
       }
 
       private int tiempoPreparacion_ ;
@@ -5323,22 +5323,22 @@ public final class RecetaProto {
       "to\032\037google/protobuf/timestamp.proto\032\017cat" +
       "egoria.proto\032\021ingrediente.proto\032\nuser.pr" +
       "oto\"\007\n\005Empty\"(\n\007Recetas\022\035\n\006receta\030\001 \003(\0132" +
-      "\r.model.Receta\"\243\002\n\006Receta\022\020\n\010idReceta\030\001 " +
+      "\r.model.Receta\"\244\002\n\006Receta\022\020\n\010idReceta\030\001 " +
       "\001(\005\022\031\n\004user\030\002 \001(\0132\013.model.User\022\024\n\014titulo" +
       "Receta\030\003 \001(\t\022\023\n\013descripcion\030\004 \001(\t\022#\n\tcat" +
       "egoria\030\005 \001(\0132\020.model.Categoria\022\r\n\005pasos\030" +
-      "\006 \001(\t\022\'\n\013ingrediente\030\010 \003(\0132\022.model.Ingre" +
-      "diente\022\031\n\021tiempoPreparacion\030\t \001(\005\022\r\n\005fot" +
-      "o1\030\n \001(\t\022\r\n\005foto2\030\013 \001(\t\022\r\n\005foto3\030\014 \001(\t\022\r" +
-      "\n\005foto4\030\r \001(\t\022\r\n\005foto5\030\016 \001(\t\"\036\n\tUsuarioI" +
-      "d\022\021\n\tidUsuario\030\001 \001(\005\"y\n\014RecetaFiltro\022\021\n\t" +
-      "categoria\030\001 \001(\t\022\016\n\006nombre\030\002 \001(\t\022\024\n\014ingre" +
-      "dientes\030\003 \003(\t\022\027\n\017tiempoPrepDesde\030\004 \001(\005\022\027" +
-      "\n\017tiempoPrepHasta\030\005 \001(\0052r\n\016RecetasServic" +
-      "e\022+\n\tAddReceta\022\r.model.Receta\032\r.model.Re" +
-      "ceta\"\000\0223\n\007FindAll\022\026.google.protobuf.Empt" +
-      "y\032\016.model.Recetas\"\000B#\n\024com.chefencasa.mo" +
-      "delB\013RecetaProtob\006proto3"
+      "\006 \001(\t\022(\n\014ingredientes\030\010 \003(\0132\022.model.Ingr" +
+      "ediente\022\031\n\021tiempoPreparacion\030\t \001(\005\022\r\n\005fo" +
+      "to1\030\n \001(\t\022\r\n\005foto2\030\013 \001(\t\022\r\n\005foto3\030\014 \001(\t\022" +
+      "\r\n\005foto4\030\r \001(\t\022\r\n\005foto5\030\016 \001(\t\"\036\n\tUsuario" +
+      "Id\022\021\n\tidUsuario\030\001 \001(\005\"y\n\014RecetaFiltro\022\021\n" +
+      "\tcategoria\030\001 \001(\t\022\016\n\006nombre\030\002 \001(\t\022\024\n\014ingr" +
+      "edientes\030\003 \003(\t\022\027\n\017tiempoPrepDesde\030\004 \001(\005\022" +
+      "\027\n\017tiempoPrepHasta\030\005 \001(\0052r\n\016RecetasServi" +
+      "ce\022+\n\tAddReceta\022\r.model.Receta\032\r.model.R" +
+      "eceta\"\000\0223\n\007FindAll\022\026.google.protobuf.Emp" +
+      "ty\032\016.model.Recetas\"\000B#\n\024com.chefencasa.m" +
+      "odelB\013RecetaProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -5367,7 +5367,7 @@ public final class RecetaProto {
     internal_static_model_Receta_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_Receta_descriptor,
-        new java.lang.String[] { "IdReceta", "User", "TituloReceta", "Descripcion", "Categoria", "Pasos", "Ingrediente", "TiempoPreparacion", "Foto1", "Foto2", "Foto3", "Foto4", "Foto5", });
+        new java.lang.String[] { "IdReceta", "User", "TituloReceta", "Descripcion", "Categoria", "Pasos", "Ingredientes", "TiempoPreparacion", "Foto1", "Foto2", "Foto3", "Foto4", "Foto5", });
     internal_static_model_UsuarioId_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_model_UsuarioId_fieldAccessorTable = new

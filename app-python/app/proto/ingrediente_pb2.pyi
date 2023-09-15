@@ -14,9 +14,9 @@ class Ingredientes(_message.Message):
     def __init__(self, ingrediente: _Optional[_Iterable[_Union[Ingrediente, _Mapping]]] = ...) -> None: ...
 
 class Ingrediente(_message.Message):
-    __slots__ = ["id", "ingrediente"]
+    __slots__ = ["id", "nombre"]
     ID_FIELD_NUMBER: _ClassVar[int]
-    INGREDIENTE_FIELD_NUMBER: _ClassVar[int]
+    NOMBRE_FIELD_NUMBER: _ClassVar[int]
     id: int
-    ingrediente: str
-    def __init__(self, id: _Optional[int] = ..., ingrediente: _Optional[str] = ...) -> None: ...
+    nombre: str
+    def __init__(self, id: _Optional[int] = ..., nombre: _Optional[str] = ...) -> None: ...

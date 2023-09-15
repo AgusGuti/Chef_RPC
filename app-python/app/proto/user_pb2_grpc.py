@@ -2,6 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from . import user_pb2 as user__pb2
 
 
@@ -24,6 +25,16 @@ class UsersServiceStub(object):
                 request_serializer=user__pb2.User.SerializeToString,
                 response_deserializer=user__pb2.User.FromString,
                 )
+        self.TraerUser = channel.unary_unary(
+                '/model.UsersService/TraerUser',
+                request_serializer=user__pb2.User.SerializeToString,
+                response_deserializer=user__pb2.User.FromString,
+                )
+        self.FindAll = channel.unary_unary(
+                '/model.UsersService/FindAll',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=user__pb2.Users.FromString,
+                )
 
 
 class UsersServiceServicer(object):
@@ -41,6 +52,18 @@ class UsersServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def TraerUser(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def FindAll(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_UsersServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -53,6 +76,16 @@ def add_UsersServiceServicer_to_server(servicer, server):
                     servicer.ValidarCredenciales,
                     request_deserializer=user__pb2.User.FromString,
                     response_serializer=user__pb2.User.SerializeToString,
+            ),
+            'TraerUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.TraerUser,
+                    request_deserializer=user__pb2.User.FromString,
+                    response_serializer=user__pb2.User.SerializeToString,
+            ),
+            'FindAll': grpc.unary_unary_rpc_method_handler(
+                    servicer.FindAll,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=user__pb2.Users.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -95,5 +128,39 @@ class UsersService(object):
         return grpc.experimental.unary_unary(request, target, '/model.UsersService/ValidarCredenciales',
             user__pb2.User.SerializeToString,
             user__pb2.User.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def TraerUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.UsersService/TraerUser',
+            user__pb2.User.SerializeToString,
+            user__pb2.User.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def FindAll(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.UsersService/FindAll',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            user__pb2.Users.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

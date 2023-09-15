@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect
+from flask import Flask, render_template, request, flash, redirect,session, json
 from . import user_blueprint 
 
 from google.protobuf.json_format import MessageToJson
@@ -15,18 +15,20 @@ logger = logging.getLogger(__name__)
 
 @user_blueprint.route("/autenticar", methods=['POST'])
 def autenticar():
-    logger.info("/autenticar",request.form['username'])
+    logger.info("/autenticar  %s",request.form['username'])
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = UsersServiceStub(channel)
         response = stub.ValidarCredenciales(User(nombre=request.form['username'],email=request.form['username'],clave=request.form['password']))
-    print("Greeter client received: " + str(response))    
-    user={"user":MessageToJson(response)}
-    logger.info("user %s",user)
-    if user["user"]=="{}":
+    
+    user=MessageToJson(response)
+    logger.info("user : %s",response.nombre)
+    if user=="":
         flash('Usuario y/o clave incorrectos','danger')
         return redirect('/')
     else:
-        return render_template('index.html', user=request.form['username'])
+        session['user_id']=response.id
+        session['nombre']=response.nombre
+        return render_template('index.html', nombre=response.nombre)
 
 @user_blueprint.route("/registrar", methods=['POST'])
 def registrarUser():
@@ -67,4 +69,25 @@ def seguidores():
 @user_blueprint.route("/logout",methods = ['GET'])
 def logout():
     logger.info("/logout")
+    session.pop('user_id', None)
+    session.pop('nombre', None)
     return redirect('/')
+
+
+@user_blueprint.route("/user/<int:id>", methods=["GET", "POST"])
+def userById(id):
+    logger.info("/userById &s"+str(id))
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = UsersServiceStub(channel)
+        response = stub.TraerUser(User(id=id)) 
+    print("Greeter client received: " + str(response))    
+    return MessageToJson(response)
+
+@user_blueprint.route("/users",methods = ['GET'])
+def findAll():
+    logger.info("/users")
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = UsersServiceStub(channel)
+        response = stub.FindAll(User()) 
+    print("Greeter client received: " + str(response))    
+    return MessageToJson(response)

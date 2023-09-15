@@ -25,13 +25,17 @@ public class IngredienteService extends IngredientesServiceGrpc.IngredientesServ
 
     @Override
     public void traerIngrediente(IngredienteProto.Ingrediente request, StreamObserver<IngredienteProto.Ingrediente> responseObserver) {
-        Ingrediente ingrediente = ingredienteRepository.findById(request.getId()).get();
-        IngredienteProto.Ingrediente a = IngredienteProto.Ingrediente.newBuilder()
-                    .setIngrediente(ingrediente.getIngrediente())
-                    .setId(ingrediente.getId())
-                    .build();
+        List<Ingrediente> ingredientes = ingredienteRepository.findAll(); // Obtener la lista de todos los ingredientes
 
-        responseObserver.onNext(a);
+        for (Ingrediente ingrediente : ingredientes) {
+            IngredienteProto.Ingrediente ingredienteProto = IngredienteProto.Ingrediente.newBuilder()
+                .setId(ingrediente.getId())
+                .setNombre(ingrediente.getNombre())
+                .build();
+            
+            responseObserver.onNext(ingredienteProto);
+            }
+    
         responseObserver.onCompleted();
     }
 
@@ -40,7 +44,7 @@ public class IngredienteService extends IngredientesServiceGrpc.IngredientesServ
         List<IngredienteProto.Ingrediente> ingredientedb = new ArrayList<>();
         for (Ingrediente ingrediente : ingredienteRepository.findAll()) {
             IngredienteProto.Ingrediente ingredienteProto = IngredienteProto.Ingrediente.newBuilder()
-                    .setIngrediente(ingrediente.getIngrediente())
+                    .setNombre(ingrediente.getNombre())
                     .setId(ingrediente.getId())
                     .build();
             ingredientedb.add(ingredienteProto);
