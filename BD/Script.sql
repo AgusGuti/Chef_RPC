@@ -5,6 +5,9 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
 -- Schema chefencasa
 -- -----------------------------------------------------
 DROP SCHEMA IF EXISTS `chefencasa` ;
@@ -38,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `chefencasa`.`user` (
   `apellido` VARCHAR(45) NOT NULL,
   `clave` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
+  `foto_perfil` VARCHAR(255) NULL DEFAULT NULL,
   `nombre` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -56,7 +60,7 @@ DROP TABLE IF EXISTS `chefencasa`.`receta` ;
 CREATE TABLE IF NOT EXISTS `chefencasa`.`receta` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(1000) NOT NULL,
-  `fecha_creacion` DATETIME(6) NOT NULL,
+  `fecha_creacion` DATETIME(6) NULL DEFAULT NULL,
   `foto1` VARCHAR(255) NULL DEFAULT NULL,
   `foto2` VARCHAR(255) NULL DEFAULT NULL,
   `foto3` VARCHAR(255) NULL DEFAULT NULL,
@@ -113,31 +117,49 @@ DROP TABLE IF EXISTS `chefencasa`.`ingrediente` ;
 
 CREATE TABLE IF NOT EXISTS `chefencasa`.`ingrediente` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `ingrediente` VARCHAR(255) NOT NULL,
+  `nombre` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `chefencasa`.`ingrediente_receta`
+-- Table `chefencasa`.`receta_ingredientes`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `chefencasa`.`ingrediente_receta` ;
+DROP TABLE IF EXISTS `chefencasa`.`receta_ingredientes` ;
 
-CREATE TABLE IF NOT EXISTS `chefencasa`.`ingrediente_receta` (
-  `ingrediente_id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `chefencasa`.`receta_ingredientes` (
   `receta_id` INT NOT NULL,
-  PRIMARY KEY (`ingrediente_id`, `receta_id`),
-  CONSTRAINT `FKa85r4c59407tw88pqv7ndn478`
-    FOREIGN KEY (`ingrediente_id`)
-    REFERENCES `chefencasa`.`ingrediente` (`id`),
-  CONSTRAINT `FKd789xl9q0ljewdsu5r8ualqr5`
+  `ingredientes_id` INT NOT NULL,
+  PRIMARY KEY (`receta_id`, `ingredientes_id`),
+  CONSTRAINT `FKbl8nm6s0d3hi6qb6wpx8qyrru`
     FOREIGN KEY (`receta_id`)
-    REFERENCES `chefencasa`.`receta` (`id`))
+    REFERENCES `chefencasa`.`receta` (`id`),
+  CONSTRAINT `FKqx3v38baha3exb2c5jbxl4ooc`
+    FOREIGN KEY (`ingredientes_id`)
+    REFERENCES `chefencasa`.`ingrediente` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
-CREATE INDEX `FKd789xl9q0ljewdsu5r8ualqr5` ON `chefencasa`.`ingrediente_receta` (`receta_id` ASC) VISIBLE;
+CREATE INDEX `FKqx3v38baha3exb2c5jbxl4ooc` ON `chefencasa`.`receta_ingredientes` (`ingredientes_id` ASC) VISIBLE;
+
+
+-- -----------------------------------------------------
+-- Table `chefencasa`.`seguidores`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `chefencasa`.`seguidores` ;
+
+CREATE TABLE IF NOT EXISTS `chefencasa`.`seguidores` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FKist0ac0ljtoc0j09nkn5ibeff`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `chefencasa`.`user` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+CREATE INDEX `FKist0ac0ljtoc0j09nkn5ibeff` ON `chefencasa`.`seguidores` (`user_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
