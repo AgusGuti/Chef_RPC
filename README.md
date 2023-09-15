@@ -23,6 +23,8 @@ Clases creadas en capa servidor:
 -ERROR al elegir 2 ingredientes al cargar receta (F. de Obs: 15/09/2023)
 -ERROR al mostrar Mis Recetas me mostró las recetas de otro usuario (F. de Obs: 15/09/2023)
 
+-Falta poder marcar publicacion como favorito al verla en STORYLINE (F. de Obs: 15/09/2023)
+
 
 ## SERVIDOR JAVA GRPC
 
