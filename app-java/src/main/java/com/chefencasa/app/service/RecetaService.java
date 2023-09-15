@@ -33,6 +33,7 @@ import com.chefencasa.model.RecetaProto;
 import com.chefencasa.model.RecetasServiceGrpc;
 import com.google.protobuf.Empty;
 
+import io.grpc.StatusException;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 
@@ -77,7 +78,7 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 			for (IngredienteProto.Ingrediente ingrediente :request.getIngredientesList())
 				receta.getIngredientes().add(ingredienteRepository.findById(ingrediente.getId()));
 
-			recetaRepository.saveAndFlush(receta);
+			recetaRepository.save(receta);
 
 		} catch (Exception e) {
 			System.err.println("Error al agregar la receta: " + e.getMessage());
@@ -145,6 +146,80 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 			.build();
 		
 		responseObserver.onNext(a);
+		responseObserver.onCompleted();
+	}
+
+
+	public void findById(RecetaProto.Receta request, StreamObserver<RecetaProto.Receta> responseObserver) {
+    try {
+        int recetaId = request.getIdReceta();
+        Receta receta = recetaRepository.findById(recetaId);
+
+        if (receta !=null) {
+
+			List<IngredienteProto.Ingrediente> lstIngredientes = new ArrayList<>();
+
+            if (receta.getIngredientes() != null) {
+                lstIngredientes.addAll(receta.getIngredientes().stream()
+                        .map(ingrediente -> IngredienteProto.Ingrediente.newBuilder()
+                                .setId(ingrediente.getId())
+                                .setNombre(ingrediente.getNombre())
+                                .build())
+                        .collect(Collectors.toList()));
+            }
+
+            RecetaProto.Receta recetaProto = RecetaProto.Receta.newBuilder()
+                    .setCategoria(CategoriaProto.Categoria.newBuilder()
+                            .setCategoria(receta.getCategoria().getCategoria())
+                            .build())
+                    .setDescripcion(receta.getDescripcion())
+                    .setIdReceta(receta.getId())
+                    .setTituloReceta(receta.getTituloReceta())
+                    .setPasos(receta.getPasos())
+                    .setTiempoPreparacion(receta.getTiempoPreparacion())
+                    .setFoto1(receta.getFoto1())
+                    .setFoto2(receta.getFoto2())
+                    .setFoto3(receta.getFoto3())
+                    .setFoto4(receta.getFoto4())
+                    .setFoto5(receta.getFoto5())
+                    .addAllIngredientes(lstIngredientes)
+                    .build();
+
+            responseObserver.onNext(recetaProto);
+            responseObserver.onCompleted();
+        } 
+    } catch (Exception e) {
+        System.err.println("Error al buscar la receta por ID: " + e.getMessage());
+    	}
+	}
+
+	@Transactional
+	public void modificarReceta(RecetaProto.Receta request, StreamObserver<RecetaProto.Receta> responseObserver) {
+		try {
+
+			Receta receta = recetaRepository.findById(request.getIdReceta());
+			
+			if (receta !=null) {
+				
+				receta.setCategoria(categoriaRepository.findById(request.getCategoria().getId()).get());
+				receta.setTituloReceta(request.getTituloReceta());
+				receta.setDescripcion(request.getDescripcion());
+				
+				recetaRepository.saveAndFlush(receta);
+				
+				RecetaProto.Receta recetaModificada = RecetaProto.Receta.newBuilder()
+					.setIdReceta(receta.getId())
+					.setCategoria(CategoriaProto.Categoria.newBuilder().setCategoria(receta.getCategoria().getCategoria()).build())
+					.setTituloReceta(receta.getTituloReceta())
+					.setDescripcion(receta.getDescripcion())
+					.build();
+				
+				responseObserver.onNext(recetaModificada);
+			}
+		} catch (Exception e) {
+			System.err.println("Error al modificar la receta: " + e.getMessage());
+		}
+		
 		responseObserver.onCompleted();
 	}
 
