@@ -4,6 +4,7 @@
   <title>Website Grupo E</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
   <meta charset="utf-8" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -57,7 +58,20 @@
       categorias();
       cargarIngredientes();
       cargarUsuario();
+      cargarIngredientesYReceta(recetaId);
+      cargarDetallesReceta(recetaId);
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var modificarButtons = document.querySelectorAll(".btn-warning.btn-sm");
+      modificarButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          var recetaId = button.getAttribute("data-receta-id");
+          cargarDetallesReceta(recetaId);
+        });
+      });
+    });
+
     //select Categoria
     function categorias() {
       var out = "";
@@ -127,6 +141,117 @@
       xhr.send();
       }
 
+      function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
+        console.log("cargarIngredientesYReceta function called");
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/ingredientes", true);
+      
+        // Define ingredientesSelect para seleccionar el elemento HTML
+        var ingredientesSelect = document.getElementById("ingredientes");
+      
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              var response = JSON.parse(xhr.responseText);
+              var ingredientes = response.ingrediente;
+      
+              console.log("Respuesta del servidor:", ingredientes);
+      
+              if (Array.isArray(ingredientes)) {
+                ingredientesSelect.innerHTML = ""; // Limpia el contenido actual
+      
+                var ingredientesSet = new Set(ingredientesSeleccionados);
+      
+                ingredientes.forEach(function (ingrediente) {
+                  var option = document.createElement("option");
+                  option.value = ingrediente.id;
+                  option.text = ingrediente.nombre;
+      
+                  // Verifica si el ingrediente actual está en el conjunto de ingredientes seleccionados
+                  if (ingredientesSet.has(ingrediente.id)) {
+                    option.selected = true;
+                  }
+      
+                  ingredientesSelect.appendChild(option);
+                });
+      
+                // Asegúrate de que el elemento select permita la selección múltiple
+                ingredientesSelect.setAttribute("multiple", "multiple");
+              } else {
+                console.error(
+                  "La respuesta del servidor no contiene una lista de ingredientes válida:",
+                  response
+                );
+              }
+            } else {
+              console.error("Error al cargar ingredientes:", xhr.status);
+            }
+          }
+        };
+        xhr.send();
+      }
+      
+      // Función para cargar los detalles de la receta en el modal de modificar
+      function cargarDetallesReceta(recetaId) {
+        console.log("cargarDetallesReceta function called");
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", `/receta/findById/${recetaId}`, true);
+      
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              var response = JSON.parse(xhr.responseText);
+      
+              // Llena los campos del modal de modificar con los detalles de la receta
+              document.getElementById("mod_receta_id").value = recetaId; // Establece el valor del campo oculto con el ID de la receta
+              document.getElementById("mod_tituloReceta").value = response.tituloReceta;
+              document.getElementById("mod_descripcion").value = response.descripcion;
+              document.getElementById("mod_foto1").value = response.foto1;
+              document.getElementById("mod_foto2").value = response.foto2;
+              document.getElementById("mod_foto3").value = response.foto3;
+              document.getElementById("mod_foto4").value = response.foto4;
+              document.getElementById("mod_foto5").value = response.foto5;
+              document.getElementById("mod_pasos").value = response.pasos;
+              document.getElementById("mod_tiempoPreparacion").value = response.tiemPreparacion;
+
+              // Llenar la lista de ingredientes en el elemento select "mod_ingredientes"
+              var modIngredientesSelect = document.getElementById("mod_ingredientes");
+              modIngredientesSelect.innerHTML = ""; // Limpia el contenido actual
+
+              var ingredientes = response.ingredientes;
+              if (Array.isArray(ingredientes)) {
+                ingredientes.forEach(function (ingrediente) {
+                  var option = document.createElement("option");
+                  option.value = ingrediente.id;
+                  option.text = ingrediente.nombre;
+                  modIngredientesSelect.appendChild(option);
+                });
+              } else {
+                console.error("La respuesta del servidor no contiene una lista de ingredientes válida:", response);
+              }
+              
+              // Llenar el campo de categoría en el elemento select "mod_categoria"
+              var modCategoriaSelect = document.getElementById("mod_categoria");
+              modCategoriaSelect.innerHTML = ""; // Limpia el contenido actual
+              var categoria = response.categoria;
+              if (categoria) {
+                var optionCategoria = document.createElement("option");
+                optionCategoria.value = categoria.id;
+                optionCategoria.text = categoria.categoria;
+                modCategoriaSelect.appendChild(optionCategoria);
+              } else {
+                console.error("La respuesta del servidor no contiene una categoría válida:", response);
+              }
+
+              // Abre el modal de modificar
+              $("#modalModificarReceta").modal("show");
+            } else {
+              console.error("Error al cargar los detalles de la receta:", xhr.status);
+            }
+          }
+        };
+        xhr.send();
+      }
 
     window.onload = inicio;
 
@@ -159,7 +284,7 @@
     >
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/myprofile">Gente</a>
+          <a class="nav-link" href="/myprofile">Mi Perfil</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/recetas">Mis Recetas</a>
@@ -274,12 +399,27 @@
                 >
               </td>
               <td>
-                <button
-                  class="btn btn-primary ver-detalle"
+                  <button class="btn-info btn-sm"
                   data-toggle="modal"
-                  data-target="#modalReceta{{ receta.idReceta }}"
-                >
-                  Ver Detalle
+                  data-target="#modalReceta{{ receta.idReceta }}">
+                  <i class="fas fa-info-circle icono"></i> 
+                  </button>
+                  <button class="btn-warning btn-sm"
+                  data-toggle="modal"
+                  data-receta-id="{{ receta.idReceta }}"
+                  data-target="#modalModificarReceta"
+                  data-receta-titulo="{{ receta.tituloReceta }}"
+                  data-receta-descripcion="{{ receta.descripcion }}"
+                  data-receta-foto1="{{receta.foto1 }}"
+                  data-receta-foto2="{{receta.foto2 }}"
+                  data-receta-foto3="{{receta.foto3 }}"
+                  data-receta-foto4="{{receta.foto4 }}"
+                  data-receta-foto5="{{receta.foto5 }}"
+                  data-receta-ingredientes="{{ receta.ingredientes }}"
+                  data-receta-categoria="{{ receta.categoria }}"
+                  data-receta-pasos="{{ receta.pasos }}"
+                  data-receta-tiempo="{{ receta.tiempoPreparacion }}">
+                <i class="fas fa-pencil-alt icono"></i>
                 </button>
               </td>
             </tr>
@@ -442,7 +582,75 @@
     </div>
   </div>
 
-  <!-- Modales para el detalle de las recetas -->
+  <!-- Modal para modificar una receta -->
+  <div class="modal fade" id="modalModificarReceta" tabindex="-1" role="dialog" aria-labelledby="modalModificarRecetaLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form action="/modificarReceta" method="post">
+        <!-- Formulario para modificar una receta -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalModificarRecetaLabel">Modificar Receta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">         
+          <input type="hidden" name="receta_id" id="mod_receta_id">
+          <div class="form-group">
+            <label for="mod_tituloReceta">Título:</label>
+            <input type="text" class="form-control" id="mod_tituloReceta" name="mod_tituloReceta" placeholder="Ingrese el título">
+          </div>
+          <div class="form-group">
+            <label for="mod_descripcion">Descripción:</label>
+            <textarea class="form-control" id="mod_descripcion" name="mod_descripcion" placeholder="Ingrese la descripción"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="mod_foto1">Foto 1 (URL):</label>
+            <input type="text" class="form-control" id="mod_foto1" name="mod_foto1" placeholder="URL de la foto 1">
+          </div>
+          <div class="form-group">
+          <label for="mod_foto2">Foto 2 (URL):</label>
+                      <input type="text" class="form-control" id="mod_foto2" name="mod_foto2" placeholder="URL de la foto 2">
+                    </div>
+                    <div class="form-group">
+                      <label for="mod_foto3">Foto 3 (URL):</label>
+                      <input type="text" class="form-control" id="mod_foto3" name="mod_foto3" placeholder="URL de la foto 3">
+                    </div>
+                    <div class="form-group">
+                      <label for="mod_foto4">Foto 4 (URL):</label>
+                      <input type="text" class="form-control" id="mod_foto4" name="mod_foto4" placeholder="URL de la foto 4"> 
+                    </div>
+                    <div class="form-group">
+                      <label for="mod_foto5">Foto 5 (URL):</label>
+                      <input type="text" class="form-control" id="mod_foto5" name="mod_foto5" placeholder="URL de la foto 5">
+                    </div>
+                    <div class="form-group">
+                      <label for="mod_ingredientes">Ingredientes:</label>
+                      <select class="form-control" id="mod_ingredientes" name="mod_ingredientes" multiple></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="mod_categoria">Categoría:</label>
+                      <select class="form-control form-control-sm" id="mod_categoria" name="mod_categoria"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="mod_pasos">Pasos de Preparación:</label>
+                      <textarea class="form-control" id="mod_pasos" name="mod_pasos" placeholder="Ingrese los pasos de preparación"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="mod_tiempoPreparacion">Tiempo de Preparación (minutos):</label>
+                      <input type="number" class="form-control" id="mod_tiempoPreparacion" name="mod_tiempoPreparacion" placeholder="Ingrese el tiempo de preparación en minutos">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                  </div>
+          </form>
+      </div>
+    </div>
+  </div>
+
+<!-- Modales para el detalle de las recetas -->
   {% for receta in recetas %}
   <div
     class="modal fade"
@@ -465,7 +673,6 @@
           <p>Descripcion: {{ receta.descripcion }}</p>
           <p>Ingredientes: {{ receta.ingredientes }}</p>
           <p>Pasos de preparación: {{ receta.pasos }}</p>
-          <!-- Agrega más detalles aquí según tus necesidades -->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

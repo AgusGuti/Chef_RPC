@@ -44,6 +44,7 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
         .setApellido(request.getApellido())
         .setEmail(request.getEmail())
         .setClave(request.getClave())
+        .setFotoPerfil(request.getFotoPerfil())
         .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();
@@ -66,6 +67,7 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
         .setApellido(user.getApellido())
         .setEmail(user.getEmail())
         .setClave(user.getClave())
+        .setFotoPerfil(user.getFotoPerfil())
         .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();
