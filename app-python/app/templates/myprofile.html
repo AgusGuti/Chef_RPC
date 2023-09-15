@@ -82,11 +82,29 @@
 
     <main> <!-- Contenido principal -->
       
+      <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='myProfile_styles.css')}}"
+      />
 
-      <h3>Nro. de Usuario: {{user_id}}</h3>
-      <h3>Nombre: {{nombre}}</h3>
-      <h3>Apellido: {{apellido}}</h3>
-      <h3>E-mail: {{email}}</h3>
+      <br>
+      <br>
+
+      <img class="pad-der" src= "{{fotoPerfil}}"
+                  alt="Foto de Perfil" style="float: right;max-width: 55%; height: auto;">
+     
+      <br>
+      <br>
+      <br>
+
+      <h3 class="pad-izq">
+        Nro. de Usuario: {{user_id}}<br>
+        Nombre: {{nombre}}<br>
+        Apellido: {{apellido}}<br>
+        E-mail: {{email}}<br>
+      </h3>
+      
       
     </main>
 
