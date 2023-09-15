@@ -34,7 +34,7 @@
       />
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark nav-bk">
-      <a class="navbar-brand d-flex gap-lg-1 mx-lg-3" href="#">
+      <a class="navbar-brand d-flex gap-lg-1 mx-lg-3" href="/index">
         <i class="bi bi-house-fill text-white"></i> Inicio
       </a>
       <button
@@ -51,7 +51,7 @@
       >
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="/myprofile">Gente</a>
+            <a class="nav-link" href="/myprofile">Mi Perfil</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/recetas">Mis Recetas</a>
@@ -79,5 +79,34 @@
         </ul>
       </div>
     </nav>
+
+    <main> <!-- Contenido principal -->
+      
+      <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='myProfile_styles.css')}}"
+      />
+
+      <br>
+      <br>
+
+      <img class="pad-der" src= "{{fotoPerfil}}"
+                  alt="Foto de Perfil" style="float: right;max-width: 55%; height: auto;">
+     
+      <br>
+      <br>
+      <br>
+
+      <h3 class="pad-izq">
+        Nro. de Usuario: {{user_id}}<br>
+        Nombre: {{nombre}}<br>
+        Apellido: {{apellido}}<br>
+        E-mail: {{email}}<br>
+      </h3>
+      
+      
+    </main>
+
   </body>
 </html>
