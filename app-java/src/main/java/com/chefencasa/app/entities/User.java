@@ -44,7 +44,7 @@ public class User implements Serializable {
 	@Column(name = "clave", nullable = false, length = 45)
 	private String clave;
 
-	@Column(name = "fotoPerfil", nullable = true, length = 255)
+	@Column(name = "fotoPerfil", nullable = false, length = 255, columnDefinition = "VARCHAR(255) DEFAULT ''")
 	private String fotoPerfil;
 
 	public User(int id, String nombre, String apellido, String email, String clave, String fotoPerfil) {
@@ -69,6 +69,7 @@ public class User implements Serializable {
 		this.apellido = apellido;
 		this.email = email;
 		this.clave = clave;
+		this.fotoPerfil = "";
 	}
 
 	@Override

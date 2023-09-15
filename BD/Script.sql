@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `chefencasa`.`user` (
   `apellido` VARCHAR(45) NOT NULL,
   `clave` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `foto_perfil` VARCHAR(255) NULL DEFAULT NULL,
+  `foto_perfil` VARCHAR(255) NULL DEFAULT '',
   `nombre` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
