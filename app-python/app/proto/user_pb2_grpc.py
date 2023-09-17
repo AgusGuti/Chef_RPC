@@ -35,6 +35,16 @@ class UsersServiceStub(object):
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=user__pb2.Users.FromString,
                 )
+        self.TraerSeguidos = channel.unary_unary(
+                '/model.UsersService/TraerSeguidos',
+                request_serializer=user__pb2.User.SerializeToString,
+                response_deserializer=user__pb2.Users.FromString,
+                )
+        self.TraerSeguidores = channel.unary_unary(
+                '/model.UsersService/TraerSeguidores',
+                request_serializer=user__pb2.User.SerializeToString,
+                response_deserializer=user__pb2.Users.FromString,
+                )
 
 
 class UsersServiceServicer(object):
@@ -64,6 +74,18 @@ class UsersServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def TraerSeguidos(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def TraerSeguidores(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_UsersServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -85,6 +107,16 @@ def add_UsersServiceServicer_to_server(servicer, server):
             'FindAll': grpc.unary_unary_rpc_method_handler(
                     servicer.FindAll,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=user__pb2.Users.SerializeToString,
+            ),
+            'TraerSeguidos': grpc.unary_unary_rpc_method_handler(
+                    servicer.TraerSeguidos,
+                    request_deserializer=user__pb2.User.FromString,
+                    response_serializer=user__pb2.Users.SerializeToString,
+            ),
+            'TraerSeguidores': grpc.unary_unary_rpc_method_handler(
+                    servicer.TraerSeguidores,
+                    request_deserializer=user__pb2.User.FromString,
                     response_serializer=user__pb2.Users.SerializeToString,
             ),
     }
@@ -161,6 +193,40 @@ class UsersService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/model.UsersService/FindAll',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            user__pb2.Users.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def TraerSeguidos(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.UsersService/TraerSeguidos',
+            user__pb2.User.SerializeToString,
+            user__pb2.Users.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def TraerSeguidores(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.UsersService/TraerSeguidores',
+            user__pb2.User.SerializeToString,
             user__pb2.Users.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
