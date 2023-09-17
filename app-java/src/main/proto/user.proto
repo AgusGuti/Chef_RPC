@@ -13,6 +13,8 @@ service UsersService {
   rpc ValidarCredenciales(User) returns (User) {}
   rpc TraerUser(User) returns (User) {}
   rpc FindAll(google.protobuf.Empty) returns (Users) {}
+  rpc TraerSeguidos(User) returns (Users) {}
+  rpc TraerSeguidores(User) returns (Users) {}
 
 }
 

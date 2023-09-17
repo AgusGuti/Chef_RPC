@@ -139,6 +139,68 @@ public final class UsersServiceGrpc {
     return getFindAllMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.UserProto.User,
+      com.chefencasa.model.UserProto.Users> getTraerSeguidosMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "TraerSeguidos",
+      requestType = com.chefencasa.model.UserProto.User.class,
+      responseType = com.chefencasa.model.UserProto.Users.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.chefencasa.model.UserProto.User,
+      com.chefencasa.model.UserProto.Users> getTraerSeguidosMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.Users> getTraerSeguidosMethod;
+    if ((getTraerSeguidosMethod = UsersServiceGrpc.getTraerSeguidosMethod) == null) {
+      synchronized (UsersServiceGrpc.class) {
+        if ((getTraerSeguidosMethod = UsersServiceGrpc.getTraerSeguidosMethod) == null) {
+          UsersServiceGrpc.getTraerSeguidosMethod = getTraerSeguidosMethod =
+              io.grpc.MethodDescriptor.<com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.Users>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "TraerSeguidos"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.UserProto.User.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.UserProto.Users.getDefaultInstance()))
+              .setSchemaDescriptor(new UsersServiceMethodDescriptorSupplier("TraerSeguidos"))
+              .build();
+        }
+      }
+    }
+    return getTraerSeguidosMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.UserProto.User,
+      com.chefencasa.model.UserProto.Users> getTraerSeguidoresMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "TraerSeguidores",
+      requestType = com.chefencasa.model.UserProto.User.class,
+      responseType = com.chefencasa.model.UserProto.Users.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.chefencasa.model.UserProto.User,
+      com.chefencasa.model.UserProto.Users> getTraerSeguidoresMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.Users> getTraerSeguidoresMethod;
+    if ((getTraerSeguidoresMethod = UsersServiceGrpc.getTraerSeguidoresMethod) == null) {
+      synchronized (UsersServiceGrpc.class) {
+        if ((getTraerSeguidoresMethod = UsersServiceGrpc.getTraerSeguidoresMethod) == null) {
+          UsersServiceGrpc.getTraerSeguidoresMethod = getTraerSeguidoresMethod =
+              io.grpc.MethodDescriptor.<com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.Users>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "TraerSeguidores"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.UserProto.User.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.UserProto.Users.getDefaultInstance()))
+              .setSchemaDescriptor(new UsersServiceMethodDescriptorSupplier("TraerSeguidores"))
+              .build();
+        }
+      }
+    }
+    return getTraerSeguidoresMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -214,6 +276,20 @@ public final class UsersServiceGrpc {
         io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.Users> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindAllMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void traerSeguidos(com.chefencasa.model.UserProto.User request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.Users> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getTraerSeguidosMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void traerSeguidores(com.chefencasa.model.UserProto.User request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.Users> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getTraerSeguidoresMethod(), responseObserver);
+    }
   }
 
   /**
@@ -274,6 +350,22 @@ public final class UsersServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getFindAllMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void traerSeguidos(com.chefencasa.model.UserProto.User request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.Users> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getTraerSeguidosMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void traerSeguidores(com.chefencasa.model.UserProto.User request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.Users> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getTraerSeguidoresMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -318,6 +410,20 @@ public final class UsersServiceGrpc {
     public com.chefencasa.model.UserProto.Users findAll(com.google.protobuf.Empty request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getFindAllMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.UserProto.Users traerSeguidos(com.chefencasa.model.UserProto.User request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getTraerSeguidosMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.UserProto.Users traerSeguidores(com.chefencasa.model.UserProto.User request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getTraerSeguidoresMethod(), getCallOptions(), request);
     }
   }
 
@@ -368,12 +474,30 @@ public final class UsersServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getFindAllMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.UserProto.Users> traerSeguidos(
+        com.chefencasa.model.UserProto.User request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getTraerSeguidosMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.UserProto.Users> traerSeguidores(
+        com.chefencasa.model.UserProto.User request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getTraerSeguidoresMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_ADD_USER = 0;
   private static final int METHODID_VALIDAR_CREDENCIALES = 1;
   private static final int METHODID_TRAER_USER = 2;
   private static final int METHODID_FIND_ALL = 3;
+  private static final int METHODID_TRAER_SEGUIDOS = 4;
+  private static final int METHODID_TRAER_SEGUIDORES = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -406,6 +530,14 @@ public final class UsersServiceGrpc {
           break;
         case METHODID_FIND_ALL:
           serviceImpl.findAll((com.google.protobuf.Empty) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.Users>) responseObserver);
+          break;
+        case METHODID_TRAER_SEGUIDOS:
+          serviceImpl.traerSeguidos((com.chefencasa.model.UserProto.User) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.Users>) responseObserver);
+          break;
+        case METHODID_TRAER_SEGUIDORES:
+          serviceImpl.traerSeguidores((com.chefencasa.model.UserProto.User) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.Users>) responseObserver);
           break;
         default:
@@ -454,6 +586,20 @@ public final class UsersServiceGrpc {
               com.google.protobuf.Empty,
               com.chefencasa.model.UserProto.Users>(
                 service, METHODID_FIND_ALL)))
+        .addMethod(
+          getTraerSeguidosMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.chefencasa.model.UserProto.User,
+              com.chefencasa.model.UserProto.Users>(
+                service, METHODID_TRAER_SEGUIDOS)))
+        .addMethod(
+          getTraerSeguidoresMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.chefencasa.model.UserProto.User,
+              com.chefencasa.model.UserProto.Users>(
+                service, METHODID_TRAER_SEGUIDORES)))
         .build();
   }
 
@@ -506,6 +652,8 @@ public final class UsersServiceGrpc {
               .addMethod(getValidarCredencialesMethod())
               .addMethod(getTraerUserMethod())
               .addMethod(getFindAllMethod())
+              .addMethod(getTraerSeguidosMethod())
+              .addMethod(getTraerSeguidoresMethod())
               .build();
         }
       }

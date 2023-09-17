@@ -91,6 +91,7 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
    	@Override
 	public void findAll(Empty request, StreamObserver<UserProto.Users> responseObserver) {
         List<UserProto.User> userdb = new ArrayList<>();
+
         for (User user : usuarioRepository.findAll()) {
             UserProto.User userProto = UserProto.User.newBuilder()
                     .setId(user.getId())
@@ -104,5 +105,55 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
         responseObserver.onNext(a);
         responseObserver.onCompleted();
     }
+
     
+    @Override
+    public void traerSeguidos(UserProto.User request,StreamObserver<UserProto.Users> responseObserver) {
+        
+        List<UserProto.User> userdb = new ArrayList<>();
+
+        for (User user : usuarioRepository.findSeguidosById(request.getId())) {
+            UserProto.User userProto = UserProto.User.newBuilder()
+                    .setId(user.getId())
+                    .setNombre(user.getNombre())
+                    .setApellido(user.getApellido())
+                    .setEmail(user.getEmail())
+                    .setFotoPerfil(user.getFotoPerfil())
+                    .build();
+            userdb.add(userProto);
+        }
+
+        UserProto.Users a = UserProto.Users.newBuilder()
+            .addAllUser(userdb)
+            .build();
+        responseObserver.onNext(a);
+        responseObserver.onCompleted();
+    }
+        
+    @Override
+    public void traerSeguidores(UserProto.User request,StreamObserver<UserProto.Users> responseObserver) {
+        
+        List<UserProto.User> userdb = new ArrayList<>();
+
+        for (User user : usuarioRepository.findSeguidoresById(request.getId())) {
+            UserProto.User userProto = UserProto.User.newBuilder()
+                    .setId(user.getId())
+                    .setNombre(user.getNombre())
+                    .setApellido(user.getApellido())
+                    .setEmail(user.getEmail())
+                    .setFotoPerfil(user.getFotoPerfil())
+                    .build();
+            userdb.add(userProto);
+        }
+
+        UserProto.Users a = UserProto.Users.newBuilder()
+            .addAllUser(userdb)
+            .build();
+        responseObserver.onNext(a);
+        responseObserver.onCompleted();
+    }
+
+
+
 }
+
