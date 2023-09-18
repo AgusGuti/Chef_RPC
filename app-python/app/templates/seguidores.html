@@ -90,11 +90,11 @@
       <div class="table-title">
         <div class="row">
           <div class="col-sm-8">
-            <h2 style="margin-bottom: 20px;"><b>Mis seguidores</b></h2>
+            <h2 style="margin-bottom: 20px;"><b>Lista de seguidores</b></h2>
           </div>
         </div>
         <div class="filter-box">
-          <form action="/buscar_recetas" method="GET" class="row">
+          <form action="/buscar_seguidores" method="GET" class="row">
             
             </div>
             <div class="col">
@@ -116,12 +116,13 @@
           <tr>
             <th>#</th>
             <th>Nombre</th>
+            <th>Apellido</th>
             <th>Email</th>
             <th>Foto de perfil</th>
             <th><button type="button"
               class="btn btn-success"
               data-toggle="modal">
-              bloquear
+              dejar de seguir
             </button>
 
             <button type="button"
@@ -133,25 +134,26 @@
           
         </thead>
         <tbody>
-          {% for user in users %}
+          {% for user in seguidores %}
           <tr>
-            <td>{{ receta.idReceta }}</td>
-            <td>{{ receta.tituloReceta }}</td>
-            <td>{{ receta.tiempoPreparacion }} minutos</td>
+            <td>{{ user.id }}</td>
+            <td>{{ user.nombre }}</td>
+            <td>{{ user.apellido }}</td>
+            <td>{{ user.email }}</td>
             <td>
               <img
-                src="{{ receta.foto1 }}"
-                alt="{{ receta.tituloReceta }}"
+                src="{{ user.foto_perfil }}"
+                alt="{{ user.nombre }} {{ user.apellido }}"
                 class="miniatura"
                 data-toggle="modal"
-                data-target="#modalReceta{{ receta.idReceta }}"
+                data-target="#modaluser{{ user.id }}"
               >
             </td>
             <td>
               <button
                 class="btn btn-primary ver-detalle"
                 data-toggle="modal"
-                data-target="#modalReceta{{ receta.idReceta }}"
+                data-target="#modaluser{{ user.id }}"
               >
                 Ver Detalle
               </button>

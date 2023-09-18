@@ -50,8 +50,7 @@ public class Seguidores implements Serializable {
 	
 	public Seguidores(int id) {
 		
-		this.id = id;
-		
+		this.id = id;		
 		
 	}
 	

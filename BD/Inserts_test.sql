@@ -200,13 +200,17 @@ VALUES
 	(3, 4),
 	(5, 6),
 	(7, 8),
-	(9, 10);
+	(9, 10),
+    (9, 5),
+    (1, 5),
+    (3, 5),
+    (8, 5);
 
 -- select * from chefencasa.seguido;
 
 /*
 SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE chefencasa.seguido;
+TRUNCATE chefencasa.seguidos;
 SET FOREIGN_KEY_CHECKS = 1;
 */
 
