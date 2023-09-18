@@ -170,6 +170,7 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 
             RecetaProto.Receta recetaProto = RecetaProto.Receta.newBuilder()
                     .setCategoria(CategoriaProto.Categoria.newBuilder()
+							.setId(receta.getCategoria().getId())
                             .setCategoria(receta.getCategoria().getCategoria())
                             .build())
                     .setDescripcion(receta.getDescripcion())
@@ -195,32 +196,59 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 
 	@Transactional
 	public void modificarReceta(RecetaProto.Receta request, StreamObserver<RecetaProto.Receta> responseObserver) {
-		try {
-
-			Receta receta = recetaRepository.findById(request.getIdReceta());
-			
-			if (receta !=null) {
-				
+		logger.info("RECETA::"+request.getIdReceta());
+		Receta receta = recetaRepository.findById(request.getIdReceta());
+	
+				// Actualizar la categoría de la receta
 				receta.setCategoria(categoriaRepository.findById(request.getCategoria().getId()).get());
+
+				// Actualizar otros campos de la receta
 				receta.setTituloReceta(request.getTituloReceta());
 				receta.setDescripcion(request.getDescripcion());
+				receta.setPasos(request.getPasos());
+				receta.setTiempoPreparacion(request.getTiempoPreparacion());
+				receta.setFoto1(request.getFoto1());
+				receta.setFoto2(request.getFoto2());
+				receta.setFoto3(request.getFoto3());
+				receta.setFoto4(request.getFoto4());
+				receta.setFoto5(request.getFoto5());
+
+				// Crear un conjunto para los ingredientes actualizados
+				Set<Ingrediente> ingredientesActualizados = new HashSet<>();
+
+				// Actualizar los ingredientes de la receta
+				for (IngredienteProto.Ingrediente ingredienteProto : request.getIngredientesList()) {	
+					ingredientesActualizados.add(ingredienteRepository.findById(ingredienteProto.getId()));
+					
+				}
 				
+				receta.setIngredientes(ingredientesActualizados);
+
 				recetaRepository.saveAndFlush(receta);
+
 				
+				// Crear una respuesta con la receta modificada
 				RecetaProto.Receta recetaModificada = RecetaProto.Receta.newBuilder()
-					.setIdReceta(receta.getId())
-					.setCategoria(CategoriaProto.Categoria.newBuilder().setCategoria(receta.getCategoria().getCategoria()).build())
-					.setTituloReceta(receta.getTituloReceta())
-					.setDescripcion(receta.getDescripcion())
-					.build();
-				
-				responseObserver.onNext(recetaModificada);
-			}
-		} catch (Exception e) {
-			System.err.println("Error al modificar la receta: " + e.getMessage());
-		}
-		
-		responseObserver.onCompleted();
+						.setIdReceta(receta.getId())
+						.setCategoria(CategoriaProto.Categoria.newBuilder()
+								.setId(receta.getCategoria().getId())
+								.setCategoria(receta.getCategoria().getCategoria())
+								.build())
+						.setTituloReceta(receta.getTituloReceta())
+						.setDescripcion(receta.getDescripcion())
+						.setPasos(receta.getPasos())
+						.setTiempoPreparacion(receta.getTiempoPreparacion())
+						.setFoto1(receta.getFoto1())
+						.setFoto2(receta.getFoto2())
+						.setFoto3(receta.getFoto3())
+						.setFoto4(receta.getFoto4())
+						.setFoto5(receta.getFoto5())
+						.addAllIngredientes(request.getIngredientesList()) // Usamos los mismos ingredientes que se enviaron en la solicitud
+						.build();
+
+			responseObserver.onNext(recetaModificada);
+			responseObserver.onCompleted();
+
 	}
 
 }

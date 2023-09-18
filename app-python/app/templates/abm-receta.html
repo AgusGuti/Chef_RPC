@@ -62,7 +62,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-      var modificarButtons = document.querySelectorAll(".btn-warning.btn-sm");
+      var modificarButtons = document.querySelectorAll(".btn-recetas.btn-sm");
       modificarButtons.forEach(function (button) {
         button.addEventListener("click", function () {
           var recetaId = button.getAttribute("data-receta-id");
@@ -401,12 +401,12 @@
                 >
               </div>
               <div class="col">
-                <button type="submit" class="btn btn-primary">Filtrar búsqueda</button>
+                <button type="submit" class="btn btn-recetas">Filtrar búsqueda</button>
               </div>
               <div class="col">
                 <button
                   type="button"
-                  class="btn btn-primary"
+                  class="btn btn-recetas"
                   data-toggle="modal"
                   data-target="#modalAgregarReceta"
                 >
@@ -443,12 +443,14 @@
                 >
               </td>
               <td>
-                  <button class="btn-info btn-sm"
+                <div class="btn-group">
+                  <button class="btn btn-recetas btn-sm"
                   data-toggle="modal"
                   data-target="#modalReceta{{ receta.idReceta }}">
-                  <i class="fas fa-info-circle icono"></i> 
+                  <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
                   </button>
-                  <button class="btn-warning btn-sm"
+                  &nbsp; <!--espacio en blanco-->
+                  <button class="btn btn-recetas btn-sm ml-1"
                   data-toggle="modal"
                   data-receta-id="{{ receta.idReceta }}"
                   data-target="#modalModificarReceta"
@@ -465,6 +467,11 @@
                   data-receta-tiempo="{{ receta.tiempoPreparacion }}">
                 <i class="fas fa-pencil-alt icono"></i>
                 </button>
+                &nbsp; <!--espacio en blanco-->
+                <button class="btn btn-recetas btn-sm ml-1"
+                data-toggle="modal">
+                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>                
+                </button>
               </td>
             </tr>
             {% endfor %}
@@ -474,6 +481,7 @@
       </div>
     </div>
   </div>
+</div>
 
   <!-- Modal para agregar una receta -->
   <div
@@ -619,7 +627,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="submit" class="btn btn-recetas">Guardar</button>
           </div>
         </form>
       </div>
@@ -687,7 +695,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <button type="submit" class="btn btn-recetas">Guardar Cambios</button>
                   </div>
           </form>
       </div>

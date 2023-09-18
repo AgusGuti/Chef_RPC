@@ -119,3 +119,14 @@ table.table td i {
 .icono {
     color: white;
 }
+
+.btn-recetas {
+    background-color: #000000;
+    color: #ffffff;
+    transition: color 0.3s;
+}
+
+/* Estilo cuando el mouse está sobre el botón */
+.btn-recetas:hover {
+    color: #c5c0c0; /* Cambia el color del texto a blanco cuando el mouse está sobre el botón */
+}
