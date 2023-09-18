@@ -31,6 +31,16 @@
     type="text/css"
     href="{{ url_for('static', filename='receta_styles.css')}}"
   />
+
+<!-- Incluir el archivo CSS de DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+
+ <!-- JavaScript para inicializar DataTables -->
+ <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+ <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  
   <style>
     /* Estilo para las miniaturas de las recetas en la tabla */
     .miniatura {
@@ -53,6 +63,11 @@
 
 <body onload="inicio();"  class="h-100">
   <script>
+
+    $(document).ready(function () {
+      $('#example').DataTable();
+    });
+
     function inicio() {
       categorias();
       cargarIngredientes();
@@ -358,79 +373,40 @@
 
   <!--tabla-->
   <div class="container-xl">
-    <div class="table-responsive">
+    <di class="table-responsive">
       <div class="table-wrapper">
         <div class="table-title">
           <div class="row">
             <div class="col-sm-8">
               <h2 style="margin-bottom: 20px;"><b>Recetas</b></h2>
             </div>
-          </div>
-          <div class="filter-box">
-            <form action="/buscar_recetas" method="GET" class="row">
-              <div class="col">
-                <input
-                  type="text"
-                  name="categoriaBusqueda"
-                  placeholder="Categoría"
-                  class="form-control"
-                >
-              </div>
-              <div class="col">
-                <input
-                  type="text"
-                  name="titulo"
-                  placeholder="Título o parte del título"
-                  class="form-control"
-                >
-              </div>
-              <div class="col">
-                <input
-                  type="text"
-                  name="ingredientes"
-                  placeholder="Ingredientes"
-                  class="form-control"
-                >
-              </div>
-              <div class="col">
-                <input
-                  type="number"
-                  name="tiempo"
-                  placeholder="Tiempo de preparación (minutos)"
-                  class="form-control"
-                >
-              </div>
-              <div class="col">
-                <button type="submit" class="btn btn-recetas">Filtrar búsqueda</button>
-              </div>
-              <div class="col">
-                <button
-                  type="button"
-                  class="btn btn-recetas"
-                  data-toggle="modal"
-                  data-target="#modalAgregarReceta"
-                >
-                  Agregar Receta
-                </button>
-              </div>
-            </form>
+          <div class="btn-container">
+            <button
+              type="button"
+              class="btn btn-recetas"
+              data-toggle="modal"
+              data-target="#modalAgregarReceta"
+            >
+              Agregar Receta
+            </button>
           </div>
         </div>
+      </div>
         {% block content %}
-        <table class="table table-striped table-hover table-bordered">
+        <table id="example" class="table table-striped" style="width:100%">
           <thead>
             <tr>
-              <th>#</th>
               <th>Título</th>
               <th>Tiempo de Preparación</th>
               <th>Foto en Miniatura</th>
+              <th style="display:none;">Categoría</th> <!-- Columna de Categoría oculta -->
+              <th style="display:none;">Ingredientes</th> <!-- Columna de Ingredientes oculta -->
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {% for receta in recetas %}
             <tr>
-              <td>{{ receta.idReceta }}</td>
               <td>{{ receta.tituloReceta }}</td>
               <td>{{ receta.tiempoPreparacion }} minutos</td>
               <td>
@@ -442,6 +418,14 @@
                   data-target="#modalReceta{{ receta.idReceta }}"
                 >
               </td>
+              <td style="display:none;">
+                {{ receta.categoria.categoria }}</td> <!-- Columna de Categoría oculta -->
+              <td style="display:none;">
+                {% for ingrediente in receta.ingredientes %}
+                  {{ ingrediente.nombre }}
+                  {% if not loop.last %}, {% endif %}
+                {% endfor %}
+              </td> <!-- Columna de Ingredientes oculta -->          
               <td>
                 <div class="btn-group">
                   <button class="btn btn-recetas btn-sm"
@@ -722,8 +706,15 @@
         </div>
         <div class="modal-body">
           <img src="{{ receta.foto1 }}" alt="{{ receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          <p>
+          <p>Categoria: {{ receta.categoria.categoria }}</p>
           <p>Descripcion: {{ receta.descripcion }}</p>
-          <p>Ingredientes: {{ receta.ingredientes }}</p>
+          <p>Ingredientes:
+            {% for ingrediente in receta.ingredientes %}
+              {{ ingrediente.nombre }}
+              {% if not loop.last %}, {% endif %}
+            {% endfor %}
+          </p>
           <p>Pasos de preparación: {{ receta.pasos }}</p>
         </div>
         <div class="modal-footer">

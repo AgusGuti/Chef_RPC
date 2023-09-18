@@ -130,3 +130,11 @@ table.table td i {
 .btn-recetas:hover {
     color: #c5c0c0; /* Cambia el color del texto a blanco cuando el mouse está sobre el botón */
 }
+
+.btn-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 200px; /* Ajusta el margen superior */
+    margin-right: -1022px; /* Ajusta el margen derecho */
+  }
