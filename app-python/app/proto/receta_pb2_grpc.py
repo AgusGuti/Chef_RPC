@@ -40,6 +40,11 @@ class RecetasServiceStub(object):
                 request_serializer=receta__pb2.Receta.SerializeToString,
                 response_deserializer=receta__pb2.Recetas.FromString,
                 )
+        self.FindAllById = channel.unary_unary(
+                '/model.RecetasService/FindAllById',
+                request_serializer=receta__pb2.Receta.SerializeToString,
+                response_deserializer=receta__pb2.Recetas.FromString,
+                )
 
 
 class RecetasServiceServicer(object):
@@ -75,6 +80,12 @@ class RecetasServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def FindAllById(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_RecetasServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -100,6 +111,11 @@ def add_RecetasServiceServicer_to_server(servicer, server):
             ),
             'FindFavoritos': grpc.unary_unary_rpc_method_handler(
                     servicer.FindFavoritos,
+                    request_deserializer=receta__pb2.Receta.FromString,
+                    response_serializer=receta__pb2.Recetas.SerializeToString,
+            ),
+            'FindAllById': grpc.unary_unary_rpc_method_handler(
+                    servicer.FindAllById,
                     request_deserializer=receta__pb2.Receta.FromString,
                     response_serializer=receta__pb2.Recetas.SerializeToString,
             ),
@@ -193,6 +209,23 @@ class RecetasService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/model.RecetasService/FindFavoritos',
+            receta__pb2.Receta.SerializeToString,
+            receta__pb2.Recetas.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def FindAllById(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.RecetasService/FindAllById',
             receta__pb2.Receta.SerializeToString,
             receta__pb2.Recetas.FromString,
             options, channel_credentials,

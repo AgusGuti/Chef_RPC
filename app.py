@@ -114,9 +114,9 @@ def logout():
 
 
 
-@app.route("/recetas",methods = ['GET'])
+@app.route("/misRecetas",methods = ['GET'])
 def recetas():
-    app.logger.info("/recetas")
+    app.logger.info("/misRecetas")
     return render_template('abm-receta.html')
 
 

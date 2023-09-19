@@ -21,13 +21,24 @@ import datetime
 
 logger = logging.getLogger(__name__)
 
-@receta_blueprint.route("/recetas",methods = ['GET'])
-def recetas():
-    logger.info("/recetas")
+@receta_blueprint.route("/storyline",methods = ['GET'])
+def storyline():
+    logger.info("/storyline")
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = RecetasServiceStub(channel)
         response = stub.FindAll(Receta())
         recetas = response.receta
+    return render_template('abm-receta.html', recetas=recetas)
+
+@receta_blueprint.route("/misRecetas",methods = ['GET'])
+def misRecetas():
+    logger.info("/misRecetas")
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = RecetasServiceStub(channel) 
+        response = stub.FindAllById(Receta(user=User(id=session['user_id'])))
+        recetas = response.receta        
+    print("Greeter Recetas received: " + str(response))
+
     return render_template('abm-receta.html', recetas=recetas)
 
 
@@ -71,7 +82,7 @@ def altaReceta():
             return redirect('/altaReceta')
         else:
             flash('Receta creada exitosamente!','success')
-            return redirect('/recetas')
+            return redirect('/misRecetas')
 
 @receta_blueprint.route("/receta/findAll",methods = ['GET'])
 def findAll():
@@ -117,7 +128,7 @@ def modificarReceta():
             return redirect('/modificarReceta')
         else:
             flash('Receta modificada exitosamente!','success')
-            return redirect('/recetas')
+            return redirect('/misRecetas')
         
 
 @receta_blueprint.route("/favoritos",methods = ['GET'])
