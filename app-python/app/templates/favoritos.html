@@ -1,54 +1,346 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" class="h-75">
-  <head>
-    <title>Website Grupo E</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" />
-    <meta charset="utf-8" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
+<head>
+  <title>Website Grupo E</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+  <meta charset="utf-8" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
+  />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static', filename='index_styles.css')}}"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static', filename='receta_styles.css')}}"
+  />
+
+<!-- Incluir el archivo CSS de DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+
+ <!-- JavaScript para inicializar DataTables -->
+ <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+ <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  
+  <style>
+    /* Estilo para las miniaturas de las recetas en la tabla */
+    .miniatura {
+      width: 100px; /* Ajusta el tamaño según tus preferencias */
+      cursor: pointer; /* Cambia el cursor a una mano al pasar el ratón sobre la miniatura */
+    }
+
+    /* Estilo para ocultar el detalle de la receta por defecto */
+    .modal-body {
+      display: none;
+    }
+
+    /* Estilo para mostrar el detalle de la receta cuando se muestra el modal */
+    .modal.show .modal-body {
+      display: block;
+    }
+  </style>
+</head>
+
+
+<body onload="inicio();"  class="h-100">
+  <script>
+
+    $(document).ready(function () {
+      $('#example').DataTable();
+    });
+
+    function inicio() {
+      categorias();
+      cargarIngredientes();
+      cargarUsuario();
+      cargarIngredientesYReceta(recetaId);
+      cargarDetallesReceta(recetaId);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var modificarButtons = document.querySelectorAll(".btn-recetas.btn-sm");
+      modificarButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          var recetaId = button.getAttribute("data-receta-id");
+          cargarDetallesReceta(recetaId);
+        });
+      });
+    });
+
+    //select Categoria
+    function categorias() {
+      var out = "";
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("GET", "/categorias", false);
+      xhttp.setRequestHeader("Content-Type", "application/json");
+      xhttp.send();
+      var data = JSON.parse(xhttp.responseText);
+      for (let i = 0; i < data.categoria.length; i++) {
+        out +=
+          '<option value="' +
+          data.categoria[i].id +
+          '">' +
+          data.categoria[i].categoria +
+          "</option>";
+      }
+      document.getElementById("categoria").innerHTML = out;
+    }
+    // Cargar la lista de ingredientes al cargar la página
+    function cargarIngredientes() {
+      console.log("cargarIngredientes function called");
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/ingredientes", true);
+
+      // Define ingredientesSelect para seleccionar el elemento HTML
+      var ingredientesSelect = document.getElementById("ingredientes");
+
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var response = JSON.parse(xhr.responseText);
+              var ingredientes = response.ingrediente; // Accede a response.ingrediente
+
+              console.log("Respuesta del servidor:", ingredientes);
+
+              // Verifica si ingredientes es un array y luego itera sobre él
+              if (Array.isArray(ingredientes)) {
+                  ingredientes.forEach(function (ingrediente) {
+                      var option = document.createElement("option");
+                      option.value = ingrediente.id;
+                      option.text = ingrediente.nombre;
+                      ingredientesSelect.appendChild(option);
+                  });
+              } else {
+                  console.error("La respuesta del servidor no contiene una lista de ingredientes válida:", response);
+              }
+          }
+      };
+      xhr.send();
+    }
+
+    // Cargar el usuario desde el endpoint /user/<int:id>
+    function cargarUsuario() {
+      console.log("cargarUsuario function called");
+      var userId = "{{ user_id }}"; // Aquí obtén el ID del usuario de tu aplicación
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", `/user/${userId}`, true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var usuario = JSON.parse(xhr.responseText);
+          
+          // Aquí puedes utilizar la información del usuario para prellenar la base de datos
+          // por ejemplo, enviarla al servidor con el formulario de creación de recetas
+          document.getElementById("user_id").value = user.id;// Asigna el ID del usuario al campo oculto
+          // Puedes asignar otros datos del usuario a otros campos del formulario si es necesario
+        }
+      };
+      xhr.send();
+      }
+
+      function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
+        console.log("cargarIngredientesYReceta function called");
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/ingredientes", true);
+      
+        // Define ingredientesSelect para seleccionar el elemento HTML
+        var ingredientesSelect = document.getElementById("ingredientes");
+      
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              var response = JSON.parse(xhr.responseText);
+              var ingredientes = response.ingrediente;
+      
+              console.log("Respuesta del servidor:", ingredientes);
+      
+              if (Array.isArray(ingredientes)) {
+                ingredientesSelect.innerHTML = ""; // Limpia el contenido actual
+      
+                var ingredientesSet = new Set(ingredientesSeleccionados);
+      
+                ingredientes.forEach(function (ingrediente) {
+                  var option = document.createElement("option");
+                  option.value = ingrediente.id;
+                  option.text = ingrediente.nombre;
+      
+                  // Verifica si el ingrediente actual está en el conjunto de ingredientes seleccionados
+                  if (ingredientesSet.has(ingrediente.id)) {
+                    option.selected = true;
+                  }
+      
+                  ingredientesSelect.appendChild(option);
+                });
+      
+                // Asegúrate de que el elemento select permita la selección múltiple
+                ingredientesSelect.setAttribute("multiple", "multiple");
+              } else {
+                console.error(
+                  "La respuesta del servidor no contiene una lista de ingredientes válida:",
+                  response
+                );
+              }
+            } else {
+              console.error("Error al cargar ingredientes:", xhr.status);
+            }
+          }
+        };
+        xhr.send();
+      }
+      
+      // Función para cargar los detalles de la receta en el modal de modificar
+      function cargarDetallesReceta(recetaId) {
+        console.log("cargarDetallesReceta function called");
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", `/receta/findById/${recetaId}`, true);
+      
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              var response = JSON.parse(xhr.responseText);
+      
+              // Llena los campos del modal de modificar con los detalles de la receta
+              document.getElementById("mod_receta_id").value = recetaId; // Establece el valor del campo oculto con el ID de la receta
+              document.getElementById("mod_tituloReceta").value = response.tituloReceta;
+              document.getElementById("mod_descripcion").value = response.descripcion;
+              document.getElementById("mod_foto1").value = response.foto1;
+              document.getElementById("mod_foto2").value = response.foto2;
+              document.getElementById("mod_foto3").value = response.foto3;
+              document.getElementById("mod_foto4").value = response.foto4;
+              document.getElementById("mod_foto5").value = response.foto5;
+              document.getElementById("mod_pasos").value = response.pasos;
+              document.getElementById("mod_tiempoPreparacion").value = response.tiempoPreparacion;
+              // Llenar la lista de ingredientes en el elemento select "mod_ingredientes"
+              var modIngredientesSelect = document.getElementById("mod_ingredientes");
+              modIngredientesSelect.innerHTML = ""; // Limpia el contenido actual
+      
+              var ingredientes = response.ingredientes;
+              if (Array.isArray(ingredientes)) {
+                // Obtén todos los ingredientes disponibles
+                var xhrIngredientes = new XMLHttpRequest();
+                xhrIngredientes.open("GET", "/ingredientes", true);
+      
+                xhrIngredientes.onreadystatechange = function () {
+                  if (xhrIngredientes.readyState === 4) {
+                    if (xhrIngredientes.status === 200) {
+                      var responseIngredientes = JSON.parse(xhrIngredientes.responseText);
+                      var ingredientesDisponibles = responseIngredientes.ingrediente;
+      
+                      // Agrega las opciones de ingredientes al desplegable y marca como seleccionados los ingredientes asociados a la receta
+                      ingredientesDisponibles.forEach(function (ingredienteDisponible) {
+                        var option = document.createElement("option");
+                        option.value = ingredienteDisponible.id;
+                        option.text = ingredienteDisponible.nombre;
+                        
+                        // Verifica si este ingrediente está asociado a la receta
+                        if (ingredientes.find(ingrediente => ingrediente.id === ingredienteDisponible.id)) {
+                          option.selected = true; // Marcar como seleccionado
+                        }
+                        
+                        modIngredientesSelect.appendChild(option);
+                      });
+                    } else {
+                      console.error("Error al cargar ingredientes:", xhrIngredientes.status);
+                    }
+                  }
+                };
+      
+                xhrIngredientes.send();
+              } else {
+                console.error("La respuesta del servidor no contiene una lista de ingredientes válida:", response);
+              }
+      
+             // Llenar el campo de categoría en el elemento select "mod_categoria" con todas las categorías disponibles
+            var modCategoriaSelect = document.getElementById("mod_categoria");
+            modCategoriaSelect.innerHTML = ""; // Limpia el contenido actual
+
+            // Obtener todas las categorías disponibles
+            var xhrCategorias = new XMLHttpRequest();
+            xhrCategorias.open("GET", "/categorias", true);
+
+            xhrCategorias.onreadystatechange = function () {
+              if (xhrCategorias.readyState === 4) {
+                if (xhrCategorias.status === 200) {
+                  var responseCategorias = JSON.parse(xhrCategorias.responseText);
+                  var categoriasDisponibles = responseCategorias.categoria;
+
+                  // Agregar las opciones de categorías al desplegable
+                  categoriasDisponibles.forEach(function (categoriaDisponible) {
+                    var option = document.createElement("option");
+                    option.value = categoriaDisponible.id;
+                    option.text = categoriaDisponible.categoria;
+
+                    modCategoriaSelect.appendChild(option);
+                  });
+                  
+                  // Establecer el valor seleccionado en función de la categoría actual de la receta
+                  var categoriaActual = response.categoria;
+                  if (categoriaActual && categoriaActual.id) {
+                    modCategoriaSelect.value = categoriaActual.id;
+                  }
+                } else {
+                  console.error("Error al cargar categorías:", xhrCategorias.status);
+                }
+              }
+            };
+
+            xhrCategorias.send();
+
+              // Abre el modal de modificar
+              $("#modalModificarReceta").modal("show");
+            } else {
+              console.error("Error al cargar los detalles de la receta:", xhr.status);
+            }
+          }
+        };
+        xhr.send();
+      }
+    window.onload = inicio;
+
+  </script>
+
+  
+
+  <div class="form-outline">
+    <img
+      src="{{ url_for('static', filename='chefencasa.png.jpg') }}"
+      alt="Universidad Nacional de Lanús"
+      style="vertical-align: Stickman; margin: 0px; padding: 16px"
     />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='index_styles.css')}}"
-    />
-  </head>
-  <body class="h-100">
-    <div class="form-outline">
-      <img
-        src="{{ url_for('static', filename='chefencasa.png.jpg') }}"
-        alt="Universidad Nacional de Lanús"
-        style="vertical-align: Stickman; margin: 0px; padding: 16px"
-      />
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-dark nav-bk">
-      <a class="navbar-brand d-flex gap-lg-1 mx-lg-3" href="/index">
-        <i class="bi bi-house-fill text-white"></i> Inicio
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapsibleNavbar"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="collapse navbar-collapse d-flex align-items-center"
-        id="collapsibleNavbar"
-      >
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-dark nav-bk">
+    <a class="navbar-brand d-flex gap-lg-1 mx-lg-3" href="/index">
+      <i class="bi bi-house-fill text-white"></i> Inicio
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#collapsibleNavbar"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse d-flex align-items-center"
+      id="collapsibleNavbar"
+    >
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="/myprofile">Mi Perfil</a>
@@ -57,7 +349,7 @@
           <a class="nav-link" href="/storyline">Publicaciones</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/recetas">Mis Recetas</a>
+          <a class="nav-link" href="/misRecetas">Mis Recetas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/favoritos">Mis Favoritos</a>
@@ -69,146 +361,124 @@
           <a class="nav-link" href="/seguidores">Seguidores</a>
         </li>        
       </ul>
-    
+    </div>
+    <div class="nav navbar-nav navbar-right" id="collapsibleNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item">
+          <a class="nav-link" href="/logout"
+            >Cerrar Sesión
+            <i class="bi bi-box-arrow-left" style="vertical-align: -1px"></i
+          ></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!--tabla-->
+  <div class="container-xl">
+    <di class="table-responsive">
+      <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-8">
+              <h2 style="margin-bottom: 20px;"><b>Favoritos</b></h2>
+            </div>          
+        </div>
       </div>
-      <div class="nav navbar-nav navbar-right" id="collapsibleNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="nav-item">
-            <a class="nav-link" href="/logout"
-              >Cerrar Sesión
-              <i class="bi bi-box-arrow-left" style="vertical-align: -1px"></i
-            ></a>
-          </li>
-        </ul>
+        {% block content %}
+        <table id="example" class="table table-striped" style="width:100%">
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Tiempo de Preparación</th>
+              <th>Foto en Miniatura</th>
+              <th style="display:none;">Categoría</th> <!-- Columna de Categoría oculta -->
+              <th style="display:none;">Ingredientes</th> <!-- Columna de Ingredientes oculta -->
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for receta in recetas %}
+            <tr>
+              <td>{{ receta.tituloReceta }}</td>
+              <td>{{ receta.tiempoPreparacion }} minutos</td>
+              <td>
+                <img
+                  src="{{ receta.foto1 }}"
+                  alt="{{ receta.tituloReceta }}"
+                  class="miniatura"
+                  data-toggle="modal"
+                  data-target="#modalReceta{{ receta.idReceta }}"
+                >
+              </td>
+              <td style="display:none;">
+                {{ receta.categoria.categoria }}</td> <!-- Columna de Categoría oculta -->
+              <td style="display:none;">
+                {% for ingrediente in receta.ingredientes %}
+                  {{ ingrediente.nombre }}
+                  {% if not loop.last %}, {% endif %}
+                {% endfor %}
+              </td> <!-- Columna de Ingredientes oculta -->          
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-recetas btn-sm"
+                  data-toggle="modal"
+                  data-target="#modalReceta{{ receta.idReceta }}">
+                  <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
+                  </button>
+                  &nbsp; <!--espacio en blanco-->
+                <button class="btn btn-recetas btn-sm ml-1"
+                data-toggle="modal">
+                <i class="fa fa-heart" style="color: #e36c6c;"></i>                
+                </button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% endblock %}
       </div>
-    </nav>
-    
-    
-    
-    <!--tabla-->
-     <div class="container-xl">
-      <div class="table-responsive">
-        <div class="table-wrapper">
-          <div class="table-title">
-            <div class="row">
-              <div class="col-sm-8">
-                <h2 style="margin-bottom: 20px;"><b>Recetas</b></h2>
-              </div>
-            </div>
-            <div class="filter-box">
-              <form action="/buscar_recetas" method="GET" class="row">
-                <div class="col">
-                  <input
-                    type="text"
-                    name="categoriaBusqueda"
-                    placeholder="Categoría"
-                    class="form-control"
-                  >
-                </div>
-                <div class="col">
-                  <input
-                    type="text"
-                    name="titulo"
-                    placeholder="Título o parte del título"
-                    class="form-control"
-                  >
-                </div>
-                <div class="col">
-                  <input
-                    type="text"
-                    name="ingredientes"
-                    placeholder="Ingredientes"
-                    class="form-control"
-                  >
-                </div>
-                <div class="col">
-                  <input
-                    type="number"
-                    name="tiempo"
-                    placeholder="Tiempo de preparación (minutos)"
-                    class="form-control"
-                  >
-                </div>
-                <div class="col">
-                  <button type="submit" class="btn btn-primary">Filtrar búsqueda</button>
-                </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          {% block content %}
-          <table class="table table-striped table-hover table-bordered">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Título</th>
-                <th>Tiempo de Preparación</th>
-                <th>Foto en Miniatura</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for receta in recetas %}
-              <tr>
-                <td>{{ receta.idReceta }}</td>
-                <td>{{ receta.tituloReceta }}</td>
-                <td>{{ receta.tiempoPreparacion }} minutos</td>
-                <td>
-                  <img
-                    src="{{ receta.foto1 }}"
-                    alt="{{ receta.tituloReceta }}"
-                    class="miniatura"
-                    data-toggle="modal"
-                    data-target="#modalReceta{{ receta.idReceta }}"
-                  >
-                </td>
-                <td>
-                    <button class="btn-info btn-sm"
-                    data-toggle="modal"
-                    data-target="#modalReceta{{ receta.idReceta }}">
-                    <i class="fas fa-info-circle icono"></i> 
-                    </button>                  
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          {% endblock %}
+    </div>
+  </div>
+</div>
+
+<!-- Modales para el detalle de las recetas -->
+  {% for receta in recetas %}
+  <div
+    class="modal fade"
+    id="modalReceta{{ receta.idReceta }}"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalReceta{{ receta.idReceta }}Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalReceta{{ receta.idReceta }}Label">{{ receta.tituloReceta }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img src="{{ receta.foto1 }}" alt="{{ receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          <p>
+          <p>Categoria: {{ receta.categoria.categoria }}</p>
+          <p>Descripcion: {{ receta.descripcion }}</p>
+          <p>Ingredientes:
+            {% for ingrediente in receta.ingredientes %}
+              {{ ingrediente.nombre }}
+              {% if not loop.last %}, {% endif %}
+            {% endfor %}
+          </p>
+          <p>Pasos de preparación: {{ receta.pasos }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
-  
-    <!-- Modales para el detalle de las recetas -->
-    {% for receta in recetas %}
-    <div
-      class="modal fade"
-      id="modalReceta{{ receta.idReceta }}"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="modalReceta{{ receta.idReceta }}Label"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalReceta{{ receta.idReceta }}Label">{{ receta.tituloReceta }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <img src="{{ receta.foto1 }}" alt="{{ receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
-            <p>Descripcion: {{ receta.descripcion }}</p>
-            <p>Ingredientes: {{ receta.ingredientes }}</p>
-            <p>Pasos de preparación: {{ receta.pasos }}</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  
-    </body>
-  </html>
+  </div>
+  {% endfor %}
+</body>
+</html>

@@ -251,6 +251,59 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 
 	}
 
+	public void findAllById(RecetaProto.Receta request, StreamObserver<RecetaProto.Recetas> responseObserver) {
+		try {
+			
+			int usuarioId = request.getUser().getId();
+			logger.info("Usuario ID: " + usuarioId);
+			
+			List<Receta> recetas = recetaRepository.findAllRecetasByUserId(usuarioId);
+			List<RecetaProto.Receta> recetadb = new ArrayList<>();
+	
+			for (Receta receta : recetas) {
+				List<IngredienteProto.Ingrediente> lstIngredientes = new ArrayList<>();
+	
+				if (receta.getIngredientes() != null) {
+					lstIngredientes.addAll(receta.getIngredientes().stream()
+							.map(ingrediente -> IngredienteProto.Ingrediente.newBuilder()
+									.setId(ingrediente.getId())
+									.setNombre(ingrediente.getNombre())
+									.build())
+							.collect(Collectors.toList()));
+				}
+
+				RecetaProto.Receta recetaProto = RecetaProto.Receta.newBuilder()
+						.setCategoria(CategoriaProto.Categoria.newBuilder()
+								.setCategoria(receta.getCategoria().getCategoria())
+								.build())
+						.setDescripcion(receta.getDescripcion())
+						.setIdReceta(receta.getId())
+						.setTituloReceta(receta.getTituloReceta())
+						.setPasos(receta.getPasos())
+						.setTiempoPreparacion(receta.getTiempoPreparacion())
+						.setFoto1(receta.getFoto1())
+						.setFoto2(receta.getFoto2())
+						.setFoto3(receta.getFoto3())
+						.setFoto4(receta.getFoto4())
+						.setFoto5(receta.getFoto5())
+						.addAllIngredientes(lstIngredientes)
+						.build();
+	
+				recetadb.add(recetaProto);
+			}
+			
+			RecetaProto.Recetas a = RecetaProto.Recetas.newBuilder()
+					.addAllReceta(recetadb)
+					.build();
+		
+			responseObserver.onNext(a);
+			responseObserver.onCompleted();
+	
+		} catch (Exception e) {
+			logger.info("Error al traer Mis Recetas", e);
+		}
+	}
+
 
 	public void findFavoritos(RecetaProto.Receta request, StreamObserver<RecetaProto.Recetas> responseObserver) {
 

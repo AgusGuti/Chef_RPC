@@ -5334,15 +5334,16 @@ public final class RecetaProto {
       "Id\022\021\n\tidUsuario\030\001 \001(\005\"y\n\014RecetaFiltro\022\021\n" +
       "\tcategoria\030\001 \001(\t\022\016\n\006nombre\030\002 \001(\t\022\024\n\014ingr" +
       "edientes\030\003 \003(\t\022\027\n\017tiempoPrepDesde\030\004 \001(\005\022" +
-      "\027\n\017tiempoPrepHasta\030\005 \001(\0052\203\002\n\016RecetasServ" +
+      "\027\n\017tiempoPrepHasta\030\005 \001(\0052\263\002\n\016RecetasServ" +
       "ice\022+\n\tAddReceta\022\r.model.Receta\032\r.model." +
       "Receta\"\000\0223\n\007FindAll\022\026.google.protobuf.Em" +
       "pty\032\016.model.Recetas\"\000\0221\n\017ModificarReceta" +
       "\022\r.model.Receta\032\r.model.Receta\"\000\022*\n\010Find" +
       "ById\022\r.model.Receta\032\r.model.Receta\"\000\0220\n\r" +
       "FindFavoritos\022\r.model.Receta\032\016.model.Rec" +
-      "etas\"\000B#\n\024com.chefencasa.modelB\013RecetaPr" +
-      "otob\006proto3"
+      "etas\"\000\022.\n\013FindAllById\022\r.model.Receta\032\016.m" +
+      "odel.Recetas\"\000B#\n\024com.chefencasa.modelB\013" +
+      "RecetaProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
