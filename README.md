@@ -15,13 +15,12 @@ Clases creadas en capa servidor:
 
 -Solucionar la carga del objeto categoría dentro de la clase receta.
 
--No levantó correctmente los seguidos de los INSERT (F. de Obs: 15/09/2023)
 -Falta poder cargar foto de perfil al registrarse y mostrarla en Mi Perfil (F. de Obs: 15/09/2023)
 -Falta implementar poder dejar de seguir, evitar que me sigan (F. de Obs: 17/09/2023)
--ERROR al mostrar Mis Recetas me mostró las recetas de otro usuario (F. de Obs: 15/09/2023)
-
 -Falta poder marcar publicacion como favorito al verla en STORYLINE (F. de Obs: 15/09/2023)
 
+-No levantó correctmente las recetas de los INSERT (F. de Obs: 19/09/2023)
+(OPCIONAL, las recetas generadas desde la pagina funcionan bien)
 
 ## SERVIDOR JAVA GRPC
 

@@ -40,7 +40,7 @@ def registrarUser():
     logger.info("/registrar")
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = UsersServiceStub(channel)
-        response = stub.AddUser(User(nombre=request.form['nombre'],apellido=request.form['apellido'],email=request.form['email'],clave=request.form['clave']))
+        response = stub.AddUser(User(nombre=request.form['nombre'],apellido=request.form['apellido'],email=request.form['email'],clave=request.form['clave'], fotoPerfil=request.form['fotoPerfil']))
     print("Greeter client received: " + str(response))    
     user={"user":MessageToJson(response)}
     logger.info("user registrado %s",user)
