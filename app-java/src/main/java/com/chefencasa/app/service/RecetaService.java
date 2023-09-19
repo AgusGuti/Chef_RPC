@@ -251,4 +251,54 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 
 	}
 
+
+	public void findFavoritos(RecetaProto.Receta request, StreamObserver<RecetaProto.Recetas> responseObserver) {
+
+		List<RecetaProto.Receta> recetadb = new ArrayList<>();
+		
+		int userId = request.getUser().getId();
+		
+		for (Receta receta : recetaRepository.findAllFavoritosByUserId(userId)) {
+			List<IngredienteProto.Ingrediente> lstIngredientes = new ArrayList<>();
+			
+			if (receta.getIngredientes() != null) {
+				lstIngredientes.addAll(receta.getIngredientes().stream()
+					.map(ingrediente -> IngredienteProto.Ingrediente.newBuilder()
+						.setId(ingrediente.getId())
+						.setNombre(ingrediente.getNombre())
+						.build())
+					.collect(Collectors.toList()));
+			}
+			
+			RecetaProto.Receta recetaProto = RecetaProto.Receta.newBuilder()
+				.setCategoria(CategoriaProto.Categoria.newBuilder()
+					.setCategoria(receta.getCategoria().getCategoria())
+					.build())
+				.setDescripcion(receta.getDescripcion())
+				.setIdReceta(receta.getId())
+				.setTituloReceta(receta.getTituloReceta())
+				.setPasos(receta.getPasos())
+				.setTiempoPreparacion(receta.getTiempoPreparacion())
+				.setFoto1(receta.getFoto1())
+				.setFoto2(receta.getFoto2())
+				.setFoto3(receta.getFoto3())
+				.setFoto4(receta.getFoto4())
+				.setFoto5(receta.getFoto5())
+				.addAllIngredientes(lstIngredientes) // Agrega los ingredientes a la receta
+				.build();
+			
+			recetadb.add(recetaProto);
+		}
+	
+		RecetaProto.Recetas a = RecetaProto.Recetas.newBuilder()
+			.addAllReceta(recetadb)
+			.build();
+			
+		logger.info("Receta Favoritos %s",recetadb);
+
+		responseObserver.onNext(a);
+		responseObserver.onCompleted();
+	}
+
+
 }

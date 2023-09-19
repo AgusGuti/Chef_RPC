@@ -77,6 +77,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Table chefencasa.favoritos
 -- -----------------------------------------------------
 
+SET FOREIGN_KEY_CHECKS = 0;
 INSERT INTO chefencasa.favorito (user_id, receta_id)
 VALUES
   (1, 5),
@@ -88,13 +89,15 @@ VALUES
   (1, 2),
   (8, 6),
   (9, 9),
-  (10, 4);
+  (10, 4),
+  (10, 3);
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- select * from chefencasa.favoritos;
 
 /*
 SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE chefencasa.favoritos;
+TRUNCATE chefencasa.favorito;
 SET FOREIGN_KEY_CHECKS = 1;
 */
 

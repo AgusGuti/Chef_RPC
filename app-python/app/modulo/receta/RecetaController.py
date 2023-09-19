@@ -118,5 +118,15 @@ def modificarReceta():
         else:
             flash('Receta modificada exitosamente!','success')
             return redirect('/recetas')
+        
+
+@receta_blueprint.route("/favoritos",methods = ['GET'])
+def favoritos():
+    logger.info("/favoritos")
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = RecetasServiceStub(channel)
+        response = stub.FindFavoritos(Receta(user=User(id=session['user_id'])))
+        recetas = response.receta
+    return render_template('favoritos.html', recetas=recetas)
     
 

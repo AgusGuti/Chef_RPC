@@ -139,6 +139,37 @@ public final class RecetasServiceGrpc {
     return getFindByIdMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.Receta,
+      com.chefencasa.model.RecetaProto.Recetas> getFindFavoritosMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "FindFavoritos",
+      requestType = com.chefencasa.model.RecetaProto.Receta.class,
+      responseType = com.chefencasa.model.RecetaProto.Recetas.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.Receta,
+      com.chefencasa.model.RecetaProto.Recetas> getFindFavoritosMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.Recetas> getFindFavoritosMethod;
+    if ((getFindFavoritosMethod = RecetasServiceGrpc.getFindFavoritosMethod) == null) {
+      synchronized (RecetasServiceGrpc.class) {
+        if ((getFindFavoritosMethod = RecetasServiceGrpc.getFindFavoritosMethod) == null) {
+          RecetasServiceGrpc.getFindFavoritosMethod = getFindFavoritosMethod =
+              io.grpc.MethodDescriptor.<com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.Recetas>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FindFavoritos"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.RecetaProto.Receta.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.RecetaProto.Recetas.getDefaultInstance()))
+              .setSchemaDescriptor(new RecetasServiceMethodDescriptorSupplier("FindFavoritos"))
+              .build();
+        }
+      }
+    }
+    return getFindFavoritosMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -214,6 +245,13 @@ public final class RecetasServiceGrpc {
         io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Receta> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindByIdMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void findFavoritos(com.chefencasa.model.RecetaProto.Receta request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Recetas> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindFavoritosMethod(), responseObserver);
+    }
   }
 
   /**
@@ -274,6 +312,14 @@ public final class RecetasServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getFindByIdMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void findFavoritos(com.chefencasa.model.RecetaProto.Receta request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Recetas> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getFindFavoritosMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -318,6 +364,13 @@ public final class RecetasServiceGrpc {
     public com.chefencasa.model.RecetaProto.Receta findById(com.chefencasa.model.RecetaProto.Receta request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getFindByIdMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.RecetaProto.Recetas findFavoritos(com.chefencasa.model.RecetaProto.Receta request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getFindFavoritosMethod(), getCallOptions(), request);
     }
   }
 
@@ -368,12 +421,21 @@ public final class RecetasServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getFindByIdMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.RecetaProto.Recetas> findFavoritos(
+        com.chefencasa.model.RecetaProto.Receta request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getFindFavoritosMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_ADD_RECETA = 0;
   private static final int METHODID_FIND_ALL = 1;
   private static final int METHODID_MODIFICAR_RECETA = 2;
   private static final int METHODID_FIND_BY_ID = 3;
+  private static final int METHODID_FIND_FAVORITOS = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -407,6 +469,10 @@ public final class RecetasServiceGrpc {
         case METHODID_FIND_BY_ID:
           serviceImpl.findById((com.chefencasa.model.RecetaProto.Receta) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Receta>) responseObserver);
+          break;
+        case METHODID_FIND_FAVORITOS:
+          serviceImpl.findFavoritos((com.chefencasa.model.RecetaProto.Receta) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Recetas>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -454,6 +520,13 @@ public final class RecetasServiceGrpc {
               com.chefencasa.model.RecetaProto.Receta,
               com.chefencasa.model.RecetaProto.Receta>(
                 service, METHODID_FIND_BY_ID)))
+        .addMethod(
+          getFindFavoritosMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.chefencasa.model.RecetaProto.Receta,
+              com.chefencasa.model.RecetaProto.Recetas>(
+                service, METHODID_FIND_FAVORITOS)))
         .build();
   }
 
@@ -506,6 +579,7 @@ public final class RecetasServiceGrpc {
               .addMethod(getFindAllMethod())
               .addMethod(getModificarRecetaMethod())
               .addMethod(getFindByIdMethod())
+              .addMethod(getFindFavoritosMethod())
               .build();
         }
       }
