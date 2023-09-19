@@ -17,6 +17,7 @@ service RecetasService {
   rpc FindAll(google.protobuf.Empty) returns (Recetas) {}
   rpc ModificarReceta(Receta) returns (Receta) {}
   rpc FindById(Receta) returns (Receta) {}
+  rpc FindFavoritos(Receta) returns (Recetas) {}
 }
 
 message Empty {
@@ -25,7 +26,6 @@ message Empty {
 message Recetas {
   repeated Receta receta = 1;
 }
-
 
 message Receta {
   int32 idReceta = 1;
