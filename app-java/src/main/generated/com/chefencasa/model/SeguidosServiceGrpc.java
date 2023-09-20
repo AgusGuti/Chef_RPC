@@ -108,6 +108,37 @@ public final class SeguidosServiceGrpc {
     return getDeleteSeguidoresMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.SeguidoProto.Seguido,
+      com.chefencasa.model.SeguidoProto.FlagSeguido> getCheckSeguidosMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "CheckSeguidos",
+      requestType = com.chefencasa.model.SeguidoProto.Seguido.class,
+      responseType = com.chefencasa.model.SeguidoProto.FlagSeguido.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.chefencasa.model.SeguidoProto.Seguido,
+      com.chefencasa.model.SeguidoProto.FlagSeguido> getCheckSeguidosMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.SeguidoProto.Seguido, com.chefencasa.model.SeguidoProto.FlagSeguido> getCheckSeguidosMethod;
+    if ((getCheckSeguidosMethod = SeguidosServiceGrpc.getCheckSeguidosMethod) == null) {
+      synchronized (SeguidosServiceGrpc.class) {
+        if ((getCheckSeguidosMethod = SeguidosServiceGrpc.getCheckSeguidosMethod) == null) {
+          SeguidosServiceGrpc.getCheckSeguidosMethod = getCheckSeguidosMethod =
+              io.grpc.MethodDescriptor.<com.chefencasa.model.SeguidoProto.Seguido, com.chefencasa.model.SeguidoProto.FlagSeguido>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CheckSeguidos"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.SeguidoProto.Seguido.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.SeguidoProto.FlagSeguido.getDefaultInstance()))
+              .setSchemaDescriptor(new SeguidosServiceMethodDescriptorSupplier("CheckSeguidos"))
+              .build();
+        }
+      }
+    }
+    return getCheckSeguidosMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -176,6 +207,13 @@ public final class SeguidosServiceGrpc {
         io.grpc.stub.StreamObserver<com.chefencasa.model.SeguidoProto.Seguido> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteSeguidoresMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void checkSeguidos(com.chefencasa.model.SeguidoProto.Seguido request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.SeguidoProto.FlagSeguido> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCheckSeguidosMethod(), responseObserver);
+    }
   }
 
   /**
@@ -228,6 +266,14 @@ public final class SeguidosServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getDeleteSeguidoresMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void checkSeguidos(com.chefencasa.model.SeguidoProto.Seguido request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.SeguidoProto.FlagSeguido> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getCheckSeguidosMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -265,6 +311,13 @@ public final class SeguidosServiceGrpc {
     public com.chefencasa.model.SeguidoProto.Seguido deleteSeguidores(com.chefencasa.model.SeguidoProto.Seguido request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getDeleteSeguidoresMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.SeguidoProto.FlagSeguido checkSeguidos(com.chefencasa.model.SeguidoProto.Seguido request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCheckSeguidosMethod(), getCallOptions(), request);
     }
   }
 
@@ -307,11 +360,20 @@ public final class SeguidosServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getDeleteSeguidoresMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.SeguidoProto.FlagSeguido> checkSeguidos(
+        com.chefencasa.model.SeguidoProto.Seguido request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getCheckSeguidosMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_ADD_SEGUIDOS = 0;
   private static final int METHODID_DELETE_SEGUIDOS = 1;
   private static final int METHODID_DELETE_SEGUIDORES = 2;
+  private static final int METHODID_CHECK_SEGUIDOS = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -341,6 +403,10 @@ public final class SeguidosServiceGrpc {
         case METHODID_DELETE_SEGUIDORES:
           serviceImpl.deleteSeguidores((com.chefencasa.model.SeguidoProto.Seguido) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.SeguidoProto.Seguido>) responseObserver);
+          break;
+        case METHODID_CHECK_SEGUIDOS:
+          serviceImpl.checkSeguidos((com.chefencasa.model.SeguidoProto.Seguido) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.SeguidoProto.FlagSeguido>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -381,6 +447,13 @@ public final class SeguidosServiceGrpc {
               com.chefencasa.model.SeguidoProto.Seguido,
               com.chefencasa.model.SeguidoProto.Seguido>(
                 service, METHODID_DELETE_SEGUIDORES)))
+        .addMethod(
+          getCheckSeguidosMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.chefencasa.model.SeguidoProto.Seguido,
+              com.chefencasa.model.SeguidoProto.FlagSeguido>(
+                service, METHODID_CHECK_SEGUIDOS)))
         .build();
   }
 
@@ -432,6 +505,7 @@ public final class SeguidosServiceGrpc {
               .addMethod(getAddSeguidosMethod())
               .addMethod(getDeleteSeguidosMethod())
               .addMethod(getDeleteSeguidoresMethod())
+              .addMethod(getCheckSeguidosMethod())
               .build();
         }
       }

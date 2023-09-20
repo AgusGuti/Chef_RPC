@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.chefencasa.app.entities.User;
+import com.chefencasa.app.entities.Favorito;
 import com.chefencasa.app.entities.Seguidos;
 import com.chefencasa.app.repository.SeguidosRepository;
 import com.chefencasa.app.repository.UserRepository;
 import com.chefencasa.model.SeguidosProto.Seguido;
+import com.chefencasa.model.SeguidoProto;
 import com.chefencasa.model.SeguidoProto;
 import com.chefencasa.model.SeguidosServiceGrpc;
 import com.google.protobuf.Empty;
@@ -102,6 +104,36 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
             .setId(request.getId())
             .setUserId(request.getSeguidoId())
             .setSeguidoId(request.getUserId())
+            .build();
+        responseObserver.onNext(a);
+        responseObserver.onCompleted();
+    }
+
+
+    @Override
+    public void checkSeguidos(SeguidoProto.Seguido request, StreamObserver<SeguidoProto.FlagSeguido> responseObserver) {
+       
+        Boolean existe = false;
+               
+        try {
+			
+            Seguidos seguido = seguidosRepository.checkSeguidos(request.getUserId().getId(), request.getSeguidoId().getId());
+
+            if(seguido != null){
+                existe = true;
+            }
+            
+		} catch (Exception e) {
+			try {
+                throw new Exception("No se pudo completar la operación,error al leer Seguidos");
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+		}
+
+        SeguidoProto.FlagSeguido a = SeguidoProto.FlagSeguido.newBuilder()
+            .setFlagExiste(existe)
             .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();

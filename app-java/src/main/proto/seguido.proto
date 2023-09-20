@@ -13,11 +13,16 @@ service SeguidosService {
   rpc AddSeguidos(Seguido) returns (Seguido) {}
   rpc DeleteSeguidos(Seguido) returns (Seguido) {}
   rpc DeleteSeguidores(Seguido) returns (Seguido) {} 
+  rpc CheckSeguidos(Seguido) returns (FlagSeguido) {} 
 
 }
 
 message Seguidos {
   repeated Seguidos user = 1;
+}
+
+message FlagSeguido {
+  bool flagExiste = 1;
 }
 
 message Seguido {

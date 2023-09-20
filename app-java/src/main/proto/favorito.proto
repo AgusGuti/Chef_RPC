@@ -11,8 +11,9 @@ import "user.proto";
 import "receta.proto";
 
 service FavoritosService {
-  rpc AddFavoritos(Favorito) returns (Favorito) {}
-  rpc DeleteFavoritos(Favorito) returns (Favorito) {}  
+  rpc AddFavorito(Favorito) returns (Favorito) {}
+  rpc DeleteFavorito(Favorito) returns (Favorito) {}  
+  rpc CheckFavorito(Favorito) returns (FlagFavorito) {} 
 }
 
 message Favoritos {
@@ -23,4 +24,8 @@ message Favorito {
   int32 id = 1;
   User userId = 2;
   Receta RecetaId = 3;
+}
+
+message FlagFavorito {
+  bool flagExiste = 1;
 }

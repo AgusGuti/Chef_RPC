@@ -16,65 +16,96 @@ public final class FavoritosServiceGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito,
-      com.chefencasa.model.FavoritoProto.Favorito> getAddFavoritosMethod;
+      com.chefencasa.model.FavoritoProto.Favorito> getAddFavoritoMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "AddFavoritos",
+      fullMethodName = SERVICE_NAME + '/' + "AddFavorito",
       requestType = com.chefencasa.model.FavoritoProto.Favorito.class,
       responseType = com.chefencasa.model.FavoritoProto.Favorito.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito,
-      com.chefencasa.model.FavoritoProto.Favorito> getAddFavoritosMethod() {
-    io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.Favorito> getAddFavoritosMethod;
-    if ((getAddFavoritosMethod = FavoritosServiceGrpc.getAddFavoritosMethod) == null) {
+      com.chefencasa.model.FavoritoProto.Favorito> getAddFavoritoMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.Favorito> getAddFavoritoMethod;
+    if ((getAddFavoritoMethod = FavoritosServiceGrpc.getAddFavoritoMethod) == null) {
       synchronized (FavoritosServiceGrpc.class) {
-        if ((getAddFavoritosMethod = FavoritosServiceGrpc.getAddFavoritosMethod) == null) {
-          FavoritosServiceGrpc.getAddFavoritosMethod = getAddFavoritosMethod =
+        if ((getAddFavoritoMethod = FavoritosServiceGrpc.getAddFavoritoMethod) == null) {
+          FavoritosServiceGrpc.getAddFavoritoMethod = getAddFavoritoMethod =
               io.grpc.MethodDescriptor.<com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.Favorito>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "AddFavoritos"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "AddFavorito"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.chefencasa.model.FavoritoProto.Favorito.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.chefencasa.model.FavoritoProto.Favorito.getDefaultInstance()))
-              .setSchemaDescriptor(new FavoritosServiceMethodDescriptorSupplier("AddFavoritos"))
+              .setSchemaDescriptor(new FavoritosServiceMethodDescriptorSupplier("AddFavorito"))
               .build();
         }
       }
     }
-    return getAddFavoritosMethod;
+    return getAddFavoritoMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito,
-      com.chefencasa.model.FavoritoProto.Favorito> getDeleteFavoritosMethod;
+      com.chefencasa.model.FavoritoProto.Favorito> getDeleteFavoritoMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "DeleteFavoritos",
+      fullMethodName = SERVICE_NAME + '/' + "DeleteFavorito",
       requestType = com.chefencasa.model.FavoritoProto.Favorito.class,
       responseType = com.chefencasa.model.FavoritoProto.Favorito.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito,
-      com.chefencasa.model.FavoritoProto.Favorito> getDeleteFavoritosMethod() {
-    io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.Favorito> getDeleteFavoritosMethod;
-    if ((getDeleteFavoritosMethod = FavoritosServiceGrpc.getDeleteFavoritosMethod) == null) {
+      com.chefencasa.model.FavoritoProto.Favorito> getDeleteFavoritoMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.Favorito> getDeleteFavoritoMethod;
+    if ((getDeleteFavoritoMethod = FavoritosServiceGrpc.getDeleteFavoritoMethod) == null) {
       synchronized (FavoritosServiceGrpc.class) {
-        if ((getDeleteFavoritosMethod = FavoritosServiceGrpc.getDeleteFavoritosMethod) == null) {
-          FavoritosServiceGrpc.getDeleteFavoritosMethod = getDeleteFavoritosMethod =
+        if ((getDeleteFavoritoMethod = FavoritosServiceGrpc.getDeleteFavoritoMethod) == null) {
+          FavoritosServiceGrpc.getDeleteFavoritoMethod = getDeleteFavoritoMethod =
               io.grpc.MethodDescriptor.<com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.Favorito>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DeleteFavoritos"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DeleteFavorito"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.chefencasa.model.FavoritoProto.Favorito.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.chefencasa.model.FavoritoProto.Favorito.getDefaultInstance()))
-              .setSchemaDescriptor(new FavoritosServiceMethodDescriptorSupplier("DeleteFavoritos"))
+              .setSchemaDescriptor(new FavoritosServiceMethodDescriptorSupplier("DeleteFavorito"))
               .build();
         }
       }
     }
-    return getDeleteFavoritosMethod;
+    return getDeleteFavoritoMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito,
+      com.chefencasa.model.FavoritoProto.FlagFavorito> getCheckFavoritoMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "CheckFavorito",
+      requestType = com.chefencasa.model.FavoritoProto.Favorito.class,
+      responseType = com.chefencasa.model.FavoritoProto.FlagFavorito.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito,
+      com.chefencasa.model.FavoritoProto.FlagFavorito> getCheckFavoritoMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.FlagFavorito> getCheckFavoritoMethod;
+    if ((getCheckFavoritoMethod = FavoritosServiceGrpc.getCheckFavoritoMethod) == null) {
+      synchronized (FavoritosServiceGrpc.class) {
+        if ((getCheckFavoritoMethod = FavoritosServiceGrpc.getCheckFavoritoMethod) == null) {
+          FavoritosServiceGrpc.getCheckFavoritoMethod = getCheckFavoritoMethod =
+              io.grpc.MethodDescriptor.<com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.FlagFavorito>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CheckFavorito"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.FavoritoProto.Favorito.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.FavoritoProto.FlagFavorito.getDefaultInstance()))
+              .setSchemaDescriptor(new FavoritosServiceMethodDescriptorSupplier("CheckFavorito"))
+              .build();
+        }
+      }
+    }
+    return getCheckFavoritoMethod;
   }
 
   /**
@@ -127,16 +158,23 @@ public final class FavoritosServiceGrpc {
 
     /**
      */
-    default void addFavoritos(com.chefencasa.model.FavoritoProto.Favorito request,
+    default void addFavorito(com.chefencasa.model.FavoritoProto.Favorito request,
         io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.Favorito> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddFavoritosMethod(), responseObserver);
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddFavoritoMethod(), responseObserver);
     }
 
     /**
      */
-    default void deleteFavoritos(com.chefencasa.model.FavoritoProto.Favorito request,
+    default void deleteFavorito(com.chefencasa.model.FavoritoProto.Favorito request,
         io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.Favorito> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteFavoritosMethod(), responseObserver);
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteFavoritoMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void checkFavorito(com.chefencasa.model.FavoritoProto.Favorito request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.FlagFavorito> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCheckFavoritoMethod(), responseObserver);
     }
   }
 
@@ -169,18 +207,26 @@ public final class FavoritosServiceGrpc {
 
     /**
      */
-    public void addFavoritos(com.chefencasa.model.FavoritoProto.Favorito request,
+    public void addFavorito(com.chefencasa.model.FavoritoProto.Favorito request,
         io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.Favorito> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getAddFavoritosMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getAddFavoritoMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void deleteFavoritos(com.chefencasa.model.FavoritoProto.Favorito request,
+    public void deleteFavorito(com.chefencasa.model.FavoritoProto.Favorito request,
         io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.Favorito> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getDeleteFavoritosMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getDeleteFavoritoMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void checkFavorito(com.chefencasa.model.FavoritoProto.Favorito request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.FlagFavorito> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getCheckFavoritoMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -202,16 +248,23 @@ public final class FavoritosServiceGrpc {
 
     /**
      */
-    public com.chefencasa.model.FavoritoProto.Favorito addFavoritos(com.chefencasa.model.FavoritoProto.Favorito request) {
+    public com.chefencasa.model.FavoritoProto.Favorito addFavorito(com.chefencasa.model.FavoritoProto.Favorito request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getAddFavoritosMethod(), getCallOptions(), request);
+          getChannel(), getAddFavoritoMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public com.chefencasa.model.FavoritoProto.Favorito deleteFavoritos(com.chefencasa.model.FavoritoProto.Favorito request) {
+    public com.chefencasa.model.FavoritoProto.Favorito deleteFavorito(com.chefencasa.model.FavoritoProto.Favorito request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getDeleteFavoritosMethod(), getCallOptions(), request);
+          getChannel(), getDeleteFavoritoMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.FavoritoProto.FlagFavorito checkFavorito(com.chefencasa.model.FavoritoProto.Favorito request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCheckFavoritoMethod(), getCallOptions(), request);
     }
   }
 
@@ -233,23 +286,32 @@ public final class FavoritosServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.FavoritoProto.Favorito> addFavoritos(
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.FavoritoProto.Favorito> addFavorito(
         com.chefencasa.model.FavoritoProto.Favorito request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getAddFavoritosMethod(), getCallOptions()), request);
+          getChannel().newCall(getAddFavoritoMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.FavoritoProto.Favorito> deleteFavoritos(
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.FavoritoProto.Favorito> deleteFavorito(
         com.chefencasa.model.FavoritoProto.Favorito request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getDeleteFavoritosMethod(), getCallOptions()), request);
+          getChannel().newCall(getDeleteFavoritoMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.FavoritoProto.FlagFavorito> checkFavorito(
+        com.chefencasa.model.FavoritoProto.Favorito request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getCheckFavoritoMethod(), getCallOptions()), request);
     }
   }
 
-  private static final int METHODID_ADD_FAVORITOS = 0;
-  private static final int METHODID_DELETE_FAVORITOS = 1;
+  private static final int METHODID_ADD_FAVORITO = 0;
+  private static final int METHODID_DELETE_FAVORITO = 1;
+  private static final int METHODID_CHECK_FAVORITO = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -268,13 +330,17 @@ public final class FavoritosServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_ADD_FAVORITOS:
-          serviceImpl.addFavoritos((com.chefencasa.model.FavoritoProto.Favorito) request,
+        case METHODID_ADD_FAVORITO:
+          serviceImpl.addFavorito((com.chefencasa.model.FavoritoProto.Favorito) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.Favorito>) responseObserver);
           break;
-        case METHODID_DELETE_FAVORITOS:
-          serviceImpl.deleteFavoritos((com.chefencasa.model.FavoritoProto.Favorito) request,
+        case METHODID_DELETE_FAVORITO:
+          serviceImpl.deleteFavorito((com.chefencasa.model.FavoritoProto.Favorito) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.Favorito>) responseObserver);
+          break;
+        case METHODID_CHECK_FAVORITO:
+          serviceImpl.checkFavorito((com.chefencasa.model.FavoritoProto.Favorito) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.FlagFavorito>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -295,19 +361,26 @@ public final class FavoritosServiceGrpc {
   public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
     return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
         .addMethod(
-          getAddFavoritosMethod(),
+          getAddFavoritoMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
               com.chefencasa.model.FavoritoProto.Favorito,
               com.chefencasa.model.FavoritoProto.Favorito>(
-                service, METHODID_ADD_FAVORITOS)))
+                service, METHODID_ADD_FAVORITO)))
         .addMethod(
-          getDeleteFavoritosMethod(),
+          getDeleteFavoritoMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
               com.chefencasa.model.FavoritoProto.Favorito,
               com.chefencasa.model.FavoritoProto.Favorito>(
-                service, METHODID_DELETE_FAVORITOS)))
+                service, METHODID_DELETE_FAVORITO)))
+        .addMethod(
+          getCheckFavoritoMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.chefencasa.model.FavoritoProto.Favorito,
+              com.chefencasa.model.FavoritoProto.FlagFavorito>(
+                service, METHODID_CHECK_FAVORITO)))
         .build();
   }
 
@@ -356,8 +429,9 @@ public final class FavoritosServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new FavoritosServiceFileDescriptorSupplier())
-              .addMethod(getAddFavoritosMethod())
-              .addMethod(getDeleteFavoritosMethod())
+              .addMethod(getAddFavoritoMethod())
+              .addMethod(getDeleteFavoritoMethod())
+              .addMethod(getCheckFavoritoMethod())
               .build();
         }
       }
