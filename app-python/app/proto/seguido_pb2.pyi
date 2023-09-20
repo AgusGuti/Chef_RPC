@@ -14,13 +14,11 @@ class Seguidos(_message.Message):
     user: _containers.RepeatedCompositeFieldContainer[Seguidos]
     def __init__(self, user: _Optional[_Iterable[_Union[Seguidos, _Mapping]]] = ...) -> None: ...
 
-class Usuarios(_message.Message):
-    __slots__ = ["user_seguidor", "user_seguido"]
-    USER_SEGUIDOR_FIELD_NUMBER: _ClassVar[int]
-    USER_SEGUIDO_FIELD_NUMBER: _ClassVar[int]
-    user_seguidor: _user_pb2.User
-    user_seguido: _user_pb2.User
-    def __init__(self, user_seguidor: _Optional[_Union[_user_pb2.User, _Mapping]] = ..., user_seguido: _Optional[_Union[_user_pb2.User, _Mapping]] = ...) -> None: ...
+class FlagSeguido(_message.Message):
+    __slots__ = ["flagExiste"]
+    FLAGEXISTE_FIELD_NUMBER: _ClassVar[int]
+    flagExiste: bool
+    def __init__(self, flagExiste: bool = ...) -> None: ...
 
 class Seguido(_message.Message):
     __slots__ = ["id", "userId", "seguidoId"]

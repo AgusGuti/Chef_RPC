@@ -11,8 +11,10 @@ from app.proto.categoria_pb2 import Categoria
 from app.proto.user_pb2 import User
 from app.proto.ingrediente_pb2 import Ingrediente
 from app.proto.receta_pb2 import Receta
+from app.proto.favorito_pb2 import Favorito
 
 from app.proto.receta_pb2_grpc import RecetasServiceStub
+from app.proto.favorito_pb2_grpc import FavoritosServiceStub
 
 from logging.config import dictConfig
 from google.protobuf.json_format import MessageToDict, MessageToJson
@@ -139,5 +141,17 @@ def favoritos():
         response = stub.FindFavoritos(Receta(user=User(id=session['user_id'])))
         recetas = response.receta
     return render_template('favoritos.html', recetas=recetas)
-    
+
+
+@receta_blueprint.route("/checkFavorito/<int:recetaId>",methods = ['GET'])
+def checkFavorito(recetaId):
+    logger.info("/checkFavorito %s"),request.args.get('recetaId')
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = FavoritosServiceStub(channel)
+        response = stub.CheckFavorito(Favorito(userId=User(id=session['user_id']), recetaId=Receta(idReceta=recetaId)))
+        
+        print("Greeter EXISTE received: " + str(response))
+        
+        existe = {"existe":MessageToJson(response)}
+    return existe
 

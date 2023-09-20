@@ -24,6 +24,16 @@ class SeguidosServiceStub(object):
                 request_serializer=seguido__pb2.Seguido.SerializeToString,
                 response_deserializer=seguido__pb2.Seguido.FromString,
                 )
+        self.DeleteSeguidores = channel.unary_unary(
+                '/model.SeguidosService/DeleteSeguidores',
+                request_serializer=seguido__pb2.Seguido.SerializeToString,
+                response_deserializer=seguido__pb2.Seguido.FromString,
+                )
+        self.CheckSeguidos = channel.unary_unary(
+                '/model.SeguidosService/CheckSeguidos',
+                request_serializer=seguido__pb2.Seguido.SerializeToString,
+                response_deserializer=seguido__pb2.FlagSeguido.FromString,
+                )
 
 
 class SeguidosServiceServicer(object):
@@ -41,6 +51,18 @@ class SeguidosServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def DeleteSeguidores(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CheckSeguidos(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_SeguidosServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -53,6 +75,16 @@ def add_SeguidosServiceServicer_to_server(servicer, server):
                     servicer.DeleteSeguidos,
                     request_deserializer=seguido__pb2.Seguido.FromString,
                     response_serializer=seguido__pb2.Seguido.SerializeToString,
+            ),
+            'DeleteSeguidores': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteSeguidores,
+                    request_deserializer=seguido__pb2.Seguido.FromString,
+                    response_serializer=seguido__pb2.Seguido.SerializeToString,
+            ),
+            'CheckSeguidos': grpc.unary_unary_rpc_method_handler(
+                    servicer.CheckSeguidos,
+                    request_deserializer=seguido__pb2.Seguido.FromString,
+                    response_serializer=seguido__pb2.FlagSeguido.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -95,5 +127,39 @@ class SeguidosService(object):
         return grpc.experimental.unary_unary(request, target, '/model.SeguidosService/DeleteSeguidos',
             seguido__pb2.Seguido.SerializeToString,
             seguido__pb2.Seguido.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteSeguidores(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.SeguidosService/DeleteSeguidores',
+            seguido__pb2.Seguido.SerializeToString,
+            seguido__pb2.Seguido.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CheckSeguidos(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.SeguidosService/CheckSeguidos',
+            seguido__pb2.Seguido.SerializeToString,
+            seguido__pb2.FlagSeguido.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

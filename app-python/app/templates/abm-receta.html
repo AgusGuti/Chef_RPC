@@ -74,6 +74,7 @@
       cargarUsuario();
       cargarIngredientesYReceta(recetaId);
       cargarDetallesReceta(recetaId);
+      checkFavorito(recetaId);
     }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -155,58 +156,58 @@
       xhr.send();
       }
 
-      function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
-        console.log("cargarIngredientesYReceta function called");
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/ingredientes", true);
-      
-        // Define ingredientesSelect para seleccionar el elemento HTML
-        var ingredientesSelect = document.getElementById("ingredientes");
-      
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              var response = JSON.parse(xhr.responseText);
-              var ingredientes = response.ingrediente;
-      
-              console.log("Respuesta del servidor:", ingredientes);
-      
-              if (Array.isArray(ingredientes)) {
-                ingredientesSelect.innerHTML = ""; // Limpia el contenido actual
-      
-                var ingredientesSet = new Set(ingredientesSeleccionados);
-      
-                ingredientes.forEach(function (ingrediente) {
-                  var option = document.createElement("option");
-                  option.value = ingrediente.id;
-                  option.text = ingrediente.nombre;
-      
-                  // Verifica si el ingrediente actual está en el conjunto de ingredientes seleccionados
-                  if (ingredientesSet.has(ingrediente.id)) {
-                    option.selected = true;
-                  }
-      
-                  ingredientesSelect.appendChild(option);
-                });
-      
-                // Asegúrate de que el elemento select permita la selección múltiple
-                ingredientesSelect.setAttribute("multiple", "multiple");
-              } else {
-                console.error(
-                  "La respuesta del servidor no contiene una lista de ingredientes válida:",
-                  response
-                );
-              }
+    function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
+      console.log("cargarIngredientesYReceta function called");
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/ingredientes", true);
+    
+      // Define ingredientesSelect para seleccionar el elemento HTML
+      var ingredientesSelect = document.getElementById("ingredientes");
+    
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            var ingredientes = response.ingrediente;
+    
+            console.log("Respuesta del servidor:", ingredientes);
+    
+            if (Array.isArray(ingredientes)) {
+              ingredientesSelect.innerHTML = ""; // Limpia el contenido actual
+    
+              var ingredientesSet = new Set(ingredientesSeleccionados);
+    
+              ingredientes.forEach(function (ingrediente) {
+                var option = document.createElement("option");
+                option.value = ingrediente.id;
+                option.text = ingrediente.nombre;
+    
+                // Verifica si el ingrediente actual está en el conjunto de ingredientes seleccionados
+                if (ingredientesSet.has(ingrediente.id)) {
+                  option.selected = true;
+                }
+    
+                ingredientesSelect.appendChild(option);
+              });
+    
+              // Asegúrate de que el elemento select permita la selección múltiple
+              ingredientesSelect.setAttribute("multiple", "multiple");
             } else {
-              console.error("Error al cargar ingredientes:", xhr.status);
+              console.error(
+                "La respuesta del servidor no contiene una lista de ingredientes válida:",
+                response
+              );
             }
+          } else {
+            console.error("Error al cargar ingredientes:", xhr.status);
           }
-        };
-        xhr.send();
-      }
-      
-      // Función para cargar los detalles de la receta en el modal de modificar
-      function cargarDetallesReceta(recetaId) {
+        }
+      };
+      xhr.send();
+    }
+    
+    // Función para cargar los detalles de la receta en el modal de modificar
+    function cargarDetallesReceta(recetaId) {
         console.log("cargarDetallesReceta function called");
         var xhr = new XMLHttpRequest();
         xhr.open("GET", `/receta/findById/${recetaId}`, true);
@@ -312,7 +313,28 @@
         };
         xhr.send();
       }
+
+    //Chequear si la receta ya está en Favoritos
+    function checkFavorito(recetaId) {
+    console.log("checkFavorito function called");
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", `/checkFavorito/${recetaId}`, true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var favorito = JSON.parse(xhr.responseText);
+        
+        // Aquí puedes utilizar la información del usuario para prellenar la base de datos
+        // por ejemplo, enviarla al servidor con el formulario de creación de recetas
+        document.getElementById("user_id").value = user.id;// Asigna el ID del usuario al campo oculto
+        // Puedes asignar otros datos del usuario a otros campos del formulario si es necesario
+      }
+    };
+    xhr.send();
+    }
+    
     window.onload = inicio;
+
+
 
   </script>
 
@@ -456,7 +478,7 @@
                 </button>
                 &nbsp; <!--espacio en blanco-->
                 <button class="btn btn-recetas btn-sm ml-1" id="favoritoButton_{{ receta.idReceta }}"
-                data-toggle="modal" data-target="#favoritoModal{{ receta.idReceta }}">
+                data-toggle="modal" data-target="modalFavorito">
                 <i class="fa-regular fa-heart" style="color: #ffffff;"></i>                
                 </button>
               </td>
@@ -731,32 +753,47 @@
 
 <!-- Modal de Confirmación -->
   {% for receta in recetas %}
-  <div class="modal fade" id="#favoritoModal{{ receta.idReceta }}">
+  <div class="modal fade" id="modalFavorito">
     <div class="modal-dialog">
       <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Confirmación</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <!-- Modal body -->
-        <div class="modal-body">
-          ¿Estás seguro de que quieres guardar en Favoritos?
-        </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" id="confirmFavorito">Confirmar Favorito</button>
-        </div>
+        
       </div>
     </div>
   </div>
 
-  <script>
+  <!-- <script>
     // JavaScript para cambiar el icono y el color del botón "Like"
     $(document).ready(function () {
+      
+      var recetaId = receta.idReceta;
+      var icon = $(this).find("i");
+
+      fetch("/checkFavorito?recetaId=" + recetaId, {
+        method: "GET"
+      })
+
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Error al verificar el favorito");
+        }
+      })
+
+      .then(function (existe) {
+      // Manipular la respuesta del servidor (data) aquí
+        if (existe.existe == 'true') {
+          alert("Es favorito");
+          icon.removeClass("fa-regular fa-heart").addClass("fa fa-heart").css("color", "#e36c6c");
+        } else {
+          alert("No es favorito");        
+        }
+    })
+      
+      
+      
       $("#favoritoButton_{{ receta.idReceta }}").click(function () {
-        var icon = $(this).find("i");
+                
         if (icon.hasClass("fa-regular fa-heart")) {
           // Cambiar de corazón vacío a corazón lleno y cambiar el color
           icon.removeClass("fa-regular fa-heart").addClass("fa fa-heart").css("color", "#e36c6c");
@@ -766,14 +803,34 @@
         }
       });
 
-      // Restablecer el color del botón y el icono cuando se confirma el "Like"
-      $("#confirmFavorito").click(function () {
-        $("#favoritoButton_{{ receta.idReceta }} i").removeClass("fa-regular fa-heart").addClass("fa fa-heart").css("color", "#e36c6c");
-        // Aquí puedes agregar la lógica para enviar el "Like" al servidor si es necesario
-        // ...
-      });
     });
-  </script>
+  </script> -->
+
+  <script>
+    // Obtener el ID de la receta
+    const recetaId = document.getElementById("recetaId").value;
+    
+    // Crear una solicitud HTTP
+    const request = new XMLHttpRequest();
+    request.open("GET", `/checkFavorito/${recetaId}`);
+    
+    // Enviar la solicitud
+    request.send();
+    
+    // Manejar la respuesta
+    request.onload = function() {
+      // Obtener la respuesta
+      const response = JSON.parse(request.responseText);
+    
+      // Mostrar el resultado
+      if (response.favorito) {
+        document.getElementById("favorito").innerHTML = "Favorito";
+      } else {
+        document.getElementById("favorito").innerHTML = "No favorito";
+      }
+    };
+    </script>
+
   {% endfor %}
 
 
