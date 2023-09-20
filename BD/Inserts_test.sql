@@ -35,7 +35,8 @@ VALUES
 	('Lucía', 'Lopez', 'TechWhiz@volcanmail.com', 'cl4ve07'),
 	('Diego', 'Sanchez', 'CodeHero@volcanmail.com', 'cl4ve08'),
 	('Silvia', 'Gomez', 'NeonStar@volcanmail.com', 'cl4ve09'),
-	('Mariano', 'Torres', 'ByteBoss@volcanmail.com', 'cl4ve010');
+	('Mariano', 'Torres', 'ByteBoss@volcanmail.com', 'cl4ve010'),
+    ('Pablo', 'Gomez', 'pablo@volcanmail.com', '1234');
 
 
 -- select * from chefencasa.user;
@@ -197,6 +198,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Table chefencasa.seguido
 -- -----------------------------------------------------
 
+SET FOREIGN_KEY_CHECKS = 0;
 INSERT INTO chefencasa.seguidos (user_id, seguido_id)
 VALUES
 	(1, 2),
@@ -211,6 +213,7 @@ VALUES
     (11,3),
     (11,5),
     (11,7);
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- select * from chefencasa.seguido;
 
