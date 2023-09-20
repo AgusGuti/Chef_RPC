@@ -197,7 +197,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Table chefencasa.seguido
 -- -----------------------------------------------------
 
-INSERT INTO chefencasa.seguidos (user_id, seguido_id)
+INSERT INTO chefencasa.seguidos (seguido_id,user_id)
 VALUES
 	(1, 2),
 	(3, 4),
@@ -207,10 +207,7 @@ VALUES
     (9, 5),
     (1, 5),
     (3, 5),
-    (8, 5),
-    (11,3),
-    (11,5),
-    (11,7);
+    (8, 5);
 
 -- select * from chefencasa.seguido;
 

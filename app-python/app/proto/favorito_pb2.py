@@ -13,8 +13,6 @@ _sym_db = _symbol_database.Default()
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
-import user_pb2 as user__pb2
-import receta_pb2 as receta__pb2
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0e\x66\x61vorito.proto\x12\x05model\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\nuser.proto\x1a\x0creceta.proto\"+\n\tFavoritos\x12\x1e\n\x04user\x18\x01 \x03(\x0b\x32\x10.model.Favoritos\"T\n\x08\x46\x61vorito\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x1b\n\x06userId\x18\x02 \x01(\x0b\x32\x0b.model.User\x12\x1f\n\x08RecetaId\x18\x03 \x01(\x0b\x32\r.model.Receta\"\"\n\x0c\x46lagFavorito\x12\x12\n\nflagExiste\x18\x01 \x01(\x08\x32\xb4\x01\n\x10\x46\x61voritosService\x12\x31\n\x0b\x41\x64\x64\x46\x61vorito\x12\x0f.model.Favorito\x1a\x0f.model.Favorito\"\x00\x12\x34\n\x0e\x44\x65leteFavorito\x12\x0f.model.Favorito\x1a\x0f.model.Favorito\"\x00\x12\x37\n\rCheckFavorito\x12\x0f.model.Favorito\x1a\x13.model.FlagFavorito\"\x00\x42%\n\x14\x63om.chefencasa.modelB\rFavoritoProtob\x06proto3')

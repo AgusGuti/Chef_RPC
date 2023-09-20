@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
-import user_pb2 as user__pb2
+
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rseguido.proto\x12\x05model\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\nuser.proto\")\n\x08Seguidos\x12\x1d\n\x04user\x18\x01 \x03(\x0b\x32\x0f.model.Seguidos\"!\n\x0b\x46lagSeguido\x12\x12\n\nflagExiste\x18\x01 \x01(\x08\"R\n\x07Seguido\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x1b\n\x06userId\x18\x02 \x01(\x0b\x32\x0b.model.User\x12\x1e\n\tseguidoId\x18\x03 \x01(\x0b\x32\x0b.model.User2\xe3\x01\n\x0fSeguidosService\x12/\n\x0b\x41\x64\x64Seguidos\x12\x0e.model.Seguido\x1a\x0e.model.Seguido\"\x00\x12\x32\n\x0e\x44\x65leteSeguidos\x12\x0e.model.Seguido\x1a\x0e.model.Seguido\"\x00\x12\x34\n\x10\x44\x65leteSeguidores\x12\x0e.model.Seguido\x1a\x0e.model.Seguido\"\x00\x12\x35\n\rCheckSeguidos\x12\x0e.model.Seguido\x1a\x12.model.FlagSeguido\"\x00\x42$\n\x14\x63om.chefencasa.modelB\x0cSeguidoProtob\x06proto3')
