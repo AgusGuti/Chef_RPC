@@ -51,18 +51,18 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- -----------------------------------------------------
 
 SET FOREIGN_KEY_CHECKS = 0;
-INSERT INTO chefencasa.receta (user_id, titulo_receta, descripcion, pasos, tiempo_preparacion, categoria_id, fecha_creacion)
+INSERT INTO chefencasa.receta (user_id, titulo_receta, descripcion, pasos, tiempo_preparacion, categoria_id, fecha_creacion, foto1, foto2, foto3, foto4, foto5)
 VALUES
-(1, 'Receta 1', 'Descripción de la Receta 1', 'Pasos de la Receta 1', 30, 3, '2023-09-03 12:00:00'),
-(3, 'Receta 2', 'Descripción de la Receta 2', 'Pasos de la Receta 2', 45, 1, '2022-07-01 15:30:00'),
-(2, 'Receta 3', 'Descripción de la Receta 3', 'Pasos de la Receta 3', 60, 2, '2023-08-15 08:45:00'),
-(3, 'Receta 4', 'Descripción de la Receta 4', 'Pasos de la Receta 4', 40, 3, '2022-11-20 19:15:00'),
-(4, 'Receta 5', 'Descripción de la Receta 5', 'Pasos de la Receta 5', 55, 4, '2022-07-25 10:00:00'),
-(1, 'Receta 6', 'Descripción de la Receta 6', 'Pasos de la Receta 6', 25, 2, '2023-06-05 14:20:00'),
-(3, 'Receta 7', 'Descripción de la Receta 7', 'Pasos de la Receta 7', 50, 3, '2022-09-18 16:40:00'),
-(7, 'Receta 8', 'Descripción de la Receta 8', 'Pasos de la Receta 8', 35, 1, '2023-01-10 09:55:00'),
-(8, 'Receta 9', 'Descripción de la Receta 9', 'Pasos de la Receta 9', 70, 5, '2023-07-30 21:05:00'),
-(7, 'Receta 10', 'Descripción de la Receta 10', 'Pasos de la Receta 10', 45, 3, '2022-12-15 18:30:00');
+(1, 'Receta 1', 'Descripción de la Receta 1', 'Pasos de la Receta 1', 30, 3, STR_TO_DATE('2023-09-03 12:00:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(3, 'Receta 2', 'Descripción de la Receta 2', 'Pasos de la Receta 2', 45, 1, STR_TO_DATE('2022-07-01 15:30:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(2, 'Receta 3', 'Descripción de la Receta 3', 'Pasos de la Receta 3', 60, 2, STR_TO_DATE('2023-08-15 08:45:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(3, 'Receta 4', 'Descripción de la Receta 4', 'Pasos de la Receta 4', 40, 3, STR_TO_DATE('2022-11-20 19:15:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(4, 'Receta 5', 'Descripción de la Receta 5', 'Pasos de la Receta 5', 55, 4, STR_TO_DATE('2022-07-25 10:00:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(1, 'Receta 6', 'Descripción de la Receta 6', 'Pasos de la Receta 6', 25, 2, STR_TO_DATE('2023-06-05 14:20:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(3, 'Receta 7', 'Descripción de la Receta 7', 'Pasos de la Receta 7', 50, 3, STR_TO_DATE('2022-09-18 16:40:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(7, 'Receta 8', 'Descripción de la Receta 8', 'Pasos de la Receta 8', 35, 1, STR_TO_DATE('2023-01-10 09:55:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(8, 'Receta 9', 'Descripción de la Receta 9', 'Pasos de la Receta 9', 70, 5, STR_TO_DATE('2023-07-30 21:05:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(7, 'Receta 10', 'Descripción de la Receta 10', 'Pasos de la Receta 10', 45, 3, STR_TO_DATE('2022-12-15 18:30:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", "");
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- select * from chefencasa.receta;
@@ -207,7 +207,10 @@ VALUES
     (9, 5),
     (1, 5),
     (3, 5),
-    (8, 5);
+    (8, 5),
+    (11,3),
+    (11,5),
+    (11,7);
 
 -- select * from chefencasa.seguido;
 
