@@ -51,12 +51,6 @@ class Receta(_message.Message):
     foto5: str
     def __init__(self, idReceta: _Optional[int] = ..., user: _Optional[_Union[_user_pb2.User, _Mapping]] = ..., tituloReceta: _Optional[str] = ..., descripcion: _Optional[str] = ..., categoria: _Optional[_Union[_categoria_pb2.Categoria, _Mapping]] = ..., pasos: _Optional[str] = ..., ingredientes: _Optional[_Iterable[_Union[_ingrediente_pb2.Ingrediente, _Mapping]]] = ..., tiempoPreparacion: _Optional[int] = ..., foto1: _Optional[str] = ..., foto2: _Optional[str] = ..., foto3: _Optional[str] = ..., foto4: _Optional[str] = ..., foto5: _Optional[str] = ...) -> None: ...
 
-class UsuarioId(_message.Message):
-    __slots__ = ["idUsuario"]
-    IDUSUARIO_FIELD_NUMBER: _ClassVar[int]
-    idUsuario: int
-    def __init__(self, idUsuario: _Optional[int] = ...) -> None: ...
-
 class RecetaFiltro(_message.Message):
     __slots__ = ["categoria", "nombre", "ingredientes", "tiempoPrepDesde", "tiempoPrepHasta"]
     CATEGORIA_FIELD_NUMBER: _ClassVar[int]

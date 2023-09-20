@@ -54,7 +54,11 @@ public class Favorito implements Serializable {
 		this.id = id;
 		this.user_id = user_id;
 		this.receta_id = receta_id;
-		
+	}
+
+	public Favorito(User user_id, Receta receta_id) {
+		this.user_id = user_id;
+		this.receta_id = receta_id;		
 	}
 
 	public static long getSerialversionuid() {
