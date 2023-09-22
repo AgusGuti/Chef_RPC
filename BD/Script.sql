@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS `chefencasa`.`categoria` (
   `categoria` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -46,7 +45,6 @@ CREATE TABLE IF NOT EXISTS `chefencasa`.`user` (
   `nombre` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 12
 DEFAULT CHARACTER SET = utf8mb3;
 
 CREATE UNIQUE INDEX `UK_ob8kqyqqgmefl0aco34akdtpe` ON `chefencasa`.`user` (`email` ASC) VISIBLE;
@@ -79,7 +77,6 @@ CREATE TABLE IF NOT EXISTS `chefencasa`.`receta` (
     FOREIGN KEY (`categoria_id`)
     REFERENCES `chefencasa`.`categoria` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 21
 DEFAULT CHARACTER SET = utf8mb3;
 
 CREATE INDEX `FKiietmot1luu7pnieopyxnj8ge` ON `chefencasa`.`receta` (`categoria_id` ASC) VISIBLE;
@@ -104,7 +101,6 @@ CREATE TABLE IF NOT EXISTS `chefencasa`.`favorito` (
     FOREIGN KEY (`receta_id`)
     REFERENCES `chefencasa`.`receta` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 12
 DEFAULT CHARACTER SET = utf8mb3;
 
 CREATE INDEX `FKsp6x16gw0bgmo4trgdc3xvc22` ON `chefencasa`.`favorito` (`receta_id` ASC) VISIBLE;
@@ -122,7 +118,6 @@ CREATE TABLE IF NOT EXISTS `chefencasa`.`ingrediente` (
   `nombre` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -164,7 +159,6 @@ CREATE TABLE IF NOT EXISTS `chefencasa`.`seguidos` (
     FOREIGN KEY (`seguido_id`)
     REFERENCES `chefencasa`.`user` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 13
 DEFAULT CHARACTER SET = utf8mb3;
 
 CREATE INDEX `FKocsdh6x45tlpkxceh692ublpn` ON `chefencasa`.`seguidos` (`seguido_id` ASC) VISIBLE;
