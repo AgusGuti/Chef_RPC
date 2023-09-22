@@ -51,6 +51,12 @@ public class Seguidos implements Serializable {
 	private User seguido_id;
 
 	
+	public Seguidos(User user_id, User seguido_id) {
+		this.user_id = user_id;
+		this.seguido_id = seguido_id;
+	}
+
+
 	public Seguidos(int id) {		
 		
 		this.id = id;		

@@ -44,10 +44,6 @@ message Receta {
   string foto5 = 14;
 }
 
-message UsuarioId {
-  int32 idUsuario = 1;
-}
-
 message RecetaFiltro{
   string categoria = 1;
 	string nombre = 2;

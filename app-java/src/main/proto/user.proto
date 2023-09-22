@@ -15,12 +15,12 @@ service UsersService {
   rpc FindAll(google.protobuf.Empty) returns (Users) {}
   rpc TraerSeguidos(User) returns (Users) {}
   rpc TraerSeguidores(User) returns (Users) {}
-
 }
 
 message Users {
   repeated User user = 1;
 }
+
 
 message User {
   int32 id = 1;

@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package model;
+
+option java_package = "com.chefencasa.model";
+option java_outer_classname = "SeguidoProto";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "user.proto";
+
+service SeguidosService {
+  rpc AddSeguidos(Seguido) returns (Seguido) {}
+  rpc DeleteSeguidos(Seguido) returns (Seguido) {}
+  rpc DeleteSeguidores(Seguido) returns (Seguido) {} 
+  rpc CheckSeguidos(Seguido) returns (FlagSeguido) {} 
+
+}
+
+message Seguidos {
+  repeated Seguidos user = 1;
+}
+
+message FlagSeguido {
+  bool flagExiste = 1;
+}
+
+message Seguido {
+  int32 id = 1;
+  User userId = 2;
+  User seguidoId = 3;
+}

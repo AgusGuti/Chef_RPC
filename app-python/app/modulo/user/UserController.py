@@ -24,7 +24,7 @@ def autenticar():
     
     logger.info("user : %s",response.nombre)
     
-    if user=="":
+    if user=="{}":
         flash('Usuario y/o clave incorrectos','danger')
         return redirect('/')
     else:

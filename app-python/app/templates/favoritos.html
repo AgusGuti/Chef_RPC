@@ -427,10 +427,10 @@
                   <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
                   </button>
                   &nbsp; <!--espacio en blanco-->
-                <button class="btn btn-recetas btn-sm ml-1"
-                data-toggle="modal">
-                <i class="fa fa-heart" style="color: #e36c6c;"></i>                
-                </button>
+                  <button class="btn btn-recetas btn-sm ml-1" id="favoritoButton_{{ receta.idReceta }}"
+                  data-toggle="modal" data-target="#favoritoModal{{ receta.idReceta }}">
+                  <i class="fa fa-heart" style="color: #e36c6c;"></i>                
+                  </button>
               </td>
             </tr>
             {% endfor %}
@@ -480,5 +480,57 @@
     </div>
   </div>
   {% endfor %}
+
+
+<!-- Modal de Confirmación -->
+  {% for receta in recetas %}
+  <div class="modal fade" id="#favoritoModal{{ receta.idReceta }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Confirmación</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          ¿Estás seguro de que quieres guardar en Favoritos?
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="confirmFavorito">Confirmar Favorito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript para cambiar el icono y el color del botón "Like"
+    $(document).ready(function () {
+      $("#favoritoButton_{{ receta.idReceta }}").click(function () {
+        var icon = $(this).find("i");
+        if (icon.hasClass("fa-regular fa-heart")) {
+          // Cambiar de corazón vacío a corazón lleno y cambiar el color
+          icon.removeClass("fa-regular fa-heart").addClass("fa fa-heart").css("color", "#e36c6c");
+        } else {
+          // Cambiar de corazón lleno a corazón vacío y cambiar el color
+          icon.removeClass("fa fa-heart").addClass("fa-regular fa-heart").css("color", "#ffffff");
+        }
+      });
+
+      // Restablecer el color del botón y el icono cuando se confirma el "Like"
+      $("#confirmFavorito").click(function () {
+        $("#favoritoButton_{{ receta.idReceta }} i").removeClass("fa-regular fa-heart").addClass("fa fa-heart").css("color", "#e36c6c");
+        // Aquí puedes agregar la lógica para enviar el "Like" al servidor si es necesario
+        // ...
+      });
+    });
+  </script>
+  {% endfor %}
+
+
+
+
 </body>
 </html>

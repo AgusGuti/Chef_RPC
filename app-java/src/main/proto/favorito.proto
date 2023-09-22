@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package model;
+
+option java_package = "com.chefencasa.model";
+option java_outer_classname = "FavoritoProto";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "user.proto";
+import "receta.proto";
+
+service FavoritosService {
+  rpc AddFavorito(Favorito) returns (Favorito) {}
+  rpc DeleteFavorito(Favorito) returns (Favorito) {}  
+  rpc CheckFavorito(Favorito) returns (FlagFavorito) {} 
+}
+
+message Favoritos {
+  repeated Favoritos user = 1;
+}
+
+message Favorito {
+  int32 id = 1;
+  User userId = 2;
+  Receta RecetaId = 3;
+}
+
+message FlagFavorito {
+  bool flagExiste = 1;
+}

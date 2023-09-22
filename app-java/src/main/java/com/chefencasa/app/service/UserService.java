@@ -7,7 +7,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import com.chefencasa.app.entities.Seguidos;
 import com.chefencasa.app.entities.User;
+import com.chefencasa.app.repository.SeguidosRepository;
 import com.chefencasa.app.repository.UserRepository;
 import com.chefencasa.model.UserProto;
 import com.chefencasa.model.UsersServiceGrpc;
@@ -24,6 +26,10 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
 	@Autowired
 	@Qualifier("userRepository")
 	private UserRepository usuarioRepository;
+
+    @Autowired
+	@Qualifier("seguidosRepository")
+	private SeguidosRepository seguidosRepository;
 
     @Override
     public void addUser(UserProto.User request, StreamObserver<UserProto.User> responseObserver) {
@@ -152,7 +158,7 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
         responseObserver.onNext(a);
         responseObserver.onCompleted();
     }
-
+  
 
 
 }
