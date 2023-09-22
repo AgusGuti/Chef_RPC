@@ -139,7 +139,12 @@ table.table td i {
     margin-right: -1022px; /* Ajusta el margen derecho */
   }
 
-.boton-rojo {
-background-color: red;
-color: white;
+/* Icono de corazón por defecto (en blanco) */
+.fa-regular.fa-heart {
+    color: #ffffff;
 }
+  
+/* Icono de corazón cuando el favorito está activo (en rojo) */
+.favorito-activo .fa-heart {
+    color: red;
+  }

@@ -147,20 +147,23 @@
 
     // Actualiza la función eliminarFavorito para obtener el ID del favorito del botón
     function eliminarFavorito(button, favoritoId) {
-      var favoritoId = $(button).data("favoritoid"); // Obtiene el favoritoId del atributo data-favoritoid del botón
-
-      console.log("Favorito ID a eliminar:", favoritoId); // Agrega un log para registrar el ID antes de la solicitud AJAX
-
+      var favoritoId = $(button).data("favoritoid");
+    
+      console.log("Favorito ID a eliminar:", favoritoId);
+    
       // Realiza una solicitud AJAX para eliminar el favorito
       $.ajax({
         type: "POST",
         url: `/eliminarFavorito/${favoritoId}`,
         success: function (data, textStatus, xhr) {
           console.log("Respuesta del servidor:", xhr.status);
-
+    
           if (xhr.status === 200) {
-            // Eliminación exitosa, puedes realizar alguna acción, como ocultar la fila de la tabla
+
             $("#filaFavorito_" + favoritoId).hide(); // Cambia el ID de filaReceta_ a filaFavorito_
+            
+            // Quita la clase "favorito-activo" para cambiar el color del corazón a blanco
+            $(button).removeClass("favorito-activo");
           } else {
             // Maneja el caso en que la eliminación falla, muestra un mensaje de error
             alert("Error al eliminar el favorito. Estado: " + xhr.status);
@@ -294,10 +297,10 @@
                     <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
                   </button>
                   &nbsp; <!--espacio en blanco-->
-                  <button class="btn btn-recetas btn-sm ml-1" 
+                  <button class="btn btn-recetas btn-sm ml-1 favorito-activo" 
                     data-favoritoid="{{ favorito.id }}" 
                     onclick="eliminarFavorito(this)">
-                    <i class="fa-solid fa-heart" style="color: red;"></i>
+                    <i class="fas fa-heart"></i>
                   </button>
                 </div>
               </td>
