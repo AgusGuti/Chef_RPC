@@ -26,16 +26,16 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 INSERT INTO chefencasa.`user` (`nombre`, `apellido`, `email`, `clave`)
 VALUES
-	('Juan', 'Gonzalez', 'User1234@volcanmail.com', 'cl4ve01'),
-	('Maria', 'Fernandez', 'ByteGeek@volcanmail.com', 'cl4ve02'),
-	('Carlos', 'Martinez', 'CodeNerd@volcanmail.com', 'cl4ve03'),
-	('Ana', 'Rodriguez', 'QuickFox@volcanmail.com', 'cl4ve04'),
-	('Luis', 'Perez', 'PixelArt@volcanmail.com', 'cl4ve05'),
-	('Laura', 'Diaz', 'DataGuru@volcanmail.com', 'cl4ve06'),
-	('Lucía', 'Lopez', 'TechWhiz@volcanmail.com', 'cl4ve07'),
-	('Diego', 'Sanchez', 'CodeHero@volcanmail.com', 'cl4ve08'),
-	('Silvia', 'Gomez', 'NeonStar@volcanmail.com', 'cl4ve09'),
-	('Mariano', 'Torres', 'ByteBoss@volcanmail.com', 'cl4ve010'),
+	('Juan', 'Gonzalez', 'User1234@volcanmail.com', '1234'),
+	('Maria', 'Fernandez', 'ByteGeek@volcanmail.com', '1234'),
+	('Carlos', 'Martinez', 'CodeNerd@volcanmail.com', '1234'),
+	('Ana', 'Rodriguez', 'QuickFox@volcanmail.com', '1234'),
+	('Luis', 'Perez', 'PixelArt@volcanmail.com', '1234'),
+	('Laura', 'Diaz', 'DataGuru@volcanmail.com', '1234'),
+	('Lucía', 'Lopez', 'TechWhiz@volcanmail.com', '1234'),
+	('Diego', 'Sanchez', 'CodeHero@volcanmail.com', '1234'),
+	('Silvia', 'Gomez', 'NeonStar@volcanmail.com', '1234'),
+	('Mariano', 'Torres', 'ByteBoss@volcanmail.com', '1234'),
     ('Pablo', 'Gomez', 'pablo@volcanmail.com', '1234');
 
 
@@ -54,16 +54,26 @@ SET FOREIGN_KEY_CHECKS = 1;
 SET FOREIGN_KEY_CHECKS = 0;
 INSERT INTO chefencasa.receta (user_id, titulo_receta, descripcion, pasos, tiempo_preparacion, categoria_id, fecha_creacion, foto1, foto2, foto3, foto4, foto5)
 VALUES
-(1, 'Receta 1', 'Descripción de la Receta 1', 'Pasos de la Receta 1', 30, 3, STR_TO_DATE('2023-09-03 12:00:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
-(3, 'Receta 2', 'Descripción de la Receta 2', 'Pasos de la Receta 2', 45, 1, STR_TO_DATE('2022-07-01 15:30:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
-(2, 'Receta 3', 'Descripción de la Receta 3', 'Pasos de la Receta 3', 60, 2, STR_TO_DATE('2023-08-15 08:45:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
-(3, 'Receta 4', 'Descripción de la Receta 4', 'Pasos de la Receta 4', 40, 3, STR_TO_DATE('2022-11-20 19:15:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
-(4, 'Receta 5', 'Descripción de la Receta 5', 'Pasos de la Receta 5', 55, 4, STR_TO_DATE('2022-07-25 10:00:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
-(1, 'Receta 6', 'Descripción de la Receta 6', 'Pasos de la Receta 6', 25, 2, STR_TO_DATE('2023-06-05 14:20:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
-(3, 'Receta 7', 'Descripción de la Receta 7', 'Pasos de la Receta 7', 50, 3, STR_TO_DATE('2022-09-18 16:40:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
-(7, 'Receta 8', 'Descripción de la Receta 8', 'Pasos de la Receta 8', 35, 1, STR_TO_DATE('2023-01-10 09:55:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
-(8, 'Receta 9', 'Descripción de la Receta 9', 'Pasos de la Receta 9', 70, 5, STR_TO_DATE('2023-07-30 21:05:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
-(7, 'Receta 10', 'Descripción de la Receta 10', 'Pasos de la Receta 10', 45, 3, STR_TO_DATE('2022-12-15 18:30:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", "");
+(3, 'Receta 01', 'Descripción de la Receta 01', 'Pasos de la Receta 01', 30, 3, STR_TO_DATE('2023-09-03 12:00:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(4, 'Receta 02', 'Descripción de la Receta 02', 'Pasos de la Receta 02', 45, 1, STR_TO_DATE('2022-07-01 15:30:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(5, 'Receta 03', 'Descripción de la Receta 03', 'Pasos de la Receta 03', 60, 2, STR_TO_DATE('2023-08-15 08:45:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(6, 'Receta 04', 'Descripción de la Receta 04', 'Pasos de la Receta 04', 40, 3, STR_TO_DATE('2022-11-20 19:15:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(7, 'Receta 05', 'Descripción de la Receta 05', 'Pasos de la Receta 05', 55, 4, STR_TO_DATE('2022-07-25 10:00:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(8, 'Receta 06', 'Descripción de la Receta 06', 'Pasos de la Receta 06', 25, 2, STR_TO_DATE('2023-06-05 14:20:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(9, 'Receta 07', 'Descripción de la Receta 07', 'Pasos de la Receta 07', 50, 3, STR_TO_DATE('2022-09-18 16:40:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(10, 'Receta 08', 'Descripción de la Receta 08', 'Pasos de la Receta 08', 35, 1, STR_TO_DATE('2023-01-10 09:55:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(1, 'Receta 09', 'Descripción de la Receta 09', 'Pasos de la Receta 09', 70, 5, STR_TO_DATE('2023-07-30 21:05:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(2, 'Receta 10', 'Descripción de la Receta 10', 'Pasos de la Receta 10', 45, 3, STR_TO_DATE('2022-12-15 18:30:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(3, 'Receta 11', 'Descripción de la Receta 11', 'Pasos de la Receta 11', 30, 3, STR_TO_DATE('2023-01-03 12:00:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(4, 'Receta 12', 'Descripción de la Receta 12', 'Pasos de la Receta 12', 45, 1, STR_TO_DATE('2022-02-01 15:30:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(5, 'Receta 13', 'Descripción de la Receta 13', 'Pasos de la Receta 13', 60, 2, STR_TO_DATE('2023-03-15 08:45:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(6, 'Receta 14', 'Descripción de la Receta 14', 'Pasos de la Receta 14', 40, 3, STR_TO_DATE('2022-02-20 19:15:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(7, 'Receta 15', 'Descripción de la Receta 15', 'Pasos de la Receta 15', 55, 4, STR_TO_DATE('2022-05-25 10:00:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(8, 'Receta 16', 'Descripción de la Receta 16', 'Pasos de la Receta 16', 25, 2, STR_TO_DATE('2023-07-05 14:20:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(9, 'Receta 17', 'Descripción de la Receta 17', 'Pasos de la Receta 17', 50, 3, STR_TO_DATE('2022-06-18 16:40:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(10, 'Receta 18', 'Descripción de la Receta 18', 'Pasos de la Receta 18', 35, 1, STR_TO_DATE('2023-08-10 09:55:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(1, 'Receta 19', 'Descripción de la Receta 19', 'Pasos de la Receta 19', 70, 5, STR_TO_DATE('2023-09-30 21:05:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", ""),
+(2, 'Receta 20', 'Descripción de la Receta 20', 'Pasos de la Receta 20', 45, 3, STR_TO_DATE('2022-10-15 18:30:00', '%Y-%m-%d %H:%i:%s.%f'), "", "", "", "", "");
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- select * from chefencasa.receta;
