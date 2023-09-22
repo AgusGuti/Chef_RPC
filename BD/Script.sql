@@ -41,13 +41,11 @@ CREATE TABLE IF NOT EXISTS `chefencasa`.`user` (
   `apellido` VARCHAR(45) NOT NULL,
   `clave` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `foto_perfil` VARCHAR(255) NULL DEFAULT '',
+  `foto_perfil` VARCHAR(255) NOT NULL DEFAULT '',
   `nombre` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
-
-CREATE UNIQUE INDEX `UK_le6e9ohs2inu3gbxbgg8e9dfa` ON `chefencasa`.`user` (`apellido` ASC) VISIBLE;
 
 CREATE UNIQUE INDEX `UK_ob8kqyqqgmefl0aco34akdtpe` ON `chefencasa`.`user` (`email` ASC) VISIBLE;
 
@@ -142,24 +140,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 CREATE INDEX `FKqx3v38baha3exb2c5jbxl4ooc` ON `chefencasa`.`receta_ingredientes` (`ingredientes_id` ASC) VISIBLE;
-
-
--- -----------------------------------------------------
--- Table `chefencasa`.`seguidores`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `chefencasa`.`seguidores` ;
-
-CREATE TABLE IF NOT EXISTS `chefencasa`.`seguidores` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `user_id` INT NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `FKist0ac0ljtoc0j09nkn5ibeff`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `chefencasa`.`user` (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3;
-
-CREATE INDEX `FKist0ac0ljtoc0j09nkn5ibeff` ON `chefencasa`.`seguidores` (`user_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
