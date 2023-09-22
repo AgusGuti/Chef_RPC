@@ -24,10 +24,6 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Table chefencasa.categoria
 -- -----------------------------------------------------
 
--- -----------------------------------------------------
--- Table chefencasa.categoria
--- -----------------------------------------------------
-
 INSERT INTO chefencasa.`user` (`nombre`, `apellido`, `email`, `clave`)
 VALUES
 	('Juan', 'Gonzalez', 'User1234@volcanmail.com', '1234'),
