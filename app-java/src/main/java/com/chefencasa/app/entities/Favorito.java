@@ -33,12 +33,12 @@ public class Favorito implements Serializable {
 	
 	@ManyToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user_id;
+    private User user;
 
 
 	@ManyToOne(optional = false)
     @JoinColumn(name = "receta_id", nullable = false)
-    private Receta receta_id;
+    private Receta receta;
 
 
 	
@@ -49,17 +49,23 @@ public class Favorito implements Serializable {
 		
 	}
 
-	public Favorito(int id, User user_id, Receta receta_id) {
-		
+	
+
+	public Favorito(int id, User user, Receta receta) {
 		this.id = id;
-		this.user_id = user_id;
-		this.receta_id = receta_id;
+		this.user = user;
+		this.receta = receta;
 	}
 
-	public Favorito(User user_id, Receta receta_id) {
-		this.user_id = user_id;
-		this.receta_id = receta_id;		
+	
+
+
+	public Favorito(User user, Receta receta) {
+		this.user = user;
+		this.receta = receta;
 	}
+
+
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

@@ -2,10 +2,9 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from . import favorito_pb2 as favorito__pb2
 from . import user_pb2 as user__pb2
 from . import receta_pb2 as receta__pb2
-
+from . import favorito_pb2 as favorito__pb2
 
 
 class FavoritosServiceStub(object):
@@ -27,10 +26,10 @@ class FavoritosServiceStub(object):
                 request_serializer=favorito__pb2.Favorito.SerializeToString,
                 response_deserializer=favorito__pb2.Favorito.FromString,
                 )
-        self.CheckFavorito = channel.unary_unary(
-                '/model.FavoritosService/CheckFavorito',
+        self.FindAllById = channel.unary_unary(
+                '/model.FavoritosService/FindAllById',
                 request_serializer=favorito__pb2.Favorito.SerializeToString,
-                response_deserializer=favorito__pb2.FlagFavorito.FromString,
+                response_deserializer=favorito__pb2.Favoritos.FromString,
                 )
 
 
@@ -49,7 +48,7 @@ class FavoritosServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def CheckFavorito(self, request, context):
+    def FindAllById(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -68,10 +67,10 @@ def add_FavoritosServiceServicer_to_server(servicer, server):
                     request_deserializer=favorito__pb2.Favorito.FromString,
                     response_serializer=favorito__pb2.Favorito.SerializeToString,
             ),
-            'CheckFavorito': grpc.unary_unary_rpc_method_handler(
-                    servicer.CheckFavorito,
+            'FindAllById': grpc.unary_unary_rpc_method_handler(
+                    servicer.FindAllById,
                     request_deserializer=favorito__pb2.Favorito.FromString,
-                    response_serializer=favorito__pb2.FlagFavorito.SerializeToString,
+                    response_serializer=favorito__pb2.Favoritos.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -118,7 +117,7 @@ class FavoritosService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def CheckFavorito(request,
+    def FindAllById(request,
             target,
             options=(),
             channel_credentials=None,
@@ -128,8 +127,8 @@ class FavoritosService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/model.FavoritosService/CheckFavorito',
+        return grpc.experimental.unary_unary(request, target, '/model.FavoritosService/FindAllById',
             favorito__pb2.Favorito.SerializeToString,
-            favorito__pb2.FlagFavorito.FromString,
+            favorito__pb2.Favoritos.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

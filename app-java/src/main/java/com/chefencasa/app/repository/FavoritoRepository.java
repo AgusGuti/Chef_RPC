@@ -1,6 +1,7 @@
 package com.chefencasa.app.repository;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,8 +12,10 @@ import com.chefencasa.app.entities.Favorito;
 
 @Repository("favoritoRepository")
 public interface FavoritoRepository extends JpaRepository<Favorito, Serializable> {
+    
+    public abstract List<Favorito> findAll();
 
-	@Query("SELECT DISTINCT f FROM Favorito f WHERE f.user_id.id = :userId AND f.receta_id = :recetaId")
-	public abstract Favorito checkFavorito(@Param("userId") int userId, @Param("recetaId") int recetaId);
+    @Query("SELECT DISTINCT f FROM Favorito f LEFT JOIN FETCH f.receta r LEFT JOIN FETCH r.ingredientes WHERE f.user.id = :userId")
+    public abstract List<Favorito> findAllFavoritosByUserId(@Param("userId") int userId);
 
 }

@@ -32,15 +32,14 @@
     href="{{ url_for('static', filename='receta_styles.css')}}"
   />
 
-<!-- Incluir el archivo CSS de DataTables -->
+  <!-- Incluir el archivo CSS de DataTables -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
+  <!-- JavaScript para inicializar DataTables -->
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
- <!-- JavaScript para inicializar DataTables -->
- <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
- <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
- <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-  
   <style>
     /* Estilo para las miniaturas de las recetas en la tabla */
     .miniatura {
@@ -60,10 +59,8 @@
   </style>
 </head>
 
-
-<body onload="inicio();"  class="h-100">
+<body onload="inicio();" class="h-100">
   <script>
-
     $(document).ready(function () {
       $('#example').DataTable();
     });
@@ -72,20 +69,9 @@
       categorias();
       cargarIngredientes();
       cargarUsuario();
-      cargarIngredientesYReceta(recetaId);
-      cargarDetallesReceta(recetaId);
+      eliminarFavorito(button,favoritoId);
     }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      var modificarButtons = document.querySelectorAll(".btn-recetas.btn-sm");
-      modificarButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-          var recetaId = button.getAttribute("data-receta-id");
-          cargarDetallesReceta(recetaId);
-        });
-      });
-    });
-
+    
     //select Categoria
     function categorias() {
       var out = "";
@@ -104,6 +90,7 @@
       }
       document.getElementById("categoria").innerHTML = out;
     }
+
     // Cargar la lista de ingredientes al cargar la página
     function cargarIngredientes() {
       console.log("cargarIngredientes function called");
@@ -114,24 +101,27 @@
       var ingredientesSelect = document.getElementById("ingredientes");
 
       xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-              var response = JSON.parse(xhr.responseText);
-              var ingredientes = response.ingrediente; // Accede a response.ingrediente
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText);
+          var ingredientes = response.ingrediente; // Accede a response.ingrediente
 
-              console.log("Respuesta del servidor:", ingredientes);
+          console.log("Respuesta del servidor:", ingredientes);
 
-              // Verifica si ingredientes es un array y luego itera sobre él
-              if (Array.isArray(ingredientes)) {
-                  ingredientes.forEach(function (ingrediente) {
-                      var option = document.createElement("option");
-                      option.value = ingrediente.id;
-                      option.text = ingrediente.nombre;
-                      ingredientesSelect.appendChild(option);
-                  });
-              } else {
-                  console.error("La respuesta del servidor no contiene una lista de ingredientes válida:", response);
-              }
+          // Verifica si ingredientes es un array y luego itera sobre él
+          if (Array.isArray(ingredientes)) {
+            ingredientes.forEach(function (ingrediente) {
+              var option = document.createElement("option");
+              option.value = ingrediente.id;
+              option.text = ingrediente.nombre;
+              ingredientesSelect.appendChild(option);
+            });
+          } else {
+            console.error(
+              "La respuesta del servidor no contiene una lista de ingredientes válida:",
+              response
+            );
           }
+        }
       };
       xhr.send();
     }
@@ -145,178 +135,47 @@
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
           var usuario = JSON.parse(xhr.responseText);
-          
+
           // Aquí puedes utilizar la información del usuario para prellenar la base de datos
           // por ejemplo, enviarla al servidor con el formulario de creación de recetas
-          document.getElementById("user_id").value = user.id;// Asigna el ID del usuario al campo oculto
+          document.getElementById("user_id").value = usuario.id; // Asigna el ID del usuario al campo oculto
           // Puedes asignar otros datos del usuario a otros campos del formulario si es necesario
         }
       };
       xhr.send();
-      }
+    }
 
-      function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
-        console.log("cargarIngredientesYReceta function called");
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/ingredientes", true);
-      
-        // Define ingredientesSelect para seleccionar el elemento HTML
-        var ingredientesSelect = document.getElementById("ingredientes");
-      
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              var response = JSON.parse(xhr.responseText);
-              var ingredientes = response.ingrediente;
-      
-              console.log("Respuesta del servidor:", ingredientes);
-      
-              if (Array.isArray(ingredientes)) {
-                ingredientesSelect.innerHTML = ""; // Limpia el contenido actual
-      
-                var ingredientesSet = new Set(ingredientesSeleccionados);
-      
-                ingredientes.forEach(function (ingrediente) {
-                  var option = document.createElement("option");
-                  option.value = ingrediente.id;
-                  option.text = ingrediente.nombre;
-      
-                  // Verifica si el ingrediente actual está en el conjunto de ingredientes seleccionados
-                  if (ingredientesSet.has(ingrediente.id)) {
-                    option.selected = true;
-                  }
-      
-                  ingredientesSelect.appendChild(option);
-                });
-      
-                // Asegúrate de que el elemento select permita la selección múltiple
-                ingredientesSelect.setAttribute("multiple", "multiple");
-              } else {
-                console.error(
-                  "La respuesta del servidor no contiene una lista de ingredientes válida:",
-                  response
-                );
-              }
-            } else {
-              console.error("Error al cargar ingredientes:", xhr.status);
-            }
+    // Actualiza la función eliminarFavorito para obtener el ID del favorito del botón
+    function eliminarFavorito(button, favoritoId) {
+      var favoritoId = $(button).data("favoritoid"); // Obtiene el favoritoId del atributo data-favoritoid del botón
+
+      console.log("Favorito ID a eliminar:", favoritoId); // Agrega un log para registrar el ID antes de la solicitud AJAX
+
+      // Realiza una solicitud AJAX para eliminar el favorito
+      $.ajax({
+        type: "POST",
+        url: `/eliminarFavorito/${favoritoId}`,
+        success: function (data, textStatus, xhr) {
+          console.log("Respuesta del servidor:", xhr.status);
+
+          if (xhr.status === 200) {
+            // Eliminación exitosa, puedes realizar alguna acción, como ocultar la fila de la tabla
+            $("#filaFavorito_" + favoritoId).hide(); // Cambia el ID de filaReceta_ a filaFavorito_
+          } else {
+            // Maneja el caso en que la eliminación falla, muestra un mensaje de error
+            alert("Error al eliminar el favorito. Estado: " + xhr.status);
           }
-        };
-        xhr.send();
-      }
-      
-      // Función para cargar los detalles de la receta en el modal de modificar
-      function cargarDetallesReceta(recetaId) {
-        console.log("cargarDetallesReceta function called");
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", `/receta/findById/${recetaId}`, true);
-      
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              var response = JSON.parse(xhr.responseText);
-      
-              // Llena los campos del modal de modificar con los detalles de la receta
-              document.getElementById("mod_receta_id").value = recetaId; // Establece el valor del campo oculto con el ID de la receta
-              document.getElementById("mod_tituloReceta").value = response.tituloReceta;
-              document.getElementById("mod_descripcion").value = response.descripcion;
-              document.getElementById("mod_foto1").value = response.foto1;
-              document.getElementById("mod_foto2").value = response.foto2;
-              document.getElementById("mod_foto3").value = response.foto3;
-              document.getElementById("mod_foto4").value = response.foto4;
-              document.getElementById("mod_foto5").value = response.foto5;
-              document.getElementById("mod_pasos").value = response.pasos;
-              document.getElementById("mod_tiempoPreparacion").value = response.tiempoPreparacion;
-              // Llenar la lista de ingredientes en el elemento select "mod_ingredientes"
-              var modIngredientesSelect = document.getElementById("mod_ingredientes");
-              modIngredientesSelect.innerHTML = ""; // Limpia el contenido actual
-      
-              var ingredientes = response.ingredientes;
-              if (Array.isArray(ingredientes)) {
-                // Obtén todos los ingredientes disponibles
-                var xhrIngredientes = new XMLHttpRequest();
-                xhrIngredientes.open("GET", "/ingredientes", true);
-      
-                xhrIngredientes.onreadystatechange = function () {
-                  if (xhrIngredientes.readyState === 4) {
-                    if (xhrIngredientes.status === 200) {
-                      var responseIngredientes = JSON.parse(xhrIngredientes.responseText);
-                      var ingredientesDisponibles = responseIngredientes.ingrediente;
-      
-                      // Agrega las opciones de ingredientes al desplegable y marca como seleccionados los ingredientes asociados a la receta
-                      ingredientesDisponibles.forEach(function (ingredienteDisponible) {
-                        var option = document.createElement("option");
-                        option.value = ingredienteDisponible.id;
-                        option.text = ingredienteDisponible.nombre;
-                        
-                        // Verifica si este ingrediente está asociado a la receta
-                        if (ingredientes.find(ingrediente => ingrediente.id === ingredienteDisponible.id)) {
-                          option.selected = true; // Marcar como seleccionado
-                        }
-                        
-                        modIngredientesSelect.appendChild(option);
-                      });
-                    } else {
-                      console.error("Error al cargar ingredientes:", xhrIngredientes.status);
-                    }
-                  }
-                };
-      
-                xhrIngredientes.send();
-              } else {
-                console.error("La respuesta del servidor no contiene una lista de ingredientes válida:", response);
-              }
-      
-             // Llenar el campo de categoría en el elemento select "mod_categoria" con todas las categorías disponibles
-            var modCategoriaSelect = document.getElementById("mod_categoria");
-            modCategoriaSelect.innerHTML = ""; // Limpia el contenido actual
-
-            // Obtener todas las categorías disponibles
-            var xhrCategorias = new XMLHttpRequest();
-            xhrCategorias.open("GET", "/categorias", true);
-
-            xhrCategorias.onreadystatechange = function () {
-              if (xhrCategorias.readyState === 4) {
-                if (xhrCategorias.status === 200) {
-                  var responseCategorias = JSON.parse(xhrCategorias.responseText);
-                  var categoriasDisponibles = responseCategorias.categoria;
-
-                  // Agregar las opciones de categorías al desplegable
-                  categoriasDisponibles.forEach(function (categoriaDisponible) {
-                    var option = document.createElement("option");
-                    option.value = categoriaDisponible.id;
-                    option.text = categoriaDisponible.categoria;
-
-                    modCategoriaSelect.appendChild(option);
-                  });
-                  
-                  // Establecer el valor seleccionado en función de la categoría actual de la receta
-                  var categoriaActual = response.categoria;
-                  if (categoriaActual && categoriaActual.id) {
-                    modCategoriaSelect.value = categoriaActual.id;
-                  }
-                } else {
-                  console.error("Error al cargar categorías:", xhrCategorias.status);
-                }
-              }
-            };
-
-            xhrCategorias.send();
-
-              // Abre el modal de modificar
-              $("#modalModificarReceta").modal("show");
-            } else {
-              console.error("Error al cargar los detalles de la receta:", xhr.status);
-            }
-          }
-        };
-        xhr.send();
-      }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          // Maneja los errores de la solicitud AJAX
+          alert("Error al comunicarse con el servidor. Estado: " + jqXHR.status);
+        },
+      });
+    }
+        
     window.onload = inicio;
 
   </script>
-
-  
 
   <div class="form-outline">
     <img
@@ -376,16 +235,24 @@
 
   <!--tabla-->
   <div class="container-xl">
-    <di class="table-responsive">
+    <div class="table-responsive">
       <div class="table-wrapper">
         <div class="table-title">
           <div class="row">
             <div class="col-sm-8">
               <h2 style="margin-bottom: 20px;"><b>Favoritos</b></h2>
-            </div>          
+              <div class="form-outline mb-4">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                  {% for category, message in messages %}
+                     <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
+                  {% endfor %}
+                {% endif %}
+              {% endwith %}
+            </div>
+            </div>
+          </div>
         </div>
-      </div>
-        {% block content %}
         <table id="example" class="table table-striped" style="width:100%">
           <thead>
             <tr>
@@ -398,23 +265,23 @@
             </tr>
           </thead>
           <tbody>
-            {% for receta in recetas %}
+            {% for favorito in favoritos %}
             <tr>
-              <td>{{ receta.tituloReceta }}</td>
-              <td>{{ receta.tiempoPreparacion }} minutos</td>
+              <td>{{ favorito.receta.tituloReceta }}</td>
+              <td>{{ favorito.receta.tiempoPreparacion }} minutos</td>
               <td>
                 <img
-                  src="{{ receta.foto1 }}"
-                  alt="{{ receta.tituloReceta }}"
+                  src="{{ favorito.receta.foto1 }}"
+                  alt="{{ favorito.receta.tituloReceta }}"
                   class="miniatura"
                   data-toggle="modal"
-                  data-target="#modalReceta{{ receta.idReceta }}"
+                  data-target="#modalReceta{{ favorito.receta.idReceta }}"
                 >
               </td>
               <td style="display:none;">
-                {{ receta.categoria.categoria }}</td> <!-- Columna de Categoría oculta -->
+                {{ favorito.receta.categoria.categoria }}</td> <!-- Columna de Categoría oculta -->
               <td style="display:none;">
-                {% for ingrediente in receta.ingredientes %}
+                {% for ingrediente in favorito.receta.ingredientes %}
                   {{ ingrediente.nombre }}
                   {% if not loop.last %}, {% endif %}
                 {% endfor %}
@@ -422,56 +289,56 @@
               <td>
                 <div class="btn-group">
                   <button class="btn btn-recetas btn-sm"
-                  data-toggle="modal"
-                  data-target="#modalReceta{{ receta.idReceta }}">
-                  <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
+                    data-toggle="modal"
+                    data-target="#modalReceta{{ favorito.receta.idReceta }}">
+                    <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
                   </button>
                   &nbsp; <!--espacio en blanco-->
-                  <button class="btn btn-recetas btn-sm ml-1" id="favoritoButton_{{ receta.idReceta }}"
-                  data-toggle="modal" data-target="#favoritoModal{{ receta.idReceta }}">
-                  <i class="fa fa-heart" style="color: #e36c6c;"></i>                
+                  <button class="btn btn-recetas btn-sm ml-1" 
+                    data-favoritoid="{{ favorito.id }}" 
+                    onclick="eliminarFavorito(this)">
+                    <i class="fa-solid fa-heart" style="color: red;"></i>
                   </button>
+                </div>
               </td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
-        {% endblock %}
       </div>
     </div>
   </div>
-</div>
 
-<!-- Modales para el detalle de las recetas -->
-  {% for receta in recetas %}
+  <!-- Modales para el detalle de las recetas -->
+  {% for favorito in favoritos %}
   <div
     class="modal fade"
-    id="modalReceta{{ receta.idReceta }}"
+    id="modalReceta{{ favorito.receta.idReceta }}"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="modalReceta{{ receta.idReceta }}Label"
+    aria-labelledby="modalReceta{{ favorito.receta.idReceta }}Label"
     aria-hidden="true"
   >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalReceta{{ receta.idReceta }}Label">{{ receta.tituloReceta }}</h5>
+          <h5 class="modal-title" id="modalReceta{{ favorito.receta.idReceta }}Label">{{ favorito.receta.tituloReceta }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <img src="{{ receta.foto1 }}" alt="{{ receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          <img src="{{ favorito.receta.foto1 }}" alt="{{ favorito.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
           <p>
-          <p>Categoria: {{ receta.categoria.categoria }}</p>
-          <p>Descripcion: {{ receta.descripcion }}</p>
+          <p>Categoria: {{ favorito.receta.categoria.categoria }}</p>
+          <p>Descripcion: {{ favorito.receta.descripcion }}</p>
           <p>Ingredientes:
-            {% for ingrediente in receta.ingredientes %}
+            {% for ingrediente in favorito.receta.ingredientes %}
               {{ ingrediente.nombre }}
               {% if not loop.last %}, {% endif %}
             {% endfor %}
           </p>
-          <p>Pasos de preparación: {{ receta.pasos }}</p>
+          <p>Pasos de preparación: {{ favorito.receta.pasos }}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -480,57 +347,5 @@
     </div>
   </div>
   {% endfor %}
-
-
-<!-- Modal de Confirmación -->
-  {% for receta in recetas %}
-  <div class="modal fade" id="#favoritoModal{{ receta.idReceta }}">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Confirmación</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <!-- Modal body -->
-        <div class="modal-body">
-          ¿Estás seguro de que quieres guardar en Favoritos?
-        </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" id="confirmFavorito">Confirmar Favorito</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // JavaScript para cambiar el icono y el color del botón "Like"
-    $(document).ready(function () {
-      $("#favoritoButton_{{ receta.idReceta }}").click(function () {
-        var icon = $(this).find("i");
-        if (icon.hasClass("fa-regular fa-heart")) {
-          // Cambiar de corazón vacío a corazón lleno y cambiar el color
-          icon.removeClass("fa-regular fa-heart").addClass("fa fa-heart").css("color", "#e36c6c");
-        } else {
-          // Cambiar de corazón lleno a corazón vacío y cambiar el color
-          icon.removeClass("fa fa-heart").addClass("fa-regular fa-heart").css("color", "#ffffff");
-        }
-      });
-
-      // Restablecer el color del botón y el icono cuando se confirma el "Like"
-      $("#confirmFavorito").click(function () {
-        $("#favoritoButton_{{ receta.idReceta }} i").removeClass("fa-regular fa-heart").addClass("fa fa-heart").css("color", "#e36c6c");
-        // Aquí puedes agregar la lógica para enviar el "Like" al servidor si es necesario
-        // ...
-      });
-    });
-  </script>
-  {% endfor %}
-
-
-
-
 </body>
 </html>

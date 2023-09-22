@@ -124,6 +124,7 @@ def modificarReceta():
                 foto5=request.form["mod_foto5"]))
         print("Greeter client received: " + str(response))    
         receta={"receta":MessageToJson(response)}
+        logger.info("response %s",response)
         logger.info("receta modificada %s",receta)
         if receta["receta"]=="{}":
             flash('Error al intentar modificar la receta','danger')
@@ -131,27 +132,4 @@ def modificarReceta():
         else:
             flash('Receta modificada exitosamente!','success')
             return redirect('/misRecetas')
-        
-
-@receta_blueprint.route("/favoritos",methods = ['GET'])
-def favoritos():
-    logger.info("/favoritos")
-    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
-        stub = RecetasServiceStub(channel)
-        response = stub.FindFavoritos(Receta(user=User(id=session['user_id'])))
-        recetas = response.receta
-    return render_template('favoritos.html', recetas=recetas)
-
-
-@receta_blueprint.route("/checkFavorito/<int:recetaId>",methods = ['GET'])
-def checkFavorito(recetaId):
-    logger.info("/checkFavorito %s"),request.args.get('recetaId')
-    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
-        stub = FavoritosServiceStub(channel)
-        response = stub.CheckFavorito(Favorito(userId=User(id=session['user_id']), recetaId=Receta(idReceta=recetaId)))
-        
-        print("Greeter EXISTE received: " + str(response))
-        
-        existe = {"existe":MessageToJson(response)}
-    return existe
 

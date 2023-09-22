@@ -138,3 +138,8 @@ table.table td i {
     margin-top: 200px; /* Ajusta el margen superior */
     margin-right: -1022px; /* Ajusta el margen derecho */
   }
+
+.boton-rojo {
+background-color: red;
+color: white;
+}

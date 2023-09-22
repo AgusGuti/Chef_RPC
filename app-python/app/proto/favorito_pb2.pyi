@@ -10,20 +10,20 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Favoritos(_message.Message):
-    __slots__ = ["user"]
-    USER_FIELD_NUMBER: _ClassVar[int]
-    user: _containers.RepeatedCompositeFieldContainer[Favoritos]
-    def __init__(self, user: _Optional[_Iterable[_Union[Favoritos, _Mapping]]] = ...) -> None: ...
+    __slots__ = ["favorito"]
+    FAVORITO_FIELD_NUMBER: _ClassVar[int]
+    favorito: _containers.RepeatedCompositeFieldContainer[Favorito]
+    def __init__(self, favorito: _Optional[_Iterable[_Union[Favorito, _Mapping]]] = ...) -> None: ...
 
 class Favorito(_message.Message):
-    __slots__ = ["id", "userId", "RecetaId"]
+    __slots__ = ["id", "user", "receta"]
     ID_FIELD_NUMBER: _ClassVar[int]
-    USERID_FIELD_NUMBER: _ClassVar[int]
-    RECETAID_FIELD_NUMBER: _ClassVar[int]
+    USER_FIELD_NUMBER: _ClassVar[int]
+    RECETA_FIELD_NUMBER: _ClassVar[int]
     id: int
-    userId: _user_pb2.User
-    RecetaId: _receta_pb2.Receta
-    def __init__(self, id: _Optional[int] = ..., userId: _Optional[_Union[_user_pb2.User, _Mapping]] = ..., RecetaId: _Optional[_Union[_receta_pb2.Receta, _Mapping]] = ...) -> None: ...
+    user: _user_pb2.User
+    receta: _receta_pb2.Receta
+    def __init__(self, id: _Optional[int] = ..., user: _Optional[_Union[_user_pb2.User, _Mapping]] = ..., receta: _Optional[_Union[_receta_pb2.Receta, _Mapping]] = ...) -> None: ...
 
 class FlagFavorito(_message.Message):
     __slots__ = ["flagExiste"]

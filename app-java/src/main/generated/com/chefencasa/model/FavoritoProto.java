@@ -19,27 +19,27 @@ public final class FavoritoProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .model.Favoritos user = 1;</code>
+     * <code>repeated .model.Favorito favorito = 1;</code>
      */
-    java.util.List<com.chefencasa.model.FavoritoProto.Favoritos> 
-        getUserList();
+    java.util.List<com.chefencasa.model.FavoritoProto.Favorito> 
+        getFavoritoList();
     /**
-     * <code>repeated .model.Favoritos user = 1;</code>
+     * <code>repeated .model.Favorito favorito = 1;</code>
      */
-    com.chefencasa.model.FavoritoProto.Favoritos getUser(int index);
+    com.chefencasa.model.FavoritoProto.Favorito getFavorito(int index);
     /**
-     * <code>repeated .model.Favoritos user = 1;</code>
+     * <code>repeated .model.Favorito favorito = 1;</code>
      */
-    int getUserCount();
+    int getFavoritoCount();
     /**
-     * <code>repeated .model.Favoritos user = 1;</code>
+     * <code>repeated .model.Favorito favorito = 1;</code>
      */
-    java.util.List<? extends com.chefencasa.model.FavoritoProto.FavoritosOrBuilder> 
-        getUserOrBuilderList();
+    java.util.List<? extends com.chefencasa.model.FavoritoProto.FavoritoOrBuilder> 
+        getFavoritoOrBuilderList();
     /**
-     * <code>repeated .model.Favoritos user = 1;</code>
+     * <code>repeated .model.Favorito favorito = 1;</code>
      */
-    com.chefencasa.model.FavoritoProto.FavoritosOrBuilder getUserOrBuilder(
+    com.chefencasa.model.FavoritoProto.FavoritoOrBuilder getFavoritoOrBuilder(
         int index);
   }
   /**
@@ -55,7 +55,7 @@ public final class FavoritoProto {
       super(builder);
     }
     private Favoritos() {
-      user_ = java.util.Collections.emptyList();
+      favorito_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -91,11 +91,11 @@ public final class FavoritoProto {
               break;
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                user_ = new java.util.ArrayList<com.chefencasa.model.FavoritoProto.Favoritos>();
+                favorito_ = new java.util.ArrayList<com.chefencasa.model.FavoritoProto.Favorito>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              user_.add(
-                  input.readMessage(com.chefencasa.model.FavoritoProto.Favoritos.parser(), extensionRegistry));
+              favorito_.add(
+                  input.readMessage(com.chefencasa.model.FavoritoProto.Favorito.parser(), extensionRegistry));
               break;
             }
             default: {
@@ -114,7 +114,7 @@ public final class FavoritoProto {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          user_ = java.util.Collections.unmodifiableList(user_);
+          favorito_ = java.util.Collections.unmodifiableList(favorito_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -133,39 +133,39 @@ public final class FavoritoProto {
               com.chefencasa.model.FavoritoProto.Favoritos.class, com.chefencasa.model.FavoritoProto.Favoritos.Builder.class);
     }
 
-    public static final int USER_FIELD_NUMBER = 1;
-    private java.util.List<com.chefencasa.model.FavoritoProto.Favoritos> user_;
+    public static final int FAVORITO_FIELD_NUMBER = 1;
+    private java.util.List<com.chefencasa.model.FavoritoProto.Favorito> favorito_;
     /**
-     * <code>repeated .model.Favoritos user = 1;</code>
+     * <code>repeated .model.Favorito favorito = 1;</code>
      */
-    public java.util.List<com.chefencasa.model.FavoritoProto.Favoritos> getUserList() {
-      return user_;
+    public java.util.List<com.chefencasa.model.FavoritoProto.Favorito> getFavoritoList() {
+      return favorito_;
     }
     /**
-     * <code>repeated .model.Favoritos user = 1;</code>
+     * <code>repeated .model.Favorito favorito = 1;</code>
      */
-    public java.util.List<? extends com.chefencasa.model.FavoritoProto.FavoritosOrBuilder> 
-        getUserOrBuilderList() {
-      return user_;
+    public java.util.List<? extends com.chefencasa.model.FavoritoProto.FavoritoOrBuilder> 
+        getFavoritoOrBuilderList() {
+      return favorito_;
     }
     /**
-     * <code>repeated .model.Favoritos user = 1;</code>
+     * <code>repeated .model.Favorito favorito = 1;</code>
      */
-    public int getUserCount() {
-      return user_.size();
+    public int getFavoritoCount() {
+      return favorito_.size();
     }
     /**
-     * <code>repeated .model.Favoritos user = 1;</code>
+     * <code>repeated .model.Favorito favorito = 1;</code>
      */
-    public com.chefencasa.model.FavoritoProto.Favoritos getUser(int index) {
-      return user_.get(index);
+    public com.chefencasa.model.FavoritoProto.Favorito getFavorito(int index) {
+      return favorito_.get(index);
     }
     /**
-     * <code>repeated .model.Favoritos user = 1;</code>
+     * <code>repeated .model.Favorito favorito = 1;</code>
      */
-    public com.chefencasa.model.FavoritoProto.FavoritosOrBuilder getUserOrBuilder(
+    public com.chefencasa.model.FavoritoProto.FavoritoOrBuilder getFavoritoOrBuilder(
         int index) {
-      return user_.get(index);
+      return favorito_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -182,8 +182,8 @@ public final class FavoritoProto {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < user_.size(); i++) {
-        output.writeMessage(1, user_.get(i));
+      for (int i = 0; i < favorito_.size(); i++) {
+        output.writeMessage(1, favorito_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -194,9 +194,9 @@ public final class FavoritoProto {
       if (size != -1) return size;
 
       size = 0;
-      for (int i = 0; i < user_.size(); i++) {
+      for (int i = 0; i < favorito_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, user_.get(i));
+          .computeMessageSize(1, favorito_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -213,8 +213,8 @@ public final class FavoritoProto {
       }
       com.chefencasa.model.FavoritoProto.Favoritos other = (com.chefencasa.model.FavoritoProto.Favoritos) obj;
 
-      if (!getUserList()
-          .equals(other.getUserList())) return false;
+      if (!getFavoritoList()
+          .equals(other.getFavoritoList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -226,9 +226,9 @@ public final class FavoritoProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (getUserCount() > 0) {
-        hash = (37 * hash) + USER_FIELD_NUMBER;
-        hash = (53 * hash) + getUserList().hashCode();
+      if (getFavoritoCount() > 0) {
+        hash = (37 * hash) + FAVORITO_FIELD_NUMBER;
+        hash = (53 * hash) + getFavoritoList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -358,17 +358,17 @@ public final class FavoritoProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getUserFieldBuilder();
+          getFavoritoFieldBuilder();
         }
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (userBuilder_ == null) {
-          user_ = java.util.Collections.emptyList();
+        if (favoritoBuilder_ == null) {
+          favorito_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          userBuilder_.clear();
+          favoritoBuilder_.clear();
         }
         return this;
       }
@@ -397,14 +397,14 @@ public final class FavoritoProto {
       public com.chefencasa.model.FavoritoProto.Favoritos buildPartial() {
         com.chefencasa.model.FavoritoProto.Favoritos result = new com.chefencasa.model.FavoritoProto.Favoritos(this);
         int from_bitField0_ = bitField0_;
-        if (userBuilder_ == null) {
+        if (favoritoBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
-            user_ = java.util.Collections.unmodifiableList(user_);
+            favorito_ = java.util.Collections.unmodifiableList(favorito_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
-          result.user_ = user_;
+          result.favorito_ = favorito_;
         } else {
-          result.user_ = userBuilder_.build();
+          result.favorito_ = favoritoBuilder_.build();
         }
         onBuilt();
         return result;
@@ -454,29 +454,29 @@ public final class FavoritoProto {
 
       public Builder mergeFrom(com.chefencasa.model.FavoritoProto.Favoritos other) {
         if (other == com.chefencasa.model.FavoritoProto.Favoritos.getDefaultInstance()) return this;
-        if (userBuilder_ == null) {
-          if (!other.user_.isEmpty()) {
-            if (user_.isEmpty()) {
-              user_ = other.user_;
+        if (favoritoBuilder_ == null) {
+          if (!other.favorito_.isEmpty()) {
+            if (favorito_.isEmpty()) {
+              favorito_ = other.favorito_;
               bitField0_ = (bitField0_ & ~0x00000001);
             } else {
-              ensureUserIsMutable();
-              user_.addAll(other.user_);
+              ensureFavoritoIsMutable();
+              favorito_.addAll(other.favorito_);
             }
             onChanged();
           }
         } else {
-          if (!other.user_.isEmpty()) {
-            if (userBuilder_.isEmpty()) {
-              userBuilder_.dispose();
-              userBuilder_ = null;
-              user_ = other.user_;
+          if (!other.favorito_.isEmpty()) {
+            if (favoritoBuilder_.isEmpty()) {
+              favoritoBuilder_.dispose();
+              favoritoBuilder_ = null;
+              favorito_ = other.favorito_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              userBuilder_ = 
+              favoritoBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getUserFieldBuilder() : null;
+                   getFavoritoFieldBuilder() : null;
             } else {
-              userBuilder_.addAllMessages(other.user_);
+              favoritoBuilder_.addAllMessages(other.favorito_);
             }
           }
         }
@@ -510,244 +510,244 @@ public final class FavoritoProto {
       }
       private int bitField0_;
 
-      private java.util.List<com.chefencasa.model.FavoritoProto.Favoritos> user_ =
+      private java.util.List<com.chefencasa.model.FavoritoProto.Favorito> favorito_ =
         java.util.Collections.emptyList();
-      private void ensureUserIsMutable() {
+      private void ensureFavoritoIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          user_ = new java.util.ArrayList<com.chefencasa.model.FavoritoProto.Favoritos>(user_);
+          favorito_ = new java.util.ArrayList<com.chefencasa.model.FavoritoProto.Favorito>(favorito_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.chefencasa.model.FavoritoProto.Favoritos, com.chefencasa.model.FavoritoProto.Favoritos.Builder, com.chefencasa.model.FavoritoProto.FavoritosOrBuilder> userBuilder_;
+          com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.Favorito.Builder, com.chefencasa.model.FavoritoProto.FavoritoOrBuilder> favoritoBuilder_;
 
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public java.util.List<com.chefencasa.model.FavoritoProto.Favoritos> getUserList() {
-        if (userBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(user_);
+      public java.util.List<com.chefencasa.model.FavoritoProto.Favorito> getFavoritoList() {
+        if (favoritoBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(favorito_);
         } else {
-          return userBuilder_.getMessageList();
+          return favoritoBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public int getUserCount() {
-        if (userBuilder_ == null) {
-          return user_.size();
+      public int getFavoritoCount() {
+        if (favoritoBuilder_ == null) {
+          return favorito_.size();
         } else {
-          return userBuilder_.getCount();
+          return favoritoBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public com.chefencasa.model.FavoritoProto.Favoritos getUser(int index) {
-        if (userBuilder_ == null) {
-          return user_.get(index);
+      public com.chefencasa.model.FavoritoProto.Favorito getFavorito(int index) {
+        if (favoritoBuilder_ == null) {
+          return favorito_.get(index);
         } else {
-          return userBuilder_.getMessage(index);
+          return favoritoBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public Builder setUser(
-          int index, com.chefencasa.model.FavoritoProto.Favoritos value) {
-        if (userBuilder_ == null) {
+      public Builder setFavorito(
+          int index, com.chefencasa.model.FavoritoProto.Favorito value) {
+        if (favoritoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUserIsMutable();
-          user_.set(index, value);
+          ensureFavoritoIsMutable();
+          favorito_.set(index, value);
           onChanged();
         } else {
-          userBuilder_.setMessage(index, value);
+          favoritoBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public Builder setUser(
-          int index, com.chefencasa.model.FavoritoProto.Favoritos.Builder builderForValue) {
-        if (userBuilder_ == null) {
-          ensureUserIsMutable();
-          user_.set(index, builderForValue.build());
+      public Builder setFavorito(
+          int index, com.chefencasa.model.FavoritoProto.Favorito.Builder builderForValue) {
+        if (favoritoBuilder_ == null) {
+          ensureFavoritoIsMutable();
+          favorito_.set(index, builderForValue.build());
           onChanged();
         } else {
-          userBuilder_.setMessage(index, builderForValue.build());
+          favoritoBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public Builder addUser(com.chefencasa.model.FavoritoProto.Favoritos value) {
-        if (userBuilder_ == null) {
+      public Builder addFavorito(com.chefencasa.model.FavoritoProto.Favorito value) {
+        if (favoritoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUserIsMutable();
-          user_.add(value);
+          ensureFavoritoIsMutable();
+          favorito_.add(value);
           onChanged();
         } else {
-          userBuilder_.addMessage(value);
+          favoritoBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public Builder addUser(
-          int index, com.chefencasa.model.FavoritoProto.Favoritos value) {
-        if (userBuilder_ == null) {
+      public Builder addFavorito(
+          int index, com.chefencasa.model.FavoritoProto.Favorito value) {
+        if (favoritoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUserIsMutable();
-          user_.add(index, value);
+          ensureFavoritoIsMutable();
+          favorito_.add(index, value);
           onChanged();
         } else {
-          userBuilder_.addMessage(index, value);
+          favoritoBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public Builder addUser(
-          com.chefencasa.model.FavoritoProto.Favoritos.Builder builderForValue) {
-        if (userBuilder_ == null) {
-          ensureUserIsMutable();
-          user_.add(builderForValue.build());
+      public Builder addFavorito(
+          com.chefencasa.model.FavoritoProto.Favorito.Builder builderForValue) {
+        if (favoritoBuilder_ == null) {
+          ensureFavoritoIsMutable();
+          favorito_.add(builderForValue.build());
           onChanged();
         } else {
-          userBuilder_.addMessage(builderForValue.build());
+          favoritoBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public Builder addUser(
-          int index, com.chefencasa.model.FavoritoProto.Favoritos.Builder builderForValue) {
-        if (userBuilder_ == null) {
-          ensureUserIsMutable();
-          user_.add(index, builderForValue.build());
+      public Builder addFavorito(
+          int index, com.chefencasa.model.FavoritoProto.Favorito.Builder builderForValue) {
+        if (favoritoBuilder_ == null) {
+          ensureFavoritoIsMutable();
+          favorito_.add(index, builderForValue.build());
           onChanged();
         } else {
-          userBuilder_.addMessage(index, builderForValue.build());
+          favoritoBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public Builder addAllUser(
-          java.lang.Iterable<? extends com.chefencasa.model.FavoritoProto.Favoritos> values) {
-        if (userBuilder_ == null) {
-          ensureUserIsMutable();
+      public Builder addAllFavorito(
+          java.lang.Iterable<? extends com.chefencasa.model.FavoritoProto.Favorito> values) {
+        if (favoritoBuilder_ == null) {
+          ensureFavoritoIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, user_);
+              values, favorito_);
           onChanged();
         } else {
-          userBuilder_.addAllMessages(values);
+          favoritoBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public Builder clearUser() {
-        if (userBuilder_ == null) {
-          user_ = java.util.Collections.emptyList();
+      public Builder clearFavorito() {
+        if (favoritoBuilder_ == null) {
+          favorito_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          userBuilder_.clear();
+          favoritoBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public Builder removeUser(int index) {
-        if (userBuilder_ == null) {
-          ensureUserIsMutable();
-          user_.remove(index);
+      public Builder removeFavorito(int index) {
+        if (favoritoBuilder_ == null) {
+          ensureFavoritoIsMutable();
+          favorito_.remove(index);
           onChanged();
         } else {
-          userBuilder_.remove(index);
+          favoritoBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public com.chefencasa.model.FavoritoProto.Favoritos.Builder getUserBuilder(
+      public com.chefencasa.model.FavoritoProto.Favorito.Builder getFavoritoBuilder(
           int index) {
-        return getUserFieldBuilder().getBuilder(index);
+        return getFavoritoFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public com.chefencasa.model.FavoritoProto.FavoritosOrBuilder getUserOrBuilder(
+      public com.chefencasa.model.FavoritoProto.FavoritoOrBuilder getFavoritoOrBuilder(
           int index) {
-        if (userBuilder_ == null) {
-          return user_.get(index);  } else {
-          return userBuilder_.getMessageOrBuilder(index);
+        if (favoritoBuilder_ == null) {
+          return favorito_.get(index);  } else {
+          return favoritoBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public java.util.List<? extends com.chefencasa.model.FavoritoProto.FavoritosOrBuilder> 
-           getUserOrBuilderList() {
-        if (userBuilder_ != null) {
-          return userBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends com.chefencasa.model.FavoritoProto.FavoritoOrBuilder> 
+           getFavoritoOrBuilderList() {
+        if (favoritoBuilder_ != null) {
+          return favoritoBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(user_);
+          return java.util.Collections.unmodifiableList(favorito_);
         }
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public com.chefencasa.model.FavoritoProto.Favoritos.Builder addUserBuilder() {
-        return getUserFieldBuilder().addBuilder(
-            com.chefencasa.model.FavoritoProto.Favoritos.getDefaultInstance());
+      public com.chefencasa.model.FavoritoProto.Favorito.Builder addFavoritoBuilder() {
+        return getFavoritoFieldBuilder().addBuilder(
+            com.chefencasa.model.FavoritoProto.Favorito.getDefaultInstance());
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public com.chefencasa.model.FavoritoProto.Favoritos.Builder addUserBuilder(
+      public com.chefencasa.model.FavoritoProto.Favorito.Builder addFavoritoBuilder(
           int index) {
-        return getUserFieldBuilder().addBuilder(
-            index, com.chefencasa.model.FavoritoProto.Favoritos.getDefaultInstance());
+        return getFavoritoFieldBuilder().addBuilder(
+            index, com.chefencasa.model.FavoritoProto.Favorito.getDefaultInstance());
       }
       /**
-       * <code>repeated .model.Favoritos user = 1;</code>
+       * <code>repeated .model.Favorito favorito = 1;</code>
        */
-      public java.util.List<com.chefencasa.model.FavoritoProto.Favoritos.Builder> 
-           getUserBuilderList() {
-        return getUserFieldBuilder().getBuilderList();
+      public java.util.List<com.chefencasa.model.FavoritoProto.Favorito.Builder> 
+           getFavoritoBuilderList() {
+        return getFavoritoFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.chefencasa.model.FavoritoProto.Favoritos, com.chefencasa.model.FavoritoProto.Favoritos.Builder, com.chefencasa.model.FavoritoProto.FavoritosOrBuilder> 
-          getUserFieldBuilder() {
-        if (userBuilder_ == null) {
-          userBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.chefencasa.model.FavoritoProto.Favoritos, com.chefencasa.model.FavoritoProto.Favoritos.Builder, com.chefencasa.model.FavoritoProto.FavoritosOrBuilder>(
-                  user_,
+          com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.Favorito.Builder, com.chefencasa.model.FavoritoProto.FavoritoOrBuilder> 
+          getFavoritoFieldBuilder() {
+        if (favoritoBuilder_ == null) {
+          favoritoBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.Favorito.Builder, com.chefencasa.model.FavoritoProto.FavoritoOrBuilder>(
+                  favorito_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
-          user_ = null;
+          favorito_ = null;
         }
-        return userBuilder_;
+        return favoritoBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -813,34 +813,34 @@ public final class FavoritoProto {
     int getId();
 
     /**
-     * <code>.model.User userId = 2;</code>
-     * @return Whether the userId field is set.
+     * <code>.model.User user = 2;</code>
+     * @return Whether the user field is set.
      */
-    boolean hasUserId();
+    boolean hasUser();
     /**
-     * <code>.model.User userId = 2;</code>
-     * @return The userId.
+     * <code>.model.User user = 2;</code>
+     * @return The user.
      */
-    com.chefencasa.model.UserProto.User getUserId();
+    com.chefencasa.model.UserProto.User getUser();
     /**
-     * <code>.model.User userId = 2;</code>
+     * <code>.model.User user = 2;</code>
      */
-    com.chefencasa.model.UserProto.UserOrBuilder getUserIdOrBuilder();
+    com.chefencasa.model.UserProto.UserOrBuilder getUserOrBuilder();
 
     /**
-     * <code>.model.Receta RecetaId = 3;</code>
-     * @return Whether the recetaId field is set.
+     * <code>.model.Receta receta = 3;</code>
+     * @return Whether the receta field is set.
      */
-    boolean hasRecetaId();
+    boolean hasReceta();
     /**
-     * <code>.model.Receta RecetaId = 3;</code>
-     * @return The recetaId.
+     * <code>.model.Receta receta = 3;</code>
+     * @return The receta.
      */
-    com.chefencasa.model.RecetaProto.Receta getRecetaId();
+    com.chefencasa.model.RecetaProto.Receta getReceta();
     /**
-     * <code>.model.Receta RecetaId = 3;</code>
+     * <code>.model.Receta receta = 3;</code>
      */
-    com.chefencasa.model.RecetaProto.RecetaOrBuilder getRecetaIdOrBuilder();
+    com.chefencasa.model.RecetaProto.RecetaOrBuilder getRecetaOrBuilder();
   }
   /**
    * Protobuf type {@code model.Favorito}
@@ -894,26 +894,26 @@ public final class FavoritoProto {
             }
             case 18: {
               com.chefencasa.model.UserProto.User.Builder subBuilder = null;
-              if (userId_ != null) {
-                subBuilder = userId_.toBuilder();
+              if (user_ != null) {
+                subBuilder = user_.toBuilder();
               }
-              userId_ = input.readMessage(com.chefencasa.model.UserProto.User.parser(), extensionRegistry);
+              user_ = input.readMessage(com.chefencasa.model.UserProto.User.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(userId_);
-                userId_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(user_);
+                user_ = subBuilder.buildPartial();
               }
 
               break;
             }
             case 26: {
               com.chefencasa.model.RecetaProto.Receta.Builder subBuilder = null;
-              if (recetaId_ != null) {
-                subBuilder = recetaId_.toBuilder();
+              if (receta_ != null) {
+                subBuilder = receta_.toBuilder();
               }
-              recetaId_ = input.readMessage(com.chefencasa.model.RecetaProto.Receta.parser(), extensionRegistry);
+              receta_ = input.readMessage(com.chefencasa.model.RecetaProto.Receta.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(recetaId_);
-                recetaId_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(receta_);
+                receta_ = subBuilder.buildPartial();
               }
 
               break;
@@ -960,50 +960,50 @@ public final class FavoritoProto {
       return id_;
     }
 
-    public static final int USERID_FIELD_NUMBER = 2;
-    private com.chefencasa.model.UserProto.User userId_;
+    public static final int USER_FIELD_NUMBER = 2;
+    private com.chefencasa.model.UserProto.User user_;
     /**
-     * <code>.model.User userId = 2;</code>
-     * @return Whether the userId field is set.
+     * <code>.model.User user = 2;</code>
+     * @return Whether the user field is set.
      */
-    public boolean hasUserId() {
-      return userId_ != null;
+    public boolean hasUser() {
+      return user_ != null;
     }
     /**
-     * <code>.model.User userId = 2;</code>
-     * @return The userId.
+     * <code>.model.User user = 2;</code>
+     * @return The user.
      */
-    public com.chefencasa.model.UserProto.User getUserId() {
-      return userId_ == null ? com.chefencasa.model.UserProto.User.getDefaultInstance() : userId_;
+    public com.chefencasa.model.UserProto.User getUser() {
+      return user_ == null ? com.chefencasa.model.UserProto.User.getDefaultInstance() : user_;
     }
     /**
-     * <code>.model.User userId = 2;</code>
+     * <code>.model.User user = 2;</code>
      */
-    public com.chefencasa.model.UserProto.UserOrBuilder getUserIdOrBuilder() {
-      return getUserId();
+    public com.chefencasa.model.UserProto.UserOrBuilder getUserOrBuilder() {
+      return getUser();
     }
 
-    public static final int RECETAID_FIELD_NUMBER = 3;
-    private com.chefencasa.model.RecetaProto.Receta recetaId_;
+    public static final int RECETA_FIELD_NUMBER = 3;
+    private com.chefencasa.model.RecetaProto.Receta receta_;
     /**
-     * <code>.model.Receta RecetaId = 3;</code>
-     * @return Whether the recetaId field is set.
+     * <code>.model.Receta receta = 3;</code>
+     * @return Whether the receta field is set.
      */
-    public boolean hasRecetaId() {
-      return recetaId_ != null;
+    public boolean hasReceta() {
+      return receta_ != null;
     }
     /**
-     * <code>.model.Receta RecetaId = 3;</code>
-     * @return The recetaId.
+     * <code>.model.Receta receta = 3;</code>
+     * @return The receta.
      */
-    public com.chefencasa.model.RecetaProto.Receta getRecetaId() {
-      return recetaId_ == null ? com.chefencasa.model.RecetaProto.Receta.getDefaultInstance() : recetaId_;
+    public com.chefencasa.model.RecetaProto.Receta getReceta() {
+      return receta_ == null ? com.chefencasa.model.RecetaProto.Receta.getDefaultInstance() : receta_;
     }
     /**
-     * <code>.model.Receta RecetaId = 3;</code>
+     * <code>.model.Receta receta = 3;</code>
      */
-    public com.chefencasa.model.RecetaProto.RecetaOrBuilder getRecetaIdOrBuilder() {
-      return getRecetaId();
+    public com.chefencasa.model.RecetaProto.RecetaOrBuilder getRecetaOrBuilder() {
+      return getReceta();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1023,11 +1023,11 @@ public final class FavoritoProto {
       if (id_ != 0) {
         output.writeInt32(1, id_);
       }
-      if (userId_ != null) {
-        output.writeMessage(2, getUserId());
+      if (user_ != null) {
+        output.writeMessage(2, getUser());
       }
-      if (recetaId_ != null) {
-        output.writeMessage(3, getRecetaId());
+      if (receta_ != null) {
+        output.writeMessage(3, getReceta());
       }
       unknownFields.writeTo(output);
     }
@@ -1042,13 +1042,13 @@ public final class FavoritoProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, id_);
       }
-      if (userId_ != null) {
+      if (user_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getUserId());
+          .computeMessageSize(2, getUser());
       }
-      if (recetaId_ != null) {
+      if (receta_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getRecetaId());
+          .computeMessageSize(3, getReceta());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1067,15 +1067,15 @@ public final class FavoritoProto {
 
       if (getId()
           != other.getId()) return false;
-      if (hasUserId() != other.hasUserId()) return false;
-      if (hasUserId()) {
-        if (!getUserId()
-            .equals(other.getUserId())) return false;
+      if (hasUser() != other.hasUser()) return false;
+      if (hasUser()) {
+        if (!getUser()
+            .equals(other.getUser())) return false;
       }
-      if (hasRecetaId() != other.hasRecetaId()) return false;
-      if (hasRecetaId()) {
-        if (!getRecetaId()
-            .equals(other.getRecetaId())) return false;
+      if (hasReceta() != other.hasReceta()) return false;
+      if (hasReceta()) {
+        if (!getReceta()
+            .equals(other.getReceta())) return false;
       }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
@@ -1090,13 +1090,13 @@ public final class FavoritoProto {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId();
-      if (hasUserId()) {
-        hash = (37 * hash) + USERID_FIELD_NUMBER;
-        hash = (53 * hash) + getUserId().hashCode();
+      if (hasUser()) {
+        hash = (37 * hash) + USER_FIELD_NUMBER;
+        hash = (53 * hash) + getUser().hashCode();
       }
-      if (hasRecetaId()) {
-        hash = (37 * hash) + RECETAID_FIELD_NUMBER;
-        hash = (53 * hash) + getRecetaId().hashCode();
+      if (hasReceta()) {
+        hash = (37 * hash) + RECETA_FIELD_NUMBER;
+        hash = (53 * hash) + getReceta().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1233,17 +1233,17 @@ public final class FavoritoProto {
         super.clear();
         id_ = 0;
 
-        if (userIdBuilder_ == null) {
-          userId_ = null;
+        if (userBuilder_ == null) {
+          user_ = null;
         } else {
-          userId_ = null;
-          userIdBuilder_ = null;
+          user_ = null;
+          userBuilder_ = null;
         }
-        if (recetaIdBuilder_ == null) {
-          recetaId_ = null;
+        if (recetaBuilder_ == null) {
+          receta_ = null;
         } else {
-          recetaId_ = null;
-          recetaIdBuilder_ = null;
+          receta_ = null;
+          recetaBuilder_ = null;
         }
         return this;
       }
@@ -1272,15 +1272,15 @@ public final class FavoritoProto {
       public com.chefencasa.model.FavoritoProto.Favorito buildPartial() {
         com.chefencasa.model.FavoritoProto.Favorito result = new com.chefencasa.model.FavoritoProto.Favorito(this);
         result.id_ = id_;
-        if (userIdBuilder_ == null) {
-          result.userId_ = userId_;
+        if (userBuilder_ == null) {
+          result.user_ = user_;
         } else {
-          result.userId_ = userIdBuilder_.build();
+          result.user_ = userBuilder_.build();
         }
-        if (recetaIdBuilder_ == null) {
-          result.recetaId_ = recetaId_;
+        if (recetaBuilder_ == null) {
+          result.receta_ = receta_;
         } else {
-          result.recetaId_ = recetaIdBuilder_.build();
+          result.receta_ = recetaBuilder_.build();
         }
         onBuilt();
         return result;
@@ -1333,11 +1333,11 @@ public final class FavoritoProto {
         if (other.getId() != 0) {
           setId(other.getId());
         }
-        if (other.hasUserId()) {
-          mergeUserId(other.getUserId());
+        if (other.hasUser()) {
+          mergeUser(other.getUser());
         }
-        if (other.hasRecetaId()) {
-          mergeRecetaId(other.getRecetaId());
+        if (other.hasReceta()) {
+          mergeReceta(other.getReceta());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1398,242 +1398,242 @@ public final class FavoritoProto {
         return this;
       }
 
-      private com.chefencasa.model.UserProto.User userId_;
+      private com.chefencasa.model.UserProto.User user_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.User.Builder, com.chefencasa.model.UserProto.UserOrBuilder> userIdBuilder_;
+          com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.User.Builder, com.chefencasa.model.UserProto.UserOrBuilder> userBuilder_;
       /**
-       * <code>.model.User userId = 2;</code>
-       * @return Whether the userId field is set.
+       * <code>.model.User user = 2;</code>
+       * @return Whether the user field is set.
        */
-      public boolean hasUserId() {
-        return userIdBuilder_ != null || userId_ != null;
+      public boolean hasUser() {
+        return userBuilder_ != null || user_ != null;
       }
       /**
-       * <code>.model.User userId = 2;</code>
-       * @return The userId.
+       * <code>.model.User user = 2;</code>
+       * @return The user.
        */
-      public com.chefencasa.model.UserProto.User getUserId() {
-        if (userIdBuilder_ == null) {
-          return userId_ == null ? com.chefencasa.model.UserProto.User.getDefaultInstance() : userId_;
+      public com.chefencasa.model.UserProto.User getUser() {
+        if (userBuilder_ == null) {
+          return user_ == null ? com.chefencasa.model.UserProto.User.getDefaultInstance() : user_;
         } else {
-          return userIdBuilder_.getMessage();
+          return userBuilder_.getMessage();
         }
       }
       /**
-       * <code>.model.User userId = 2;</code>
+       * <code>.model.User user = 2;</code>
        */
-      public Builder setUserId(com.chefencasa.model.UserProto.User value) {
-        if (userIdBuilder_ == null) {
+      public Builder setUser(com.chefencasa.model.UserProto.User value) {
+        if (userBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          userId_ = value;
+          user_ = value;
           onChanged();
         } else {
-          userIdBuilder_.setMessage(value);
+          userBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
-       * <code>.model.User userId = 2;</code>
+       * <code>.model.User user = 2;</code>
        */
-      public Builder setUserId(
+      public Builder setUser(
           com.chefencasa.model.UserProto.User.Builder builderForValue) {
-        if (userIdBuilder_ == null) {
-          userId_ = builderForValue.build();
+        if (userBuilder_ == null) {
+          user_ = builderForValue.build();
           onChanged();
         } else {
-          userIdBuilder_.setMessage(builderForValue.build());
+          userBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
-       * <code>.model.User userId = 2;</code>
+       * <code>.model.User user = 2;</code>
        */
-      public Builder mergeUserId(com.chefencasa.model.UserProto.User value) {
-        if (userIdBuilder_ == null) {
-          if (userId_ != null) {
-            userId_ =
-              com.chefencasa.model.UserProto.User.newBuilder(userId_).mergeFrom(value).buildPartial();
+      public Builder mergeUser(com.chefencasa.model.UserProto.User value) {
+        if (userBuilder_ == null) {
+          if (user_ != null) {
+            user_ =
+              com.chefencasa.model.UserProto.User.newBuilder(user_).mergeFrom(value).buildPartial();
           } else {
-            userId_ = value;
+            user_ = value;
           }
           onChanged();
         } else {
-          userIdBuilder_.mergeFrom(value);
+          userBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
-       * <code>.model.User userId = 2;</code>
+       * <code>.model.User user = 2;</code>
        */
-      public Builder clearUserId() {
-        if (userIdBuilder_ == null) {
-          userId_ = null;
+      public Builder clearUser() {
+        if (userBuilder_ == null) {
+          user_ = null;
           onChanged();
         } else {
-          userId_ = null;
-          userIdBuilder_ = null;
+          user_ = null;
+          userBuilder_ = null;
         }
 
         return this;
       }
       /**
-       * <code>.model.User userId = 2;</code>
+       * <code>.model.User user = 2;</code>
        */
-      public com.chefencasa.model.UserProto.User.Builder getUserIdBuilder() {
+      public com.chefencasa.model.UserProto.User.Builder getUserBuilder() {
         
         onChanged();
-        return getUserIdFieldBuilder().getBuilder();
+        return getUserFieldBuilder().getBuilder();
       }
       /**
-       * <code>.model.User userId = 2;</code>
+       * <code>.model.User user = 2;</code>
        */
-      public com.chefencasa.model.UserProto.UserOrBuilder getUserIdOrBuilder() {
-        if (userIdBuilder_ != null) {
-          return userIdBuilder_.getMessageOrBuilder();
+      public com.chefencasa.model.UserProto.UserOrBuilder getUserOrBuilder() {
+        if (userBuilder_ != null) {
+          return userBuilder_.getMessageOrBuilder();
         } else {
-          return userId_ == null ?
-              com.chefencasa.model.UserProto.User.getDefaultInstance() : userId_;
+          return user_ == null ?
+              com.chefencasa.model.UserProto.User.getDefaultInstance() : user_;
         }
       }
       /**
-       * <code>.model.User userId = 2;</code>
+       * <code>.model.User user = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.User.Builder, com.chefencasa.model.UserProto.UserOrBuilder> 
-          getUserIdFieldBuilder() {
-        if (userIdBuilder_ == null) {
-          userIdBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          getUserFieldBuilder() {
+        if (userBuilder_ == null) {
+          userBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.User.Builder, com.chefencasa.model.UserProto.UserOrBuilder>(
-                  getUserId(),
+                  getUser(),
                   getParentForChildren(),
                   isClean());
-          userId_ = null;
+          user_ = null;
         }
-        return userIdBuilder_;
+        return userBuilder_;
       }
 
-      private com.chefencasa.model.RecetaProto.Receta recetaId_;
+      private com.chefencasa.model.RecetaProto.Receta receta_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.Receta.Builder, com.chefencasa.model.RecetaProto.RecetaOrBuilder> recetaIdBuilder_;
+          com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.Receta.Builder, com.chefencasa.model.RecetaProto.RecetaOrBuilder> recetaBuilder_;
       /**
-       * <code>.model.Receta RecetaId = 3;</code>
-       * @return Whether the recetaId field is set.
+       * <code>.model.Receta receta = 3;</code>
+       * @return Whether the receta field is set.
        */
-      public boolean hasRecetaId() {
-        return recetaIdBuilder_ != null || recetaId_ != null;
+      public boolean hasReceta() {
+        return recetaBuilder_ != null || receta_ != null;
       }
       /**
-       * <code>.model.Receta RecetaId = 3;</code>
-       * @return The recetaId.
+       * <code>.model.Receta receta = 3;</code>
+       * @return The receta.
        */
-      public com.chefencasa.model.RecetaProto.Receta getRecetaId() {
-        if (recetaIdBuilder_ == null) {
-          return recetaId_ == null ? com.chefencasa.model.RecetaProto.Receta.getDefaultInstance() : recetaId_;
+      public com.chefencasa.model.RecetaProto.Receta getReceta() {
+        if (recetaBuilder_ == null) {
+          return receta_ == null ? com.chefencasa.model.RecetaProto.Receta.getDefaultInstance() : receta_;
         } else {
-          return recetaIdBuilder_.getMessage();
+          return recetaBuilder_.getMessage();
         }
       }
       /**
-       * <code>.model.Receta RecetaId = 3;</code>
+       * <code>.model.Receta receta = 3;</code>
        */
-      public Builder setRecetaId(com.chefencasa.model.RecetaProto.Receta value) {
-        if (recetaIdBuilder_ == null) {
+      public Builder setReceta(com.chefencasa.model.RecetaProto.Receta value) {
+        if (recetaBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          recetaId_ = value;
+          receta_ = value;
           onChanged();
         } else {
-          recetaIdBuilder_.setMessage(value);
+          recetaBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
-       * <code>.model.Receta RecetaId = 3;</code>
+       * <code>.model.Receta receta = 3;</code>
        */
-      public Builder setRecetaId(
+      public Builder setReceta(
           com.chefencasa.model.RecetaProto.Receta.Builder builderForValue) {
-        if (recetaIdBuilder_ == null) {
-          recetaId_ = builderForValue.build();
+        if (recetaBuilder_ == null) {
+          receta_ = builderForValue.build();
           onChanged();
         } else {
-          recetaIdBuilder_.setMessage(builderForValue.build());
+          recetaBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
-       * <code>.model.Receta RecetaId = 3;</code>
+       * <code>.model.Receta receta = 3;</code>
        */
-      public Builder mergeRecetaId(com.chefencasa.model.RecetaProto.Receta value) {
-        if (recetaIdBuilder_ == null) {
-          if (recetaId_ != null) {
-            recetaId_ =
-              com.chefencasa.model.RecetaProto.Receta.newBuilder(recetaId_).mergeFrom(value).buildPartial();
+      public Builder mergeReceta(com.chefencasa.model.RecetaProto.Receta value) {
+        if (recetaBuilder_ == null) {
+          if (receta_ != null) {
+            receta_ =
+              com.chefencasa.model.RecetaProto.Receta.newBuilder(receta_).mergeFrom(value).buildPartial();
           } else {
-            recetaId_ = value;
+            receta_ = value;
           }
           onChanged();
         } else {
-          recetaIdBuilder_.mergeFrom(value);
+          recetaBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
-       * <code>.model.Receta RecetaId = 3;</code>
+       * <code>.model.Receta receta = 3;</code>
        */
-      public Builder clearRecetaId() {
-        if (recetaIdBuilder_ == null) {
-          recetaId_ = null;
+      public Builder clearReceta() {
+        if (recetaBuilder_ == null) {
+          receta_ = null;
           onChanged();
         } else {
-          recetaId_ = null;
-          recetaIdBuilder_ = null;
+          receta_ = null;
+          recetaBuilder_ = null;
         }
 
         return this;
       }
       /**
-       * <code>.model.Receta RecetaId = 3;</code>
+       * <code>.model.Receta receta = 3;</code>
        */
-      public com.chefencasa.model.RecetaProto.Receta.Builder getRecetaIdBuilder() {
+      public com.chefencasa.model.RecetaProto.Receta.Builder getRecetaBuilder() {
         
         onChanged();
-        return getRecetaIdFieldBuilder().getBuilder();
+        return getRecetaFieldBuilder().getBuilder();
       }
       /**
-       * <code>.model.Receta RecetaId = 3;</code>
+       * <code>.model.Receta receta = 3;</code>
        */
-      public com.chefencasa.model.RecetaProto.RecetaOrBuilder getRecetaIdOrBuilder() {
-        if (recetaIdBuilder_ != null) {
-          return recetaIdBuilder_.getMessageOrBuilder();
+      public com.chefencasa.model.RecetaProto.RecetaOrBuilder getRecetaOrBuilder() {
+        if (recetaBuilder_ != null) {
+          return recetaBuilder_.getMessageOrBuilder();
         } else {
-          return recetaId_ == null ?
-              com.chefencasa.model.RecetaProto.Receta.getDefaultInstance() : recetaId_;
+          return receta_ == null ?
+              com.chefencasa.model.RecetaProto.Receta.getDefaultInstance() : receta_;
         }
       }
       /**
-       * <code>.model.Receta RecetaId = 3;</code>
+       * <code>.model.Receta receta = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.Receta.Builder, com.chefencasa.model.RecetaProto.RecetaOrBuilder> 
-          getRecetaIdFieldBuilder() {
-        if (recetaIdBuilder_ == null) {
-          recetaIdBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          getRecetaFieldBuilder() {
+        if (recetaBuilder_ == null) {
+          recetaBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.Receta.Builder, com.chefencasa.model.RecetaProto.RecetaOrBuilder>(
-                  getRecetaId(),
+                  getReceta(),
                   getParentForChildren(),
                   isClean());
-          recetaId_ = null;
+          receta_ = null;
         }
-        return recetaIdBuilder_;
+        return recetaBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -2201,17 +2201,17 @@ public final class FavoritoProto {
     java.lang.String[] descriptorData = {
       "\n\016favorito.proto\022\005model\032\033google/protobuf" +
       "/empty.proto\032\036google/protobuf/wrappers.p" +
-      "roto\032\nuser.proto\032\014receta.proto\"+\n\tFavori" +
-      "tos\022\036\n\004user\030\001 \003(\0132\020.model.Favoritos\"T\n\010F" +
-      "avorito\022\n\n\002id\030\001 \001(\005\022\033\n\006userId\030\002 \001(\0132\013.mo" +
-      "del.User\022\037\n\010RecetaId\030\003 \001(\0132\r.model.Recet" +
-      "a\"\"\n\014FlagFavorito\022\022\n\nflagExiste\030\001 \001(\0102\264\001" +
-      "\n\020FavoritosService\0221\n\013AddFavorito\022\017.mode" +
-      "l.Favorito\032\017.model.Favorito\"\000\0224\n\016DeleteF" +
-      "avorito\022\017.model.Favorito\032\017.model.Favorit" +
-      "o\"\000\0227\n\rCheckFavorito\022\017.model.Favorito\032\023." +
-      "model.FlagFavorito\"\000B%\n\024com.chefencasa.m" +
-      "odelB\rFavoritoProtob\006proto3"
+      "roto\032\nuser.proto\032\014receta.proto\".\n\tFavori" +
+      "tos\022!\n\010favorito\030\001 \003(\0132\017.model.Favorito\"P" +
+      "\n\010Favorito\022\n\n\002id\030\001 \001(\005\022\031\n\004user\030\002 \001(\0132\013.m" +
+      "odel.User\022\035\n\006receta\030\003 \001(\0132\r.model.Receta" +
+      "\"\"\n\014FlagFavorito\022\022\n\nflagExiste\030\001 \001(\0102\257\001\n" +
+      "\020FavoritosService\0221\n\013AddFavorito\022\017.model" +
+      ".Favorito\032\017.model.Favorito\"\000\0224\n\016DeleteFa" +
+      "vorito\022\017.model.Favorito\032\017.model.Favorito" +
+      "\"\000\0222\n\013FindAllById\022\017.model.Favorito\032\020.mod" +
+      "el.Favoritos\"\000B%\n\024com.chefencasa.modelB\r" +
+      "FavoritoProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2226,13 +2226,13 @@ public final class FavoritoProto {
     internal_static_model_Favoritos_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_Favoritos_descriptor,
-        new java.lang.String[] { "User", });
+        new java.lang.String[] { "Favorito", });
     internal_static_model_Favorito_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_model_Favorito_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_Favorito_descriptor,
-        new java.lang.String[] { "Id", "UserId", "RecetaId", });
+        new java.lang.String[] { "Id", "User", "Receta", });
     internal_static_model_FlagFavorito_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_model_FlagFavorito_fieldAccessorTable = new

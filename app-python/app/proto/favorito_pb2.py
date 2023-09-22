@@ -15,7 +15,8 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0e\x66\x61vorito.proto\x12\x05model\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\nuser.proto\x1a\x0creceta.proto\"+\n\tFavoritos\x12\x1e\n\x04user\x18\x01 \x03(\x0b\x32\x10.model.Favoritos\"T\n\x08\x46\x61vorito\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x1b\n\x06userId\x18\x02 \x01(\x0b\x32\x0b.model.User\x12\x1f\n\x08RecetaId\x18\x03 \x01(\x0b\x32\r.model.Receta\"\"\n\x0c\x46lagFavorito\x12\x12\n\nflagExiste\x18\x01 \x01(\x08\x32\xb4\x01\n\x10\x46\x61voritosService\x12\x31\n\x0b\x41\x64\x64\x46\x61vorito\x12\x0f.model.Favorito\x1a\x0f.model.Favorito\"\x00\x12\x34\n\x0e\x44\x65leteFavorito\x12\x0f.model.Favorito\x1a\x0f.model.Favorito\"\x00\x12\x37\n\rCheckFavorito\x12\x0f.model.Favorito\x1a\x13.model.FlagFavorito\"\x00\x42%\n\x14\x63om.chefencasa.modelB\rFavoritoProtob\x06proto3')
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0e\x66\x61vorito.proto\x12\x05model\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\nuser.proto\x1a\x0creceta.proto\".\n\tFavoritos\x12!\n\x08\x66\x61vorito\x18\x01 \x03(\x0b\x32\x0f.model.Favorito\"P\n\x08\x46\x61vorito\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x19\n\x04user\x18\x02 \x01(\x0b\x32\x0b.model.User\x12\x1d\n\x06receta\x18\x03 \x01(\x0b\x32\r.model.Receta\"\"\n\x0c\x46lagFavorito\x12\x12\n\nflagExiste\x18\x01 \x01(\x08\x32\xaf\x01\n\x10\x46\x61voritosService\x12\x31\n\x0b\x41\x64\x64\x46\x61vorito\x12\x0f.model.Favorito\x1a\x0f.model.Favorito\"\x00\x12\x34\n\x0e\x44\x65leteFavorito\x12\x0f.model.Favorito\x1a\x0f.model.Favorito\"\x00\x12\x32\n\x0b\x46indAllById\x12\x0f.model.Favorito\x1a\x10.model.Favoritos\"\x00\x42%\n\x14\x63om.chefencasa.modelB\rFavoritoProtob\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -25,11 +26,11 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'\n\024com.chefencasa.modelB\rFavoritoProto'
   _globals['_FAVORITOS']._serialized_start=112
-  _globals['_FAVORITOS']._serialized_end=155
-  _globals['_FAVORITO']._serialized_start=157
-  _globals['_FAVORITO']._serialized_end=241
-  _globals['_FLAGFAVORITO']._serialized_start=243
-  _globals['_FLAGFAVORITO']._serialized_end=277
-  _globals['_FAVORITOSSERVICE']._serialized_start=280
-  _globals['_FAVORITOSSERVICE']._serialized_end=460
+  _globals['_FAVORITOS']._serialized_end=158
+  _globals['_FAVORITO']._serialized_start=160
+  _globals['_FAVORITO']._serialized_end=240
+  _globals['_FLAGFAVORITO']._serialized_start=242
+  _globals['_FLAGFAVORITO']._serialized_end=276
+  _globals['_FAVORITOSSERVICE']._serialized_start=279
+  _globals['_FAVORITOSSERVICE']._serialized_end=454
 # @@protoc_insertion_point(module_scope)

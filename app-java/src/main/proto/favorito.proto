@@ -13,17 +13,17 @@ import "receta.proto";
 service FavoritosService {
   rpc AddFavorito(Favorito) returns (Favorito) {}
   rpc DeleteFavorito(Favorito) returns (Favorito) {}  
-  rpc CheckFavorito(Favorito) returns (FlagFavorito) {} 
+  rpc FindAllById(Favorito) returns (Favoritos) {}
 }
 
 message Favoritos {
-  repeated Favoritos user = 1;
+  repeated Favorito favorito = 1;
 }
 
 message Favorito {
   int32 id = 1;
-  User userId = 2;
-  Receta RecetaId = 3;
+  User user = 2;
+  Receta receta = 3;
 }
 
 message FlagFavorito {

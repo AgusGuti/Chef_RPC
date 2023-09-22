@@ -78,34 +78,34 @@ public final class FavoritosServiceGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito,
-      com.chefencasa.model.FavoritoProto.FlagFavorito> getCheckFavoritoMethod;
+      com.chefencasa.model.FavoritoProto.Favoritos> getFindAllByIdMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "CheckFavorito",
+      fullMethodName = SERVICE_NAME + '/' + "FindAllById",
       requestType = com.chefencasa.model.FavoritoProto.Favorito.class,
-      responseType = com.chefencasa.model.FavoritoProto.FlagFavorito.class,
+      responseType = com.chefencasa.model.FavoritoProto.Favoritos.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito,
-      com.chefencasa.model.FavoritoProto.FlagFavorito> getCheckFavoritoMethod() {
-    io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.FlagFavorito> getCheckFavoritoMethod;
-    if ((getCheckFavoritoMethod = FavoritosServiceGrpc.getCheckFavoritoMethod) == null) {
+      com.chefencasa.model.FavoritoProto.Favoritos> getFindAllByIdMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.Favoritos> getFindAllByIdMethod;
+    if ((getFindAllByIdMethod = FavoritosServiceGrpc.getFindAllByIdMethod) == null) {
       synchronized (FavoritosServiceGrpc.class) {
-        if ((getCheckFavoritoMethod = FavoritosServiceGrpc.getCheckFavoritoMethod) == null) {
-          FavoritosServiceGrpc.getCheckFavoritoMethod = getCheckFavoritoMethod =
-              io.grpc.MethodDescriptor.<com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.FlagFavorito>newBuilder()
+        if ((getFindAllByIdMethod = FavoritosServiceGrpc.getFindAllByIdMethod) == null) {
+          FavoritosServiceGrpc.getFindAllByIdMethod = getFindAllByIdMethod =
+              io.grpc.MethodDescriptor.<com.chefencasa.model.FavoritoProto.Favorito, com.chefencasa.model.FavoritoProto.Favoritos>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CheckFavorito"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FindAllById"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.chefencasa.model.FavoritoProto.Favorito.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.FavoritoProto.FlagFavorito.getDefaultInstance()))
-              .setSchemaDescriptor(new FavoritosServiceMethodDescriptorSupplier("CheckFavorito"))
+                  com.chefencasa.model.FavoritoProto.Favoritos.getDefaultInstance()))
+              .setSchemaDescriptor(new FavoritosServiceMethodDescriptorSupplier("FindAllById"))
               .build();
         }
       }
     }
-    return getCheckFavoritoMethod;
+    return getFindAllByIdMethod;
   }
 
   /**
@@ -172,9 +172,9 @@ public final class FavoritosServiceGrpc {
 
     /**
      */
-    default void checkFavorito(com.chefencasa.model.FavoritoProto.Favorito request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.FlagFavorito> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCheckFavoritoMethod(), responseObserver);
+    default void findAllById(com.chefencasa.model.FavoritoProto.Favorito request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.Favoritos> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindAllByIdMethod(), responseObserver);
     }
   }
 
@@ -223,10 +223,10 @@ public final class FavoritosServiceGrpc {
 
     /**
      */
-    public void checkFavorito(com.chefencasa.model.FavoritoProto.Favorito request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.FlagFavorito> responseObserver) {
+    public void findAllById(com.chefencasa.model.FavoritoProto.Favorito request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.Favoritos> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getCheckFavoritoMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getFindAllByIdMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -262,9 +262,9 @@ public final class FavoritosServiceGrpc {
 
     /**
      */
-    public com.chefencasa.model.FavoritoProto.FlagFavorito checkFavorito(com.chefencasa.model.FavoritoProto.Favorito request) {
+    public com.chefencasa.model.FavoritoProto.Favoritos findAllById(com.chefencasa.model.FavoritoProto.Favorito request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getCheckFavoritoMethod(), getCallOptions(), request);
+          getChannel(), getFindAllByIdMethod(), getCallOptions(), request);
     }
   }
 
@@ -302,16 +302,16 @@ public final class FavoritosServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.FavoritoProto.FlagFavorito> checkFavorito(
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.FavoritoProto.Favoritos> findAllById(
         com.chefencasa.model.FavoritoProto.Favorito request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getCheckFavoritoMethod(), getCallOptions()), request);
+          getChannel().newCall(getFindAllByIdMethod(), getCallOptions()), request);
     }
   }
 
   private static final int METHODID_ADD_FAVORITO = 0;
   private static final int METHODID_DELETE_FAVORITO = 1;
-  private static final int METHODID_CHECK_FAVORITO = 2;
+  private static final int METHODID_FIND_ALL_BY_ID = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -338,9 +338,9 @@ public final class FavoritosServiceGrpc {
           serviceImpl.deleteFavorito((com.chefencasa.model.FavoritoProto.Favorito) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.Favorito>) responseObserver);
           break;
-        case METHODID_CHECK_FAVORITO:
-          serviceImpl.checkFavorito((com.chefencasa.model.FavoritoProto.Favorito) request,
-              (io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.FlagFavorito>) responseObserver);
+        case METHODID_FIND_ALL_BY_ID:
+          serviceImpl.findAllById((com.chefencasa.model.FavoritoProto.Favorito) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.FavoritoProto.Favoritos>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -375,12 +375,12 @@ public final class FavoritosServiceGrpc {
               com.chefencasa.model.FavoritoProto.Favorito>(
                 service, METHODID_DELETE_FAVORITO)))
         .addMethod(
-          getCheckFavoritoMethod(),
+          getFindAllByIdMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
               com.chefencasa.model.FavoritoProto.Favorito,
-              com.chefencasa.model.FavoritoProto.FlagFavorito>(
-                service, METHODID_CHECK_FAVORITO)))
+              com.chefencasa.model.FavoritoProto.Favoritos>(
+                service, METHODID_FIND_ALL_BY_ID)))
         .build();
   }
 
@@ -431,7 +431,7 @@ public final class FavoritosServiceGrpc {
               .setSchemaDescriptor(new FavoritosServiceFileDescriptorSupplier())
               .addMethod(getAddFavoritoMethod())
               .addMethod(getDeleteFavoritoMethod())
-              .addMethod(getCheckFavoritoMethod())
+              .addMethod(getFindAllByIdMethod())
               .build();
         }
       }
