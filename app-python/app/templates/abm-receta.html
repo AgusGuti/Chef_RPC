@@ -316,7 +316,6 @@
       }
 
       function addFavorito(recetaId) {
-        // Realizar una solicitud AJAX al servidor para agregar la receta a favoritos
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/addFavorito", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -326,22 +325,22 @@
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-              // Cambiar la visibilidad de los íconos de corazón cuando se agrega un favorito
-              var favoritoIcon = document.getElementById("favoritoIcon_" + recetaId);
-              if (favoritoIcon) {
-                favoritoIcon.style.display = "block"; // Mostrar el ícono de corazón marcado
-              } 
-              // Ocultar el ícono de corazón en blanco
-              var heartIcon = document.querySelector("#favoritoButton_" + recetaId + " .fa-regular.fa-heart");
-              if (heartIcon) {
-                heartIcon.style.display = "none";
+              console.log("Response Text: " + xhr.responseText);
+              var response = JSON.parse(xhr.responseText);
+              if (response.success) {
+                var favoritoIcon = document.getElementById("favoritoIcon_" + recetaId);
+                if (favoritoIcon) {
+                  favoritoIcon.style.color = "red";
+                }
+                var heartIcon = document.querySelector("#favoritoButton_" + recetaId + " .fa-regular.fa-heart");
+                if (heartIcon) {
+                  heartIcon.style.display = "none";
+                }
+                window.alert("Receta agregada a favoritos con éxito");
+              } else {
+                window.alert("La receta ya está en favoritos");
               }
-
-              // Aquí puedes manejar la respuesta del servidor si es necesario
-              console.log("Receta agregada a favoritos con éxito");
-              
             } else {
-              // Maneja los errores en caso de que la solicitud falle
               console.error("Error al agregar la receta a favoritos:", xhr.status);
             }
           }
@@ -416,6 +415,15 @@
       <div class="table-wrapper">
         <div class="table-title">
           <div class="row">
+            <div class="form-outline mb-4">
+              {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+              {% for category, message in messages %}
+              <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
+              {% endfor %}
+              {% endif %}
+              {% endwith %}
+            </div>
             <div class="col-sm-8">
               <h2 style="margin-bottom: 20px;"><b>Recetas</b></h2>
             </div>
@@ -469,6 +477,7 @@
                 <div class="btn-group">
                   <button class="btn btn-recetas btn-sm"
                   data-toggle="modal"
+                  data-receta-id="{{ receta.idReceta}}"
                   data-target="#modalReceta{{ receta.idReceta }}">
                   <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
                   </button>
@@ -494,8 +503,7 @@
                 <button class="btn btn-recetas btn-sm ml-1" id="favoritoButton_{{ receta.idReceta }}"
                   data-toggle="modal" data-target="modalFavorito" onclick="addFavorito({{ receta.idReceta }})"
                   data-receta-id="{{ receta.idReceta }}">
-                  <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                  <i class="fa-solid fa-heart" id="favoritoIcon_{{ receta.idReceta }}" style="color: red; display: none;"></i>
+                  <i class="fa-solid fa-heart" id="favoritoIcon_{{ receta.idReceta }}" style="color: #ffffff;"></i>
                 </button>
               </td>
             </tr>
@@ -522,15 +530,6 @@
         <form action="/altaReceta" method="post">
           <!-- Formulario principal -->
           <div class="modal-header">
-            <div class="form-outline mb-4">
-              {% with messages = get_flashed_messages(with_categories=true) %}
-              {% if messages %}
-              {% for category, message in messages %}
-              <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
-              {% endfor %}
-              {% endif %}
-              {% endwith %}
-            </div>
             <h5 class="modal-title" id="modalAgregarRecetaLabel">Agregar Receta</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>

@@ -2,9 +2,9 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
+from . import favorito_pb2 as favorito__pb2
 from . import user_pb2 as user__pb2
 from . import receta_pb2 as receta__pb2
-from . import favorito_pb2 as favorito__pb2
 
 
 class FavoritosServiceStub(object):

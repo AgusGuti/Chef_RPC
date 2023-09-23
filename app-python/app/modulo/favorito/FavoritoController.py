@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session,jsonify
 from . import favorito_blueprint
 
 from google.protobuf.json_format import MessageToJson
@@ -34,18 +34,16 @@ def addFavorito():
         favorito={"favorito":MessageToJson(response)}
 
         if favorito["favorito"]=="{}":
-            flash('Error al intentar agregar favorito','danger')
-            return redirect('/addFavorito')
+            return jsonify({"success": False, "message": "Error al intentar agregar favorito"})
+
         else:
-            flash('Favorito agregado exitosamente!','success')
-            return redirect('/favoritos')
+            return jsonify({"success": True, "message": "Favorito agregado exitosamente!"})
 
 
 @favorito_blueprint.route("/addFavorito",methods = ['GET'])
 def favorito():
     logger.info("/addFavorito")
     return render_template('favoritos.html')
-
 
 
 @favorito_blueprint.route("/favoritos",methods = ['GET'])
@@ -57,6 +55,7 @@ def favoritos():
         favoritos = response.favorito        
     print("Greeter client received: " + str(response))    
     return render_template('favoritos.html',favoritos=favoritos)
+
 
 @favorito_blueprint.route("/eliminarFavorito/<int:id>",methods=["POST"])
 def eliminarFavorito(id):

@@ -242,17 +242,17 @@
       <div class="table-wrapper">
         <div class="table-title">
           <div class="row">
+            <div class="form-outline mb-4">
+              {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                   <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            </div>
             <div class="col-sm-8">
               <h2 style="margin-bottom: 20px;"><b>Favoritos</b></h2>
-              <div class="form-outline mb-4">
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                  {% for category, message in messages %}
-                     <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
-                  {% endfor %}
-                {% endif %}
-              {% endwith %}
-            </div>
             </div>
           </div>
         </div>

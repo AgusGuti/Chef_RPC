@@ -48,23 +48,33 @@ public class FavoritoService extends FavoritosServiceGrpc.FavoritosServiceImplBa
     public void addFavorito(FavoritoProto.Favorito request, StreamObserver<FavoritoProto.Favorito> responseObserver) {
        
         try {
-			Favorito favorito = new Favorito(userRepository.findById(request.getUser().getId()), recetaRepository.findById(request.getReceta().getIdReceta()));
 
-            favoritoRepository.save(favorito);
+            boolean favoritoExistente = favoritoRepository.existsByUserAndReceta(userRepository.findById(request.getUser().getId()), recetaRepository.findById(request.getReceta().getIdReceta()));
             
-		} catch (Exception e) {
-			try {
-                throw new Exception("No se pudo completar la operación,error al ingresar los datos o el favorito ya existe");
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+            if (!favoritoExistente) {
+                Favorito favorito = new Favorito(userRepository.findById(request.getUser().getId()), recetaRepository.findById(request.getReceta().getIdReceta()));
+                favoritoRepository.save(favorito);
             }
-		}
-        FavoritoProto.Favorito a = FavoritoProto.Favorito.newBuilder()
-            .setId(request.getId())
-            .build();
-        responseObserver.onNext(a);
-        responseObserver.onCompleted();
+            else{
+                // Si el favorito ya existe, envía una respuesta vacía al cliente
+                FavoritoProto.Favorito a = FavoritoProto.Favorito.newBuilder().build();
+                responseObserver.onNext(a);
+                responseObserver.onCompleted();
+                return; // Sale de la función sin enviar otra respuesta
+            }
+
+            FavoritoProto.Favorito a = FavoritoProto.Favorito.newBuilder()
+                .setId(request.getId())
+                .setUser(UserProto.User.newBuilder().setId(request.getUser().getId()))
+                .setReceta(RecetaProto.Receta.newBuilder().setIdReceta(request.getReceta().getIdReceta()).build())
+                .build();
+            responseObserver.onNext(a);
+            responseObserver.onCompleted();
+
+        } catch (Exception e) {
+            logger.error("Error al agregar Favorito", e);
+        }
+
     }
 
     @Override
@@ -80,9 +90,11 @@ public class FavoritoService extends FavoritosServiceGrpc.FavoritosServiceImplBa
 		} catch (Exception e) {
             logger.error("Error al eliminar Favorito", e);
         }
+        
         FavoritoProto.Favorito a = FavoritoProto.Favorito.newBuilder()
             .setId(request.getId())
             .build();
+        System.out.println("Respuesta enviada al cliente delete favorito: " + a.toString());
         responseObserver.onNext(a);
         responseObserver.onCompleted();
     }
