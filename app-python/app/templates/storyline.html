@@ -1,211 +1,397 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" class="h-75">
-  <head>
-    <title>Website Grupo E</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" />
-    <meta charset="utf-8" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='index_styles.css')}}"
-    />
-  </head>
-  <body class="h-100">
-    <div class="form-outline">
-      <img
-        src="{{ url_for('static', filename='chefencasa.png.jpg') }}"
-        alt="Universidad Nacional de Lanús"
-        style="vertical-align: Stickman; margin: 0px; padding: 16px"
-      />
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-dark nav-bk">
-      <a class="navbar-brand d-flex gap-lg-1 mx-lg-3" href="/index">
-        <i class="bi bi-house-fill text-white"></i> Inicio
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapsibleNavbar"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="collapse navbar-collapse d-flex align-items-center"
-        id="collapsibleNavbar"
-      >
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="/myprofile">Mi Perfil</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/misRecetas">Mis Recetas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/storyline">Publicaciones</a>
-              </li>          
-              <li class="nav-item">
-                <a class="nav-link" href="/seguidores">Seguidores</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/seguidos">Seguidos</a>
-              </li>
-        </ul>
-    
-      </div>
-      <div class="nav navbar-nav navbar-right" id="collapsibleNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="nav-item">
-            <a class="nav-link" href="/logout"
-              >Cerrar Sesión
-              <i class="bi bi-box-arrow-left" style="vertical-align: -1px"></i
-            ></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    
-    
-    
-    <!--tabla-->
-     <div class="container-xl">
-      <div class="table-responsive">
-        <div class="table-wrapper">
-          <div class="table-title">
-            <div class="row">
-              <div class="col-sm-8">
-                <h2 style="margin-bottom: 20px;"><b>Recetas</b></h2>
-              </div>
-            </div>
-            <div class="filter-box">
-              <form action="/buscar_recetas" method="GET" class="row">
-                <div class="col">
-                  <input
-                    type="text"
-                    name="categoriaBusqueda"
-                    placeholder="Categoría"
-                    class="form-control"
-                  >
-                </div>
-                <div class="col">
-                  <input
-                    type="text"
-                    name="titulo"
-                    placeholder="Título o parte del título"
-                    class="form-control"
-                  >
-                </div>
-                <div class="col">
-                  <input
-                    type="text"
-                    name="ingredientes"
-                    placeholder="Ingredientes"
-                    class="form-control"
-                  >
-                </div>
-                <div class="col">
-                  <input
-                    type="number"
-                    name="tiempo"
-                    placeholder="Tiempo de preparación (minutos)"
-                    class="form-control"
-                  >
-                </div>
-                <div class="col">
-                  <button type="submit" class="btn btn-primary">Filtrar búsqueda</button>
-                </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          {% block content %}
-          <table class="table table-striped table-hover table-bordered">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Título</th>
-                <th>Tiempo de Preparación</th>
-                <th>Foto en Miniatura</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for receta in recetas %}
-              <tr>
-                <td>{{ receta.idReceta }}</td>
-                <td>{{ receta.tituloReceta }}</td>
-                <td>{{ receta.tiempoPreparacion }} minutos</td>
-                <td>
-                  <img
-                    src="{{ receta.foto1 }}"
-                    alt="{{ receta.tituloReceta }}"
-                    class="miniatura"
-                    data-toggle="modal"
-                    data-target="#modalReceta{{ receta.idReceta }}"
-                  >
-                </td>
-                <td>
-                    <button class="btn-info btn-sm"
-                    data-toggle="modal"
-                    data-target="#modalReceta{{ receta.idReceta }}">
-                    <i class="fas fa-info-circle icono"></i> 
-                    </button>                  
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          {% endblock %}
-        </div>
-      </div>
-    </div>
+<html lang="es">
+<head>
+  <title>Website Grupo E</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+  <meta charset="utf-8" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
+  />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static', filename='index_styles.css')}}"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static', filename='receta_styles.css')}}"
+  />
+
+<!-- Incluir el archivo CSS de DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+
+ <!-- JavaScript para inicializar DataTables -->
+ <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+ <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
   
-    <!-- Modales para el detalle de las recetas -->
-    {% for receta in recetas %}
-    <div
-      class="modal fade"
-      id="modalReceta{{ receta.idReceta }}"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="modalReceta{{ receta.idReceta }}Label"
-      aria-hidden="true"
+  <style>
+    /* Estilo para las miniaturas de las recetas en la tabla */
+    .miniatura {
+      width: 100px; /* Ajusta el tamaño según tus preferencias */
+      cursor: pointer; /* Cambia el cursor a una mano al pasar el ratón sobre la miniatura */
+    }
+
+    /* Estilo para ocultar el detalle de la receta por defecto */
+    .modal-body {
+      display: none;
+    }
+
+    /* Estilo para mostrar el detalle de la receta cuando se muestra el modal */
+    .modal.show .modal-body {
+      display: block;
+    }
+  </style>
+</head>
+<body onload="inicio();"  class="h-100">
+  <script>
+
+    $(document).ready(function () {
+      $('#example').DataTable();
+    });
+
+    function inicio() {
+      cargarIngredientesYReceta(recetaId);
+      addFavorito(recetaId);
+    }
+
+    function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
+      console.log("cargarIngredientesYReceta function called");
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/ingredientes", true);
+    
+      // Define ingredientesSelect para seleccionar el elemento HTML
+      var ingredientesSelect = document.getElementById("ingredientes");
+    
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            var ingredientes = response.ingrediente;
+    
+            console.log("Respuesta del servidor:", ingredientes);
+    
+            if (Array.isArray(ingredientes)) {
+              ingredientesSelect.innerHTML = ""; // Limpia el contenido actual
+    
+              var ingredientesSet = new Set(ingredientesSeleccionados);
+    
+              ingredientes.forEach(function (ingrediente) {
+                var option = document.createElement("option");
+                option.value = ingrediente.id;
+                option.text = ingrediente.nombre;
+    
+                // Verifica si el ingrediente actual está en el conjunto de ingredientes seleccionados
+                if (ingredientesSet.has(ingrediente.id)) {
+                  option.selected = true;
+                }
+    
+                ingredientesSelect.appendChild(option);
+              });
+    
+              // Asegúrate de que el elemento select permita la selección múltiple
+              ingredientesSelect.setAttribute("multiple", "multiple");
+            } else {
+              console.error(
+                "La respuesta del servidor no contiene una lista de ingredientes válida:",
+                response
+              );
+            }
+          } else {
+            console.error("Error al cargar ingredientes:", xhr.status);
+          }
+        }
+      };
+      xhr.send();
+    }
+
+
+    function addFavorito(recetaId) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/addFavorito", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    
+      var data = "recetaId=" + recetaId;
+    
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            console.log("Response Text: " + xhr.responseText);
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+              var favoritoIcon = document.getElementById("favoritoIcon_" + recetaId);
+              if (favoritoIcon) {
+                favoritoIcon.style.color = "red";
+              }
+              var heartIcon = document.querySelector("#favoritoButton_" + recetaId + " .fa-regular.fa-heart");
+              if (heartIcon) {
+                heartIcon.style.display = "none";
+              }
+              window.alert("Receta agregada a favoritos con éxito");
+            } else {
+              window.alert("La receta ya está en favoritos");
+            }
+          } else {
+            console.error("Error al agregar la receta a favoritos:", xhr.status);
+          }
+        }
+      };
+    
+      xhr.send(data);
+    }
+
+    function addSeguido(seguidoId) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/addSeguido", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    
+      var data = "seguidoId=" + seguidoId;
+    
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            console.log("Response Text: " + xhr.responseText);
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+              window.alert("Usuario seguido con éxito");
+            } else {
+              window.alert("Ya sigues al usuario");
+            }
+          } else {
+            console.error("Error no se puede seguir al usuario", xhr.status);
+          }
+        }
+      };
+    
+      xhr.send(data);
+    }
+
+    window.onload = inicio;
+
+  </script>
+
+  <div class="form-outline">
+    <img
+      src="{{ url_for('static', filename='chefencasa.png.jpg') }}"
+      alt="Universidad Nacional de Lanús"
+      style="vertical-align: Stickman; margin: 0px; padding: 16px"
+    />
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-dark nav-bk">
+    <a class="navbar-brand d-flex gap-lg-1 mx-lg-3" href="/index">
+      <i class="bi bi-house-fill text-white"></i> Inicio
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#collapsibleNavbar"
     >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalReceta{{ receta.idReceta }}Label">{{ receta.tituloReceta }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <img src="{{ receta.foto1 }}" alt="{{ receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
-            <p>Descripcion: {{ receta.descripcion }}</p>
-            <p>Ingredientes: {{ receta.ingredientes }}</p>
-            <p>Pasos de preparación: {{ receta.pasos }}</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          </div>
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse d-flex align-items-center"
+      id="collapsibleNavbar"
+    >
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/myprofile">Mi Perfil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/storyline">Publicaciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/misRecetas">Mis Recetas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/favoritos">Mis Favoritos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/seguidos">Seguidos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/seguidores">Seguidores</a>
+        </li>        
+      </ul>
+    </div>
+    <div class="nav navbar-nav navbar-right" id="collapsibleNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item">
+          <a class="nav-link" href="/logout"
+            >Cerrar Sesión
+            <i class="bi bi-box-arrow-left" style="vertical-align: -1px"></i
+          ></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!--tabla-->
+  <div class="container-xl">
+    <di class="table-responsive">
+      <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="form-outline mb-4">
+              {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+              {% for category, message in messages %}
+              <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
+              {% endfor %}
+              {% endif %}
+              {% endwith %}
+            </div>
+            <div class="col-sm-8">
+              <h2 style="margin-bottom: 20px;"><b>Publicaciones</b></h2>
+            </div>
+        </div>
+      </div>
+        {% block content %}
+        <table id="example" class="table table-striped" style="width:100%">
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Tiempo de Preparación</th>
+              <th>Foto en Miniatura</th>
+              <th style="display:none;">Categoría</th> <!-- Columna de Categoría oculta -->
+              <th style="display:none;">Ingredientes</th> <!-- Columna de Ingredientes oculta -->
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for receta in recetas %}
+            <tr>
+              <td>{{ receta.tituloReceta }}</td>
+              <td>{{ receta.tiempoPreparacion }} minutos</td>
+              <td>
+                <img
+                  src="{{ receta.foto1 }}"
+                  alt="{{ receta.tituloReceta }}"
+                  class="miniatura"
+                  data-toggle="modal"
+                  data-target="#modalReceta{{ receta.idReceta }}"
+                >
+              </td>
+              <td style="display:none;">
+                {{ receta.categoria.categoria }}</td> <!-- Columna de Categoría oculta -->
+              <td style="display:none;">
+                {% for ingrediente in receta.ingredientes %}
+                  {{ ingrediente.nombre }}
+                  {% if not loop.last %}, {% endif %}
+                {% endfor %}
+              </td> <!-- Columna de Ingredientes oculta -->          
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-recetas btn-sm"
+                  data-toggle="modal"
+                  data-receta-id="{{ receta.idReceta}}"
+                  data-target="#modalReceta{{ receta.idReceta }}">
+                  <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
+                  </button>
+                  &nbsp; <!--espacio en blanco-->
+                <button class="btn btn-recetas btn-sm ml-1" id="favoritoButton_{{ receta.idReceta }}"
+                  data-toggle="modal" data-target="modalFavorito" onclick="addFavorito({{ receta.idReceta }})"
+                  data-receta-id="{{ receta.idReceta }}">
+                  <i class="fa-solid fa-heart" id="favoritoIcon_{{ receta.idReceta }}" style="color: #ffffff;"></i>
+                </button>
+                &nbsp; <!--espacio en blanco-->
+                <button class="btn btn-recetas btn-sm ml-1" data-toggle="modal" data-target="#modalUsuario{{ receta.user.id }}">
+                  <i class="fa-solid fa-user"></i>
+                </button>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Modal para el detalle de las recetas -->
+  {% for receta in recetas %}
+  <div
+    class="modal fade"
+    id="modalReceta{{ receta.idReceta }}"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalReceta{{ receta.idReceta }}Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalReceta{{ receta.idReceta }}Label">{{ receta.tituloReceta }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img src="{{ receta.foto1 }}" alt="{{ receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          <p>
+          <p>Categoria: {{ receta.categoria.categoria }}</p>
+          <p>Descripcion: {{ receta.descripcion }}</p>
+          <p>Ingredientes:
+            {% for ingrediente in receta.ingredientes %}
+              {{ ingrediente.nombre }}
+              {% if not loop.last %}, {% endif %}
+            {% endfor %}
+          </p>
+          <p>Pasos de preparación: {{ receta.pasos }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
-    {% endfor %}
-  
-    </body>
-  </html>
+  </div>
+
+   <!-- Modal para mostrar la información del usuario -->
+   <div class="modal fade" id="modalUsuario{{ receta.user.id }}" tabindex="-1" role="dialog" aria-labelledby="modalUsuarioLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalUsuarioLabel">Perfil</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <img src="{{ receta.user.fotoPerfil }}" width="200" height="150" class="detalle-imagen">
+                <p>
+                <p>Nombre: {{ receta.user.nombre }}</p>
+                <p>Apellido: {{ receta.user.apellido }}</p>
+                <p>Email: {{receta.user.email}}</p>
+                <!-- Agrega más información del usuario aquí si es necesario -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <!-- Botón para seguir o dejar de seguir al autor -->
+                <button class="btn btn-success" onclick="addSeguido('{{ receta.user.id }}')">Seguir</button>
+                <!-- Opcionalmente, puedes mostrar un botón diferente si ya sigues al autor -->
+            </div>
+        </div>
+    </div>
+  </div>
+  {% endfor %}
+</body>
+</html>

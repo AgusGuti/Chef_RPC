@@ -27,6 +27,6 @@ message FlagSeguido {
 
 message Seguido {
   int32 id = 1;
-  User userId = 2;
-  User seguidoId = 3;
+  User user = 2;
+  User seguido = 3;
 }

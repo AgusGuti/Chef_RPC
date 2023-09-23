@@ -101,6 +101,9 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
         for (User user : usuarioRepository.findAll()) {
             UserProto.User userProto = UserProto.User.newBuilder()
                     .setId(user.getId())
+                    .setNombre(user.getNombre())
+                    .setApellido(user.getApellido())
+                    .setFotoPerfil(user.getFotoPerfil())
                     .build();
             userdb.add(userProto);
         }

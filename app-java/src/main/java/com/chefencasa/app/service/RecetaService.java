@@ -31,6 +31,7 @@ import com.chefencasa.model.CategoriaProto;
 import com.chefencasa.model.IngredienteProto;
 import com.chefencasa.model.RecetaProto;
 import com.chefencasa.model.RecetasServiceGrpc;
+import com.chefencasa.model.UserProto;
 import com.google.protobuf.Empty;
 
 import io.grpc.StatusException;
@@ -122,6 +123,13 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 			}
 			
 			RecetaProto.Receta recetaProto = RecetaProto.Receta.newBuilder()
+				.setUser(UserProto.User.newBuilder()
+								.setId(receta.getUser().getId())
+								.setNombre(receta.getUser().getNombre())
+								.setApellido(receta.getUser().getApellido())
+								.setEmail(receta.getUser().getEmail())
+								.setFotoPerfil(receta.getUser().getFotoPerfil())
+								.build())
 				.setCategoria(CategoriaProto.Categoria.newBuilder()
 					.setCategoria(receta.getCategoria().getCategoria())
 					.build())

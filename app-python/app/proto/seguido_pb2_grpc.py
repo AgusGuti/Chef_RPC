@@ -3,9 +3,7 @@
 import grpc
 
 from . import user_pb2 as user__pb2
-
 from . import seguido_pb2 as seguido__pb2
-
 
 
 class SeguidosServiceStub(object):

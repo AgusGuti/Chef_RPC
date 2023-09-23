@@ -37,7 +37,7 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
     public void addSeguidos(SeguidoProto.Seguido request, StreamObserver<SeguidoProto.Seguido> responseObserver) {
        
         try {
-			Seguidos seguido = new Seguidos(userRepository.findById(request.getUserId().getId()), userRepository.findById(request.getSeguidoId().getId()));
+			Seguidos seguido = new Seguidos(userRepository.findById(request.getUser().getId()), userRepository.findById(request.getSeguido().getId()));
 
             seguidosRepository.save(seguido);
             
@@ -51,8 +51,8 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
 		}
         SeguidoProto.Seguido a = SeguidoProto.Seguido.newBuilder()
             .setId(request.getId())
-            .setUserId(request.getUserId())
-            .setSeguidoId(request.getSeguidoId())
+            .setUser(request.getUser())
+            .setSeguido(request.getSeguido())
             .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();
@@ -62,7 +62,7 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
     public void deleteSeguidos(SeguidoProto.Seguido request, StreamObserver<SeguidoProto.Seguido> responseObserver) {
        
         try {
-			Seguidos seguido = new Seguidos(userRepository.findById(request.getUserId().getId()), userRepository.findById(request.getSeguidoId().getId()));
+			Seguidos seguido = new Seguidos(userRepository.findById(request.getUser().getId()), userRepository.findById(request.getSeguido().getId()));
 
             seguidosRepository.delete(seguido);
             
@@ -76,8 +76,8 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
 		}
         SeguidoProto.Seguido a = SeguidoProto.Seguido.newBuilder()
             .setId(request.getId())
-            .setUserId(request.getUserId())
-            .setSeguidoId(request.getSeguidoId())
+            .setUser(request.getUser())
+            .setSeguido(request.getSeguido())
             .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();
@@ -88,7 +88,7 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
     public void deleteSeguidores(SeguidoProto.Seguido request, StreamObserver<SeguidoProto.Seguido> responseObserver) {
        
         try {
-			Seguidos seguido = new Seguidos(userRepository.findById(request.getSeguidoId().getId()), userRepository.findById(request.getUserId().getId()));
+			Seguidos seguido = new Seguidos(userRepository.findById(request.getSeguido().getId()), userRepository.findById(request.getUser().getId()));
 
             seguidosRepository.delete(seguido);
             
@@ -102,8 +102,8 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
 		}
         SeguidoProto.Seguido a = SeguidoProto.Seguido.newBuilder()
             .setId(request.getId())
-            .setUserId(request.getSeguidoId())
-            .setSeguidoId(request.getUserId())
+            .setUser(request.getSeguido())
+            .setSeguido(request.getUser())
             .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();
@@ -117,7 +117,7 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
                
         try {
 			
-            Seguidos seguido = seguidosRepository.checkSeguidos(request.getUserId().getId(), request.getSeguidoId().getId());
+            Seguidos seguido = seguidosRepository.checkSeguidos(request.getUser().getId(), request.getSeguido().getId());
 
             if(seguido != null){
                 existe = true;

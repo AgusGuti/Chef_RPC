@@ -21,11 +21,11 @@ class FlagSeguido(_message.Message):
     def __init__(self, flagExiste: bool = ...) -> None: ...
 
 class Seguido(_message.Message):
-    __slots__ = ["id", "userId", "seguidoId"]
+    __slots__ = ["id", "user", "seguido"]
     ID_FIELD_NUMBER: _ClassVar[int]
-    USERID_FIELD_NUMBER: _ClassVar[int]
-    SEGUIDOID_FIELD_NUMBER: _ClassVar[int]
+    USER_FIELD_NUMBER: _ClassVar[int]
+    SEGUIDO_FIELD_NUMBER: _ClassVar[int]
     id: int
-    userId: _user_pb2.User
-    seguidoId: _user_pb2.User
-    def __init__(self, id: _Optional[int] = ..., userId: _Optional[_Union[_user_pb2.User, _Mapping]] = ..., seguidoId: _Optional[_Union[_user_pb2.User, _Mapping]] = ...) -> None: ...
+    user: _user_pb2.User
+    seguido: _user_pb2.User
+    def __init__(self, id: _Optional[int] = ..., user: _Optional[_Union[_user_pb2.User, _Mapping]] = ..., seguido: _Optional[_Union[_user_pb2.User, _Mapping]] = ...) -> None: ...

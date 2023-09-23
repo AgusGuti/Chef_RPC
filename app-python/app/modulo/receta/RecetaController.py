@@ -23,14 +23,6 @@ import datetime
 
 logger = logging.getLogger(__name__)
 
-@receta_blueprint.route("/storyline",methods = ['GET'])
-def storyline():
-    logger.info("/storyline")
-    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
-        stub = RecetasServiceStub(channel)
-        response = stub.FindAll(Receta())
-        recetas = response.receta
-    return render_template('abm-receta.html', recetas=recetas)
 
 @receta_blueprint.route("/misRecetas",methods = ['GET'])
 def misRecetas():
@@ -86,14 +78,16 @@ def altaReceta():
             flash('Receta creada exitosamente!','success')
             return redirect('/misRecetas')
 
-@receta_blueprint.route("/receta/findAll",methods = ['GET'])
+@receta_blueprint.route("/storyline",methods = ['GET'])
 def findAll():
     logger.info("/receta/findAll")
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = RecetasServiceStub(channel)
         response = stub.FindAll(Receta()) 
+        recetas = response.receta 
     print("Greeter client received: " + str(response))    
-    return MessageToJson(response)
+    return render_template('storyline.html', recetas=recetas)
+
 
 @receta_blueprint.route("/receta/findById/<int:id>",methods = ['GET'])
 def findById(id):
