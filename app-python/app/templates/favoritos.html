@@ -259,6 +259,7 @@
         <table id="example" class="table table-striped" style="width:100%">
           <thead>
             <tr>
+             
               <th>Título</th>
               <th>Tiempo de Preparación</th>
               <th>Foto en Miniatura</th>
@@ -333,6 +334,10 @@
         <div class="modal-body">
           <img src="{{ favorito.receta.foto1 }}" alt="{{ favorito.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
           <p>
+          <p>Usuario: 
+            {{ favorito.receta.id }}
+           
+
           <p>Categoria: {{ favorito.receta.categoria.categoria }}</p>
           <p>Descripcion: {{ favorito.receta.descripcion }}</p>
           <p>Ingredientes:
@@ -342,6 +347,12 @@
             {% endfor %}
           </p>
           <p>Pasos de preparación: {{ favorito.receta.pasos }}</p>
+
+          <form>
+            <textarea rows="5" cols="50"></textarea><br><br>
+            <input type="submit" value="Enviar comentario">
+          </form>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
