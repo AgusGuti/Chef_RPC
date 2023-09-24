@@ -164,6 +164,9 @@
             
             // Quita la clase "favorito-activo" para cambiar el color del corazón a blanco
             $(button).removeClass("favorito-activo");
+
+            // Recarga la página para reflejar los cambios
+            location.reload();
           } else {
             // Maneja el caso en que la eliminación falla, muestra un mensaje de error
             alert("Error al eliminar el favorito. Estado: " + xhr.status);
