@@ -40,7 +40,7 @@ Clases creadas en capa servidor:
 
 -Solucionar la carga del objeto categoría dentro de la clase receta.
 
--Falta poder cargar foto de perfil al registrarse y mostrarla en Mi Perfil (F. de Obs: 15/09/2023)
+-Falta poder cargar foto de perfil al registrarse y mostrarla en Mi Perfil. SOLUCIÓN: cargar archivo de tipo .png web directamente en la base.
 -Falta implementar poder dejar de seguir, evitar que me sigan (F. de Obs: 17/09/2023)
 -Falta poder marcar publicacion como favorito al verla en STORYLINE (F. de Obs: 15/09/2023)
 
