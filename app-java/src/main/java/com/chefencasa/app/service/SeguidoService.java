@@ -3,20 +3,25 @@ package com.chefencasa.app.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.chefencasa.app.entities.User;
-import com.chefencasa.app.entities.Favorito;
-import com.chefencasa.app.entities.Seguidos;
-import com.chefencasa.app.repository.SeguidosRepository;
+import com.chefencasa.app.entities.Receta;
+import com.chefencasa.app.entities.Seguido;
+import com.chefencasa.app.repository.SeguidoRepository;
 import com.chefencasa.app.repository.UserRepository;
-import com.chefencasa.model.SeguidosProto.Seguido;
-import com.chefencasa.model.SeguidoProto;
+import com.chefencasa.model.CategoriaProto;
+import com.chefencasa.model.IngredienteProto;
+import com.chefencasa.model.RecetaProto;
 import com.chefencasa.model.SeguidoProto;
 import com.chefencasa.model.SeguidosServiceGrpc;
-import com.google.protobuf.Empty;
+import com.chefencasa.model.UserProto;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -26,24 +31,27 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
     AtomicInteger id = new AtomicInteger();
 
     @Autowired
-	@Qualifier("seguidosRepository")
-	private SeguidosRepository seguidosRepository;
+	@Qualifier("seguidoRepository")
+	private SeguidoRepository seguidoRepository;
 
     @Autowired
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
 
+    Logger logger = LoggerFactory.getLogger(RecetaService.class);
+
+
     @Override
-    public void addSeguidos(SeguidoProto.Seguido request, StreamObserver<SeguidoProto.Seguido> responseObserver) {
+    public void addSeguido(SeguidoProto.Seguido request, StreamObserver<SeguidoProto.Seguido> responseObserver) {
        
         try {
-			Seguidos seguido = new Seguidos(userRepository.findById(request.getUser().getId()), userRepository.findById(request.getSeguido().getId()));
+			Seguido seguido = new Seguido(userRepository.findById(request.getUser().getId()), userRepository.findById(request.getSeguido().getId()));
 
-            seguidosRepository.save(seguido);
+            seguidoRepository.save(seguido);
             
 		} catch (Exception e) {
 			try {
-                throw new Exception("No se pudo completar la operación,error al ingresar los datos o el usuario ya existe");
+                throw new Exception("No se pudo completar la operación,error al ingresar los datos o el seguidor ya existe");
             } catch (Exception e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
@@ -58,87 +66,61 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
         responseObserver.onCompleted();
     }
 
-    @Override
-    public void deleteSeguidos(SeguidoProto.Seguido request, StreamObserver<SeguidoProto.Seguido> responseObserver) {
+    @Transactional
+    public void deleteSeguido(SeguidoProto.Seguido request, StreamObserver<SeguidoProto.Seguido> responseObserver) {
        
         try {
-			Seguidos seguido = new Seguidos(userRepository.findById(request.getUser().getId()), userRepository.findById(request.getSeguido().getId()));
-
-            seguidosRepository.delete(seguido);
+			Seguido seguido = seguidoRepository.findById(request.getId()).get();
+            System.out.println("Seguido a eliminar"+seguido);
+            seguidoRepository.delete(seguido);
             
 		} catch (Exception e) {
-			try {
-                throw new Exception("No se pudo completar la operación,error al ingresar los datos o el usuario ya existe");
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-		}
+            logger.error("Error al eliminar Seguido", e);
+        }
+
         SeguidoProto.Seguido a = SeguidoProto.Seguido.newBuilder()
             .setId(request.getId())
-            .setUser(request.getUser())
-            .setSeguido(request.getSeguido())
             .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();
     }
 
-
-    @Override
-    public void deleteSeguidores(SeguidoProto.Seguido request, StreamObserver<SeguidoProto.Seguido> responseObserver) {
-       
-        try {
-			Seguidos seguido = new Seguidos(userRepository.findById(request.getSeguido().getId()), userRepository.findById(request.getUser().getId()));
-
-            seguidosRepository.delete(seguido);
-            
-		} catch (Exception e) {
-			try {
-                throw new Exception("No se pudo completar la operación,error al ingresar los datos o el usuario ya existe");
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-		}
-        SeguidoProto.Seguido a = SeguidoProto.Seguido.newBuilder()
-            .setId(request.getId())
-            .setUser(request.getSeguido())
-            .setSeguido(request.getUser())
-            .build();
-        responseObserver.onNext(a);
-        responseObserver.onCompleted();
-    }
-
-
-    @Override
-    public void checkSeguidos(SeguidoProto.Seguido request, StreamObserver<SeguidoProto.FlagSeguido> responseObserver) {
-       
-        Boolean existe = false;
-               
-        try {
+    @Transactional
+    public void findAllById(SeguidoProto.Seguido request, StreamObserver<SeguidoProto.Seguidos> responseObserver) {
+		try {
 			
-            Seguidos seguido = seguidosRepository.checkSeguidos(request.getUser().getId(), request.getSeguido().getId());
+			List<SeguidoProto.Seguido> seguidodb = new ArrayList<>();
+            int usuarioId = request.getUser().getId();
+			logger.info("Usuario ID: " + usuarioId); 
 
-            if(seguido != null){
-                existe = true;
-            }
-            
+            List<Seguido> seguidos = seguidoRepository.findAllSeguidosByUserId(usuarioId);
+
+			for (Seguido seguido : seguidos) {
+                
+                SeguidoProto.Seguido seguidoProto = SeguidoProto.Seguido.newBuilder()
+                        .setId(seguido.getId())
+						.setUser(UserProto.User.newBuilder()
+                                .setId(seguido.getSeguido().getId())
+								.setNombre(seguido.getSeguido().getNombre())
+                                .setApellido(seguido.getSeguido().getApellido())
+                                .setFotoPerfil(seguido.getSeguido().getFotoPerfil())
+                                .setEmail(seguido.getSeguido().getEmail())
+								.build())
+						.build();
+				seguidodb.add(seguidoProto);
+			}
+			
+			SeguidoProto.Seguidos s = SeguidoProto.Seguidos.newBuilder()
+					.addAllSeguido(seguidodb)
+					.build();
+		
+			responseObserver.onNext(s);
+			responseObserver.onCompleted();
+	
 		} catch (Exception e) {
-			try {
-                throw new Exception("No se pudo completar la operación,error al leer Seguidos");
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
+			logger.info("Error al traer los Seguidos"+e.getMessage(), e);
 		}
-
-        SeguidoProto.FlagSeguido a = SeguidoProto.FlagSeguido.newBuilder()
-            .setFlagExiste(existe)
-            .build();
-        responseObserver.onNext(a);
-        responseObserver.onCompleted();
-    }
-    
+	}
 
 }
 

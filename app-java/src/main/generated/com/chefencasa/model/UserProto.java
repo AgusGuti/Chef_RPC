@@ -2052,15 +2052,13 @@ public final class UserProto {
       "\"\"\n\005Users\022\031\n\004user\030\001 \003(\0132\013.model.User\"f\n\004" +
       "User\022\n\n\002id\030\001 \001(\005\022\016\n\006nombre\030\002 \001(\t\022\020\n\010apel" +
       "lido\030\003 \001(\t\022\r\n\005email\030\004 \001(\t\022\r\n\005clave\030\005 \001(\t" +
-      "\022\022\n\nfotoPerfil\030\006 \001(\t2\242\002\n\014UsersService\022%\n" +
+      "\022\022\n\nfotoPerfil\030\006 \001(\t2\304\001\n\014UsersService\022%\n" +
       "\007AddUser\022\013.model.User\032\013.model.User\"\000\0221\n\023" +
       "ValidarCredenciales\022\013.model.User\032\013.model" +
       ".User\"\000\022\'\n\tTraerUser\022\013.model.User\032\013.mode" +
       "l.User\"\000\0221\n\007FindAll\022\026.google.protobuf.Em" +
-      "pty\032\014.model.Users\"\000\022,\n\rTraerSeguidos\022\013.m" +
-      "odel.User\032\014.model.Users\"\000\022.\n\017TraerSeguid" +
-      "ores\022\013.model.User\032\014.model.Users\"\000B!\n\024com" +
-      ".chefencasa.modelB\tUserProtob\006proto3"
+      "pty\032\014.model.Users\"\000B!\n\024com.chefencasa.mo" +
+      "delB\tUserProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

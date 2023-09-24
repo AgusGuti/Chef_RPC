@@ -84,9 +84,6 @@ public class FavoritoService extends FavoritosServiceGrpc.FavoritosServiceImplBa
 			Favorito favorito = favoritoRepository.findById(request.getId()).get();
             favoritoRepository.delete(favorito);
             
-            logger.info("Favorito eliminado con éxito: Favorito ID {}", request.getId());
-
-            
 		} catch (Exception e) {
             logger.error("Error al eliminar Favorito", e);
         }
@@ -94,7 +91,6 @@ public class FavoritoService extends FavoritosServiceGrpc.FavoritosServiceImplBa
         FavoritoProto.Favorito a = FavoritoProto.Favorito.newBuilder()
             .setId(request.getId())
             .build();
-        System.out.println("Respuesta enviada al cliente delete favorito: " + a.toString());
         responseObserver.onNext(a);
         responseObserver.onCompleted();
     }

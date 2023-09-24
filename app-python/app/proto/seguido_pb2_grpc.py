@@ -15,50 +15,39 @@ class SeguidosServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.AddSeguidos = channel.unary_unary(
-                '/model.SeguidosService/AddSeguidos',
+        self.AddSeguido = channel.unary_unary(
+                '/model.SeguidosService/AddSeguido',
                 request_serializer=seguido__pb2.Seguido.SerializeToString,
                 response_deserializer=seguido__pb2.Seguido.FromString,
                 )
-        self.DeleteSeguidos = channel.unary_unary(
-                '/model.SeguidosService/DeleteSeguidos',
+        self.DeleteSeguido = channel.unary_unary(
+                '/model.SeguidosService/DeleteSeguido',
                 request_serializer=seguido__pb2.Seguido.SerializeToString,
                 response_deserializer=seguido__pb2.Seguido.FromString,
                 )
-        self.DeleteSeguidores = channel.unary_unary(
-                '/model.SeguidosService/DeleteSeguidores',
+        self.FindAllById = channel.unary_unary(
+                '/model.SeguidosService/FindAllById',
                 request_serializer=seguido__pb2.Seguido.SerializeToString,
-                response_deserializer=seguido__pb2.Seguido.FromString,
-                )
-        self.CheckSeguidos = channel.unary_unary(
-                '/model.SeguidosService/CheckSeguidos',
-                request_serializer=seguido__pb2.Seguido.SerializeToString,
-                response_deserializer=seguido__pb2.FlagSeguido.FromString,
+                response_deserializer=seguido__pb2.Seguidos.FromString,
                 )
 
 
 class SeguidosServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def AddSeguidos(self, request, context):
+    def AddSeguido(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def DeleteSeguidos(self, request, context):
+    def DeleteSeguido(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def DeleteSeguidores(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CheckSeguidos(self, request, context):
+    def FindAllById(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -67,25 +56,20 @@ class SeguidosServiceServicer(object):
 
 def add_SeguidosServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'AddSeguidos': grpc.unary_unary_rpc_method_handler(
-                    servicer.AddSeguidos,
+            'AddSeguido': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddSeguido,
                     request_deserializer=seguido__pb2.Seguido.FromString,
                     response_serializer=seguido__pb2.Seguido.SerializeToString,
             ),
-            'DeleteSeguidos': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteSeguidos,
+            'DeleteSeguido': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteSeguido,
                     request_deserializer=seguido__pb2.Seguido.FromString,
                     response_serializer=seguido__pb2.Seguido.SerializeToString,
             ),
-            'DeleteSeguidores': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteSeguidores,
+            'FindAllById': grpc.unary_unary_rpc_method_handler(
+                    servicer.FindAllById,
                     request_deserializer=seguido__pb2.Seguido.FromString,
-                    response_serializer=seguido__pb2.Seguido.SerializeToString,
-            ),
-            'CheckSeguidos': grpc.unary_unary_rpc_method_handler(
-                    servicer.CheckSeguidos,
-                    request_deserializer=seguido__pb2.Seguido.FromString,
-                    response_serializer=seguido__pb2.FlagSeguido.SerializeToString,
+                    response_serializer=seguido__pb2.Seguidos.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -98,7 +82,7 @@ class SeguidosService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def AddSeguidos(request,
+    def AddSeguido(request,
             target,
             options=(),
             channel_credentials=None,
@@ -108,14 +92,14 @@ class SeguidosService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/model.SeguidosService/AddSeguidos',
+        return grpc.experimental.unary_unary(request, target, '/model.SeguidosService/AddSeguido',
             seguido__pb2.Seguido.SerializeToString,
             seguido__pb2.Seguido.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def DeleteSeguidos(request,
+    def DeleteSeguido(request,
             target,
             options=(),
             channel_credentials=None,
@@ -125,14 +109,14 @@ class SeguidosService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/model.SeguidosService/DeleteSeguidos',
+        return grpc.experimental.unary_unary(request, target, '/model.SeguidosService/DeleteSeguido',
             seguido__pb2.Seguido.SerializeToString,
             seguido__pb2.Seguido.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def DeleteSeguidores(request,
+    def FindAllById(request,
             target,
             options=(),
             channel_credentials=None,
@@ -142,25 +126,8 @@ class SeguidosService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/model.SeguidosService/DeleteSeguidores',
+        return grpc.experimental.unary_unary(request, target, '/model.SeguidosService/FindAllById',
             seguido__pb2.Seguido.SerializeToString,
-            seguido__pb2.Seguido.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CheckSeguidos(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/model.SeguidosService/CheckSeguidos',
-            seguido__pb2.Seguido.SerializeToString,
-            seguido__pb2.FlagSeguido.FromString,
+            seguido__pb2.Seguidos.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

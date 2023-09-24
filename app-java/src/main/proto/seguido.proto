@@ -10,15 +10,13 @@ import "google/protobuf/wrappers.proto";
 import "user.proto";
 
 service SeguidosService {
-  rpc AddSeguidos(Seguido) returns (Seguido) {}
-  rpc DeleteSeguidos(Seguido) returns (Seguido) {}
-  rpc DeleteSeguidores(Seguido) returns (Seguido) {} 
-  rpc CheckSeguidos(Seguido) returns (FlagSeguido) {} 
-
+  rpc AddSeguido(Seguido) returns (Seguido) {}
+  rpc DeleteSeguido(Seguido) returns (Seguido) {}
+  rpc FindAllById(Seguido) returns (Seguidos) {}
 }
 
 message Seguidos {
-  repeated Seguidos user = 1;
+  repeated Seguido seguido = 1;
 }
 
 message FlagSeguido {

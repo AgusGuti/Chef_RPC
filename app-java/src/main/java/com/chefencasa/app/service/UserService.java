@@ -7,9 +7,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.chefencasa.app.entities.Seguidos;
 import com.chefencasa.app.entities.User;
-import com.chefencasa.app.repository.SeguidosRepository;
+import com.chefencasa.app.repository.SeguidoRepository;
 import com.chefencasa.app.repository.UserRepository;
 import com.chefencasa.model.UserProto;
 import com.chefencasa.model.UsersServiceGrpc;
@@ -27,10 +26,7 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
 	@Qualifier("userRepository")
 	private UserRepository usuarioRepository;
 
-    @Autowired
-	@Qualifier("seguidosRepository")
-	private SeguidosRepository seguidosRepository;
-
+   
     @Override
     public void addUser(UserProto.User request, StreamObserver<UserProto.User> responseObserver) {
        
@@ -114,55 +110,6 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
         responseObserver.onNext(a);
         responseObserver.onCompleted();
     }
-
-    
-    @Override
-    public void traerSeguidos(UserProto.User request,StreamObserver<UserProto.Users> responseObserver) {
-        
-        List<UserProto.User> userdb = new ArrayList<>();
-
-        for (User user : usuarioRepository.findSeguidosById(request.getId())) {
-            UserProto.User userProto = UserProto.User.newBuilder()
-                    .setId(user.getId())
-                    .setNombre(user.getNombre())
-                    .setApellido(user.getApellido())
-                    .setEmail(user.getEmail())
-                    .setFotoPerfil(user.getFotoPerfil())
-                    .build();
-            userdb.add(userProto);
-        }
-
-        UserProto.Users a = UserProto.Users.newBuilder()
-            .addAllUser(userdb)
-            .build();
-        responseObserver.onNext(a);
-        responseObserver.onCompleted();
-    }
-        
-    @Override
-    public void traerSeguidores(UserProto.User request,StreamObserver<UserProto.Users> responseObserver) {
-        
-        List<UserProto.User> userdb = new ArrayList<>();
-
-        for (User user : usuarioRepository.findSeguidoresById(request.getId())) {
-            UserProto.User userProto = UserProto.User.newBuilder()
-                    .setId(user.getId())
-                    .setNombre(user.getNombre())
-                    .setApellido(user.getApellido())
-                    .setEmail(user.getEmail())
-                    .setFotoPerfil(user.getFotoPerfil())
-                    .build();
-            userdb.add(userProto);
-        }
-
-        UserProto.Users a = UserProto.Users.newBuilder()
-            .addAllUser(userdb)
-            .build();
-        responseObserver.onNext(a);
-        responseObserver.onCompleted();
-    }
-  
-
 
 }
 

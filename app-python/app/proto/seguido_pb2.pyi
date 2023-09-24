@@ -9,10 +9,10 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Seguidos(_message.Message):
-    __slots__ = ["user"]
-    USER_FIELD_NUMBER: _ClassVar[int]
-    user: _containers.RepeatedCompositeFieldContainer[Seguidos]
-    def __init__(self, user: _Optional[_Iterable[_Union[Seguidos, _Mapping]]] = ...) -> None: ...
+    __slots__ = ["seguido"]
+    SEGUIDO_FIELD_NUMBER: _ClassVar[int]
+    seguido: _containers.RepeatedCompositeFieldContainer[Seguido]
+    def __init__(self, seguido: _Optional[_Iterable[_Union[Seguido, _Mapping]]] = ...) -> None: ...
 
 class FlagSeguido(_message.Message):
     __slots__ = ["flagExiste"]

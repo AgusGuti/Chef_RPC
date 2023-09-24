@@ -19,27 +19,27 @@ public final class SeguidoProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .model.Seguidos user = 1;</code>
+     * <code>repeated .model.Seguido seguido = 1;</code>
      */
-    java.util.List<com.chefencasa.model.SeguidoProto.Seguidos> 
-        getUserList();
+    java.util.List<com.chefencasa.model.SeguidoProto.Seguido> 
+        getSeguidoList();
     /**
-     * <code>repeated .model.Seguidos user = 1;</code>
+     * <code>repeated .model.Seguido seguido = 1;</code>
      */
-    com.chefencasa.model.SeguidoProto.Seguidos getUser(int index);
+    com.chefencasa.model.SeguidoProto.Seguido getSeguido(int index);
     /**
-     * <code>repeated .model.Seguidos user = 1;</code>
+     * <code>repeated .model.Seguido seguido = 1;</code>
      */
-    int getUserCount();
+    int getSeguidoCount();
     /**
-     * <code>repeated .model.Seguidos user = 1;</code>
+     * <code>repeated .model.Seguido seguido = 1;</code>
      */
-    java.util.List<? extends com.chefencasa.model.SeguidoProto.SeguidosOrBuilder> 
-        getUserOrBuilderList();
+    java.util.List<? extends com.chefencasa.model.SeguidoProto.SeguidoOrBuilder> 
+        getSeguidoOrBuilderList();
     /**
-     * <code>repeated .model.Seguidos user = 1;</code>
+     * <code>repeated .model.Seguido seguido = 1;</code>
      */
-    com.chefencasa.model.SeguidoProto.SeguidosOrBuilder getUserOrBuilder(
+    com.chefencasa.model.SeguidoProto.SeguidoOrBuilder getSeguidoOrBuilder(
         int index);
   }
   /**
@@ -55,7 +55,7 @@ public final class SeguidoProto {
       super(builder);
     }
     private Seguidos() {
-      user_ = java.util.Collections.emptyList();
+      seguido_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -91,11 +91,11 @@ public final class SeguidoProto {
               break;
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                user_ = new java.util.ArrayList<com.chefencasa.model.SeguidoProto.Seguidos>();
+                seguido_ = new java.util.ArrayList<com.chefencasa.model.SeguidoProto.Seguido>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              user_.add(
-                  input.readMessage(com.chefencasa.model.SeguidoProto.Seguidos.parser(), extensionRegistry));
+              seguido_.add(
+                  input.readMessage(com.chefencasa.model.SeguidoProto.Seguido.parser(), extensionRegistry));
               break;
             }
             default: {
@@ -114,7 +114,7 @@ public final class SeguidoProto {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          user_ = java.util.Collections.unmodifiableList(user_);
+          seguido_ = java.util.Collections.unmodifiableList(seguido_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -133,39 +133,39 @@ public final class SeguidoProto {
               com.chefencasa.model.SeguidoProto.Seguidos.class, com.chefencasa.model.SeguidoProto.Seguidos.Builder.class);
     }
 
-    public static final int USER_FIELD_NUMBER = 1;
-    private java.util.List<com.chefencasa.model.SeguidoProto.Seguidos> user_;
+    public static final int SEGUIDO_FIELD_NUMBER = 1;
+    private java.util.List<com.chefencasa.model.SeguidoProto.Seguido> seguido_;
     /**
-     * <code>repeated .model.Seguidos user = 1;</code>
+     * <code>repeated .model.Seguido seguido = 1;</code>
      */
-    public java.util.List<com.chefencasa.model.SeguidoProto.Seguidos> getUserList() {
-      return user_;
+    public java.util.List<com.chefencasa.model.SeguidoProto.Seguido> getSeguidoList() {
+      return seguido_;
     }
     /**
-     * <code>repeated .model.Seguidos user = 1;</code>
+     * <code>repeated .model.Seguido seguido = 1;</code>
      */
-    public java.util.List<? extends com.chefencasa.model.SeguidoProto.SeguidosOrBuilder> 
-        getUserOrBuilderList() {
-      return user_;
+    public java.util.List<? extends com.chefencasa.model.SeguidoProto.SeguidoOrBuilder> 
+        getSeguidoOrBuilderList() {
+      return seguido_;
     }
     /**
-     * <code>repeated .model.Seguidos user = 1;</code>
+     * <code>repeated .model.Seguido seguido = 1;</code>
      */
-    public int getUserCount() {
-      return user_.size();
+    public int getSeguidoCount() {
+      return seguido_.size();
     }
     /**
-     * <code>repeated .model.Seguidos user = 1;</code>
+     * <code>repeated .model.Seguido seguido = 1;</code>
      */
-    public com.chefencasa.model.SeguidoProto.Seguidos getUser(int index) {
-      return user_.get(index);
+    public com.chefencasa.model.SeguidoProto.Seguido getSeguido(int index) {
+      return seguido_.get(index);
     }
     /**
-     * <code>repeated .model.Seguidos user = 1;</code>
+     * <code>repeated .model.Seguido seguido = 1;</code>
      */
-    public com.chefencasa.model.SeguidoProto.SeguidosOrBuilder getUserOrBuilder(
+    public com.chefencasa.model.SeguidoProto.SeguidoOrBuilder getSeguidoOrBuilder(
         int index) {
-      return user_.get(index);
+      return seguido_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -182,8 +182,8 @@ public final class SeguidoProto {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < user_.size(); i++) {
-        output.writeMessage(1, user_.get(i));
+      for (int i = 0; i < seguido_.size(); i++) {
+        output.writeMessage(1, seguido_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -194,9 +194,9 @@ public final class SeguidoProto {
       if (size != -1) return size;
 
       size = 0;
-      for (int i = 0; i < user_.size(); i++) {
+      for (int i = 0; i < seguido_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, user_.get(i));
+          .computeMessageSize(1, seguido_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -213,8 +213,8 @@ public final class SeguidoProto {
       }
       com.chefencasa.model.SeguidoProto.Seguidos other = (com.chefencasa.model.SeguidoProto.Seguidos) obj;
 
-      if (!getUserList()
-          .equals(other.getUserList())) return false;
+      if (!getSeguidoList()
+          .equals(other.getSeguidoList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -226,9 +226,9 @@ public final class SeguidoProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (getUserCount() > 0) {
-        hash = (37 * hash) + USER_FIELD_NUMBER;
-        hash = (53 * hash) + getUserList().hashCode();
+      if (getSeguidoCount() > 0) {
+        hash = (37 * hash) + SEGUIDO_FIELD_NUMBER;
+        hash = (53 * hash) + getSeguidoList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -358,17 +358,17 @@ public final class SeguidoProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getUserFieldBuilder();
+          getSeguidoFieldBuilder();
         }
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (userBuilder_ == null) {
-          user_ = java.util.Collections.emptyList();
+        if (seguidoBuilder_ == null) {
+          seguido_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          userBuilder_.clear();
+          seguidoBuilder_.clear();
         }
         return this;
       }
@@ -397,14 +397,14 @@ public final class SeguidoProto {
       public com.chefencasa.model.SeguidoProto.Seguidos buildPartial() {
         com.chefencasa.model.SeguidoProto.Seguidos result = new com.chefencasa.model.SeguidoProto.Seguidos(this);
         int from_bitField0_ = bitField0_;
-        if (userBuilder_ == null) {
+        if (seguidoBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
-            user_ = java.util.Collections.unmodifiableList(user_);
+            seguido_ = java.util.Collections.unmodifiableList(seguido_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
-          result.user_ = user_;
+          result.seguido_ = seguido_;
         } else {
-          result.user_ = userBuilder_.build();
+          result.seguido_ = seguidoBuilder_.build();
         }
         onBuilt();
         return result;
@@ -454,29 +454,29 @@ public final class SeguidoProto {
 
       public Builder mergeFrom(com.chefencasa.model.SeguidoProto.Seguidos other) {
         if (other == com.chefencasa.model.SeguidoProto.Seguidos.getDefaultInstance()) return this;
-        if (userBuilder_ == null) {
-          if (!other.user_.isEmpty()) {
-            if (user_.isEmpty()) {
-              user_ = other.user_;
+        if (seguidoBuilder_ == null) {
+          if (!other.seguido_.isEmpty()) {
+            if (seguido_.isEmpty()) {
+              seguido_ = other.seguido_;
               bitField0_ = (bitField0_ & ~0x00000001);
             } else {
-              ensureUserIsMutable();
-              user_.addAll(other.user_);
+              ensureSeguidoIsMutable();
+              seguido_.addAll(other.seguido_);
             }
             onChanged();
           }
         } else {
-          if (!other.user_.isEmpty()) {
-            if (userBuilder_.isEmpty()) {
-              userBuilder_.dispose();
-              userBuilder_ = null;
-              user_ = other.user_;
+          if (!other.seguido_.isEmpty()) {
+            if (seguidoBuilder_.isEmpty()) {
+              seguidoBuilder_.dispose();
+              seguidoBuilder_ = null;
+              seguido_ = other.seguido_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              userBuilder_ = 
+              seguidoBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getUserFieldBuilder() : null;
+                   getSeguidoFieldBuilder() : null;
             } else {
-              userBuilder_.addAllMessages(other.user_);
+              seguidoBuilder_.addAllMessages(other.seguido_);
             }
           }
         }
@@ -510,244 +510,244 @@ public final class SeguidoProto {
       }
       private int bitField0_;
 
-      private java.util.List<com.chefencasa.model.SeguidoProto.Seguidos> user_ =
+      private java.util.List<com.chefencasa.model.SeguidoProto.Seguido> seguido_ =
         java.util.Collections.emptyList();
-      private void ensureUserIsMutable() {
+      private void ensureSeguidoIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          user_ = new java.util.ArrayList<com.chefencasa.model.SeguidoProto.Seguidos>(user_);
+          seguido_ = new java.util.ArrayList<com.chefencasa.model.SeguidoProto.Seguido>(seguido_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.chefencasa.model.SeguidoProto.Seguidos, com.chefencasa.model.SeguidoProto.Seguidos.Builder, com.chefencasa.model.SeguidoProto.SeguidosOrBuilder> userBuilder_;
+          com.chefencasa.model.SeguidoProto.Seguido, com.chefencasa.model.SeguidoProto.Seguido.Builder, com.chefencasa.model.SeguidoProto.SeguidoOrBuilder> seguidoBuilder_;
 
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public java.util.List<com.chefencasa.model.SeguidoProto.Seguidos> getUserList() {
-        if (userBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(user_);
+      public java.util.List<com.chefencasa.model.SeguidoProto.Seguido> getSeguidoList() {
+        if (seguidoBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(seguido_);
         } else {
-          return userBuilder_.getMessageList();
+          return seguidoBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public int getUserCount() {
-        if (userBuilder_ == null) {
-          return user_.size();
+      public int getSeguidoCount() {
+        if (seguidoBuilder_ == null) {
+          return seguido_.size();
         } else {
-          return userBuilder_.getCount();
+          return seguidoBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public com.chefencasa.model.SeguidoProto.Seguidos getUser(int index) {
-        if (userBuilder_ == null) {
-          return user_.get(index);
+      public com.chefencasa.model.SeguidoProto.Seguido getSeguido(int index) {
+        if (seguidoBuilder_ == null) {
+          return seguido_.get(index);
         } else {
-          return userBuilder_.getMessage(index);
+          return seguidoBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public Builder setUser(
-          int index, com.chefencasa.model.SeguidoProto.Seguidos value) {
-        if (userBuilder_ == null) {
+      public Builder setSeguido(
+          int index, com.chefencasa.model.SeguidoProto.Seguido value) {
+        if (seguidoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUserIsMutable();
-          user_.set(index, value);
+          ensureSeguidoIsMutable();
+          seguido_.set(index, value);
           onChanged();
         } else {
-          userBuilder_.setMessage(index, value);
+          seguidoBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public Builder setUser(
-          int index, com.chefencasa.model.SeguidoProto.Seguidos.Builder builderForValue) {
-        if (userBuilder_ == null) {
-          ensureUserIsMutable();
-          user_.set(index, builderForValue.build());
+      public Builder setSeguido(
+          int index, com.chefencasa.model.SeguidoProto.Seguido.Builder builderForValue) {
+        if (seguidoBuilder_ == null) {
+          ensureSeguidoIsMutable();
+          seguido_.set(index, builderForValue.build());
           onChanged();
         } else {
-          userBuilder_.setMessage(index, builderForValue.build());
+          seguidoBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public Builder addUser(com.chefencasa.model.SeguidoProto.Seguidos value) {
-        if (userBuilder_ == null) {
+      public Builder addSeguido(com.chefencasa.model.SeguidoProto.Seguido value) {
+        if (seguidoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUserIsMutable();
-          user_.add(value);
+          ensureSeguidoIsMutable();
+          seguido_.add(value);
           onChanged();
         } else {
-          userBuilder_.addMessage(value);
+          seguidoBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public Builder addUser(
-          int index, com.chefencasa.model.SeguidoProto.Seguidos value) {
-        if (userBuilder_ == null) {
+      public Builder addSeguido(
+          int index, com.chefencasa.model.SeguidoProto.Seguido value) {
+        if (seguidoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUserIsMutable();
-          user_.add(index, value);
+          ensureSeguidoIsMutable();
+          seguido_.add(index, value);
           onChanged();
         } else {
-          userBuilder_.addMessage(index, value);
+          seguidoBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public Builder addUser(
-          com.chefencasa.model.SeguidoProto.Seguidos.Builder builderForValue) {
-        if (userBuilder_ == null) {
-          ensureUserIsMutable();
-          user_.add(builderForValue.build());
+      public Builder addSeguido(
+          com.chefencasa.model.SeguidoProto.Seguido.Builder builderForValue) {
+        if (seguidoBuilder_ == null) {
+          ensureSeguidoIsMutable();
+          seguido_.add(builderForValue.build());
           onChanged();
         } else {
-          userBuilder_.addMessage(builderForValue.build());
+          seguidoBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public Builder addUser(
-          int index, com.chefencasa.model.SeguidoProto.Seguidos.Builder builderForValue) {
-        if (userBuilder_ == null) {
-          ensureUserIsMutable();
-          user_.add(index, builderForValue.build());
+      public Builder addSeguido(
+          int index, com.chefencasa.model.SeguidoProto.Seguido.Builder builderForValue) {
+        if (seguidoBuilder_ == null) {
+          ensureSeguidoIsMutable();
+          seguido_.add(index, builderForValue.build());
           onChanged();
         } else {
-          userBuilder_.addMessage(index, builderForValue.build());
+          seguidoBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public Builder addAllUser(
-          java.lang.Iterable<? extends com.chefencasa.model.SeguidoProto.Seguidos> values) {
-        if (userBuilder_ == null) {
-          ensureUserIsMutable();
+      public Builder addAllSeguido(
+          java.lang.Iterable<? extends com.chefencasa.model.SeguidoProto.Seguido> values) {
+        if (seguidoBuilder_ == null) {
+          ensureSeguidoIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, user_);
+              values, seguido_);
           onChanged();
         } else {
-          userBuilder_.addAllMessages(values);
+          seguidoBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public Builder clearUser() {
-        if (userBuilder_ == null) {
-          user_ = java.util.Collections.emptyList();
+      public Builder clearSeguido() {
+        if (seguidoBuilder_ == null) {
+          seguido_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          userBuilder_.clear();
+          seguidoBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public Builder removeUser(int index) {
-        if (userBuilder_ == null) {
-          ensureUserIsMutable();
-          user_.remove(index);
+      public Builder removeSeguido(int index) {
+        if (seguidoBuilder_ == null) {
+          ensureSeguidoIsMutable();
+          seguido_.remove(index);
           onChanged();
         } else {
-          userBuilder_.remove(index);
+          seguidoBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public com.chefencasa.model.SeguidoProto.Seguidos.Builder getUserBuilder(
+      public com.chefencasa.model.SeguidoProto.Seguido.Builder getSeguidoBuilder(
           int index) {
-        return getUserFieldBuilder().getBuilder(index);
+        return getSeguidoFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public com.chefencasa.model.SeguidoProto.SeguidosOrBuilder getUserOrBuilder(
+      public com.chefencasa.model.SeguidoProto.SeguidoOrBuilder getSeguidoOrBuilder(
           int index) {
-        if (userBuilder_ == null) {
-          return user_.get(index);  } else {
-          return userBuilder_.getMessageOrBuilder(index);
+        if (seguidoBuilder_ == null) {
+          return seguido_.get(index);  } else {
+          return seguidoBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public java.util.List<? extends com.chefencasa.model.SeguidoProto.SeguidosOrBuilder> 
-           getUserOrBuilderList() {
-        if (userBuilder_ != null) {
-          return userBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends com.chefencasa.model.SeguidoProto.SeguidoOrBuilder> 
+           getSeguidoOrBuilderList() {
+        if (seguidoBuilder_ != null) {
+          return seguidoBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(user_);
+          return java.util.Collections.unmodifiableList(seguido_);
         }
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public com.chefencasa.model.SeguidoProto.Seguidos.Builder addUserBuilder() {
-        return getUserFieldBuilder().addBuilder(
-            com.chefencasa.model.SeguidoProto.Seguidos.getDefaultInstance());
+      public com.chefencasa.model.SeguidoProto.Seguido.Builder addSeguidoBuilder() {
+        return getSeguidoFieldBuilder().addBuilder(
+            com.chefencasa.model.SeguidoProto.Seguido.getDefaultInstance());
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public com.chefencasa.model.SeguidoProto.Seguidos.Builder addUserBuilder(
+      public com.chefencasa.model.SeguidoProto.Seguido.Builder addSeguidoBuilder(
           int index) {
-        return getUserFieldBuilder().addBuilder(
-            index, com.chefencasa.model.SeguidoProto.Seguidos.getDefaultInstance());
+        return getSeguidoFieldBuilder().addBuilder(
+            index, com.chefencasa.model.SeguidoProto.Seguido.getDefaultInstance());
       }
       /**
-       * <code>repeated .model.Seguidos user = 1;</code>
+       * <code>repeated .model.Seguido seguido = 1;</code>
        */
-      public java.util.List<com.chefencasa.model.SeguidoProto.Seguidos.Builder> 
-           getUserBuilderList() {
-        return getUserFieldBuilder().getBuilderList();
+      public java.util.List<com.chefencasa.model.SeguidoProto.Seguido.Builder> 
+           getSeguidoBuilderList() {
+        return getSeguidoFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.chefencasa.model.SeguidoProto.Seguidos, com.chefencasa.model.SeguidoProto.Seguidos.Builder, com.chefencasa.model.SeguidoProto.SeguidosOrBuilder> 
-          getUserFieldBuilder() {
-        if (userBuilder_ == null) {
-          userBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.chefencasa.model.SeguidoProto.Seguidos, com.chefencasa.model.SeguidoProto.Seguidos.Builder, com.chefencasa.model.SeguidoProto.SeguidosOrBuilder>(
-                  user_,
+          com.chefencasa.model.SeguidoProto.Seguido, com.chefencasa.model.SeguidoProto.Seguido.Builder, com.chefencasa.model.SeguidoProto.SeguidoOrBuilder> 
+          getSeguidoFieldBuilder() {
+        if (seguidoBuilder_ == null) {
+          seguidoBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.chefencasa.model.SeguidoProto.Seguido, com.chefencasa.model.SeguidoProto.Seguido.Builder, com.chefencasa.model.SeguidoProto.SeguidoOrBuilder>(
+                  seguido_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
-          user_ = null;
+          seguido_ = null;
         }
-        return userBuilder_;
+        return seguidoBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -2201,18 +2201,16 @@ public final class SeguidoProto {
     java.lang.String[] descriptorData = {
       "\n\rseguido.proto\022\005model\032\033google/protobuf/" +
       "empty.proto\032\036google/protobuf/wrappers.pr" +
-      "oto\032\nuser.proto\")\n\010Seguidos\022\035\n\004user\030\001 \003(" +
-      "\0132\017.model.Seguidos\"!\n\013FlagSeguido\022\022\n\nfla" +
-      "gExiste\030\001 \001(\010\"N\n\007Seguido\022\n\n\002id\030\001 \001(\005\022\031\n\004" +
-      "user\030\002 \001(\0132\013.model.User\022\034\n\007seguido\030\003 \001(\013" +
-      "2\013.model.User2\343\001\n\017SeguidosService\022/\n\013Add" +
-      "Seguidos\022\016.model.Seguido\032\016.model.Seguido" +
-      "\"\000\0222\n\016DeleteSeguidos\022\016.model.Seguido\032\016.m" +
-      "odel.Seguido\"\000\0224\n\020DeleteSeguidores\022\016.mod" +
-      "el.Seguido\032\016.model.Seguido\"\000\0225\n\rCheckSeg" +
-      "uidos\022\016.model.Seguido\032\022.model.FlagSeguid" +
-      "o\"\000B$\n\024com.chefencasa.modelB\014SeguidoProt" +
-      "ob\006proto3"
+      "oto\032\nuser.proto\"+\n\010Seguidos\022\037\n\007seguido\030\001" +
+      " \003(\0132\016.model.Seguido\"!\n\013FlagSeguido\022\022\n\nf" +
+      "lagExiste\030\001 \001(\010\"N\n\007Seguido\022\n\n\002id\030\001 \001(\005\022\031" +
+      "\n\004user\030\002 \001(\0132\013.model.User\022\034\n\007seguido\030\003 \001" +
+      "(\0132\013.model.User2\246\001\n\017SeguidosService\022.\n\nA" +
+      "ddSeguido\022\016.model.Seguido\032\016.model.Seguid" +
+      "o\"\000\0221\n\rDeleteSeguido\022\016.model.Seguido\032\016.m" +
+      "odel.Seguido\"\000\0220\n\013FindAllById\022\016.model.Se" +
+      "guido\032\017.model.Seguidos\"\000B$\n\024com.chefenca" +
+      "sa.modelB\014SeguidoProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2226,7 +2224,7 @@ public final class SeguidoProto {
     internal_static_model_Seguidos_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_Seguidos_descriptor,
-        new java.lang.String[] { "User", });
+        new java.lang.String[] { "Seguido", });
     internal_static_model_FlagSeguido_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_model_FlagSeguido_fieldAccessorTable = new

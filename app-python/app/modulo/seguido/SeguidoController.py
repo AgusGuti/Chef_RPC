@@ -29,7 +29,7 @@ def addSeguido():
 
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = SeguidosServiceStub(channel)
-        response = stub.AddSeguidos(Seguido(user=User(id=int(user_id)),seguido=User(id=int(request.form["seguidoId"]))))
+        response = stub.AddSeguido(Seguido(user=User(id=int(user_id)),seguido=User(id=int(request.form["seguidoId"]))))
         print("Greeter client received: " + str(response))    
         seguido={"seguido":MessageToJson(response)}
 
@@ -44,3 +44,36 @@ def addSeguido():
 def seguido():
     logger.info("/addSeguido")
     return render_template('seguidos.html')
+
+
+@seguido_blueprint.route("/eliminarSeguido/<int:id>",methods=["POST"])
+def eliminarSeguido(id):
+    logger.info("/eliminarSeguido %s"+str(id))
+    user_id=session['user_id']
+    
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = SeguidosServiceStub(channel)
+        response = stub.DeleteSeguido(Seguido(id=id))
+        print("Greeter client received: " + str(response))    
+        seguido={"seguido":MessageToJson(response)}
+
+        if seguido["seguido"]=="{}":
+            flash('Error al eliminar el seguido','danger')
+        else:
+            flash('Seguido eliminado exitosamente!','success')
+        
+    return redirect('/seguidos')
+    
+    
+@seguido_blueprint.route("/seguidos",methods = ['GET'])
+def seguidos():
+    logger.info("/seguidos")
+    user_id=session['user_id']
+    logging.info("Usuario ID: %s", user_id)
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = SeguidosServiceStub(channel)
+        response = stub.FindAllById(Seguido(user=User(id=session['user_id'])))
+    print("Greeter client received: " + str(response))
+    seguidos = response.seguido
+    return render_template('seguidos.html', seguidos = seguidos)
+

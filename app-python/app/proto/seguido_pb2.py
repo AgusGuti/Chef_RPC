@@ -15,7 +15,8 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rseguido.proto\x12\x05model\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\nuser.proto\")\n\x08Seguidos\x12\x1d\n\x04user\x18\x01 \x03(\x0b\x32\x0f.model.Seguidos\"!\n\x0b\x46lagSeguido\x12\x12\n\nflagExiste\x18\x01 \x01(\x08\"N\n\x07Seguido\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x19\n\x04user\x18\x02 \x01(\x0b\x32\x0b.model.User\x12\x1c\n\x07seguido\x18\x03 \x01(\x0b\x32\x0b.model.User2\xe3\x01\n\x0fSeguidosService\x12/\n\x0b\x41\x64\x64Seguidos\x12\x0e.model.Seguido\x1a\x0e.model.Seguido\"\x00\x12\x32\n\x0e\x44\x65leteSeguidos\x12\x0e.model.Seguido\x1a\x0e.model.Seguido\"\x00\x12\x34\n\x10\x44\x65leteSeguidores\x12\x0e.model.Seguido\x1a\x0e.model.Seguido\"\x00\x12\x35\n\rCheckSeguidos\x12\x0e.model.Seguido\x1a\x12.model.FlagSeguido\"\x00\x42$\n\x14\x63om.chefencasa.modelB\x0cSeguidoProtob\x06proto3')
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rseguido.proto\x12\x05model\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\nuser.proto\"+\n\x08Seguidos\x12\x1f\n\x07seguido\x18\x01 \x03(\x0b\x32\x0e.model.Seguido\"!\n\x0b\x46lagSeguido\x12\x12\n\nflagExiste\x18\x01 \x01(\x08\"N\n\x07Seguido\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x19\n\x04user\x18\x02 \x01(\x0b\x32\x0b.model.User\x12\x1c\n\x07seguido\x18\x03 \x01(\x0b\x32\x0b.model.User2\xa6\x01\n\x0fSeguidosService\x12.\n\nAddSeguido\x12\x0e.model.Seguido\x1a\x0e.model.Seguido\"\x00\x12\x31\n\rDeleteSeguido\x12\x0e.model.Seguido\x1a\x0e.model.Seguido\"\x00\x12\x30\n\x0b\x46indAllById\x12\x0e.model.Seguido\x1a\x0f.model.Seguidos\"\x00\x42$\n\x14\x63om.chefencasa.modelB\x0cSeguidoProtob\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -25,11 +26,11 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'\n\024com.chefencasa.modelB\014SeguidoProto'
   _globals['_SEGUIDOS']._serialized_start=97
-  _globals['_SEGUIDOS']._serialized_end=138
-  _globals['_FLAGSEGUIDO']._serialized_start=140
-  _globals['_FLAGSEGUIDO']._serialized_end=173
-  _globals['_SEGUIDO']._serialized_start=175
-  _globals['_SEGUIDO']._serialized_end=253
-  _globals['_SEGUIDOSSERVICE']._serialized_start=256
-  _globals['_SEGUIDOSSERVICE']._serialized_end=483
+  _globals['_SEGUIDOS']._serialized_end=140
+  _globals['_FLAGSEGUIDO']._serialized_start=142
+  _globals['_FLAGSEGUIDO']._serialized_end=175
+  _globals['_SEGUIDO']._serialized_start=177
+  _globals['_SEGUIDO']._serialized_end=255
+  _globals['_SEGUIDOSSERVICE']._serialized_start=258
+  _globals['_SEGUIDOSSERVICE']._serialized_end=424
 # @@protoc_insertion_point(module_scope)

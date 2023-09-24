@@ -74,27 +74,6 @@ def myprofile():
                 email=session['email'],
                 fotoPerfil=session['fotoPerfil'])
 
-
-@user_blueprint.route("/seguidos",methods = ['GET'])
-def seguidos():
-    logger.info("/seguidos")
-    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
-        stub = UsersServiceStub(channel)
-        response = stub.TraerSeguidos(User(id=session['user_id']))
-    print("Greeter client received: " + str(response))
-    seguidos = response.user
-    return render_template('seguidos.html', seguidos = seguidos)
-
-@user_blueprint.route("/seguidores",methods = ['GET'])
-def seguidores():
-    logger.info("/seguidores")
-    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
-        stub = UsersServiceStub(channel)
-        response = stub.TraerSeguidores(User(id=session['user_id']))
-    print("Greeter client received: " + str(response))    
-    seguidores = response.user
-    return render_template('seguidores.html', seguidores = seguidores)
-
 @user_blueprint.route("/logout",methods = ['GET'])
 def logout():
     logger.info("/logout")
