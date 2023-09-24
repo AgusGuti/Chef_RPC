@@ -58,11 +58,10 @@ def eliminarSeguido(id):
         seguido={"seguido":MessageToJson(response)}
 
         if seguido["seguido"]=="{}":
-            flash('Error al eliminar el seguido','danger')
-        else:
-            flash('Seguido eliminado exitosamente!','success')
+            return jsonify({"status": "error", "message": "Error al eliminar el seguido"})
         
-    return redirect('/seguidos')
+        else:
+            return jsonify({"status": "success", "message": "Seguido eliminado exitosamente!"})
     
     
 @seguido_blueprint.route("/seguidos",methods = ['GET'])
@@ -73,7 +72,8 @@ def seguidos():
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = SeguidosServiceStub(channel)
         response = stub.FindAllById(Seguido(user=User(id=session['user_id'])))
+        seguidos = response.seguido
     print("Greeter client received: " + str(response))
-    seguidos = response.seguido
+    
     return render_template('seguidos.html', seguidos = seguidos)
 
