@@ -19,6 +19,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import org.springframework.kafka.core.KafkaTemplate;
+
 import com.chefencasa.app.entities.Receta;
 import com.chefencasa.app.entities.User;
 import com.chefencasa.app.entities.Categoria;
@@ -33,6 +35,7 @@ import com.chefencasa.model.RecetaProto;
 import com.chefencasa.model.RecetasServiceGrpc;
 import com.chefencasa.model.UserProto;
 import com.google.protobuf.Empty;
+import com.chefencasa.app.config.KafkaConfig;
 
 import io.grpc.StatusException;
 import io.grpc.stub.StreamObserver;
@@ -57,6 +60,11 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 	@Qualifier("ingredienteRepository")
 	private IngredienteRepository ingredienteRepository;
 
+	// Inyecta el KafkaTemplate
+	@Autowired
+    private KafkaTemplate<String, String> kafkaTemplate; 
+
+
 	Logger logger = LoggerFactory.getLogger(RecetaService.class);
 
     @Transactional
@@ -76,36 +84,38 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
             request.getFoto4(),
             request.getFoto5()
 			);
+			
 			for (IngredienteProto.Ingrediente ingrediente :request.getIngredientesList())
 				receta.getIngredientes().add(ingredienteRepository.findById(ingrediente.getId()));
 
 			recetaRepository.save(receta);
 
+			RecetaProto.Receta r= RecetaProto.Receta.newBuilder()
+				.setCategoria(CategoriaProto.Categoria.newBuilder().setCategoria(request.getCategoria().getCategoria()).build())
+				.setTituloReceta(request.getTituloReceta())
+				.setDescripcion(request.getDescripcion())
+				.setPasos(request.getPasos())
+				.setTiempoPreparacion(request.getTiempoPreparacion())
+				.setFoto1(request.getFoto1())
+				.setFoto2(request.getFoto2())
+				.setFoto3(request.getFoto3())
+				.setFoto4(request.getFoto4())
+				.setFoto5(request.getFoto5())
+				.build();
+				responseObserver.onNext(r);
+				responseObserver.onCompleted();
+
+		// Después de guardar la receta en la base de datos, produce un mensaje en Kafka
+		String mensajeKafka = userRepository.findById(request.getUser().getId()).getNombre() + "," +
+							  request.getTituloReceta() + "," +
+		                      request.getFoto1();
+	
+		kafkaTemplate.send("Novedades", mensajeKafka); // Envia el mensaje a Kafka
+
+
 		} catch (Exception e) {
 			System.err.println("Error al agregar la receta: " + e.getMessage());
-
-			try {
-                throw new Exception("No se pudo completar la operación,error al ingresar los datos o el usuario ya existe");
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
 		}
-
-		RecetaProto.Receta r= RecetaProto.Receta.newBuilder()
-		.setCategoria(CategoriaProto.Categoria.newBuilder().setCategoria(request.getCategoria().getCategoria()).build())
-		.setTituloReceta(request.getTituloReceta())
-		.setDescripcion(request.getDescripcion())
-		.setPasos(request.getPasos())
-		.setTiempoPreparacion(request.getTiempoPreparacion())
-		.setFoto1(request.getFoto1())
-		.setFoto2(request.getFoto2())
-		.setFoto3(request.getFoto3())
-		.setFoto4(request.getFoto4())
-		.setFoto5(request.getFoto5())
-		.build();
-		responseObserver.onNext(r);
-		responseObserver.onCompleted();
 	}
 
 	public void findAll(Empty request, StreamObserver<RecetaProto.Recetas> responseObserver) {
