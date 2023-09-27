@@ -4,3 +4,4 @@ grpcio-tools
 Flask-RESTful
 python-dotenv
 flask_table
+confluent-kafka

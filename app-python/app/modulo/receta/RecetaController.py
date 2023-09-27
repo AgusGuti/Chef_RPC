@@ -7,6 +7,8 @@ import os,grpc
 
 import logging
 
+import threading
+
 from app.proto.categoria_pb2 import Categoria
 from app.proto.user_pb2 import User
 from app.proto.ingrediente_pb2 import Ingrediente
@@ -21,7 +23,17 @@ from google.protobuf.json_format import MessageToDict, MessageToJson
 from google.protobuf.timestamp_pb2 import Timestamp
 import datetime
 
+
+from app.modulo.consumer import kafka_consumer  # Importamos la función kafka_consumer
+
+
 logger = logging.getLogger(__name__)
+
+
+# Definición de la función para ejecutar el consumidor en un hilo
+def run_kafka_consumer():
+    logger.info("Entre aquiii")
+    kafka_consumer.kafka_consumer()  # Llama a tu función de consumidor de Kafka aquí
 
 
 @receta_blueprint.route("/misRecetas",methods = ['GET'])
@@ -68,7 +80,7 @@ def altaReceta():
                 descripcion=request.form["descripcion"],pasos=request.form["pasos"],tiempoPreparacion=int(request.form["tiempoPreparacion"]),foto1=request.form["foto1"],
                 foto2=request.form["foto2"],foto3=request.form["foto3"],foto4=request.form["foto4"],
                 foto5=request.form["foto5"]))
-        print("Greeter client received: " + str(response))    
+        print("Greeter client received: " + str(response))
         receta={"receta":MessageToJson(response)}
         logger.info("receta registrada %s",receta)
         if receta["receta"]=="{}":
@@ -76,7 +88,11 @@ def altaReceta():
             return redirect('/altaReceta')
         else:
             flash('Receta creada exitosamente!','success')
+            # Crear y iniciar un hilo para ejecutar el consumidor
+            kafka_consumer_thread = threading.Thread(target=run_kafka_consumer)
+            kafka_consumer_thread.start()
             return redirect('/misRecetas')
+            
 
 @receta_blueprint.route("/storyline",methods = ['GET'])
 def findAll():

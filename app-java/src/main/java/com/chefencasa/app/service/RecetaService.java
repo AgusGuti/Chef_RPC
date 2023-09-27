@@ -2,28 +2,23 @@ package com.chefencasa.app.service;
 
 
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.converter.StringJsonMessageConverter;
 
 import com.chefencasa.app.entities.Receta;
-import com.chefencasa.app.entities.User;
-import com.chefencasa.app.entities.Categoria;
 import com.chefencasa.app.entities.Ingrediente;
 import com.chefencasa.app.repository.CategoriaRepository;
 import com.chefencasa.app.repository.IngredienteRepository;
@@ -35,9 +30,8 @@ import com.chefencasa.model.RecetaProto;
 import com.chefencasa.model.RecetasServiceGrpc;
 import com.chefencasa.model.UserProto;
 import com.google.protobuf.Empty;
-import com.chefencasa.app.config.KafkaConfig;
+import com.chefencasa.app.dto.NovedadesDTO;
 
-import io.grpc.StatusException;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 
@@ -69,7 +63,7 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 
     @Transactional
 	public void addReceta(RecetaProto.Receta request, StreamObserver<RecetaProto.Receta> responseObserver) {
-		 
+		
 		try {
 
 			Receta receta = new Receta(userRepository.findById(request.getUser().getId()),
@@ -105,14 +99,15 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 				responseObserver.onNext(r);
 				responseObserver.onCompleted();
 
-		// Después de guardar la receta en la base de datos, produce un mensaje en Kafka
-		String mensajeKafka = userRepository.findById(request.getUser().getId()).getNombre() + "," +
-							  request.getTituloReceta() + "," +
-		                      request.getFoto1();
-	
-		kafkaTemplate.send("Novedades", mensajeKafka); // Envia el mensaje a Kafka
+				
+			kafkaTemplate.setMessageConverter(new StringJsonMessageConverter());
 
 
+			kafkaTemplate.send(
+				"novedades",
+				String.valueOf(request.getIdReceta()),
+				new NovedadesDTO(userRepository.findById(request.getUser().getId()).getNombre(),request.getTituloReceta(),request.getFoto1()).toString());
+			
 		} catch (Exception e) {
 			System.err.println("Error al agregar la receta: " + e.getMessage());
 		}
