@@ -13,7 +13,7 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 @Configuration
-public class KafkaConfig {
+public class KafkaProducerConfig {
 
     /*Se definen los beans necesarios para configurar la comunicación y el envío de mensajes a un servidor de Kafka. */
 

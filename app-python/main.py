@@ -2,7 +2,6 @@ from app import create_app
 from flask import render_template
 from argparse import ArgumentParser
 from multiprocessing import Pool
-from app.modulo.consumer import kafka_consumer  # Importamos la función kafka_consumer
 
 app = create_app('flask.cfg')
 

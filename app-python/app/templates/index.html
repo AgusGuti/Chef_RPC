@@ -1,84 +1,96 @@
 <!DOCTYPE html>
-  <head>
+<html>
+<head>
     <title>Website Grupo E</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" />
     <meta charset="utf-8" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='index_styles.css')}}"
-    />
-  </head>
-  <body class="h-100">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link href="https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index_styles.css') }}" />
+</head>
+<body class="h-100">
     <div class="form-outline">
-      <img
-        src="{{ url_for('static', filename='chefencasa.png.jpg') }}"
-        alt="Universidad Nacional de Lanús"
-        style="vertical-align: Stickman; margin: 0px; padding: 16px"
-      />
+        <img src="{{ url_for('static', filename='chefencasa.png.jpg') }}" alt="Universidad Nacional de Lanús" style="vertical-align: Stickman; margin: 0px; padding: 16px" />
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark nav-bk">
-      <a class="navbar-brand d-flex gap-lg-1 mx-lg-3" href="/index">
-        <i class="bi bi-house-fill text-white"></i> Inicio
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapsibleNavbar"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="collapse navbar-collapse d-flex align-items-center"
-        id="collapsibleNavbar"
-      >
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/myprofile">Mi Perfil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/storyline">Publicaciones</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/misRecetas">Mis Recetas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/favoritos">Mis Favoritos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/seguidos">Seguidos</a>
-        </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Cerrar Sesión
-            <i class="bi bi-box-arrow-left" style="vertical-align: -1px"></i></a>
-          </li>
-        </ul>
-      </div>
-            <div class="nav navbar-nav navbar-right" id="collapsibleNavbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="nav-item px-lg-3">
-                        <span class="text-light">Hola, </span>
-                        <span class="text-light">{{nombre}}</span>
-                        <i class="bi bi-person text-white"></i>
-                    </li>
-                </ul>
-            </div>
+        <a class="navbar-brand d-flex gap-lg-1 mx-lg-3" href="/index">
+            <i class="bi bi-house-fill text-white"></i> Inicio
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex align-items-center" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/myprofile">Mi Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/storyline">Publicaciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/misRecetas">Mis Recetas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/favoritos">Mis Favoritos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/seguidos">Seguidos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Cerrar Sesión <i class="bi bi-box-arrow-left" style="vertical-align: -1px"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav navbar-nav navbar-right" id="collapsibleNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item px-lg-3">
+                    <span class="text-light">Hola, </span>
+                    <span class="text-light">{{nombre}}</span>
+                    <i class="bi bi-person text-white"></i>
+                </li>
+            </ul>
+        </div>
     </nav>
-  </body>
+
+    <!-- Agrega la lista de las últimas recetas aquí -->
+    <div class="container mt-4">
+        <h2>Bienvenido</h2>
+        <div class="row" id="lista-mensajes">
+            <!-- Los mensajes se cargarán aquí dinámicamente con JavaScript -->
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+       // Código JavaScript para cargar la lista de mensajes
+       $(document).ready(function() {
+        $.get("/novedades", function(data) {
+            var listaMensajes = $("#lista-mensajes");
+            data.forEach(function(mensaje) {
+                // Accede a las propiedades del objeto mensaje
+                var nombreUsuario = mensaje.novedades.nombreUsuario;
+                var tituloReceta = mensaje.novedades.tituloReceta;
+                var fotoReceta = mensaje.novedades.foto1;
+
+                // Construye el HTML para mostrar la información de la receta
+                var mensajeHTML = '<div class="col-md-4 mb-3">';
+                mensajeHTML += '<div class="receta-container">';
+                mensajeHTML += '<div class="receta-imagen-container">';
+                mensajeHTML += '<img src="' + fotoReceta + '" alt="Foto de la Receta" class="receta-imagen">';
+                mensajeHTML += '</div>';
+                mensajeHTML += '<div class="receta-info">';
+                mensajeHTML += '<p>Nombre de Usuario: ' + nombreUsuario + '</p>';
+                mensajeHTML += '<p>Título de Receta: ' + tituloReceta + '</p>';
+                mensajeHTML += '</div>';
+                mensajeHTML += '</div>';
+                mensajeHTML += '</div>';
+                
+                listaMensajes.append(mensajeHTML);
+            });
+        });
+      });
+    </script>  
+</body>
 </html>

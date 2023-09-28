@@ -29,6 +29,7 @@ import com.chefencasa.model.IngredienteProto;
 import com.chefencasa.model.RecetaProto;
 import com.chefencasa.model.RecetasServiceGrpc;
 import com.chefencasa.model.UserProto;
+import com.google.gson.Gson;
 import com.google.protobuf.Empty;
 import com.chefencasa.app.dto.NovedadesDTO;
 
@@ -99,14 +100,14 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 				responseObserver.onNext(r);
 				responseObserver.onCompleted();
 
-				
-			kafkaTemplate.setMessageConverter(new StringJsonMessageConverter());
+			// Creamos un objeto NovedadesDTO para enviar como JSON
+			String mensaje = new Gson().toJson(new NovedadesDTO(
+				userRepository.findById(request.getUser().getId()).getNombre(),
+				request.getTituloReceta(),
+				request.getFoto1()
+			));
 
-
-			kafkaTemplate.send(
-				"novedades",
-				String.valueOf(request.getIdReceta()),
-				new NovedadesDTO(userRepository.findById(request.getUser().getId()).getNombre(),request.getTituloReceta(),request.getFoto1()).toString());
+			kafkaTemplate.send("novedades",mensaje);
 			
 		} catch (Exception e) {
 			System.err.println("Error al agregar la receta: " + e.getMessage());

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect,json,session
+from flask import Flask, render_template, request, flash, redirect,json,session,jsonify
 from . import receta_blueprint 
 
 from google.protobuf.json_format import MessageToJson
@@ -23,18 +23,42 @@ from google.protobuf.json_format import MessageToDict, MessageToJson
 from google.protobuf.timestamp_pb2 import Timestamp
 import datetime
 
-
-from app.modulo.consumer import kafka_consumer  # Importamos la función kafka_consumer
+from confluent_kafka import Consumer, KafkaError
 
 
 logger = logging.getLogger(__name__)
 
+# Configuración de Kafka
+kafka_config = {
+    'bootstrap.servers': 'localhost:9092',  # Dirección del broker de Kafka
+    'group.id': 'test-consumer-group',      # ID del grupo de consumidores
+    "default.topic.config": {"auto.offset.reset": "earliest"},
+    "enable.auto.commit": False,  # Comportamiento en caso de no tener un offset inicial
+}
 
-# Definición de la función para ejecutar el consumidor en un hilo
-def run_kafka_consumer():
-    logger.info("Entre aquiii")
-    kafka_consumer.kafka_consumer()  # Llama a tu función de consumidor de Kafka aquí
-
+@receta_blueprint.route("/novedades", methods=['GET'])
+def novedades():
+    # Crea un consumidor Kafka
+    consumer = Consumer(kafka_config)
+    
+    # Suscribe el consumidor al topic "Novedades"
+    consumer.subscribe(['novedades'])
+    
+    lista_mensajes = []
+    try:
+        while len(lista_mensajes) != 5:
+            msg = consumer.poll(0.1)
+            if msg is not None:
+                mensaje = msg.value().decode('utf-8')
+                logger.info(mensaje)
+                # Decodifica el JSON en cada mensaje para eliminar las barras invertidas "\" en las URL
+                mensaje_decodificado = json.loads(mensaje)
+                lista_mensajes.append({'novedades': mensaje_decodificado})
+    finally:
+        consumer.close()
+    
+    # Convierte la lista de mensajes en un JSON array y retorna la respuesta como JSON
+    return jsonify(lista_mensajes)
 
 @receta_blueprint.route("/misRecetas",methods = ['GET'])
 def misRecetas():
@@ -46,12 +70,6 @@ def misRecetas():
     print("Greeter Recetas received: " + str(response))
 
     return render_template('abm-receta.html', recetas=recetas)
-
-
-@receta_blueprint.route("/index",methods = ['GET'])
-def index():
-    logger.info("/index")
-    return render_template('index.html',nombre=session['nombre'])
 
 
 @receta_blueprint.route("/altaReceta",methods = ['GET'])
@@ -88,9 +106,6 @@ def altaReceta():
             return redirect('/altaReceta')
         else:
             flash('Receta creada exitosamente!','success')
-            # Crear y iniciar un hilo para ejecutar el consumidor
-            kafka_consumer_thread = threading.Thread(target=run_kafka_consumer)
-            kafka_consumer_thread.start()
             return redirect('/misRecetas')
             
 
