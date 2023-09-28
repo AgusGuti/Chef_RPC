@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package model;
+
+option java_package = "com.chefencasa.model";
+option java_outer_classname = "ComentarioProto";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "receta.proto";
+import "user.proto";
+
+service RecetasService {
+  rpc AddComentario(Comentario) returns (Comentario) {}
+  rpc FindAll(google.protobuf.Empty) returns (Comentario) {}
+  rpc ModificarComentario(Comentario) returns (Comentario) {}
+  rpc FindById(Comentario) returns (Comentario) {}
+  rpc FindFavoritos(Comentario) returns (Comentario) {}
+  rpc FindAllById(Comentario) returns (Comentario) {}
+}
+
+message Empty {
+}
+
+message Comentario {
+  repeated Comentario comentario = 1;
+}
+
+message Comentario {
+  int32 idReceta = 1;
+  User user = 2;
+  string recetaComentada = 3;
+  string usuarioComentario= 4;
+  string comentario = 5;
+  
+}
+
