@@ -11,6 +11,7 @@ from app.proto.user_pb2_grpc import UsersServiceStub
 
 import logging
 
+
 logger = logging.getLogger(__name__)
 
 @user_blueprint.route("/autenticar", methods=['POST'])
@@ -33,7 +34,12 @@ def autenticar():
         session['apellido']=response.apellido
         session['email']=response.email
         session['fotoPerfil']=response.fotoPerfil
-        return render_template('index.html', nombre=response.nombre)
+        return redirect('/index')
+
+@user_blueprint.route("/index",methods = ['GET'])
+def index():
+    logger.info("/index")
+    return render_template('index.html',nombre=session['nombre'])
 
 @user_blueprint.route("/registrar", methods=['POST'])
 def registrarUser():

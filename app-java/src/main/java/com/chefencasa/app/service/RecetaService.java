@@ -2,26 +2,23 @@ package com.chefencasa.app.service;
 
 
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.converter.StringJsonMessageConverter;
+
 import com.chefencasa.app.entities.Receta;
-import com.chefencasa.app.entities.User;
-import com.chefencasa.app.entities.Categoria;
 import com.chefencasa.app.entities.Ingrediente;
 import com.chefencasa.app.repository.CategoriaRepository;
 import com.chefencasa.app.repository.IngredienteRepository;
@@ -32,9 +29,10 @@ import com.chefencasa.model.IngredienteProto;
 import com.chefencasa.model.RecetaProto;
 import com.chefencasa.model.RecetasServiceGrpc;
 import com.chefencasa.model.UserProto;
+import com.google.gson.Gson;
 import com.google.protobuf.Empty;
+import com.chefencasa.app.dto.NovedadesDTO;
 
-import io.grpc.StatusException;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 
@@ -57,11 +55,16 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 	@Qualifier("ingredienteRepository")
 	private IngredienteRepository ingredienteRepository;
 
+	// Inyecta el KafkaTemplate
+	@Autowired
+    private KafkaTemplate<String, String> kafkaTemplate; 
+
+
 	Logger logger = LoggerFactory.getLogger(RecetaService.class);
 
     @Transactional
 	public void addReceta(RecetaProto.Receta request, StreamObserver<RecetaProto.Receta> responseObserver) {
-		 
+		
 		try {
 
 			Receta receta = new Receta(userRepository.findById(request.getUser().getId()),
@@ -76,36 +79,39 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
             request.getFoto4(),
             request.getFoto5()
 			);
+			
 			for (IngredienteProto.Ingrediente ingrediente :request.getIngredientesList())
 				receta.getIngredientes().add(ingredienteRepository.findById(ingrediente.getId()));
 
 			recetaRepository.save(receta);
 
+			RecetaProto.Receta r= RecetaProto.Receta.newBuilder()
+				.setCategoria(CategoriaProto.Categoria.newBuilder().setCategoria(request.getCategoria().getCategoria()).build())
+				.setTituloReceta(request.getTituloReceta())
+				.setDescripcion(request.getDescripcion())
+				.setPasos(request.getPasos())
+				.setTiempoPreparacion(request.getTiempoPreparacion())
+				.setFoto1(request.getFoto1())
+				.setFoto2(request.getFoto2())
+				.setFoto3(request.getFoto3())
+				.setFoto4(request.getFoto4())
+				.setFoto5(request.getFoto5())
+				.build();
+				responseObserver.onNext(r);
+				responseObserver.onCompleted();
+
+			// Creamos un objeto NovedadesDTO para enviar como JSON
+			String mensaje = new Gson().toJson(new NovedadesDTO(
+				userRepository.findById(request.getUser().getId()).getNombre(),
+				request.getTituloReceta(),
+				request.getFoto1()
+			));
+
+			kafkaTemplate.send("novedades",mensaje);
+			
 		} catch (Exception e) {
 			System.err.println("Error al agregar la receta: " + e.getMessage());
-
-			try {
-                throw new Exception("No se pudo completar la operación,error al ingresar los datos o el usuario ya existe");
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
 		}
-
-		RecetaProto.Receta r= RecetaProto.Receta.newBuilder()
-		.setCategoria(CategoriaProto.Categoria.newBuilder().setCategoria(request.getCategoria().getCategoria()).build())
-		.setTituloReceta(request.getTituloReceta())
-		.setDescripcion(request.getDescripcion())
-		.setPasos(request.getPasos())
-		.setTiempoPreparacion(request.getTiempoPreparacion())
-		.setFoto1(request.getFoto1())
-		.setFoto2(request.getFoto2())
-		.setFoto3(request.getFoto3())
-		.setFoto4(request.getFoto4())
-		.setFoto5(request.getFoto5())
-		.build();
-		responseObserver.onNext(r);
-		responseObserver.onCompleted();
 	}
 
 	public void findAll(Empty request, StreamObserver<RecetaProto.Recetas> responseObserver) {
