@@ -3,12 +3,6 @@
 /*********************************
 Footer 
 *********************************/
-
-:root {
-    --burntUmber: #8e2836;
-    --flushMahogany: #C7374A;
-}
-
 .social-media-icon {
     color: #000000;
 }
@@ -18,40 +12,31 @@ Footer
     line-height: 60px;
 }
 
-.center {
-    display: block;
-    margin-left: 200px;
-    margin-right: 200px;
-    width: 70%;
-}
-
 .nav-bk {
     background: #000000;
 }
 
-.btn-aulas {
-    background-color: var(--burntUmber);
-    color: rgb(255, 255, 255);
+.receta-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px; /* Ajusta este valor para controlar el espacio entre las recetas */
+    text-align: center;
+    max-width: 200px;
+    display: inline-block;
 }
 
-.btn-aulas:hover {
-    background-color: var(--flushMahogany);
-    color: rgb(255, 255, 255);
+.receta-imagen-container {
+    height: 150px; /* Aumenta esta altura si es necesario */
+    overflow: hidden;
 }
 
-.btn-unla {
-    min-width: 8rem;
-    min-height: 4rem;
-    background-color: var(--burntUmber);
-    color: rgb(255, 255, 255);
+.receta-imagen {
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
 }
 
-.btn-unla:hover {
-    background-color: var(--flushMahogany);
-    color: rgb(255, 255, 255);
-}
-
-.table {
-    border: 1px solid;
-    border-color: #d8d6d6;
+.receta-info {
+    margin-top: 10px;
+    font-size: 14px; /* Tamaño de fuente más pequeño para la información de la receta */
 }

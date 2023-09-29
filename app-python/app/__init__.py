@@ -19,6 +19,7 @@ dictConfig({
     }
 })
 
+
 def create_app(config_filename=None):
     app = Flask(__name__, instance_relative_config=True)
     logger = app

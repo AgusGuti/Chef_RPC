@@ -23,3 +23,11 @@ spring.jpa.hibernate.ddl-auto : update
 
 # spring.jpa.properties.dialect
 spring.jpa.properties.dialect : org.hibernate.dialect.MySQL5Dialect
+
+# Configuración de Kafka
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect,json,session
+from flask import Flask, render_template, request, flash, redirect,json,session,jsonify
 from . import receta_blueprint 
 
 from google.protobuf.json_format import MessageToJson
@@ -6,6 +6,8 @@ from google.protobuf.json_format import MessageToJson
 import os,grpc
 
 import logging
+
+import threading
 
 from app.proto.categoria_pb2 import Categoria
 from app.proto.user_pb2 import User
@@ -21,8 +23,66 @@ from google.protobuf.json_format import MessageToDict, MessageToJson
 from google.protobuf.timestamp_pb2 import Timestamp
 import datetime
 
+from confluent_kafka import Consumer, KafkaError
+
+
 logger = logging.getLogger(__name__)
 
+# Configuración de Kafka
+kafka_config = {
+    'bootstrap.servers': 'localhost:9092',  # Dirección del broker de Kafka
+    'group.id': 'test-consumer-group',      # ID del grupo de consumidores
+    "default.topic.config": {"auto.offset.reset": "earliest"},
+    "enable.auto.commit": False,  # Comportamiento en caso de no tener un offset inicial
+}
+
+@receta_blueprint.route("/novedades", methods=['GET'])
+def novedades():
+    # Crea un consumidor Kafka
+    consumer = Consumer(kafka_config)
+    
+    # Suscribe el consumidor al topic "Novedades"
+    consumer.subscribe(['novedades'])
+    
+    lista_mensajes = []
+    try:
+        while len(lista_mensajes) != 5:
+            msg = consumer.poll(0.1)
+            if msg is not None:
+                mensaje = msg.value().decode('utf-8')
+                logger.info(mensaje)
+                # Decodifica el JSON en cada mensaje para eliminar las barras invertidas "\" en las URL
+                mensaje_decodificado = json.loads(mensaje)
+                lista_mensajes.append({'novedades': mensaje_decodificado})
+    finally:
+        consumer.close()
+    
+    # Convierte la lista de mensajes en un JSON array y retorna la respuesta como JSON
+    return jsonify(lista_mensajes)
+
+@receta_blueprint.route("/favoritos/comentario", methods=['GET']) #revisar ruta
+def comentario():
+    # Crea un consumidor Kafka
+    consumer = Consumer(kafka_config)
+    
+    # Suscribe el consumidor al topic "Comentario"
+    consumer.subscribe(['comentario'])
+    
+    lista_mensajes = []
+    try:
+        while len(lista_mensajes) != 5:
+            msg = consumer.poll(0.1)
+            if msg is not None:
+                mensaje = msg.value().decode('utf-8')
+                logger.info(mensaje)
+                # Decodifica el JSON en cada mensaje para eliminar las barras invertidas "\" en las URL
+                mensaje_decodificado = json.loads(mensaje)
+                lista_mensajes.append({'comentario': mensaje_decodificado})
+    finally:
+        consumer.close()
+    
+    # Convierte la lista de mensajes en un JSON array y retorna la respuesta como JSON
+    return jsonify(lista_mensajes)
 
 @receta_blueprint.route("/misRecetas",methods = ['GET'])
 def misRecetas():
@@ -34,12 +94,6 @@ def misRecetas():
     print("Greeter Recetas received: " + str(response))
 
     return render_template('abm-receta.html', recetas=recetas)
-
-
-@receta_blueprint.route("/index",methods = ['GET'])
-def index():
-    logger.info("/index")
-    return render_template('index.html',nombre=session['nombre'])
 
 
 @receta_blueprint.route("/altaReceta",methods = ['GET'])
@@ -68,7 +122,7 @@ def altaReceta():
                 descripcion=request.form["descripcion"],pasos=request.form["pasos"],tiempoPreparacion=int(request.form["tiempoPreparacion"]),foto1=request.form["foto1"],
                 foto2=request.form["foto2"],foto3=request.form["foto3"],foto4=request.form["foto4"],
                 foto5=request.form["foto5"]))
-        print("Greeter client received: " + str(response))    
+        print("Greeter client received: " + str(response))
         receta={"receta":MessageToJson(response)}
         logger.info("receta registrada %s",receta)
         if receta["receta"]=="{}":
@@ -77,6 +131,7 @@ def altaReceta():
         else:
             flash('Receta creada exitosamente!','success')
             return redirect('/misRecetas')
+            
 
 @receta_blueprint.route("/storyline",methods = ['GET'])
 def findAll():

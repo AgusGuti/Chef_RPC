@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.kafka.config.TopicBuilder;
 
 import com.chefencasa.app.repository.AccountRepository;
 import com.chefencasa.model.AccountProto;
@@ -32,4 +34,22 @@ public class AppApplication {
         accounts.add(AccountProto.Account.newBuilder().setId(7).setCustomerId(2).setNumber("777777").build());
         return new AccountRepository(accounts);
     }
+
+
+    @Bean
+    public NewTopic transactionsTopicNovedades() {
+        return TopicBuilder.name("novedades")
+                .replicas(1)
+                .build();
+    }
+
+     @Bean
+    public NewTopic transactionsTopicComentario() {
+        return TopicBuilder.name("comentario")
+                .replicas(1)
+                .build();
+    }
+
+
+
 }
