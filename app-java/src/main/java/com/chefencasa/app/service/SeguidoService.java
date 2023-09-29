@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.chefencasa.app.entities.Receta;
 import com.chefencasa.app.entities.Seguido;
+import com.chefencasa.app.entities.User;
 import com.chefencasa.app.repository.SeguidoRepository;
 import com.chefencasa.app.repository.UserRepository;
 import com.chefencasa.model.CategoriaProto;
@@ -22,6 +23,7 @@ import com.chefencasa.model.RecetaProto;
 import com.chefencasa.model.SeguidoProto;
 import com.chefencasa.model.SeguidosServiceGrpc;
 import com.chefencasa.model.UserProto;
+import com.chefencasa.model.SeguidoProto;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -47,7 +49,22 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
         try {
 			Seguido seguido = new Seguido(userRepository.findById(request.getUser().getId()), userRepository.findById(request.getSeguido().getId()));
 
-            seguidoRepository.save(seguido);
+            Seguido seguido_control = seguidoRepository.validarCredenciales(seguido.getUser().getId(),seguido.getSeguido().getId());
+
+            if (seguido_control!=null) {
+                throw new Exception();
+            } else {
+
+                seguidoRepository.save(seguido);
+
+                SeguidoProto.Seguido a = SeguidoProto.Seguido.newBuilder()
+                .setId(request.getId())
+                .setUser(request.getUser())
+                .setSeguido(request.getSeguido())
+                .build();
+                responseObserver.onNext(a);
+                responseObserver.onCompleted();
+                }            
             
 		} catch (Exception e) {
 			try {
@@ -57,13 +74,6 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
                 e1.printStackTrace();
             }
 		}
-        SeguidoProto.Seguido a = SeguidoProto.Seguido.newBuilder()
-            .setId(request.getId())
-            .setUser(request.getUser())
-            .setSeguido(request.getSeguido())
-            .build();
-        responseObserver.onNext(a);
-        responseObserver.onCompleted();
     }
 
     @Transactional
