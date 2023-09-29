@@ -41,7 +41,8 @@ message Receta {
   string foto2 = 11;
   string foto3 = 12;
   string foto4 = 13;
-  string foto5 = 14;
+  string foto5 = 14; 
+  string comentario = 15;
 }
 
 message RecetaFiltro{
