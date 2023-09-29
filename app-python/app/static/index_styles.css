@@ -16,27 +16,26 @@ Footer
     background: #000000;
 }
 
+/* Estilo para cada tarjeta de receta */
 .receta-container {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px; /* Ajusta este valor para controlar el espacio entre las recetas */
-    text-align: center;
-    max-width: 200px;
-    display: inline-block;
+    width: 200px; /* Ancho fijo de la tarjeta */
 }
 
 .receta-imagen-container {
-    height: 150px; /* Aumenta esta altura si es necesario */
+    width: 100%; /* Ancho fijo del contenedor de imagen */
+    height: 200px; /* Altura fija del contenedor de imagen */
     overflow: hidden;
 }
 
+/* Asegúrate de que las imágenes de las recetas se ajusten correctamente */
 .receta-imagen {
-    max-width: 100%;
-    max-height: 100%;
-    vertical-align: middle;
+    width: 100%; /* Ancho fijo de la imagen */
+    height: 100%; /* Altura fija de la imagen */
+    object-fit: cover; /* Escala la imagen para cubrir todo el contenedor */
 }
 
 .receta-info {
     margin-top: 10px;
     font-size: 14px; /* Tamaño de fuente más pequeño para la información de la receta */
 }
+

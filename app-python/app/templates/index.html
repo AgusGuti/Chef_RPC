@@ -56,12 +56,11 @@
 
     <!-- Agrega la lista de las últimas recetas aquí -->
     <div class="container mt-4">
-        <h2>Bienvenido</h2>
-        <div class="row" id="lista-mensajes">
+        <h2 class="text-center">Bienvenido</h2>
+        <div class="d-flex flex-row flex-nowrap justify-content-center" id="lista-mensajes"> <!-- Usa clases de Bootstrap para centrar el contenido -->
             <!-- Los mensajes se cargarán aquí dinámicamente con JavaScript -->
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
        // Código JavaScript para cargar la lista de mensajes
@@ -75,15 +74,13 @@
                 var fotoReceta = mensaje.novedades.foto1;
 
                 // Construye el HTML para mostrar la información de la receta
-                var mensajeHTML = '<div class="col-md-4 mb-3">';
-                mensajeHTML += '<div class="receta-container">';
+                var mensajeHTML = '<div class="receta-container d-flex flex-column align-items-center">';
                 mensajeHTML += '<div class="receta-imagen-container">';
                 mensajeHTML += '<img src="' + fotoReceta + '" alt="Foto de la Receta" class="receta-imagen">';
                 mensajeHTML += '</div>';
                 mensajeHTML += '<div class="receta-info">';
                 mensajeHTML += '<p>Nombre de Usuario: ' + nombreUsuario + '</p>';
                 mensajeHTML += '<p>Título de Receta: ' + tituloReceta + '</p>';
-                mensajeHTML += '</div>';
                 mensajeHTML += '</div>';
                 mensajeHTML += '</div>';
                 
