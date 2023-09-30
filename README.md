@@ -36,6 +36,11 @@ Clases creadas en capa servidor:
 .Ingredientes
 .Subcategoria
 
+
+## Tópicos Kafka funcionando
+
+Novedades, comentario
+
 ## Restante
 
 -Solucionar la carga del objeto categoría dentro de la clase receta.

@@ -44,6 +44,20 @@ public class AppApplication {
     }
 
      @Bean
+    public NewTopic transactionsTopicPopularidadUser() {
+        return TopicBuilder.name("popularidadUser")
+                .replicas(1)
+                .build();
+    }
+
+         @Bean
+    public NewTopic transactionsTopicPopularidadReceta() {
+        return TopicBuilder.name("popularidadReceta")
+                .replicas(1)
+                .build();
+    }
+
+         @Bean
     public NewTopic transactionsTopicComentario() {
         return TopicBuilder.name("comentario")
                 .replicas(1)
