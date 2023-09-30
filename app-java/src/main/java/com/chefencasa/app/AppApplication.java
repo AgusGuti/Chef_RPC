@@ -37,19 +37,17 @@ public class AppApplication {
 
 
     @Bean
-    public NewTopic transactionsTopicNovedades() {
+    public NewTopic NovedadesTopic() {
         return TopicBuilder.name("novedades")
                 .replicas(1)
                 .build();
     }
 
-     @Bean
-    public NewTopic transactionsTopicComentario() {
+    @Bean
+    public NewTopic ComentarioTopic() {
         return TopicBuilder.name("comentario")
                 .replicas(1)
                 .build();
     }
-
-
 
 }

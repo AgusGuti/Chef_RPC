@@ -86,6 +86,10 @@ public class Receta implements Serializable {
 	@Column(name = "foto5", nullable = true)
 	private String foto5;
 
+	@Column(name = "comentario", nullable = true, length = 1000)
+	private String comentario;
+
+
 	
 	
 	public Receta(User user, Categoria categoria,
@@ -102,6 +106,25 @@ public class Receta implements Serializable {
 		this.foto3 = foto3;
 		this.foto4 = foto4;
 		this.foto5 = foto5;
+	}
+
+	public Receta(User user, Set<Ingrediente> ingredientes, Categoria categoria,
+			String tituloReceta, String descripcion, String pasos, int tiempoPreparacion, LocalDateTime fechaCreacion,
+			String foto1, String foto2, String foto3, String foto4, String foto5, String comentario) {
+		this.user = user;
+		this.ingredientes = ingredientes;
+		this.categoria = categoria;
+		this.tituloReceta = tituloReceta;
+		this.descripcion = descripcion;
+		this.pasos = pasos;
+		this.tiempoPreparacion = tiempoPreparacion;
+		this.fechaCreacion = fechaCreacion;
+		this.foto1 = foto1;
+		this.foto2 = foto2;
+		this.foto3 = foto3;
+		this.foto4 = foto4;
+		this.foto5 = foto5;
+		this.comentario = comentario;
 	}
 
 	public static long getSerialversionuid() {

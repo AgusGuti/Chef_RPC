@@ -54,7 +54,6 @@ public class ComentarioDTO implements Serializable{
 		return "ComentarioDTO [usuarioComentario=" + usuarioComentario + ", recetaComentada=" + recetaComentada + ", comentario=" + comentario
 				+ "]";
 	}
-
+}
     
 	
-}

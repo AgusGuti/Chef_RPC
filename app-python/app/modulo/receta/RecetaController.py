@@ -23,42 +23,21 @@ from google.protobuf.json_format import MessageToDict, MessageToJson
 from google.protobuf.timestamp_pb2 import Timestamp
 import datetime
 
-from confluent_kafka import Consumer, KafkaError
+
+from kafka import KafkaConsumer
 
 
 logger = logging.getLogger(__name__)
 
 # Configuración de Kafka
 kafka_config = {
-    'bootstrap.servers': 'localhost:9092',  # Dirección del broker de Kafka
-    'group.id': 'test-consumer-group',      # ID del grupo de consumidores
-    "default.topic.config": {"auto.offset.reset": "earliest"},
-    "enable.auto.commit": False,  # Comportamiento en caso de no tener un offset inicial
+     'bootstrap_servers': 'localhost: 9092',  # Dirección del broker de Kafka
+     'group_id': 'test-consumer-group',       # ID del grupo de consumidores
+     'auto_offset_reset': 'earliest',         # Comportamiento en caso de no tener un offset inicial
+     #'max_poll_records': 5,                  # Máximo número de registros a recuperar en cada llamada a poll
+     'enable_auto_commit': False              # Desactiva el auto commit
 }
 
-@receta_blueprint.route("/novedades", methods=['GET'])
-def novedades():
-    # Crea un consumidor Kafka
-    consumer = Consumer(kafka_config)
-    
-    # Suscribe el consumidor al topic "Novedades"
-    consumer.subscribe(['novedades'])
-    
-    lista_mensajes = []
-    try:
-        while len(lista_mensajes) != 5:
-            msg = consumer.poll(0.1)
-            if msg is not None:
-                mensaje = msg.value().decode('utf-8')
-                logger.info(mensaje)
-                # Decodifica el JSON en cada mensaje para eliminar las barras invertidas "\" en las URL
-                mensaje_decodificado = json.loads(mensaje)
-                lista_mensajes.append({'novedades': mensaje_decodificado})
-    finally:
-        consumer.close()
-    
-    # Convierte la lista de mensajes en un JSON array y retorna la respuesta como JSON
-    return jsonify(lista_mensajes)
 
 @receta_blueprint.route("/favoritos/comentario", methods=['GET']) #revisar ruta
 def comentario():
@@ -80,6 +59,34 @@ def comentario():
                 lista_mensajes.append({'comentario': mensaje_decodificado})
     finally:
         consumer.close()
+
+
+@receta_blueprint.route("/novedades", methods=['GET'])
+def novedades():
+    # Crear un consumidor Kafka
+    consumer = KafkaConsumer(
+        'novedades', # Nombre del tema al que suscribirse
+        **kafka_config
+    )
+    
+    lista_mensajes = []
+    try:
+        for msg in consumer:
+            if msg is not None:
+                mensaje = msg.value.decode('utf-8')
+                logger.info(mensaje)
+                logger.info(msg.offset)
+                # Decodifica el JSON en cada mensaje para eliminar las barras invertidas "\" en las URL
+                mensaje_decodificado = json.loads(mensaje)
+                lista_mensajes.append({'novedades': mensaje_decodificado})
+                
+            if len(lista_mensajes)>=5:
+                break
+    finally:
+        consumer.close()
+    
+    # Invertir la pila para que los mensajes más recientes estén en la parte superior
+    lista_mensajes.reverse()
     
     # Convierte la lista de mensajes en un JSON array y retorna la respuesta como JSON
     return jsonify(lista_mensajes)

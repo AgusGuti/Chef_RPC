@@ -95,3 +95,6 @@ Clases creadas en capa servidor:
 ## EJECUCIÓN
 
 1. Una vez corriendo ambos servicios se accede al front desde: http://localhost:5000
+
+
+https://kafka-python.readthedocs.io/en/master/apidoc/KafkaConsumer.html
