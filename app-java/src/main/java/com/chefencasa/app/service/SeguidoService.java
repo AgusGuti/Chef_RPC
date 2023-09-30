@@ -81,14 +81,13 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
         try {
 			Seguido seguido = seguidoRepository.findById(request.getId()).get();
             logger.info("Seguido a eliminar"+seguido);
-            
             // Creamos un objeto PopularidadUsuarioDTO para enviar como JSON
             String mensaje = new Gson().toJson(new PopularidadUsuarioDTO(
-                userRepository.findById(request.getSeguido().getId()).getNombre(), "-1"
+                seguidoRepository.findById(request.getId()).get().getSeguido().getNombre(), "-1"
             ));
 
-            kafkaTemplate.send("popularidadUsuario",mensaje);
-
+            kafkaTemplate.send("popularidadUsuario",mensaje);            
+            
             seguidoRepository.delete(seguido);
             
 		} catch (Exception e) {
@@ -100,7 +99,6 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
             .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();
-        
     }
 
     @Transactional

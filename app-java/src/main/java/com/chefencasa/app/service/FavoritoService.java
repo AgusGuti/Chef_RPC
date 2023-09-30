@@ -9,10 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.kafka.core.KafkaTemplate;
 
-import com.chefencasa.app.dto.ComentarioDTO;
-import com.chefencasa.app.dto.NovedadesDTO;
 import com.chefencasa.app.entities.Favorito;
 import com.chefencasa.app.entities.Receta;
 import com.chefencasa.app.repository.FavoritoRepository;
@@ -24,7 +21,6 @@ import com.chefencasa.model.FavoritosServiceGrpc;
 import com.chefencasa.model.IngredienteProto;
 import com.chefencasa.model.RecetaProto;
 import com.chefencasa.model.UserProto;
-import com.google.gson.Gson;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -45,8 +41,6 @@ public class FavoritoService extends FavoritosServiceGrpc.FavoritosServiceImplBa
 	@Qualifier("recetaRepository")
 	private RecetaRepository recetaRepository;
 
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate; 
 
     Logger logger = LoggerFactory.getLogger(FavoritoService.class);
 
@@ -156,17 +150,6 @@ public class FavoritoService extends FavoritosServiceGrpc.FavoritosServiceImplBa
             responseObserver.onNext(a);
             responseObserver.onCompleted();
 
-            String comentario="";    
-
-            String mensaje = new Gson().toJson(new ComentarioDTO(
-				userRepository.findById(request.getUser().getId()).getNombre(),
-				request.getReceta().getTituloReceta(),
-                comentario
-				
-			));
-
-			kafkaTemplate.send("comentario",mensaje);
-    
         } catch (Exception e) {
             logger.info("Error al traer Favoritos", e);
         }

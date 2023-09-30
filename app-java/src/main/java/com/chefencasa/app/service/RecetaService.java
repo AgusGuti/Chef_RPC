@@ -31,6 +31,7 @@ import com.chefencasa.model.RecetasServiceGrpc;
 import com.chefencasa.model.UserProto;
 import com.google.gson.Gson;
 import com.google.protobuf.Empty;
+import com.chefencasa.app.dto.ComentarioDTO;
 import com.chefencasa.app.dto.NovedadesDTO;
 
 import io.grpc.stub.StreamObserver;
@@ -318,4 +319,22 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 		}
 	}
 
+	
+	public void addComentario(RecetaProto.Receta request, StreamObserver<RecetaProto.Receta> responseObserver) {
+		
+		// Creamos un objeto ComentarioDTO para enviar como JSON
+		String mensaje = new Gson().toJson(new ComentarioDTO(
+			userRepository.findById(request.getUser().getId()).getNombre(),
+			request.getTituloReceta(),
+			request.getComentario()
+		));
+
+		kafkaTemplate.send("comentario",mensaje);
+
+		RecetaProto.Receta a = RecetaProto.Receta.newBuilder()
+			.build();
+		
+		responseObserver.onNext(a);
+		responseObserver.onCompleted();
+	}
 }

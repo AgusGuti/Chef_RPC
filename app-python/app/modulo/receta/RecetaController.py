@@ -39,27 +39,21 @@ kafka_config = {
 }
 
 
-@receta_blueprint.route("/favoritos/comentario", methods=['GET']) #revisar ruta
-def comentario():
-    # Crea un consumidor Kafka
-    consumer = Consumer(kafka_config)
+@receta_blueprint.route("/agregarComentario",methods = ['POST'])
+def agregarComentario():
+    logger.info("/agregarComentario")
     
-    # Suscribe el consumidor al topic "Comentario"
-    consumer.subscribe(['comentario'])
+    user_id=session['user_id']
     
-    lista_mensajes = []
-    try:
-        while len(lista_mensajes) != 5:
-            msg = consumer.poll(0.1)
-            if msg is not None:
-                mensaje = msg.value().decode('utf-8')
-                logger.info(mensaje)
-                # Decodifica el JSON en cada mensaje para eliminar las barras invertidas "\" en las URL
-                mensaje_decodificado = json.loads(mensaje)
-                lista_mensajes.append({'comentario': mensaje_decodificado})
-    finally:
-        consumer.close()
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = RecetasServiceStub(channel)
+        response = stub.AddComentario(
+            Receta(user=User(id=int(user_id)),tituloReceta=request.form["tituloReceta"],
+                comentario=request.form["comentario"]))
+        receta={"receta":MessageToJson(response)}
+    return redirect('/storyline')
 
+        
 
 @receta_blueprint.route("/novedades", methods=['GET'])
 def novedades():

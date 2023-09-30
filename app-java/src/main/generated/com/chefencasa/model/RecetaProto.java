@@ -4991,7 +4991,7 @@ public final class RecetaProto {
       "rio\030\017 \001(\t\"y\n\014RecetaFiltro\022\021\n\tcategoria\030\001" +
       " \001(\t\022\016\n\006nombre\030\002 \001(\t\022\024\n\014ingredientes\030\003 \003" +
       "(\t\022\027\n\017tiempoPrepDesde\030\004 \001(\005\022\027\n\017tiempoPre" +
-      "pHasta\030\005 \001(\0052\263\002\n\016RecetasService\022+\n\tAddRe" +
+      "pHasta\030\005 \001(\0052\344\002\n\016RecetasService\022+\n\tAddRe" +
       "ceta\022\r.model.Receta\032\r.model.Receta\"\000\0223\n\007" +
       "FindAll\022\026.google.protobuf.Empty\032\016.model." +
       "Recetas\"\000\0221\n\017ModificarReceta\022\r.model.Rec" +
@@ -4999,8 +4999,9 @@ public final class RecetaProto {
       ".Receta\032\r.model.Receta\"\000\0220\n\rFindFavorito" +
       "s\022\r.model.Receta\032\016.model.Recetas\"\000\022.\n\013Fi" +
       "ndAllById\022\r.model.Receta\032\016.model.Recetas" +
-      "\"\000B#\n\024com.chefencasa.modelB\013RecetaProtob" +
-      "\006proto3"
+      "\"\000\022/\n\rAddComentario\022\r.model.Receta\032\r.mod" +
+      "el.Receta\"\000B#\n\024com.chefencasa.modelB\013Rec" +
+      "etaProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

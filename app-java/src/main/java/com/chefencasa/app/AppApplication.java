@@ -50,4 +50,18 @@ public class AppApplication {
                 .build();
     }
 
+    @Bean
+    public NewTopic PopularidadUsuarioTopic() {
+        return TopicBuilder.name("popularidadUsuario")
+                .replicas(1)
+                .build();
+    }
+
+    @Bean
+    public NewTopic PopularidadRecetaTopic() {
+        return TopicBuilder.name("popularidadReceta")
+                .replicas(1)
+                .build();
+    }
+
 }

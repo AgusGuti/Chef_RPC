@@ -38,3 +38,50 @@ Footer
     margin-top: 10px;
     font-size: 14px; /* Tamaño de fuente más pequeño para la información de la receta */
 }
+
+label {
+    color: grey;
+}
+
+#form-container {
+    width: 100%; /* Opcional: Ancho completo */
+    text-align: center; /* Centrar el contenido horizontalmente */
+    margin-top: 50px; /* Espacio superior opcional */
+}
+
+#form-container {
+    width: 100%;
+    text-align: left; 
+    margin-top: 50px;
+}
+
+#form p {
+    text-align: center;
+}
+
+/* Aumentar el tamaño de las estrellas */
+.clasificacion label {
+    font-size: 30px; 
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+
+
+.clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+}
+
+/* Estilo para los labels cuando se realiza hover */
+.clasificacion label.estrella:hover,
+.clasificacion label.estrella:hover ~ .estrella {
+    color: orange;
+}
+
+/* Estilo para los labels cuando están checked */
+.clasificacion input[type="radio"]:checked ~ .estrella {
+    color: orange;
+}
