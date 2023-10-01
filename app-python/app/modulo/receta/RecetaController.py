@@ -39,6 +39,18 @@ kafka_config = {
 }
 
 
+@receta_blueprint.route("/agregarPuntaje",methods = ['POST'])
+def agregarPuntaje():
+    logger.info("/agregarPuntaje %s",request.form["puntaje"],request.form["idReceta"])
+
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = RecetasServiceStub(channel)
+        response = stub.AddPuntaje(
+        Receta(idReceta=int(request.form["idReceta"]),puntaje=str(request.form["puntaje"])))
+        receta={"receta":MessageToJson(response)}
+    return redirect('/storyline')
+
+
 @receta_blueprint.route("/agregarComentario",methods = ['POST'])
 def agregarComentario():
     logger.info("/agregarComentario")

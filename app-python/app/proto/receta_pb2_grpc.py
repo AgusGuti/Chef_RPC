@@ -3,10 +3,11 @@
 import grpc
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
+from . import receta_pb2 as receta__pb2
 from . import categoria_pb2 as categoria__pb2
 from . import ingrediente_pb2 as ingrediente__pb2
 from . import user_pb2 as user__pb2
-from . import receta_pb2 as receta__pb2
+
 
 
 class RecetasServiceStub(object):
@@ -50,6 +51,11 @@ class RecetasServiceStub(object):
                 )
         self.AddComentario = channel.unary_unary(
                 '/model.RecetasService/AddComentario',
+                request_serializer=receta__pb2.Receta.SerializeToString,
+                response_deserializer=receta__pb2.Receta.FromString,
+                )
+        self.AddPuntaje = channel.unary_unary(
+                '/model.RecetasService/AddPuntaje',
                 request_serializer=receta__pb2.Receta.SerializeToString,
                 response_deserializer=receta__pb2.Receta.FromString,
                 )
@@ -100,6 +106,12 @@ class RecetasServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def AddPuntaje(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_RecetasServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -135,6 +147,11 @@ def add_RecetasServiceServicer_to_server(servicer, server):
             ),
             'AddComentario': grpc.unary_unary_rpc_method_handler(
                     servicer.AddComentario,
+                    request_deserializer=receta__pb2.Receta.FromString,
+                    response_serializer=receta__pb2.Receta.SerializeToString,
+            ),
+            'AddPuntaje': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddPuntaje,
                     request_deserializer=receta__pb2.Receta.FromString,
                     response_serializer=receta__pb2.Receta.SerializeToString,
             ),
@@ -262,6 +279,23 @@ class RecetasService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/model.RecetasService/AddComentario',
+            receta__pb2.Receta.SerializeToString,
+            receta__pb2.Receta.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AddPuntaje(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.RecetasService/AddPuntaje',
             receta__pb2.Receta.SerializeToString,
             receta__pb2.Receta.FromString,
             options, channel_credentials,

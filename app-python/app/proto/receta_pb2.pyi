@@ -22,7 +22,7 @@ class Recetas(_message.Message):
     def __init__(self, receta: _Optional[_Iterable[_Union[Receta, _Mapping]]] = ...) -> None: ...
 
 class Receta(_message.Message):
-    __slots__ = ["idReceta", "user", "tituloReceta", "descripcion", "categoria", "pasos", "ingredientes", "tiempoPreparacion", "foto1", "foto2", "foto3", "foto4", "foto5", "comentario"]
+    __slots__ = ["idReceta", "user", "tituloReceta", "descripcion", "categoria", "pasos", "ingredientes", "tiempoPreparacion", "foto1", "foto2", "foto3", "foto4", "foto5", "comentario", "puntaje"]
     IDRECETA_FIELD_NUMBER: _ClassVar[int]
     USER_FIELD_NUMBER: _ClassVar[int]
     TITULORECETA_FIELD_NUMBER: _ClassVar[int]
@@ -37,6 +37,7 @@ class Receta(_message.Message):
     FOTO4_FIELD_NUMBER: _ClassVar[int]
     FOTO5_FIELD_NUMBER: _ClassVar[int]
     COMENTARIO_FIELD_NUMBER: _ClassVar[int]
+    PUNTAJE_FIELD_NUMBER: _ClassVar[int]
     idReceta: int
     user: _user_pb2.User
     tituloReceta: str
@@ -51,7 +52,8 @@ class Receta(_message.Message):
     foto4: str
     foto5: str
     comentario: str
-    def __init__(self, idReceta: _Optional[int] = ..., user: _Optional[_Union[_user_pb2.User, _Mapping]] = ..., tituloReceta: _Optional[str] = ..., descripcion: _Optional[str] = ..., categoria: _Optional[_Union[_categoria_pb2.Categoria, _Mapping]] = ..., pasos: _Optional[str] = ..., ingredientes: _Optional[_Iterable[_Union[_ingrediente_pb2.Ingrediente, _Mapping]]] = ..., tiempoPreparacion: _Optional[int] = ..., foto1: _Optional[str] = ..., foto2: _Optional[str] = ..., foto3: _Optional[str] = ..., foto4: _Optional[str] = ..., foto5: _Optional[str] = ..., comentario: _Optional[str] = ...) -> None: ...
+    puntaje: str
+    def __init__(self, idReceta: _Optional[int] = ..., user: _Optional[_Union[_user_pb2.User, _Mapping]] = ..., tituloReceta: _Optional[str] = ..., descripcion: _Optional[str] = ..., categoria: _Optional[_Union[_categoria_pb2.Categoria, _Mapping]] = ..., pasos: _Optional[str] = ..., ingredientes: _Optional[_Iterable[_Union[_ingrediente_pb2.Ingrediente, _Mapping]]] = ..., tiempoPreparacion: _Optional[int] = ..., foto1: _Optional[str] = ..., foto2: _Optional[str] = ..., foto3: _Optional[str] = ..., foto4: _Optional[str] = ..., foto5: _Optional[str] = ..., comentario: _Optional[str] = ..., puntaje: _Optional[str] = ...) -> None: ...
 
 class RecetaFiltro(_message.Message):
     __slots__ = ["categoria", "nombre", "ingredientes", "tiempoPrepDesde", "tiempoPrepHasta"]

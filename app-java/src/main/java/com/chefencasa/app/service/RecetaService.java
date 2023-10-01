@@ -33,6 +33,7 @@ import com.google.gson.Gson;
 import com.google.protobuf.Empty;
 import com.chefencasa.app.dto.ComentarioDTO;
 import com.chefencasa.app.dto.NovedadesDTO;
+import com.chefencasa.app.dto.PopularidadRecetaDTO;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -330,6 +331,31 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 		));
 
 		kafkaTemplate.send("comentario",mensaje);
+
+		// Creamos un objeto PopularidadRecetaDTO para enviar como JSON
+		String mensaje2 = new Gson().toJson(new PopularidadRecetaDTO(
+			request.getIdReceta(),
+			"+1"
+		));
+
+		kafkaTemplate.send("popularidadReceta",mensaje2);
+
+		RecetaProto.Receta a = RecetaProto.Receta.newBuilder()
+			.build();
+		
+		responseObserver.onNext(a);
+		responseObserver.onCompleted();
+	}
+
+
+	public void addPuntaje(RecetaProto.Receta request, StreamObserver<RecetaProto.Receta> responseObserver) {
+		
+		// Creamos un objeto PopularidadRecetaDTO para enviar como JSON
+		String mensaje = new Gson().toJson(new PopularidadRecetaDTO(
+			request.getIdReceta(), request.getPuntaje()
+		));
+
+		kafkaTemplate.send("popularidadReceta",mensaje);
 
 		RecetaProto.Receta a = RecetaProto.Receta.newBuilder()
 			.build();

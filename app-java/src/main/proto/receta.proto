@@ -20,6 +20,7 @@ service RecetasService {
   rpc FindFavoritos(Receta) returns (Recetas) {}
   rpc FindAllById(Receta) returns (Recetas) {}
   rpc AddComentario(Receta) returns (Receta){}
+  rpc AddPuntaje(Receta) returns (Receta){}
 }
 
 message Empty {
@@ -44,6 +45,7 @@ message Receta {
   string foto4 = 13;
   string foto5 = 14; 
   string comentario = 15;
+  string puntaje = 16;
 }
 
 message RecetaFiltro{

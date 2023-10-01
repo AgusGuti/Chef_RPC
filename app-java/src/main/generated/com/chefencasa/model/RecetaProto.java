@@ -1397,6 +1397,18 @@ public final class RecetaProto {
      */
     com.google.protobuf.ByteString
         getComentarioBytes();
+
+    /**
+     * <code>string puntaje = 16;</code>
+     * @return The puntaje.
+     */
+    java.lang.String getPuntaje();
+    /**
+     * <code>string puntaje = 16;</code>
+     * @return The bytes for puntaje.
+     */
+    com.google.protobuf.ByteString
+        getPuntajeBytes();
   }
   /**
    * Protobuf type {@code model.Receta}
@@ -1421,6 +1433,7 @@ public final class RecetaProto {
       foto4_ = "";
       foto5_ = "";
       comentario_ = "";
+      puntaje_ = "";
     }
 
     @java.lang.Override
@@ -1551,6 +1564,12 @@ public final class RecetaProto {
               java.lang.String s = input.readStringRequireUtf8();
 
               comentario_ = s;
+              break;
+            }
+            case 130: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              puntaje_ = s;
               break;
             }
             default: {
@@ -2013,6 +2032,42 @@ public final class RecetaProto {
       }
     }
 
+    public static final int PUNTAJE_FIELD_NUMBER = 16;
+    private volatile java.lang.Object puntaje_;
+    /**
+     * <code>string puntaje = 16;</code>
+     * @return The puntaje.
+     */
+    public java.lang.String getPuntaje() {
+      java.lang.Object ref = puntaje_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        puntaje_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string puntaje = 16;</code>
+     * @return The bytes for puntaje.
+     */
+    public com.google.protobuf.ByteString
+        getPuntajeBytes() {
+      java.lang.Object ref = puntaje_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        puntaje_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2068,6 +2123,9 @@ public final class RecetaProto {
       }
       if (!getComentarioBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 15, comentario_);
+      }
+      if (!getPuntajeBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 16, puntaje_);
       }
       unknownFields.writeTo(output);
     }
@@ -2125,6 +2183,9 @@ public final class RecetaProto {
       if (!getComentarioBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(15, comentario_);
       }
+      if (!getPuntajeBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(16, puntaje_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -2174,6 +2235,8 @@ public final class RecetaProto {
           .equals(other.getFoto5())) return false;
       if (!getComentario()
           .equals(other.getComentario())) return false;
+      if (!getPuntaje()
+          .equals(other.getPuntaje())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2219,6 +2282,8 @@ public final class RecetaProto {
       hash = (53 * hash) + getFoto5().hashCode();
       hash = (37 * hash) + COMENTARIO_FIELD_NUMBER;
       hash = (53 * hash) + getComentario().hashCode();
+      hash = (37 * hash) + PUNTAJE_FIELD_NUMBER;
+      hash = (53 * hash) + getPuntaje().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2393,6 +2458,8 @@ public final class RecetaProto {
 
         comentario_ = "";
 
+        puntaje_ = "";
+
         return this;
       }
 
@@ -2450,6 +2517,7 @@ public final class RecetaProto {
         result.foto4_ = foto4_;
         result.foto5_ = foto5_;
         result.comentario_ = comentario_;
+        result.puntaje_ = puntaje_;
         onBuilt();
         return result;
       }
@@ -2570,6 +2638,10 @@ public final class RecetaProto {
         }
         if (!other.getComentario().isEmpty()) {
           comentario_ = other.comentario_;
+          onChanged();
+        }
+        if (!other.getPuntaje().isEmpty()) {
+          puntaje_ = other.puntaje_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -3823,6 +3895,82 @@ public final class RecetaProto {
         onChanged();
         return this;
       }
+
+      private java.lang.Object puntaje_ = "";
+      /**
+       * <code>string puntaje = 16;</code>
+       * @return The puntaje.
+       */
+      public java.lang.String getPuntaje() {
+        java.lang.Object ref = puntaje_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          puntaje_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string puntaje = 16;</code>
+       * @return The bytes for puntaje.
+       */
+      public com.google.protobuf.ByteString
+          getPuntajeBytes() {
+        java.lang.Object ref = puntaje_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          puntaje_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string puntaje = 16;</code>
+       * @param value The puntaje to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPuntaje(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        puntaje_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string puntaje = 16;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPuntaje() {
+        
+        puntaje_ = getDefaultInstance().getPuntaje();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string puntaje = 16;</code>
+       * @param value The bytes for puntaje to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPuntajeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        puntaje_ = value;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -4980,7 +5128,7 @@ public final class RecetaProto {
       "to\032\037google/protobuf/timestamp.proto\032\017cat" +
       "egoria.proto\032\021ingrediente.proto\032\nuser.pr" +
       "oto\"\007\n\005Empty\"(\n\007Recetas\022\035\n\006receta\030\001 \003(\0132" +
-      "\r.model.Receta\"\270\002\n\006Receta\022\020\n\010idReceta\030\001 " +
+      "\r.model.Receta\"\311\002\n\006Receta\022\020\n\010idReceta\030\001 " +
       "\001(\005\022\031\n\004user\030\002 \001(\0132\013.model.User\022\024\n\014titulo" +
       "Receta\030\003 \001(\t\022\023\n\013descripcion\030\004 \001(\t\022#\n\tcat" +
       "egoria\030\005 \001(\0132\020.model.Categoria\022\r\n\005pasos\030" +
@@ -4988,20 +5136,21 @@ public final class RecetaProto {
       "ediente\022\031\n\021tiempoPreparacion\030\t \001(\005\022\r\n\005fo" +
       "to1\030\n \001(\t\022\r\n\005foto2\030\013 \001(\t\022\r\n\005foto3\030\014 \001(\t\022" +
       "\r\n\005foto4\030\r \001(\t\022\r\n\005foto5\030\016 \001(\t\022\022\n\ncomenta" +
-      "rio\030\017 \001(\t\"y\n\014RecetaFiltro\022\021\n\tcategoria\030\001" +
-      " \001(\t\022\016\n\006nombre\030\002 \001(\t\022\024\n\014ingredientes\030\003 \003" +
-      "(\t\022\027\n\017tiempoPrepDesde\030\004 \001(\005\022\027\n\017tiempoPre" +
-      "pHasta\030\005 \001(\0052\344\002\n\016RecetasService\022+\n\tAddRe" +
-      "ceta\022\r.model.Receta\032\r.model.Receta\"\000\0223\n\007" +
-      "FindAll\022\026.google.protobuf.Empty\032\016.model." +
-      "Recetas\"\000\0221\n\017ModificarReceta\022\r.model.Rec" +
-      "eta\032\r.model.Receta\"\000\022*\n\010FindById\022\r.model" +
-      ".Receta\032\r.model.Receta\"\000\0220\n\rFindFavorito" +
-      "s\022\r.model.Receta\032\016.model.Recetas\"\000\022.\n\013Fi" +
-      "ndAllById\022\r.model.Receta\032\016.model.Recetas" +
-      "\"\000\022/\n\rAddComentario\022\r.model.Receta\032\r.mod" +
-      "el.Receta\"\000B#\n\024com.chefencasa.modelB\013Rec" +
-      "etaProtob\006proto3"
+      "rio\030\017 \001(\t\022\017\n\007puntaje\030\020 \001(\t\"y\n\014RecetaFilt" +
+      "ro\022\021\n\tcategoria\030\001 \001(\t\022\016\n\006nombre\030\002 \001(\t\022\024\n" +
+      "\014ingredientes\030\003 \003(\t\022\027\n\017tiempoPrepDesde\030\004" +
+      " \001(\005\022\027\n\017tiempoPrepHasta\030\005 \001(\0052\222\003\n\016Receta" +
+      "sService\022+\n\tAddReceta\022\r.model.Receta\032\r.m" +
+      "odel.Receta\"\000\0223\n\007FindAll\022\026.google.protob" +
+      "uf.Empty\032\016.model.Recetas\"\000\0221\n\017ModificarR" +
+      "eceta\022\r.model.Receta\032\r.model.Receta\"\000\022*\n" +
+      "\010FindById\022\r.model.Receta\032\r.model.Receta\"" +
+      "\000\0220\n\rFindFavoritos\022\r.model.Receta\032\016.mode" +
+      "l.Recetas\"\000\022.\n\013FindAllById\022\r.model.Recet" +
+      "a\032\016.model.Recetas\"\000\022/\n\rAddComentario\022\r.m" +
+      "odel.Receta\032\r.model.Receta\"\000\022,\n\nAddPunta" +
+      "je\022\r.model.Receta\032\r.model.Receta\"\000B#\n\024co" +
+      "m.chefencasa.modelB\013RecetaProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -5030,7 +5179,7 @@ public final class RecetaProto {
     internal_static_model_Receta_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_Receta_descriptor,
-        new java.lang.String[] { "IdReceta", "User", "TituloReceta", "Descripcion", "Categoria", "Pasos", "Ingredientes", "TiempoPreparacion", "Foto1", "Foto2", "Foto3", "Foto4", "Foto5", "Comentario", });
+        new java.lang.String[] { "IdReceta", "User", "TituloReceta", "Descripcion", "Categoria", "Pasos", "Ingredientes", "TiempoPreparacion", "Foto1", "Foto2", "Foto3", "Foto4", "Foto5", "Comentario", "Puntaje", });
     internal_static_model_RecetaFiltro_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_model_RecetaFiltro_fieldAccessorTable = new
