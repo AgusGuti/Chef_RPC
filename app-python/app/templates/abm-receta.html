@@ -75,7 +75,6 @@
       cargarUsuario();
       cargarIngredientesYReceta(recetaId);
       cargarDetallesReceta(recetaId);
-      addFavorito(recetaId);
     }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -315,40 +314,6 @@
         xhr.send();
       }
 
-      function addFavorito(recetaId) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/addFavorito", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      
-        var data = "recetaId=" + recetaId;
-      
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              console.log("Response Text: " + xhr.responseText);
-              var response = JSON.parse(xhr.responseText);
-              if (response.success) {
-                var favoritoIcon = document.getElementById("favoritoIcon_" + recetaId);
-                if (favoritoIcon) {
-                  favoritoIcon.style.color = "red";
-                }
-                var heartIcon = document.querySelector("#favoritoButton_" + recetaId + " .fa-regular.fa-heart");
-                if (heartIcon) {
-                  heartIcon.style.display = "none";
-                }
-                window.alert("Receta agregada a favoritos con éxito");
-              } else {
-                window.alert("La receta ya está en favoritos");
-              }
-            } else {
-              console.error("Error al agregar la receta a favoritos:", xhr.status);
-            }
-          }
-        };
-      
-        xhr.send(data);
-      }
-
     window.onload = inicio;
 
   </script>
@@ -495,12 +460,6 @@
                   data-receta-pasos="{{ receta.pasos }}"
                   data-receta-tiempo="{{ receta.tiempoPreparacion }}">
                 <i class="fas fa-pencil-alt icono"></i>
-                </button>
-                &nbsp; <!--espacio en blanco-->
-                <button class="btn btn-recetas btn-sm ml-1" id="favoritoButton_{{ receta.idReceta }}"
-                  data-toggle="modal" data-target="modalFavorito" onclick="addFavorito({{ receta.idReceta }})"
-                  data-receta-id="{{ receta.idReceta }}">
-                  <i class="fa-solid fa-heart" id="favoritoIcon_{{ receta.idReceta }}" style="color: #ffffff;"></i>
                 </button>
               </td>
             </tr>

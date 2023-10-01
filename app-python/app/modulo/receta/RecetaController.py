@@ -149,12 +149,13 @@ def altaReceta():
 @receta_blueprint.route("/storyline",methods = ['GET'])
 def findAll():
     logger.info("/receta/findAll")
+    user_id=session['user_id']
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = RecetasServiceStub(channel)
         response = stub.FindAll(Receta()) 
         recetas = response.receta 
     print("Greeter client received: " + str(response))    
-    return render_template('storyline.html', recetas=recetas)
+    return render_template('storyline.html', recetas=recetas,usuario_autenticado=user_id)
 
 
 @receta_blueprint.route("/receta/findById/<int:id>",methods = ['GET'])
