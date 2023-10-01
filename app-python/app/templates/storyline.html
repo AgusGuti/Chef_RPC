@@ -83,6 +83,7 @@
     function inicio() {
       cargarIngredientesYReceta(recetaId);
       addFavorito(recetaId);
+      mostrarComentarios(nombreReceta);
     }
 
     function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
@@ -196,6 +197,30 @@
       xhr.send(data);
     }
 
+    function mostrarComentarios(nombreReceta) {
+      // Realiza una solicitud Fetch para obtener los comentarios
+      fetch("/comentariosReceta/" + nombreReceta) // Ajusta la ruta según tu lógica de enrutamiento
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (comentarios) {
+          var comentariosContainer = document.getElementById("comentariosContainer");
+          comentariosContainer.innerHTML = ""; // Limpia el contenedor
+    
+          comentarios.forEach(function (comentario) {
+            var comentarioDiv = document.createElement("div");
+            comentarioDiv.textContent = "Usuario: " + comentario.usuario + ", Comentario: " + comentario.texto;
+            comentariosContainer.appendChild(comentarioDiv);
+          });
+    
+          // Abre el modal de comentarios
+          $("#modalComentarios").modal("show");
+        })
+        .catch(function (error) {
+          console.error("Error al cargar comentarios:", error);
+        });
+    }
+    
     window.onload = inicio;
 
   </script>
@@ -315,17 +340,20 @@
                   data-target="#modalReceta{{ receta.idReceta }}">
                   <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
                   </button>
-                  &nbsp; <!--espacio en blanco-->
                   {% if receta.user.id != usuario_autenticado %}
-                    <button class="btn btn-recetas btn-sm ml-1" id="favoritoButton_{{ receta.idReceta }}"
+                    <button class="btn btn-recetas btn-sm" id="favoritoButton_{{ receta.idReceta }}"
                       data-toggle="modal" data-target="modalFavorito" onclick="addFavorito({{ receta.idReceta }})"
                       data-receta-id="{{ receta.idReceta }}">
                       <i class="fa-solid fa-heart" id="favoritoIcon_{{ receta.idReceta }}" style="color: #ffffff;"></i>
                     </button>
                   {% endif %}
                 &nbsp; <!--espacio en blanco-->
-                <button class="btn btn-recetas btn-sm ml-1" data-toggle="modal" data-target="#modalUsuario{{ receta.user.id }}">
+                <button class="btn btn-recetas btn-sm" data-toggle="modal" data-target="#modalUsuario{{ receta.user.id }}">
                   <i class="fa-solid fa-user-plus"></i>               
+                </button>
+                &nbsp; <!--espacio en blanco-->
+                <button class="btn btn-recetas btn-sm" onclick="mostrarComentarios('{{ receta.tituloReceta }}')">
+                  <i class="fa-solid fa-message" style="color: #ffffff;"></i>
                 </button>
               </td>
             </tr>
@@ -420,6 +448,27 @@
         </div>
     </div>
   </div>
+
+  <!-- Modal de comentarios (oculto por defecto) -->
+  <div class="modal fade" id="modalComentarios" tabindex="-1" role="dialog" aria-labelledby="modalComentariosLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalComentariosLabel">Comentarios</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="comentariosContainer"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   {% endfor %}
   <script>
    

@@ -66,7 +66,6 @@ def agregarComentario():
     return redirect('/storyline')
 
         
-
 @receta_blueprint.route("/novedades", methods=['GET'])
 def novedades():
     # Crear un consumidor Kafka
@@ -96,6 +95,153 @@ def novedades():
     
     # Convierte la lista de mensajes en un JSON array y retorna la respuesta como JSON
     return jsonify(lista_mensajes)
+
+
+@receta_blueprint.route("/popularidadUsuario" , methods=['GET'])
+def popularidadUsuario():
+    # Crear un consumidor Kafka
+    consumer = KafkaConsumer(
+        'popularidadUsuario', # Nombre del tema al que suscribirse
+        **kafka_config
+    )
+    lista_mensajes = []
+    try:
+        for msg in consumer:
+            if msg is not None:
+                mensaje = msg.value.decode('utf-8')
+                logger.info(mensaje)
+                logger.info(msg.offset)
+                # Decodifica el JSON en cada mensaje para eliminar las barras invertidas "\" en las URL
+                mensaje_decodificado = json.loads(mensaje)
+                lista_mensajes.append({'popularidadUsuario': mensaje_decodificado})
+                
+            if len(lista_mensajes)>=5:
+                break
+    finally:
+        consumer.close()
+    
+    # Calcular la popularidad de los usuarios en función de los mensajes recibidos
+    popularidad_usuarios = {}
+    
+    for mensaje in lista_mensajes:
+        mensaje_decodificado = mensaje['popularidadUsuario']
+        nombre_usuario = mensaje_decodificado['nombreUsuario']
+        puntaje = mensaje_decodificado['puntaje']
+
+        # Convertir puntaje a entero
+        if puntaje == "+1":
+            puntaje_entero = 1
+        elif puntaje == "-1":
+            puntaje_entero = -1
+        else:
+            puntaje_entero = 0  # Manejar otros valores de puntaje como 0
+
+        # Actualizar la suma de puntajes para el usuario
+        if nombre_usuario in popularidad_usuarios:
+            popularidad_usuarios[nombre_usuario] += puntaje_entero
+        else:
+            popularidad_usuarios[nombre_usuario] = puntaje_entero
+
+    # Ordenar los usuarios por popularidad en orden descendente
+    usuarios_ordenados = sorted(popularidad_usuarios.items(), key=lambda x: x[1], reverse=True)
+
+    # Obtener los usuarios más populares (por ejemplo, los 5 mejores)
+    usuarios_populares = usuarios_ordenados[:5]
+
+    # Devolver los usuarios populares como JSON
+    return jsonify(usuarios_populares)
+
+
+@receta_blueprint.route("/popularidadReceta", methods=['GET'])
+def popularidadReceta():
+    # Crear un consumidor Kafka
+    consumer = KafkaConsumer(
+        'popularidadReceta',  # Nombre del tema al que suscribirse
+        **kafka_config
+    )
+    lista_mensajes = []
+    try:
+        for msg in consumer:
+            if msg is not None:
+                mensaje = msg.value.decode('utf-8')
+                logger.info(mensaje)
+                logger.info(msg.offset)
+                # Decodifica el JSON en cada mensaje para eliminar las barras invertidas "\" en las URL
+                mensaje_decodificado = json.loads(mensaje)
+                lista_mensajes.append({'popularidadReceta': mensaje_decodificado})
+
+            if len(lista_mensajes) >= 5:
+                break
+    finally:
+        consumer.close()
+
+    # Calcular la popularidad de las recetas en función de los mensajes recibidos
+    popularidad_recetas = {}
+    contador_puntajes = {}
+    
+    for mensaje in lista_mensajes:
+        mensaje_decodificado = mensaje['popularidadReceta']
+        receta_id = mensaje_decodificado['idReceta']
+        puntaje = mensaje_decodificado['puntaje']
+
+        # Convertir puntaje a entero
+        if puntaje == "+1":
+            puntaje_entero = 1
+        elif puntaje == "-1":
+            puntaje_entero = -1
+        elif puntaje in ("1","2", "3", "4","5"):
+            puntaje_entero = int(puntaje)
+        else:
+            puntaje_entero = 0  # Manejar otros valores de puntaje como 0
+
+        # Actualizar la suma de puntajes y el contador de puntajes para la receta
+        if receta_id in popularidad_recetas:
+            popularidad_recetas[receta_id] += puntaje_entero
+            contador_puntajes[receta_id] += 1
+        else:
+            popularidad_recetas[receta_id] = puntaje_entero
+            contador_puntajes[receta_id] = 1
+
+    # Calcular la popularidad promedio de cada receta
+    popularidad_promedio = {receta_id: (puntaje_sum / contador_puntajes[receta_id]) for receta_id, puntaje_sum in popularidad_recetas.items()}
+
+    # Ordenar las recetas por popularidad promedio en orden descendente
+    recetas_ordenadas = sorted(popularidad_promedio.items(), key=lambda x: x[1], reverse=True)
+
+    # Obtener las recetas más populares (por ejemplo, las 10 mejores)
+    recetas_populares = recetas_ordenadas[:5]
+
+    # Devolver las recetas populares como JSON
+    return jsonify(recetas_populares)
+
+
+@receta_blueprint.route("/comentariosReceta/<string:nombre_receta>", methods=['GET'])
+def comentariosReceta(nombre_receta):
+    # Crear un consumidor Kafka
+    consumer = KafkaConsumer(
+        'comentario',  # Nombre del tema al que suscribirse
+        **kafka_config
+    )
+    lista_comentarios = []
+    try:
+        for msg in consumer:
+            if msg is not None:
+                mensaje = msg.value.decode('utf-8')
+                logger.info(mensaje)
+                logger.info(msg.offset)
+                # Decodifica el JSON en cada mensaje
+                mensaje_decodificado = json.loads(mensaje)
+                
+                # Verifica si el comentario se refiere a la receta específica
+                if mensaje_decodificado.get('recetaComentada') == nombre_receta:
+                    lista_comentarios.append(mensaje_decodificado)
+                    
+    finally:
+        consumer.close()
+
+    # Devuelve la lista de comentarios como JSON
+    return jsonify(lista_comentarios)
+
 
 @receta_blueprint.route("/misRecetas",methods = ['GET'])
 def misRecetas():
