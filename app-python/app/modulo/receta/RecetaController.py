@@ -61,7 +61,7 @@ def agregarComentario():
         stub = RecetasServiceStub(channel)
         response = stub.AddComentario(
             Receta(user=User(id=int(user_id)),tituloReceta=request.form["tituloReceta"],
-                comentario=request.form["comentario"]))
+                comentario=request.form["comentario"],idReceta=int(request.form["idReceta"])))
         receta={"receta":MessageToJson(response)}
     return redirect('/storyline')
 

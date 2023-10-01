@@ -331,15 +331,29 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 		));
 
 		kafkaTemplate.send("comentario",mensaje);
+		
+        Receta receta = recetaRepository.findById(request.getIdReceta());
 
-		// Creamos un objeto PopularidadRecetaDTO para enviar como JSON
-		String mensaje2 = new Gson().toJson(new PopularidadRecetaDTO(
-			request.getIdReceta(),
-			"+1"
-		));
+		if (receta != null) {
+			int propietarioRecetaId = receta.getUser().getId();
 
-		kafkaTemplate.send("popularidadReceta",mensaje2);
+            // Verificamos si el usuario actual es el propietario de la receta
+            int usuarioActualId = request.getUser().getId();
+            boolean esDuenoDeReceta = usuarioActualId == propietarioRecetaId;
 
+            if (!esDuenoDeReceta) {
+                // Creamos un objeto PopularidadRecetaDTO para enviar como JSON
+                String mensaje2 = new Gson().toJson(new PopularidadRecetaDTO(
+                    request.getIdReceta(),
+                    "+1"
+                ));
+
+                kafkaTemplate.send("popularidadReceta", mensaje2);
+            }
+        } else {
+            logger.info("No se encontro la receta");
+        }
+		
 		RecetaProto.Receta a = RecetaProto.Receta.newBuilder()
 			.build();
 		

@@ -712,6 +712,12 @@
             {% endfor %}
           </p>
           <p>Pasos de preparación: {{ receta.pasos }}</p>
+          <form action="/agregarComentario" method="post">
+            <textarea rows="5" cols="50" id="comentario" name="comentario"></textarea><br><br>
+            <input id="idReceta" type="hidden" name="idReceta" value="{{receta.idReceta}}">
+            <input id="tituloReceta" type="hidden" name="tituloReceta" value={{receta.tituloReceta}}>
+            <input type="submit" value="Enviar comentario">
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
