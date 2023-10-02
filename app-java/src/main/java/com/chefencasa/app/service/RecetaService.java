@@ -31,7 +31,9 @@ import com.chefencasa.model.RecetasServiceGrpc;
 import com.chefencasa.model.UserProto;
 import com.google.gson.Gson;
 import com.google.protobuf.Empty;
+import com.chefencasa.app.dto.ComentarioDTO;
 import com.chefencasa.app.dto.NovedadesDTO;
+import com.chefencasa.app.dto.PopularidadRecetaDTO;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -318,4 +320,61 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 		}
 	}
 
+	
+	public void addComentario(RecetaProto.Receta request, StreamObserver<RecetaProto.Receta> responseObserver) {
+		
+		// Creamos un objeto ComentarioDTO para enviar como JSON
+		String mensaje = new Gson().toJson(new ComentarioDTO(
+			userRepository.findById(request.getUser().getId()).getNombre(),
+			request.getTituloReceta(),
+			request.getComentario()
+		));
+
+		kafkaTemplate.send("comentario",mensaje);
+		
+        Receta receta = recetaRepository.findById(request.getIdReceta());
+
+		if (receta != null) {
+			int propietarioRecetaId = receta.getUser().getId();
+
+            // Verificamos si el usuario actual es el propietario de la receta
+            int usuarioActualId = request.getUser().getId();
+            boolean esDuenoDeReceta = usuarioActualId == propietarioRecetaId;
+
+            if (!esDuenoDeReceta) {
+                // Creamos un objeto PopularidadRecetaDTO para enviar como JSON
+                String mensaje2 = new Gson().toJson(new PopularidadRecetaDTO(
+                    request.getIdReceta(),
+                    "+1"
+                ));
+
+                kafkaTemplate.send("popularidadReceta", mensaje2);
+            }
+        } else {
+            logger.info("No se encontro la receta");
+        }
+		
+		RecetaProto.Receta a = RecetaProto.Receta.newBuilder()
+			.build();
+		
+		responseObserver.onNext(a);
+		responseObserver.onCompleted();
+	}
+
+
+	public void addPuntaje(RecetaProto.Receta request, StreamObserver<RecetaProto.Receta> responseObserver) {
+		
+		// Creamos un objeto PopularidadRecetaDTO para enviar como JSON
+		String mensaje = new Gson().toJson(new PopularidadRecetaDTO(
+			request.getIdReceta(), request.getPuntaje()
+		));
+
+		kafkaTemplate.send("popularidadReceta",mensaje);
+
+		RecetaProto.Receta a = RecetaProto.Receta.newBuilder()
+			.build();
+		
+		responseObserver.onNext(a);
+		responseObserver.onCompleted();
+	}
 }

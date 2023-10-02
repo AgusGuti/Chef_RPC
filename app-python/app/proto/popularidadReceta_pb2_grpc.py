@@ -3,10 +3,11 @@
 import grpc
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
-import ingrediente_pb2 as ingrediente__pb2
+from . import popularidadReceta_pb2 as popularidadReceta__pb2
+from . import receta_pb2 as receta__pb2
 
 
-class IngredientesServiceStub(object):
+class PopularidadRecetasServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -15,26 +16,20 @@ class IngredientesServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.TraerIngrediente = channel.unary_unary(
-                '/model.IngredientesService/TraerIngrediente',
-                request_serializer=ingrediente__pb2.Ingrediente.SerializeToString,
-                response_deserializer=ingrediente__pb2.Ingrediente.FromString,
-                )
         self.FindAll = channel.unary_unary(
-                '/model.IngredientesService/FindAll',
+                '/model.PopularidadRecetasService/FindAll',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=ingrediente__pb2.Ingredientes.FromString,
+                response_deserializer=popularidadReceta__pb2.PopularidadRecetas.FromString,
+                )
+        self.GuardarPopularidadReceta = channel.unary_unary(
+                '/model.PopularidadRecetasService/GuardarPopularidadReceta',
+                request_serializer=popularidadReceta__pb2.PopularidadReceta.SerializeToString,
+                response_deserializer=popularidadReceta__pb2.PopularidadReceta.FromString,
                 )
 
 
-class IngredientesServiceServicer(object):
+class PopularidadRecetasServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
-
-    def TraerIngrediente(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
 
     def FindAll(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -42,45 +37,34 @@ class IngredientesServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GuardarPopularidadReceta(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
-def add_IngredientesServiceServicer_to_server(servicer, server):
+
+def add_PopularidadRecetasServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'TraerIngrediente': grpc.unary_unary_rpc_method_handler(
-                    servicer.TraerIngrediente,
-                    request_deserializer=ingrediente__pb2.Ingrediente.FromString,
-                    response_serializer=ingrediente__pb2.Ingrediente.SerializeToString,
-            ),
             'FindAll': grpc.unary_unary_rpc_method_handler(
                     servicer.FindAll,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=ingrediente__pb2.Ingredientes.SerializeToString,
+                    response_serializer=popularidadReceta__pb2.PopularidadRecetas.SerializeToString,
+            ),
+            'GuardarPopularidadReceta': grpc.unary_unary_rpc_method_handler(
+                    servicer.GuardarPopularidadReceta,
+                    request_deserializer=popularidadReceta__pb2.PopularidadReceta.FromString,
+                    response_serializer=popularidadReceta__pb2.PopularidadReceta.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'model.IngredientesService', rpc_method_handlers)
+            'model.PopularidadRecetasService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class IngredientesService(object):
+class PopularidadRecetasService(object):
     """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def TraerIngrediente(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/model.IngredientesService/TraerIngrediente',
-            ingrediente__pb2.Ingrediente.SerializeToString,
-            ingrediente__pb2.Ingrediente.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def FindAll(request,
@@ -93,8 +77,25 @@ class IngredientesService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/model.IngredientesService/FindAll',
+        return grpc.experimental.unary_unary(request, target, '/model.PopularidadRecetasService/FindAll',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ingrediente__pb2.Ingredientes.FromString,
+            popularidadReceta__pb2.PopularidadRecetas.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GuardarPopularidadReceta(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.PopularidadRecetasService/GuardarPopularidadReceta',
+            popularidadReceta__pb2.PopularidadReceta.SerializeToString,
+            popularidadReceta__pb2.PopularidadReceta.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

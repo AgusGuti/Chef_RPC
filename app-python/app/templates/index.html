@@ -56,37 +56,98 @@
 
     <!-- Agrega la lista de las últimas recetas aquí -->
     <div class="container mt-4">
-        <h2 class="text-center">Bienvenido</h2>
-        <div class="d-flex flex-row flex-nowrap justify-content-center" id="lista-mensajes"> <!-- Usa clases de Bootstrap para centrar el contenido -->
-            <!-- Los mensajes se cargarán aquí dinámicamente con JavaScript -->
+        <!-- Sección de Novedades -->
+        <div class="novedades-section">
+            <h3 class="section-title">Novedades</h3>
+            <div class="d-flex flex-row flex-nowrap justify-content-center" id="lista-novedades">
+                <!-- Los mensajes de novedades se cargarán aquí dinámicamente con JavaScript -->
+            </div>
+        </div>
+        <!-- Sección de Popularidad de Usuarios -->
+        <div class="popularidad-section">
+            <h3 class="section-title">Usuarios más Populares</h3>
+            <div class="d-flex flex-row flex-nowrap justify-content-left" id="lista-popularidadUsuario">
+                <!-- Los mensajes de popularidad de usuarios se cargarán aquí dinámicamente con JavaScript -->
+            </div>
+        </div>
+        <!-- Sección de Popularidad de Recetas -->
+        <div class="popularidad-recetas-section">
+            <h3 class="section-title">Recetas más Populares</h3>
+            <div class="d-flex flex-row flex-nowrap justify-content-left" id="lista-popularidadReceta">
+                <!-- Los mensajes de popularidad de recetas se cargarán aquí dinámicamente con JavaScript -->
+            </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-       // Código JavaScript para cargar la lista de mensajes
-       $(document).ready(function() {
-        $.get("/novedades", function(data) {
-            var listaMensajes = $("#lista-mensajes");
-            data.forEach(function(mensaje) {
-                // Accede a las propiedades del objeto mensaje
-                var nombreUsuario = mensaje.novedades.nombreUsuario;
-                var tituloReceta = mensaje.novedades.tituloReceta;
-                var fotoReceta = mensaje.novedades.foto1;
+        // Código JavaScript para cargar la lista de novedades
+        $(document).ready(function() {
+            $.get("/novedades", function(data) {
+                var listaNovedades = $("#lista-novedades");
+                data.forEach(function(mensaje) {
+                    // Accede a las propiedades del objeto mensaje de novedades
+                    var nombreUsuario = mensaje.novedades.nombreUsuario;
+                    var tituloReceta = mensaje.novedades.tituloReceta;
+                    var fotoReceta = mensaje.novedades.foto1;
 
-                // Construye el HTML para mostrar la información de la receta
-                var mensajeHTML = '<div class="receta-container d-flex flex-column align-items-center">';
-                mensajeHTML += '<div class="receta-imagen-container">';
-                mensajeHTML += '<img src="' + fotoReceta + '" alt="Foto de la Receta" class="receta-imagen">';
-                mensajeHTML += '</div>';
-                mensajeHTML += '<div class="receta-info">';
-                mensajeHTML += '<p>Nombre de Usuario: ' + nombreUsuario + '</p>';
-                mensajeHTML += '<p>Título de Receta: ' + tituloReceta + '</p>';
-                mensajeHTML += '</div>';
-                mensajeHTML += '</div>';         
-                listaMensajes.append(mensajeHTML);
+                    // Construye el HTML para mostrar la información de la receta
+                    var mensajeHTML = '<div class="receta-container d-flex flex-column align-items-center">';
+                    mensajeHTML += '<div class="receta-imagen-container">';
+                    mensajeHTML += '<img src="' + fotoReceta + '" alt="Foto de la Receta" class="receta-imagen">';
+                    mensajeHTML += '</div>';
+                    mensajeHTML += '<div class="receta-info">';
+                    mensajeHTML += '<p>Nombre de Usuario: ' + nombreUsuario + '</p>';
+                    mensajeHTML += '<p>Título de Receta: ' + tituloReceta + '</p>';
+                    mensajeHTML += '</div>';
+                    mensajeHTML += '</div>';         
+                    listaNovedades.append(mensajeHTML);
+                });
             });
         });
-      });
+
+        // Código JavaScript para cargar la lista de popularidad de usuarios
+        $(document).ready(function() {
+            $.get("/popularidadUsuario", function(data) {
+                var listaPopularidadUsuario = $("#lista-popularidadUsuario"); // Cambia el ID
+                data.forEach(function(usuario) {
+                    // Accede a las propiedades del objeto usuario directamente
+                    var nombreUsuario = usuario[0]; // El nombre de usuario
+                    var popularidad = usuario[1]; // La popularidad acumulada
+
+                    // Construye el HTML para mostrar la información de la popularidad de usuarios
+                    var usuarioHTML = '<div class="usuario-container d-flex flex-column align-items-center">';
+                    usuarioHTML += '<div class="usuario-info">';
+                    usuarioHTML += '<i class="bi bi-star-fill star-icon text-warning"></i>';
+                    usuarioHTML += '<p>Nombre de Usuario: ' + nombreUsuario + '</p>';
+                    usuarioHTML += '<p>Popularidad: ' + popularidad + '</p>';
+                    usuarioHTML += '</div>';
+                    usuarioHTML += '</div>';
+                    listaPopularidadUsuario.append(usuarioHTML);
+                });
+            });
+        });
+
+        // Código JavaScript para cargar la lista de popularidad de recetas
+        $(document).ready(function() {
+            $.get("/popularidadReceta", function(data) {
+                var listaPopularidadReceta = $("#lista-popularidadReceta"); // Cambia el ID
+                data.forEach(function(receta) {
+                    // Accede a las propiedades del objeto receta directamente
+                    var idReceta = receta[0]; // El ID de la receta
+                    var popularidad = receta[1]; // La popularidad promedio
+
+                    // Construye el HTML para mostrar la información de la popularidad de recetas
+                    var recetaHTML = '<div class="receta-container d-flex flex-column align-items-center">';
+                    recetaHTML += '<div class="receta-info">';
+                    recetaHTML += '<i class="bi bi-star-fill star-icon text-warning"></i>';
+                    recetaHTML += '<p>ID de Receta: ' + idReceta + '</p>';
+                    recetaHTML += '<p>Popularidad Promedio: ' + popularidad.toFixed(2) + '</p>'; // Mostrar dos decimales
+                    recetaHTML += '</div>';
+                    recetaHTML += '</div>';
+                    listaPopularidadReceta.append(recetaHTML);
+                });
+            });
+        });
     </script>  
 </body>
 </html>

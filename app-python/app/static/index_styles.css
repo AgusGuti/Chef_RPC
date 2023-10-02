@@ -38,3 +38,160 @@ Footer
     margin-top: 10px;
     font-size: 14px; /* Tamaño de fuente más pequeño para la información de la receta */
 }
+
+label {
+    color: grey;
+}
+
+#form-container {
+    width: 100%; /* Opcional: Ancho completo */
+    text-align: center; /* Centrar el contenido horizontalmente */
+    margin-top: 50px; /* Espacio superior opcional */
+}
+
+#form-container {
+    width: 100%;
+    text-align: left; 
+    margin-top: 50px;
+}
+
+#form p {
+    text-align: center;
+}
+
+/* Aumentar el tamaño de las estrellas */
+.clasificacion label {
+    font-size: 30px; 
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+
+
+.clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+}
+
+/* Estilo para los labels cuando se realiza hover */
+.clasificacion label.estrella:hover,
+.clasificacion label.estrella:hover ~ .estrella {
+    color: orange;
+}
+
+/* Estilo para los labels cuando están checked */
+.clasificacion input[type="radio"]:checked ~ .estrella {
+    color: orange;
+}
+
+
+/* Estilo para la sección de novedades */
+.novedades-section {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Estilo para el título de la sección de novedades */
+.novedades-section .section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Estilo para los mensajes de novedades (puedes personalizar según tu diseño) */
+.novedades-section .receta-container {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para la información de las recetas en la sección de novedades */
+.novedades-section .receta-info p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Estilo para la sección de popularidad de usuarios */
+.popularidad-section {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Estilo para el título de la sección de popularidad de usuarios */
+.popularidad-section .section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Estilo para los mensajes de popularidad de usuarios (puedes personalizar según tu diseño) */
+.popularidad-section .usuario-container {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para la información de los usuarios en la sección de popularidad de usuarios */
+.popularidad-section .usuario-info p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Estilo para la sección de popularidad de recetas */
+.popularidad-recetas-section {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Estilo para el título de la sección de popularidad de recetas */
+.popularidad-recetas-section .section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Estilo para los mensajes de popularidad de recetas (puedes personalizar según tu diseño) */
+.popularidad-recetas-section .receta-container {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para la información de las recetas en la sección de popularidad de recetas */
+.popularidad-recetas-section .receta-info p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Estilo para las estrellas */
+.star-icon {
+    color: #FFD700; /* Cambia el color a dorado (amarillo) */
+    margin-left: auto;
+    font-size: 24px; /* Cambia el tamaño de las estrellas */
+}

@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.kafka.core.KafkaTemplate;
 
-import com.chefencasa.app.dto.ComentarioDTO;
-import com.chefencasa.app.dto.NovedadesDTO;
+import com.chefencasa.app.dto.PopularidadRecetaDTO;
+import com.chefencasa.app.dto.PopularidadUsuarioDTO;
 import com.chefencasa.app.entities.Favorito;
 import com.chefencasa.app.entities.Receta;
 import com.chefencasa.app.repository.FavoritoRepository;
@@ -45,9 +45,10 @@ public class FavoritoService extends FavoritosServiceGrpc.FavoritosServiceImplBa
 	@Qualifier("recetaRepository")
 	private RecetaRepository recetaRepository;
 
-    @Autowired
+    // Inyecta el KafkaTemplate
+	@Autowired
     private KafkaTemplate<String, String> kafkaTemplate; 
-
+    
     Logger logger = LoggerFactory.getLogger(FavoritoService.class);
 
 
@@ -78,6 +79,22 @@ public class FavoritoService extends FavoritosServiceGrpc.FavoritosServiceImplBa
             responseObserver.onNext(a);
             responseObserver.onCompleted();
 
+            // Creamos un objeto PopularidadRecetaDTO para enviar como JSON
+            String mensaje = new Gson().toJson(new PopularidadRecetaDTO(
+                request.getReceta().getIdReceta(),
+                "+1"
+            ));
+
+            kafkaTemplate.send("popularidadReceta",mensaje);
+
+            // Creamos un objeto PopularidadRecetaDTO para enviar como JSON
+            String mensaje2 = new Gson().toJson(new PopularidadUsuarioDTO(
+                recetaRepository.findById(request.getReceta().getIdReceta()).getUser().getNombre(),
+                "+1"
+            ));
+
+            kafkaTemplate.send("popularidadUsuario",mensaje2);
+
         } catch (Exception e) {
             logger.error("Error al agregar Favorito", e);
         }
@@ -89,6 +106,24 @@ public class FavoritoService extends FavoritosServiceGrpc.FavoritosServiceImplBa
        
         try {
 			Favorito favorito = favoritoRepository.findById(request.getId()).get();
+            // Creamos un objeto PopularidadRecetaDTO para enviar como JSON
+            String mensaje = new Gson().toJson(new PopularidadRecetaDTO(
+                favoritoRepository.findById(request.getId()).get().getReceta().getId(),
+                "-1"
+            ));
+
+            kafkaTemplate.send("popularidadReceta",mensaje);
+
+
+            // Creamos un objeto PopularidadRecetaDTO para enviar como JSON
+            String mensaje2 = new Gson().toJson(new PopularidadUsuarioDTO(
+                favoritoRepository.findById(request.getId()).get().getReceta().getUser().getNombre(),
+                "-1"
+            ));
+
+            kafkaTemplate.send("popularidadUsuario",mensaje2);
+
+
             favoritoRepository.delete(favorito);
             
 		} catch (Exception e) {
@@ -156,17 +191,6 @@ public class FavoritoService extends FavoritosServiceGrpc.FavoritosServiceImplBa
             responseObserver.onNext(a);
             responseObserver.onCompleted();
 
-            String comentario="";    
-
-            String mensaje = new Gson().toJson(new ComentarioDTO(
-				userRepository.findById(request.getUser().getId()).getNombre(),
-				request.getReceta().getTituloReceta(),
-                comentario
-				
-			));
-
-			kafkaTemplate.send("comentario",mensaje);
-    
         } catch (Exception e) {
             logger.info("Error al traer Favoritos", e);
         }

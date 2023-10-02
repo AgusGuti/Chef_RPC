@@ -2,11 +2,11 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import categoria_pb2 as categoria__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
+from . import popularidadUser_pb2 as popularidadUser__pb2
+from . import user_pb2 as user__pb2
 
-
-class CategoriasServiceStub(object):
+class PopularidadUsersServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -15,26 +15,20 @@ class CategoriasServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.TraerCategoria = channel.unary_unary(
-                '/model.CategoriasService/TraerCategoria',
-                request_serializer=categoria__pb2.Categoria.SerializeToString,
-                response_deserializer=categoria__pb2.Categoria.FromString,
-                )
         self.FindAll = channel.unary_unary(
-                '/model.CategoriasService/FindAll',
+                '/model.PopularidadUsersService/FindAll',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=categoria__pb2.Categorias.FromString,
+                response_deserializer=popularidadUser__pb2.PopularidadUsers.FromString,
+                )
+        self.GuardarPopularidadUser = channel.unary_unary(
+                '/model.PopularidadUsersService/GuardarPopularidadUser',
+                request_serializer=popularidadUser__pb2.PopularidadUser.SerializeToString,
+                response_deserializer=popularidadUser__pb2.PopularidadUser.FromString,
                 )
 
 
-class CategoriasServiceServicer(object):
+class PopularidadUsersServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
-
-    def TraerCategoria(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
 
     def FindAll(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -42,45 +36,34 @@ class CategoriasServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GuardarPopularidadUser(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
-def add_CategoriasServiceServicer_to_server(servicer, server):
+
+def add_PopularidadUsersServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'TraerCategoria': grpc.unary_unary_rpc_method_handler(
-                    servicer.TraerCategoria,
-                    request_deserializer=categoria__pb2.Categoria.FromString,
-                    response_serializer=categoria__pb2.Categoria.SerializeToString,
-            ),
             'FindAll': grpc.unary_unary_rpc_method_handler(
                     servicer.FindAll,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=categoria__pb2.Categorias.SerializeToString,
+                    response_serializer=popularidadUser__pb2.PopularidadUsers.SerializeToString,
+            ),
+            'GuardarPopularidadUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.GuardarPopularidadUser,
+                    request_deserializer=popularidadUser__pb2.PopularidadUser.FromString,
+                    response_serializer=popularidadUser__pb2.PopularidadUser.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'model.CategoriasService', rpc_method_handlers)
+            'model.PopularidadUsersService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class CategoriasService(object):
+class PopularidadUsersService(object):
     """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def TraerCategoria(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/model.CategoriasService/TraerCategoria',
-            categoria__pb2.Categoria.SerializeToString,
-            categoria__pb2.Categoria.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def FindAll(request,
@@ -93,8 +76,25 @@ class CategoriasService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/model.CategoriasService/FindAll',
+        return grpc.experimental.unary_unary(request, target, '/model.PopularidadUsersService/FindAll',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            categoria__pb2.Categorias.FromString,
+            popularidadUser__pb2.PopularidadUsers.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GuardarPopularidadUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.PopularidadUsersService/GuardarPopularidadUser',
+            popularidadUser__pb2.PopularidadUser.SerializeToString,
+            popularidadUser__pb2.PopularidadUser.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 
 # Configuración de Kafka
 kafka_config = {
-     'bootstrap_servers': 'localhost: 9092',  # Dirección del broker de Kafka
+     'bootstrap_servers': os.getenv("SERVER-KAFKA-BROKER"),  # Dirección del broker de Kafka
      'group_id': 'test-consumer-group',       # ID del grupo de consumidores
      'auto_offset_reset': 'earliest',         # Comportamiento en caso de no tener un offset inicial
      #'max_poll_records': 5,                  # Máximo número de registros a recuperar en cada llamada a poll
@@ -39,28 +39,33 @@ kafka_config = {
 }
 
 
-@receta_blueprint.route("/favoritos/comentario", methods=['GET']) #revisar ruta
-def comentario():
-    # Crea un consumidor Kafka
-    consumer = Consumer(kafka_config)
-    
-    # Suscribe el consumidor al topic "Comentario"
-    consumer.subscribe(['comentario'])
-    
-    lista_mensajes = []
-    try:
-        while len(lista_mensajes) != 5:
-            msg = consumer.poll(0.1)
-            if msg is not None:
-                mensaje = msg.value().decode('utf-8')
-                logger.info(mensaje)
-                # Decodifica el JSON en cada mensaje para eliminar las barras invertidas "\" en las URL
-                mensaje_decodificado = json.loads(mensaje)
-                lista_mensajes.append({'comentario': mensaje_decodificado})
-    finally:
-        consumer.close()
+@receta_blueprint.route("/agregarPuntaje",methods = ['POST'])
+def agregarPuntaje():
+    logger.info("/agregarPuntaje %s",request.form["puntaje"],request.form["idReceta"])
+
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = RecetasServiceStub(channel)
+        response = stub.AddPuntaje(
+        Receta(idReceta=int(request.form["idReceta"]),puntaje=str(request.form["puntaje"])))
+        receta={"receta":MessageToJson(response)}
+    return redirect('/storyline')
 
 
+@receta_blueprint.route("/agregarComentario",methods = ['POST'])
+def agregarComentario():
+    logger.info("/agregarComentario")
+    
+    user_id=session['user_id']
+    
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = RecetasServiceStub(channel)
+        response = stub.AddComentario(
+            Receta(user=User(id=int(user_id)),tituloReceta=request.form["tituloReceta"],
+                comentario=request.form["comentario"],idReceta=int(request.form["idReceta"])))
+        receta={"receta":MessageToJson(response)}
+    return redirect('/storyline')
+
+        
 @receta_blueprint.route("/novedades", methods=['GET'])
 def novedades():
     # Crear un consumidor Kafka
@@ -90,6 +95,64 @@ def novedades():
     
     # Convierte la lista de mensajes en un JSON array y retorna la respuesta como JSON
     return jsonify(lista_mensajes)
+
+
+
+@receta_blueprint.route("/comentarios", methods=['GET'])
+def comentarios():
+    # Crear un consumidor Kafka
+    consumer = KafkaConsumer(
+        'comentario',  # Nombre del tema al que suscribirse
+        **kafka_config
+    )
+    lista_comentarios = []
+    try:
+        for msg in consumer:
+            if msg is not None:
+                mensaje = msg.value.decode('utf-8')
+                logger.info(mensaje)
+                logger.info(msg.offset)
+                # Decodifica el JSON en cada mensaje
+                mensaje_decodificado = json.loads(mensaje)
+                lista_comentarios.append({'comentario': mensaje_decodificado})
+                                       
+    finally:
+        consumer.close()
+
+    # Devuelve la lista de comentarios como JSON
+    return jsonify(lista_comentarios)
+
+
+
+
+# @receta_blueprint.route("/comentariosReceta/<string:nombre_receta>", methods=['GET'])
+# def comentariosReceta(nombre_receta):
+#     # Crear un consumidor Kafka
+#     consumer = KafkaConsumer(
+#         'comentario',  # Nombre del tema al que suscribirse
+#         **kafka_config
+#     )
+#     lista_comentarios = []
+#     try:
+#         for msg in consumer:
+#             if msg is not None:
+#                 mensaje = msg.value.decode('utf-8')
+#                 logger.info(mensaje)
+#                 logger.info(msg.offset)
+#                 # Decodifica el JSON en cada mensaje
+#                 mensaje_decodificado = json.loads(mensaje)
+                
+#                 # Verifica si el comentario se refiere a la receta específica
+#                 if mensaje_decodificado.get('recetaComentada') == nombre_receta:
+#                     lista_comentarios.append(mensaje_decodificado)
+#                     break
+                    
+#     finally:
+#         consumer.close()
+
+#     # Devuelve la lista de comentarios como JSON
+#     return jsonify(lista_comentarios)
+
 
 @receta_blueprint.route("/misRecetas",methods = ['GET'])
 def misRecetas():
@@ -143,12 +206,13 @@ def altaReceta():
 @receta_blueprint.route("/storyline",methods = ['GET'])
 def findAll():
     logger.info("/receta/findAll")
+    user_id=session['user_id']
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = RecetasServiceStub(channel)
         response = stub.FindAll(Receta()) 
         recetas = response.receta 
     print("Greeter client received: " + str(response))    
-    return render_template('storyline.html', recetas=recetas)
+    return render_template('storyline.html', recetas=recetas,usuario_autenticado=user_id)
 
 
 @receta_blueprint.route("/receta/findById/<int:id>",methods = ['GET'])
