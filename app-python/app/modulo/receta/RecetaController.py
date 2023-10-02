@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 
 # Configuración de Kafka
 kafka_config = {
-     'bootstrap_servers': 'localhost: 9092',  # Dirección del broker de Kafka
+     'bootstrap_servers': os.getenv("SERVER-KAFKA-BROKER"),  # Dirección del broker de Kafka
      'group_id': 'test-consumer-group',       # ID del grupo de consumidores
      'auto_offset_reset': 'earliest',         # Comportamiento en caso de no tener un offset inicial
      #'max_poll_records': 5,                  # Máximo número de registros a recuperar en cada llamada a poll
