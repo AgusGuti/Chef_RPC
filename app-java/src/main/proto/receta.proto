@@ -19,6 +19,8 @@ service RecetasService {
   rpc FindById(Receta) returns (Receta) {}
   rpc FindFavoritos(Receta) returns (Recetas) {}
   rpc FindAllById(Receta) returns (Recetas) {}
+  rpc FindAllBySeguidos(Receta) returns (Recetas) {}
+
 }
 
 message Empty {

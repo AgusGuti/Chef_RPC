@@ -4842,7 +4842,7 @@ public final class RecetaProto {
       "\r\n\005foto4\030\r \001(\t\022\r\n\005foto5\030\016 \001(\t\"y\n\014RecetaF" +
       "iltro\022\021\n\tcategoria\030\001 \001(\t\022\016\n\006nombre\030\002 \001(\t" +
       "\022\024\n\014ingredientes\030\003 \003(\t\022\027\n\017tiempoPrepDesd" +
-      "e\030\004 \001(\005\022\027\n\017tiempoPrepHasta\030\005 \001(\0052\263\002\n\016Rec" +
+      "e\030\004 \001(\005\022\027\n\017tiempoPrepHasta\030\005 \001(\0052\351\002\n\016Rec" +
       "etasService\022+\n\tAddReceta\022\r.model.Receta\032" +
       "\r.model.Receta\"\000\0223\n\007FindAll\022\026.google.pro" +
       "tobuf.Empty\032\016.model.Recetas\"\000\0221\n\017Modific" +
@@ -4850,8 +4850,10 @@ public final class RecetaProto {
       "\022*\n\010FindById\022\r.model.Receta\032\r.model.Rece" +
       "ta\"\000\0220\n\rFindFavoritos\022\r.model.Receta\032\016.m" +
       "odel.Recetas\"\000\022.\n\013FindAllById\022\r.model.Re" +
-      "ceta\032\016.model.Recetas\"\000B#\n\024com.chefencasa" +
-      ".modelB\013RecetaProtob\006proto3"
+      "ceta\032\016.model.Recetas\"\000\0224\n\021FindAllBySegui" +
+      "dos\022\r.model.Receta\032\016.model.Recetas\"\000B#\n\024" +
+      "com.chefencasa.modelB\013RecetaProtob\006proto" +
+      "3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

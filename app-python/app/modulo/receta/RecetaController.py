@@ -35,6 +35,19 @@ def misRecetas():
 
     return render_template('abm-receta.html', recetas=recetas)
 
+@receta_blueprint.route("/inicio",methods = ['GET'])
+def inicio():
+    logger.info("/inicio")
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = RecetasServiceStub(channel) 
+        response = stub.FindAllBySeguidos(Receta(user=User(id=session['user_id'])))
+        recetas = response.receta        
+    
+    print("Greeter client received: " + str(response))    
+    
+    return render_template('inicio.html', recetas=recetas)
+
+
 
 @receta_blueprint.route("/index",methods = ['GET'])
 def index():
