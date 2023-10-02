@@ -85,6 +85,27 @@ CREATE INDEX `FK43n2nquvmo9rvy6hrpya4142l` ON `chefencasa`.`receta` (`user_id` A
 
 
 -- -----------------------------------------------------
+-- Table `chefencasa`.`comentario`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `chefencasa`.`comentario` ;
+
+CREATE TABLE IF NOT EXISTS `chefencasa`.`comentario` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `comentario` VARCHAR(255) NOT NULL,
+  `receta_comentada` VARCHAR(255) NOT NULL,
+  `usuario_comentario` VARCHAR(255) NOT NULL,
+  `receta_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FKk1d9f48uo7h7clegbnx1slqd9`
+    FOREIGN KEY (`receta_id`)
+    REFERENCES `chefencasa`.`receta` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+CREATE INDEX `FKk1d9f48uo7h7clegbnx1slqd9` ON `chefencasa`.`comentario` (`receta_id` ASC) VISIBLE;
+
+
+-- -----------------------------------------------------
 -- Table `chefencasa`.`favorito`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `chefencasa`.`favorito` ;
@@ -122,6 +143,45 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
+-- Table `chefencasa`.`popularidad_receta`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `chefencasa`.`popularidad_receta` ;
+
+CREATE TABLE IF NOT EXISTS `chefencasa`.`popularidad_receta` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `puntaje` VARCHAR(255) NOT NULL,
+  `receta_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FKheor4rmnnl19g3vdwhjlrnnmu`
+    FOREIGN KEY (`receta_id`)
+    REFERENCES `chefencasa`.`receta` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+CREATE INDEX `FKheor4rmnnl19g3vdwhjlrnnmu` ON `chefencasa`.`popularidad_receta` (`receta_id` ASC) VISIBLE;
+
+
+-- -----------------------------------------------------
+-- Table `chefencasa`.`popularidad_user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `chefencasa`.`popularidad_user` ;
+
+CREATE TABLE IF NOT EXISTS `chefencasa`.`popularidad_user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre_usuario` VARCHAR(255) NOT NULL,
+  `puntaje` VARCHAR(255) NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FKkxja0j4m5me6twcqc65dep6ti`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `chefencasa`.`user` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+CREATE INDEX `FKkxja0j4m5me6twcqc65dep6ti` ON `chefencasa`.`popularidad_user` (`user_id` ASC) VISIBLE;
+
+
+-- -----------------------------------------------------
 -- Table `chefencasa`.`receta_ingredientes`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `chefencasa`.`receta_ingredientes` ;
@@ -143,27 +203,27 @@ CREATE INDEX `FKqx3v38baha3exb2c5jbxl4ooc` ON `chefencasa`.`receta_ingredientes`
 
 
 -- -----------------------------------------------------
--- Table `chefencasa`.`seguidos`
+-- Table `chefencasa`.`seguido`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `chefencasa`.`seguidos` ;
+DROP TABLE IF EXISTS `chefencasa`.`seguido` ;
 
-CREATE TABLE IF NOT EXISTS `chefencasa`.`seguidos` (
+CREATE TABLE IF NOT EXISTS `chefencasa`.`seguido` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `seguido_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `FKd4lgy1f0srr610f0ebq0p5fmq`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `chefencasa`.`user` (`id`),
-  CONSTRAINT `FKocsdh6x45tlpkxceh692ublpn`
+  CONSTRAINT `FKcq1igwrimgyr62td1seuk6pvc`
     FOREIGN KEY (`seguido_id`)
+    REFERENCES `chefencasa`.`user` (`id`),
+  CONSTRAINT `FKf74a66wnouj273l03tic7gopk`
+    FOREIGN KEY (`user_id`)
     REFERENCES `chefencasa`.`user` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
-CREATE INDEX `FKocsdh6x45tlpkxceh692ublpn` ON `chefencasa`.`seguidos` (`seguido_id` ASC) VISIBLE;
+CREATE INDEX `FKcq1igwrimgyr62td1seuk6pvc` ON `chefencasa`.`seguido` (`seguido_id` ASC) VISIBLE;
 
-CREATE INDEX `FKd4lgy1f0srr610f0ebq0p5fmq` ON `chefencasa`.`seguidos` (`user_id` ASC) VISIBLE;
+CREATE INDEX `FKf74a66wnouj273l03tic7gopk` ON `chefencasa`.`seguido` (`user_id` ASC) VISIBLE;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
