@@ -46,6 +46,37 @@ public final class PopularidadRecetasServiceGrpc {
     return getFindAllMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta,
+      com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> getGuardarPopularidadRecetaMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GuardarPopularidadReceta",
+      requestType = com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.class,
+      responseType = com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta,
+      com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> getGuardarPopularidadRecetaMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta, com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> getGuardarPopularidadRecetaMethod;
+    if ((getGuardarPopularidadRecetaMethod = PopularidadRecetasServiceGrpc.getGuardarPopularidadRecetaMethod) == null) {
+      synchronized (PopularidadRecetasServiceGrpc.class) {
+        if ((getGuardarPopularidadRecetaMethod = PopularidadRecetasServiceGrpc.getGuardarPopularidadRecetaMethod) == null) {
+          PopularidadRecetasServiceGrpc.getGuardarPopularidadRecetaMethod = getGuardarPopularidadRecetaMethod =
+              io.grpc.MethodDescriptor.<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta, com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GuardarPopularidadReceta"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.getDefaultInstance()))
+              .setSchemaDescriptor(new PopularidadRecetasServiceMethodDescriptorSupplier("GuardarPopularidadReceta"))
+              .build();
+        }
+      }
+    }
+    return getGuardarPopularidadRecetaMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -100,6 +131,13 @@ public final class PopularidadRecetasServiceGrpc {
         io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindAllMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void guardarPopularidadReceta(com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGuardarPopularidadRecetaMethod(), responseObserver);
+    }
   }
 
   /**
@@ -136,6 +174,14 @@ public final class PopularidadRecetasServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getFindAllMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void guardarPopularidadReceta(com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGuardarPopularidadRecetaMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -159,6 +205,13 @@ public final class PopularidadRecetasServiceGrpc {
     public com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas findAll(com.google.protobuf.Empty request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getFindAllMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta guardarPopularidadReceta(com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGuardarPopularidadRecetaMethod(), getCallOptions(), request);
     }
   }
 
@@ -185,9 +238,18 @@ public final class PopularidadRecetasServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getFindAllMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> guardarPopularidadReceta(
+        com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGuardarPopularidadRecetaMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_FIND_ALL = 0;
+  private static final int METHODID_GUARDAR_POPULARIDAD_RECETA = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -209,6 +271,10 @@ public final class PopularidadRecetasServiceGrpc {
         case METHODID_FIND_ALL:
           serviceImpl.findAll((com.google.protobuf.Empty) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas>) responseObserver);
+          break;
+        case METHODID_GUARDAR_POPULARIDAD_RECETA:
+          serviceImpl.guardarPopularidadReceta((com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -235,6 +301,13 @@ public final class PopularidadRecetasServiceGrpc {
               com.google.protobuf.Empty,
               com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas>(
                 service, METHODID_FIND_ALL)))
+        .addMethod(
+          getGuardarPopularidadRecetaMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta,
+              com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta>(
+                service, METHODID_GUARDAR_POPULARIDAD_RECETA)))
         .build();
   }
 
@@ -284,6 +357,7 @@ public final class PopularidadRecetasServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new PopularidadRecetasServiceFileDescriptorSupplier())
               .addMethod(getFindAllMethod())
+              .addMethod(getGuardarPopularidadRecetaMethod())
               .build();
         }
       }

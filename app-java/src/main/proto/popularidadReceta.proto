@@ -10,6 +10,7 @@ import "receta.proto";
 
 service PopularidadRecetasService {
   rpc FindAll(google.protobuf.Empty) returns (PopularidadRecetas) {}
+  rpc GuardarPopularidadReceta(PopularidadReceta) returns (PopularidadReceta) {}
 }
 
 

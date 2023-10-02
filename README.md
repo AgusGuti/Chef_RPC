@@ -85,6 +85,9 @@ Clases creadas en capa servidor:
 
    python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/favorito.proto
 
+   python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/popularidadReceta.proto
+   
+
 
 4. python main.py
 

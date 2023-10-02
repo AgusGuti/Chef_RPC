@@ -44,6 +44,11 @@ public class PopularidadReceta implements Serializable {
 	}
 	
 
+	public PopularidadReceta(Receta receta, String puntaje) {
+		this.receta = receta;
+		this.puntaje = puntaje;
+	}
+
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

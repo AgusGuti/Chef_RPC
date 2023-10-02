@@ -17,7 +17,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "PopularidadReceta")
+@Table(name = "PopularidadUser")
 @Data @NoArgsConstructor
 public class PopularidadUser implements Serializable {
 

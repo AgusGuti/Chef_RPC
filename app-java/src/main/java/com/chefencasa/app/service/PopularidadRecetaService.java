@@ -4,14 +4,21 @@ package com.chefencasa.app.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.chefencasa.app.entities.Comentario;
 import com.chefencasa.app.entities.PopularidadReceta;
+import com.chefencasa.app.entities.User;
 import com.chefencasa.app.repository.PopularidadRecetaRepository;
+import com.chefencasa.app.repository.RecetaRepository;
+import com.chefencasa.model.FavoritoProto;
 import com.chefencasa.model.PopularidadRecetaProto;
 import com.chefencasa.model.PopularidadRecetasServiceGrpc;
+import com.chefencasa.model.RecetaProto;
+import com.chefencasa.model.UserProto;
 import com.google.protobuf.Empty;
 
 import io.grpc.stub.StreamObserver;
@@ -21,9 +28,33 @@ import net.devh.boot.grpc.server.service.GrpcService;
 public class PopularidadRecetaService extends PopularidadRecetasServiceGrpc.PopularidadRecetasServiceImplBase {
 
 
-	// @Autowired
-	// @Qualifier("popularidadRecetaRepository")
-	// private PopularidadRecetaRepository popularidadRecetaRepository;
+	@Autowired
+	@Qualifier("popularidadRecetaRepository")
+	private PopularidadRecetaRepository popularidadRecetaRepository;
+
+    @Autowired
+	@Qualifier("recetaRepository")
+	private RecetaRepository recetaRepository;
+
+    Logger logger = LoggerFactory.getLogger(FavoritoService.class);
+
+    public void guardarPopularidadReceta(PopularidadRecetaProto.PopularidadReceta request, StreamObserver<PopularidadRecetaProto.PopularidadReceta> responseObserver){
+        
+     try {
+			popularidadRecetaRepository.save(new PopularidadReceta(recetaRepository.findById(request.getReceta().getIdReceta()),request.getPuntaje()));
+	
+            PopularidadRecetaProto.PopularidadReceta a = PopularidadRecetaProto.PopularidadReceta.newBuilder()
+            .setId(request.getId())
+            .setPuntaje(request.getPuntaje())
+            .setReceta(RecetaProto.Receta.newBuilder().setIdReceta(request.getReceta().getIdReceta()).build())
+            .build();
+            responseObserver.onNext(a);
+            responseObserver.onCompleted();
+
+    } catch (Exception e) {
+        logger.error("Error al agregar Popularidad Receta", e);
+    }
+    }
 
     // @Override
     // public void traerComentario(PopularidadRecetaProto.Comentario request,StreamObserver<PopularidadRecetaProto.Comentario> responseObserver) {
