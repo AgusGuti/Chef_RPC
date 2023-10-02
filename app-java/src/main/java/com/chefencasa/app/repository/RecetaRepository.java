@@ -20,6 +20,9 @@ public interface RecetaRepository extends JpaRepository<Receta, Serializable>, J
 	@Query("SELECT DISTINCT r FROM Receta r LEFT JOIN FETCH r.ingredientes")
 	public abstract List<Receta> findAllRecetasIngredientes();
 
+	@Query("SELECT DISTINCT r FROM Receta r LEFT JOIN FETCH r.ingredientes WHERE r.user.id IN (SELECT DISTINCT s.seguido.id FROM Seguido s WHERE s.user.id = :userId) ORDER BY r.fechaCreacion DESC")
+	public abstract List<Receta> findAllRecetasSeguidos(int userId);
+
 	public abstract List<Receta> findByUserIdOrderByFechaCreacionDesc(int userId);
 	
 	@Query("SELECT r FROM Receta r LEFT JOIN FETCH r.ingredientes LEFT JOIN FETCH r.categoria WHERE r.id = :id")
