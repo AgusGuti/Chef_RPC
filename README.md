@@ -38,14 +38,7 @@ Clases creadas en capa servidor:
 
 ## Restante
 
--Solucionar la carga del objeto categoría dentro de la clase receta.
 
--Falta poder cargar foto de perfil al registrarse y mostrarla en Mi Perfil. SOLUCIÓN: cargar archivo de tipo .png web directamente en la base.
--Falta implementar poder dejar de seguir, evitar que me sigan (F. de Obs: 17/09/2023)
--Falta poder marcar publicacion como favorito al verla en STORYLINE (F. de Obs: 15/09/2023)
-
--No levantó correctmente las recetas de los INSERT (F. de Obs: 19/09/2023)
-(OPCIONAL, las recetas generadas desde la pagina funcionan bien)
 
 ## SERVIDOR JAVA GRPC
 
@@ -87,7 +80,7 @@ Clases creadas en capa servidor:
 
    python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/popularidadReceta.proto
    
-
+   python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/comentario.proto;
 
 4. python main.py
 
