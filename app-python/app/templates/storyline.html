@@ -171,7 +171,14 @@
       xhr.send(data);
     }
 
-    function addSeguido(seguidoId) {
+    function addSeguido(seguidoId,userId) {
+
+       // Verifica si el usuario actual es el autor de la receta
+      if (seguidoId === userId) {
+        // Si es el autor, no hagas nada o muestra un mensaje
+        window.alert("Eres el autor de la receta, no puedes seguirte a ti mismo.");
+        return;
+      }
       var xhr = new XMLHttpRequest();
       xhr.open("POST", "/addSeguido", true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -196,6 +203,7 @@
     
       xhr.send(data);
     }
+    
 
     function mostrarComentarios(nombreReceta) {
       // Realiza una solicitud Fetch para obtener los comentarios
@@ -209,7 +217,7 @@
     
           comentarios.forEach(function (comentario) {
             var comentarioDiv = document.createElement("div");
-            comentarioDiv.textContent = "Usuario: " + comentario.usuario + ", Comentario: " + comentario.texto;
+            comentarioDiv.textContent = "Usuario: " + comentario.usuarioComentario + ", Comentario: " + comentario.comentario;
             comentariosContainer.appendChild(comentarioDiv);
           });
     
@@ -341,6 +349,7 @@
                   <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
                   </button>
                   {% if receta.user.id != usuario_autenticado %}
+                    &nbsp; <!--espacio en blanco-->
                     <button class="btn btn-recetas btn-sm" id="favoritoButton_{{ receta.idReceta }}"
                       data-toggle="modal" data-target="modalFavorito" onclick="addFavorito({{ receta.idReceta }})"
                       data-receta-id="{{ receta.idReceta }}">
@@ -443,7 +452,6 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 <!-- Botón para seguir o dejar de seguir al autor -->
                 <button class="btn btn-success" onclick="addSeguido('{{ receta.user.id }}')">Seguir</button>
-                <!-- Opcionalmente, puedes mostrar un botón diferente si ya sigues al autor -->
             </div>
         </div>
     </div>

@@ -47,32 +47,39 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
     public void addSeguido(SeguidoProto.Seguido request, StreamObserver<SeguidoProto.Seguido> responseObserver) {
        
         try {
-			Seguido seguido = new Seguido(userRepository.findById(request.getUser().getId()), userRepository.findById(request.getSeguido().getId()));
 
-            seguidoRepository.save(seguido);
-            
-		} catch (Exception e) {
-			try {
-                throw new Exception("No se pudo completar la operación,error al ingresar los datos o el seguidor ya existe");
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+            boolean seguidoExistente = seguidoRepository.existsBySeguidoUser(userRepository.findById(request.getUser().getId()), userRepository.findById(request.getSeguido().getId()));
+			logger.info("SeguidoExistente: "+seguidoExistente);
+            if (!seguidoExistente) {
+                Seguido seguido = new Seguido(userRepository.findById(request.getUser().getId()), userRepository.findById(request.getSeguido().getId()));
+                seguidoRepository.save(seguido);
             }
-		}
-        SeguidoProto.Seguido a = SeguidoProto.Seguido.newBuilder()
-            .setId(request.getId())
-            .setUser(request.getUser())
-            .setSeguido(request.getSeguido())
-            .build();
-        responseObserver.onNext(a);
-        responseObserver.onCompleted();
+            else{
+                // Si el seguido ya existe, envía una respuesta vacía al cliente
+                SeguidoProto.Seguido a = SeguidoProto.Seguido.newBuilder().build();
+                responseObserver.onNext(a);
+                responseObserver.onCompleted();
+                return; // Sale de la función sin enviar otra respuesta
+            }
+            
+            SeguidoProto.Seguido a = SeguidoProto.Seguido.newBuilder()
+                .setId(request.getId())
+                .setUser(request.getUser())
+                .setSeguido(request.getSeguido())
+                .build();
+            responseObserver.onNext(a);
+            responseObserver.onCompleted();
 
-        // Creamos un objeto PopularidadUsuarioDTO para enviar como JSON
-        String mensaje = new Gson().toJson(new PopularidadUsuarioDTO(
-            userRepository.findById(request.getSeguido().getId()).getNombre(), "+1"
-        ));
+            // Creamos un objeto PopularidadUsuarioDTO para enviar como JSON
+            String mensaje = new Gson().toJson(new PopularidadUsuarioDTO(
+                userRepository.findById(request.getSeguido().getId()).getNombre(), "+1"
+            ));
 
-        kafkaTemplate.send("popularidadUsuario",mensaje);
+            kafkaTemplate.send("popularidadUsuario",mensaje);
+
+        } catch (Exception e) {
+            logger.error("Error al agregar Seguido", e);
+        }
     }
 
     @Transactional

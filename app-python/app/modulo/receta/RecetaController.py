@@ -215,8 +215,8 @@ def popularidadReceta():
     return jsonify(recetas_populares)
 
 
-@receta_blueprint.route("/comentariosReceta/<string:nombre_receta>", methods=['GET'])
-def comentariosReceta(nombre_receta):
+@receta_blueprint.route("/comentarios", methods=['GET'])
+def comentarios():
     # Crear un consumidor Kafka
     consumer = KafkaConsumer(
         'comentario',  # Nombre del tema al que suscribirse
@@ -231,16 +231,44 @@ def comentariosReceta(nombre_receta):
                 logger.info(msg.offset)
                 # Decodifica el JSON en cada mensaje
                 mensaje_decodificado = json.loads(mensaje)
-                
-                # Verifica si el comentario se refiere a la receta específica
-                if mensaje_decodificado.get('recetaComentada') == nombre_receta:
-                    lista_comentarios.append(mensaje_decodificado)
-                    
+                lista_comentarios.append({'comentario': mensaje_decodificado})
+                                       
     finally:
         consumer.close()
 
     # Devuelve la lista de comentarios como JSON
     return jsonify(lista_comentarios)
+
+
+
+
+# @receta_blueprint.route("/comentariosReceta/<string:nombre_receta>", methods=['GET'])
+# def comentariosReceta(nombre_receta):
+#     # Crear un consumidor Kafka
+#     consumer = KafkaConsumer(
+#         'comentario',  # Nombre del tema al que suscribirse
+#         **kafka_config
+#     )
+#     lista_comentarios = []
+#     try:
+#         for msg in consumer:
+#             if msg is not None:
+#                 mensaje = msg.value.decode('utf-8')
+#                 logger.info(mensaje)
+#                 logger.info(msg.offset)
+#                 # Decodifica el JSON en cada mensaje
+#                 mensaje_decodificado = json.loads(mensaje)
+                
+#                 # Verifica si el comentario se refiere a la receta específica
+#                 if mensaje_decodificado.get('recetaComentada') == nombre_receta:
+#                     lista_comentarios.append(mensaje_decodificado)
+#                     break
+                    
+#     finally:
+#         consumer.close()
+
+#     # Devuelve la lista de comentarios como JSON
+#     return jsonify(lista_comentarios)
 
 
 @receta_blueprint.route("/misRecetas",methods = ['GET'])
