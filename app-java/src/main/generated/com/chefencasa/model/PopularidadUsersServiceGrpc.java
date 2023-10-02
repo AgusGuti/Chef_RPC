@@ -46,6 +46,37 @@ public final class PopularidadUsersServiceGrpc {
     return getFindAllMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.PopularidadUserProto.PopularidadUser,
+      com.chefencasa.model.PopularidadUserProto.PopularidadUser> getGuardarPopularidadUserMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GuardarPopularidadUser",
+      requestType = com.chefencasa.model.PopularidadUserProto.PopularidadUser.class,
+      responseType = com.chefencasa.model.PopularidadUserProto.PopularidadUser.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.chefencasa.model.PopularidadUserProto.PopularidadUser,
+      com.chefencasa.model.PopularidadUserProto.PopularidadUser> getGuardarPopularidadUserMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.PopularidadUserProto.PopularidadUser, com.chefencasa.model.PopularidadUserProto.PopularidadUser> getGuardarPopularidadUserMethod;
+    if ((getGuardarPopularidadUserMethod = PopularidadUsersServiceGrpc.getGuardarPopularidadUserMethod) == null) {
+      synchronized (PopularidadUsersServiceGrpc.class) {
+        if ((getGuardarPopularidadUserMethod = PopularidadUsersServiceGrpc.getGuardarPopularidadUserMethod) == null) {
+          PopularidadUsersServiceGrpc.getGuardarPopularidadUserMethod = getGuardarPopularidadUserMethod =
+              io.grpc.MethodDescriptor.<com.chefencasa.model.PopularidadUserProto.PopularidadUser, com.chefencasa.model.PopularidadUserProto.PopularidadUser>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GuardarPopularidadUser"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.PopularidadUserProto.PopularidadUser.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.PopularidadUserProto.PopularidadUser.getDefaultInstance()))
+              .setSchemaDescriptor(new PopularidadUsersServiceMethodDescriptorSupplier("GuardarPopularidadUser"))
+              .build();
+        }
+      }
+    }
+    return getGuardarPopularidadUserMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -100,6 +131,13 @@ public final class PopularidadUsersServiceGrpc {
         io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadUserProto.PopularidadUsers> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindAllMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void guardarPopularidadUser(com.chefencasa.model.PopularidadUserProto.PopularidadUser request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadUserProto.PopularidadUser> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGuardarPopularidadUserMethod(), responseObserver);
+    }
   }
 
   /**
@@ -136,6 +174,14 @@ public final class PopularidadUsersServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getFindAllMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void guardarPopularidadUser(com.chefencasa.model.PopularidadUserProto.PopularidadUser request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadUserProto.PopularidadUser> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGuardarPopularidadUserMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -159,6 +205,13 @@ public final class PopularidadUsersServiceGrpc {
     public com.chefencasa.model.PopularidadUserProto.PopularidadUsers findAll(com.google.protobuf.Empty request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getFindAllMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.PopularidadUserProto.PopularidadUser guardarPopularidadUser(com.chefencasa.model.PopularidadUserProto.PopularidadUser request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGuardarPopularidadUserMethod(), getCallOptions(), request);
     }
   }
 
@@ -185,9 +238,18 @@ public final class PopularidadUsersServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getFindAllMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.PopularidadUserProto.PopularidadUser> guardarPopularidadUser(
+        com.chefencasa.model.PopularidadUserProto.PopularidadUser request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGuardarPopularidadUserMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_FIND_ALL = 0;
+  private static final int METHODID_GUARDAR_POPULARIDAD_USER = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -209,6 +271,10 @@ public final class PopularidadUsersServiceGrpc {
         case METHODID_FIND_ALL:
           serviceImpl.findAll((com.google.protobuf.Empty) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadUserProto.PopularidadUsers>) responseObserver);
+          break;
+        case METHODID_GUARDAR_POPULARIDAD_USER:
+          serviceImpl.guardarPopularidadUser((com.chefencasa.model.PopularidadUserProto.PopularidadUser) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadUserProto.PopularidadUser>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -235,6 +301,13 @@ public final class PopularidadUsersServiceGrpc {
               com.google.protobuf.Empty,
               com.chefencasa.model.PopularidadUserProto.PopularidadUsers>(
                 service, METHODID_FIND_ALL)))
+        .addMethod(
+          getGuardarPopularidadUserMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.chefencasa.model.PopularidadUserProto.PopularidadUser,
+              com.chefencasa.model.PopularidadUserProto.PopularidadUser>(
+                service, METHODID_GUARDAR_POPULARIDAD_USER)))
         .build();
   }
 
@@ -284,6 +357,7 @@ public final class PopularidadUsersServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new PopularidadUsersServiceFileDescriptorSupplier())
               .addMethod(getFindAllMethod())
+              .addMethod(getGuardarPopularidadUserMethod())
               .build();
         }
       }

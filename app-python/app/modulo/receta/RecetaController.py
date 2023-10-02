@@ -97,60 +97,6 @@ def novedades():
     return jsonify(lista_mensajes)
 
 
-@receta_blueprint.route("/popularidadUsuario" , methods=['GET'])
-def popularidadUsuario():
-    # Crear un consumidor Kafka
-    consumer = KafkaConsumer(
-        'popularidadUsuario', # Nombre del tema al que suscribirse
-        **kafka_config
-    )
-    lista_mensajes = []
-    try:
-        for msg in consumer:
-            if msg is not None:
-                mensaje = msg.value.decode('utf-8')
-                logger.info(mensaje)
-                logger.info(msg.offset)
-                # Decodifica el JSON en cada mensaje para eliminar las barras invertidas "\" en las URL
-                mensaje_decodificado = json.loads(mensaje)
-                lista_mensajes.append({'popularidadUsuario': mensaje_decodificado})
-                
-            if len(lista_mensajes)>=5:
-                break
-    finally:
-        consumer.close()
-    
-    # Calcular la popularidad de los usuarios en función de los mensajes recibidos
-    popularidad_usuarios = {}
-    
-    for mensaje in lista_mensajes:
-        mensaje_decodificado = mensaje['popularidadUsuario']
-        nombre_usuario = mensaje_decodificado['nombreUsuario']
-        puntaje = mensaje_decodificado['puntaje']
-
-        # Convertir puntaje a entero
-        if puntaje == "+1":
-            puntaje_entero = 1
-        elif puntaje == "-1":
-            puntaje_entero = -1
-        else:
-            puntaje_entero = 0  # Manejar otros valores de puntaje como 0
-
-        # Actualizar la suma de puntajes para el usuario
-        if nombre_usuario in popularidad_usuarios:
-            popularidad_usuarios[nombre_usuario] += puntaje_entero
-        else:
-            popularidad_usuarios[nombre_usuario] = puntaje_entero
-
-    # Ordenar los usuarios por popularidad en orden descendente
-    usuarios_ordenados = sorted(popularidad_usuarios.items(), key=lambda x: x[1], reverse=True)
-
-    # Obtener los usuarios más populares (por ejemplo, los 5 mejores)
-    usuarios_populares = usuarios_ordenados[:5]
-
-    # Devolver los usuarios populares como JSON
-    return jsonify(usuarios_populares)
-
 
 @receta_blueprint.route("/comentarios", methods=['GET'])
 def comentarios():

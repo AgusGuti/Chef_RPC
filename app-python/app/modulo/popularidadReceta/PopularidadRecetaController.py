@@ -19,6 +19,7 @@ from google.protobuf.timestamp_pb2 import Timestamp
 
 from kafka import KafkaConsumer
 
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -32,11 +33,6 @@ kafka_config = {
      'enable_auto_commit': False              # Desactiva el auto commit
 }
 
-
-from kafka import KafkaConsumer
-import time  # Importar el módulo time para agregar una pausa entre las iteraciones
-
-# ...
 
 @popularidadReceta_blueprint.route("/popularidadReceta", methods=['GET'])
 def popularidadReceta():

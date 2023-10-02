@@ -125,6 +125,10 @@ services:
       - redpanda_network
     environment:
       - KAFKA-SERVER=redpanda:9092
+      - SPRING_PORT=8088
+      - SPRING_DATASOURCE_DB=chef-mysql
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=user
     depends_on:
       - redpanda
       - chef-mysql            
@@ -133,6 +137,9 @@ services:
     container_name: app-python
     build:
       context: app-python/
+    environment:
+      - SERVER-JAVA-RPC=app-java:9090
+      - SERVER-KAFKA-BROKER=redpanda:9092            
     ports:
       - 5000:5000
     networks:

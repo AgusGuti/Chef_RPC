@@ -1,25 +1,16 @@
 package com.chefencasa.app.service;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.chefencasa.app.entities.Comentario;
 import com.chefencasa.app.entities.PopularidadReceta;
-import com.chefencasa.app.entities.User;
 import com.chefencasa.app.repository.PopularidadRecetaRepository;
 import com.chefencasa.app.repository.RecetaRepository;
-import com.chefencasa.model.FavoritoProto;
 import com.chefencasa.model.PopularidadRecetaProto;
 import com.chefencasa.model.PopularidadRecetasServiceGrpc;
 import com.chefencasa.model.RecetaProto;
-import com.chefencasa.model.UserProto;
-import com.google.protobuf.Empty;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;

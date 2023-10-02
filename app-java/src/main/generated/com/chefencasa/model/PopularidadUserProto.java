@@ -1809,11 +1809,13 @@ public final class PopularidadUserProto {
       "ers\0220\n\017popularidadUser\030\001 \003(\0132\027.model.Pop" +
       "ularidadUsers\"`\n\017PopularidadUser\022\n\n\002id\030\001" +
       " \001(\005\022\025\n\rnombreUsuario\030\002 \001(\t\022\017\n\007puntaje\030\003" +
-      " \001(\t\022\031\n\004user\030\004 \001(\0132\013.model.User2W\n\027Popul" +
-      "aridadUsersService\022<\n\007FindAll\022\026.google.p" +
-      "rotobuf.Empty\032\027.model.PopularidadUsers\"\000" +
-      "B,\n\024com.chefencasa.modelB\024PopularidadUse" +
-      "rProtob\006proto3"
+      " \001(\t\022\031\n\004user\030\004 \001(\0132\013.model.User2\243\001\n\027Popu" +
+      "laridadUsersService\022<\n\007FindAll\022\026.google." +
+      "protobuf.Empty\032\027.model.PopularidadUsers\"" +
+      "\000\022J\n\026GuardarPopularidadUser\022\026.model.Popu" +
+      "laridadUser\032\026.model.PopularidadUser\"\000B,\n" +
+      "\024com.chefencasa.modelB\024PopularidadUserPr" +
+      "otob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -11,6 +11,8 @@ import "user.proto";
 
 service PopularidadUsersService {
   rpc FindAll(google.protobuf.Empty) returns (PopularidadUsers) {}
+  rpc GuardarPopularidadUser(PopularidadUser) returns (PopularidadUser) {}
+
 }
 
 message PopularidadUsers {
