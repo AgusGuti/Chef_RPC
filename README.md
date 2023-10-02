@@ -10,20 +10,9 @@ Comandos Apache Kafka:
 ▶️ Iniciar Kafka
 .\bin\windows\kafka-server-start.bat .\config\server.properties
 
-▶️ Crea un nuevo topic en el servidor de kafka
-.\bin\windows\kafka-topics.bat --create --topic {topic-name} --bootstrap-server localhost:9092
-
-▶️ Decribir los detalles de un topic
-.\bin\windows\kafka-topics.bat --describe --topic {topic-name} --bootstrap-server localhost:9092
-
 ▶️ Listar todos los topics que existen dentro del broker
 .\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
 
-▶️ Inicia una consola para ver mensajes de un topic específico
-.\bin\windows\kafka-console-consumer.bat --topic {nombreTopic} --bootstrap-server localhost:9092
-
-▶️ Inicia una consola para enviar mensajes a un topic específico
-.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic {topic-name}
 
 Clases creadas en capa servidor:
 
@@ -38,14 +27,7 @@ Clases creadas en capa servidor:
 
 ## Restante
 
--Solucionar la carga del objeto categoría dentro de la clase receta.
 
--Falta poder cargar foto de perfil al registrarse y mostrarla en Mi Perfil. SOLUCIÓN: cargar archivo de tipo .png web directamente en la base.
--Falta implementar poder dejar de seguir, evitar que me sigan (F. de Obs: 17/09/2023)
--Falta poder marcar publicacion como favorito al verla en STORYLINE (F. de Obs: 15/09/2023)
-
--No levantó correctmente las recetas de los INSERT (F. de Obs: 19/09/2023)
-(OPCIONAL, las recetas generadas desde la pagina funcionan bien)
 
 ## SERVIDOR JAVA GRPC
 
@@ -91,7 +73,7 @@ Clases creadas en capa servidor:
 
    
    
-
+   python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/comentario.proto;
 
 4. python main.py
 
