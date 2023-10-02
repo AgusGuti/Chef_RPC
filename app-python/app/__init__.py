@@ -34,10 +34,14 @@ def register_blueprints(app):
     from app.modulo.categoria import categoria_blueprint
     from app.modulo.favorito import favorito_blueprint
     from app.modulo.seguido import seguido_blueprint
+    from app.modulo.popularidadReceta import popularidadReceta_blueprint
     app.register_blueprint(user_blueprint)
     app.register_blueprint(receta_blueprint)
     app.register_blueprint(ingrediente_blueprint)
     app.register_blueprint(categoria_blueprint)
     app.register_blueprint(favorito_blueprint)
     app.register_blueprint(seguido_blueprint)
+    app.register_blueprint(popularidadReceta_blueprint)
+
+    
     

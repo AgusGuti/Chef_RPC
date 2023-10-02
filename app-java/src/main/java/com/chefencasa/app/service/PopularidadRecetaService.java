@@ -38,23 +38,43 @@ public class PopularidadRecetaService extends PopularidadRecetasServiceGrpc.Popu
 
     Logger logger = LoggerFactory.getLogger(FavoritoService.class);
 
-    public void guardarPopularidadReceta(PopularidadRecetaProto.PopularidadReceta request, StreamObserver<PopularidadRecetaProto.PopularidadReceta> responseObserver){
+    public void guardarPopularidadReceta(PopularidadRecetaProto.PopularidadReceta request, StreamObserver<PopularidadRecetaProto.PopularidadReceta> responseObserver) {
         
-     try {
-			popularidadRecetaRepository.save(new PopularidadReceta(recetaRepository.findById(request.getReceta().getIdReceta()),request.getPuntaje()));
-	
-            PopularidadRecetaProto.PopularidadReceta a = PopularidadRecetaProto.PopularidadReceta.newBuilder()
-            .setId(request.getId())
-            .setPuntaje(request.getPuntaje())
-            .setReceta(RecetaProto.Receta.newBuilder().setIdReceta(request.getReceta().getIdReceta()).build())
-            .build();
-            responseObserver.onNext(a);
+        try {
+            boolean PopularidadRecetaExistente = popularidadRecetaRepository.existsByReceta(recetaRepository.findById(request.getReceta().getIdReceta()));
+    
+            if (PopularidadRecetaExistente) {
+                // Si la PopularidadReceta ya existe, actualiza su puntaje y guárdala
+                PopularidadReceta popularidadReceta = popularidadRecetaRepository.findByReceta(recetaRepository.findById(request.getReceta().getIdReceta()));
+                popularidadReceta.setPuntaje(request.getPuntaje());
+                popularidadRecetaRepository.save(popularidadReceta);
+    
+                // Envía una respuesta con la información actualizada
+                PopularidadRecetaProto.PopularidadReceta popularidadRecetaModificada = PopularidadRecetaProto.PopularidadReceta.newBuilder()
+                    .setId(popularidadReceta.getId())
+                    .setPuntaje(popularidadReceta.getPuntaje())
+                    .setReceta(RecetaProto.Receta.newBuilder().setIdReceta(popularidadReceta.getReceta().getId()).build())
+                    .build();
+                responseObserver.onNext(popularidadRecetaModificada);
+            } else {
+                // Si la PopularidadReceta no existe, crea una nueva instancia y guárdala
+                popularidadRecetaRepository.save(new PopularidadReceta(recetaRepository.findById(request.getReceta().getIdReceta()), request.getPuntaje()));
+    
+                // Envía una respuesta con la información creada
+                PopularidadRecetaProto.PopularidadReceta a = PopularidadRecetaProto.PopularidadReceta.newBuilder()
+                    .setId(request.getId())
+                    .setPuntaje(request.getPuntaje())
+                    .setReceta(RecetaProto.Receta.newBuilder().setIdReceta(request.getReceta().getIdReceta()).build())
+                    .build();
+                responseObserver.onNext(a);
+            }
+    
             responseObserver.onCompleted();
-
-    } catch (Exception e) {
-        logger.error("Error al agregar Popularidad Receta", e);
+        } catch (Exception e) {
+            logger.error("Error al agregar Popularidad Receta", e);
+        }
     }
-    }
+    
 
     // @Override
     // public void traerComentario(PopularidadRecetaProto.Comentario request,StreamObserver<PopularidadRecetaProto.Comentario> responseObserver) {
