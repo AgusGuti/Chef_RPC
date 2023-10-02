@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package model;
+
+option java_package = "com.chefencasa.model";
+option java_outer_classname = "PopularidadUserProto";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "user.proto";
+
+service PopularidadUsersService {
+  rpc FindAll(google.protobuf.Empty) returns (PopularidadUsers) {}
+}
+
+message PopularidadUsers {
+  repeated PopularidadUsers popularidadUser = 1;
+}
+
+message PopularidadUser {
+  int32 id = 1;
+  string nombreUsuario = 2;
+  string puntaje = 3;
+  User user= 4;
+ 
+}

@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package model;
+
+option java_package = "com.chefencasa.model";
+option java_outer_classname = "PopularidadRecetaProto";
+
+import "google/protobuf/empty.proto";
+import "receta.proto";
+
+service PopularidadRecetasService {
+  rpc FindAll(google.protobuf.Empty) returns (PopularidadRecetas) {}
+}
+
+
+message PopularidadRecetas {
+  repeated PopularidadRecetas popularidadReceta = 1;
+}
+
+message PopularidadReceta {
+  int32 id = 1;
+  string puntaje = 2;
+  Receta receta= 3;
+ 
+}

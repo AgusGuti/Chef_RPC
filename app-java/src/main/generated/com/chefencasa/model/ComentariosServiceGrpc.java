@@ -1,0 +1,367 @@
+package com.chefencasa.model;
+
+import static io.grpc.MethodDescriptor.generateFullMethodName;
+
+/**
+ */
+@javax.annotation.Generated(
+    value = "by gRPC proto compiler (version 1.57.2)",
+    comments = "Source: comentario.proto")
+@io.grpc.stub.annotations.GrpcGenerated
+public final class ComentariosServiceGrpc {
+
+  private ComentariosServiceGrpc() {}
+
+  public static final java.lang.String SERVICE_NAME = "model.ComentariosService";
+
+  // Static method descriptors that strictly reflect the proto.
+  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.ComentarioProto.Comentario,
+      com.chefencasa.model.ComentarioProto.Comentario> getTraerComentarioMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "TraerComentario",
+      requestType = com.chefencasa.model.ComentarioProto.Comentario.class,
+      responseType = com.chefencasa.model.ComentarioProto.Comentario.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.chefencasa.model.ComentarioProto.Comentario,
+      com.chefencasa.model.ComentarioProto.Comentario> getTraerComentarioMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.ComentarioProto.Comentario, com.chefencasa.model.ComentarioProto.Comentario> getTraerComentarioMethod;
+    if ((getTraerComentarioMethod = ComentariosServiceGrpc.getTraerComentarioMethod) == null) {
+      synchronized (ComentariosServiceGrpc.class) {
+        if ((getTraerComentarioMethod = ComentariosServiceGrpc.getTraerComentarioMethod) == null) {
+          ComentariosServiceGrpc.getTraerComentarioMethod = getTraerComentarioMethod =
+              io.grpc.MethodDescriptor.<com.chefencasa.model.ComentarioProto.Comentario, com.chefencasa.model.ComentarioProto.Comentario>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "TraerComentario"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.ComentarioProto.Comentario.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.ComentarioProto.Comentario.getDefaultInstance()))
+              .setSchemaDescriptor(new ComentariosServiceMethodDescriptorSupplier("TraerComentario"))
+              .build();
+        }
+      }
+    }
+    return getTraerComentarioMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      com.chefencasa.model.ComentarioProto.Comentarios> getFindAllMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "FindAll",
+      requestType = com.google.protobuf.Empty.class,
+      responseType = com.chefencasa.model.ComentarioProto.Comentarios.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      com.chefencasa.model.ComentarioProto.Comentarios> getFindAllMethod() {
+    io.grpc.MethodDescriptor<com.google.protobuf.Empty, com.chefencasa.model.ComentarioProto.Comentarios> getFindAllMethod;
+    if ((getFindAllMethod = ComentariosServiceGrpc.getFindAllMethod) == null) {
+      synchronized (ComentariosServiceGrpc.class) {
+        if ((getFindAllMethod = ComentariosServiceGrpc.getFindAllMethod) == null) {
+          ComentariosServiceGrpc.getFindAllMethod = getFindAllMethod =
+              io.grpc.MethodDescriptor.<com.google.protobuf.Empty, com.chefencasa.model.ComentarioProto.Comentarios>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FindAll"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.ComentarioProto.Comentarios.getDefaultInstance()))
+              .setSchemaDescriptor(new ComentariosServiceMethodDescriptorSupplier("FindAll"))
+              .build();
+        }
+      }
+    }
+    return getFindAllMethod;
+  }
+
+  /**
+   * Creates a new async stub that supports all call types for the service
+   */
+  public static ComentariosServiceStub newStub(io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<ComentariosServiceStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<ComentariosServiceStub>() {
+        @java.lang.Override
+        public ComentariosServiceStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new ComentariosServiceStub(channel, callOptions);
+        }
+      };
+    return ComentariosServiceStub.newStub(factory, channel);
+  }
+
+  /**
+   * Creates a new blocking-style stub that supports unary and streaming output calls on the service
+   */
+  public static ComentariosServiceBlockingStub newBlockingStub(
+      io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<ComentariosServiceBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<ComentariosServiceBlockingStub>() {
+        @java.lang.Override
+        public ComentariosServiceBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new ComentariosServiceBlockingStub(channel, callOptions);
+        }
+      };
+    return ComentariosServiceBlockingStub.newStub(factory, channel);
+  }
+
+  /**
+   * Creates a new ListenableFuture-style stub that supports unary calls on the service
+   */
+  public static ComentariosServiceFutureStub newFutureStub(
+      io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<ComentariosServiceFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<ComentariosServiceFutureStub>() {
+        @java.lang.Override
+        public ComentariosServiceFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new ComentariosServiceFutureStub(channel, callOptions);
+        }
+      };
+    return ComentariosServiceFutureStub.newStub(factory, channel);
+  }
+
+  /**
+   */
+  public interface AsyncService {
+
+    /**
+     */
+    default void traerComentario(com.chefencasa.model.ComentarioProto.Comentario request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentario> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getTraerComentarioMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void findAll(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentarios> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindAllMethod(), responseObserver);
+    }
+  }
+
+  /**
+   * Base class for the server implementation of the service ComentariosService.
+   */
+  public static abstract class ComentariosServiceImplBase
+      implements io.grpc.BindableService, AsyncService {
+
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
+      return ComentariosServiceGrpc.bindService(this);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do asynchronous rpc calls to service ComentariosService.
+   */
+  public static final class ComentariosServiceStub
+      extends io.grpc.stub.AbstractAsyncStub<ComentariosServiceStub> {
+    private ComentariosServiceStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected ComentariosServiceStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      return new ComentariosServiceStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public void traerComentario(com.chefencasa.model.ComentarioProto.Comentario request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentario> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getTraerComentarioMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void findAll(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentarios> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getFindAllMethod(), getCallOptions()), request, responseObserver);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do synchronous rpc calls to service ComentariosService.
+   */
+  public static final class ComentariosServiceBlockingStub
+      extends io.grpc.stub.AbstractBlockingStub<ComentariosServiceBlockingStub> {
+    private ComentariosServiceBlockingStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected ComentariosServiceBlockingStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      return new ComentariosServiceBlockingStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.ComentarioProto.Comentario traerComentario(com.chefencasa.model.ComentarioProto.Comentario request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getTraerComentarioMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.ComentarioProto.Comentarios findAll(com.google.protobuf.Empty request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getFindAllMethod(), getCallOptions(), request);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do ListenableFuture-style rpc calls to service ComentariosService.
+   */
+  public static final class ComentariosServiceFutureStub
+      extends io.grpc.stub.AbstractFutureStub<ComentariosServiceFutureStub> {
+    private ComentariosServiceFutureStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected ComentariosServiceFutureStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      return new ComentariosServiceFutureStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.ComentarioProto.Comentario> traerComentario(
+        com.chefencasa.model.ComentarioProto.Comentario request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getTraerComentarioMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.ComentarioProto.Comentarios> findAll(
+        com.google.protobuf.Empty request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getFindAllMethod(), getCallOptions()), request);
+    }
+  }
+
+  private static final int METHODID_TRAER_COMENTARIO = 0;
+  private static final int METHODID_FIND_ALL = 1;
+
+  private static final class MethodHandlers<Req, Resp> implements
+      io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
+      io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
+      io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
+      io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
+    private final AsyncService serviceImpl;
+    private final int methodId;
+
+    MethodHandlers(AsyncService serviceImpl, int methodId) {
+      this.serviceImpl = serviceImpl;
+      this.methodId = methodId;
+    }
+
+    @java.lang.Override
+    @java.lang.SuppressWarnings("unchecked")
+    public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
+      switch (methodId) {
+        case METHODID_TRAER_COMENTARIO:
+          serviceImpl.traerComentario((com.chefencasa.model.ComentarioProto.Comentario) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentario>) responseObserver);
+          break;
+        case METHODID_FIND_ALL:
+          serviceImpl.findAll((com.google.protobuf.Empty) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentarios>) responseObserver);
+          break;
+        default:
+          throw new AssertionError();
+      }
+    }
+
+    @java.lang.Override
+    @java.lang.SuppressWarnings("unchecked")
+    public io.grpc.stub.StreamObserver<Req> invoke(
+        io.grpc.stub.StreamObserver<Resp> responseObserver) {
+      switch (methodId) {
+        default:
+          throw new AssertionError();
+      }
+    }
+  }
+
+  public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
+    return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+        .addMethod(
+          getTraerComentarioMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.chefencasa.model.ComentarioProto.Comentario,
+              com.chefencasa.model.ComentarioProto.Comentario>(
+                service, METHODID_TRAER_COMENTARIO)))
+        .addMethod(
+          getFindAllMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.google.protobuf.Empty,
+              com.chefencasa.model.ComentarioProto.Comentarios>(
+                service, METHODID_FIND_ALL)))
+        .build();
+  }
+
+  private static abstract class ComentariosServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
+    ComentariosServiceBaseDescriptorSupplier() {}
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
+      return com.chefencasa.model.ComentarioProto.getDescriptor();
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
+      return getFileDescriptor().findServiceByName("ComentariosService");
+    }
+  }
+
+  private static final class ComentariosServiceFileDescriptorSupplier
+      extends ComentariosServiceBaseDescriptorSupplier {
+    ComentariosServiceFileDescriptorSupplier() {}
+  }
+
+  private static final class ComentariosServiceMethodDescriptorSupplier
+      extends ComentariosServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
+    private final java.lang.String methodName;
+
+    ComentariosServiceMethodDescriptorSupplier(java.lang.String methodName) {
+      this.methodName = methodName;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
+      return getServiceDescriptor().findMethodByName(methodName);
+    }
+  }
+
+  private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
+
+  public static io.grpc.ServiceDescriptor getServiceDescriptor() {
+    io.grpc.ServiceDescriptor result = serviceDescriptor;
+    if (result == null) {
+      synchronized (ComentariosServiceGrpc.class) {
+        result = serviceDescriptor;
+        if (result == null) {
+          serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
+              .setSchemaDescriptor(new ComentariosServiceFileDescriptorSupplier())
+              .addMethod(getTraerComentarioMethod())
+              .addMethod(getFindAllMethod())
+              .build();
+        }
+      }
+    }
+    return result;
+  }
+}
