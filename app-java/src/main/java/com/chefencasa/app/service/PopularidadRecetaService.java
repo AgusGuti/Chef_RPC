@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import com.chefencasa.app.entities.PopularidadReceta;
 import com.chefencasa.app.repository.PopularidadRecetaRepository;
 import com.chefencasa.app.repository.RecetaRepository;
-import com.chefencasa.model.CategoriaProto;
 import com.chefencasa.model.PopularidadRecetaProto;
 import com.chefencasa.model.PopularidadRecetasServiceGrpc;
 import com.chefencasa.model.RecetaProto;

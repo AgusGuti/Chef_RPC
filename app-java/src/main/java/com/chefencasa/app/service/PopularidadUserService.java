@@ -1,23 +1,27 @@
 package com.chefencasa.app.service;
 
 
-import com.chefencasa.model.PopularidadRecetaProto;
+import com.chefencasa.model.PopularidadUserProto;
 import com.chefencasa.model.PopularidadUserProto;
 import com.chefencasa.model.PopularidadUsersServiceGrpc;
-import com.chefencasa.model.RecetaProto;
 import com.chefencasa.model.UserProto;
+import com.chefencasa.model.UserProto;
+import com.google.protobuf.Empty;
 
 import io.grpc.stub.StreamObserver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.chefencasa.app.entities.PopularidadReceta;
+import com.chefencasa.app.entities.PopularidadUser;
 import com.chefencasa.app.entities.PopularidadUser;
 import com.chefencasa.app.entities.User;
-import com.chefencasa.app.repository.PopularidadRecetaRepository;
+import com.chefencasa.app.repository.PopularidadUserRepository;
 import com.chefencasa.app.repository.PopularidadUserRepository;
 import com.chefencasa.app.repository.UserRepository;
 
@@ -82,35 +86,26 @@ public class PopularidadUserService extends PopularidadUsersServiceGrpc.Populari
         }
     }
     
-
-    // @Override
-    // public void traerComentario(PopularidadUserProto.Comentario request,StreamObserver<PopularidadUserProto.Comentario> responseObserver) {
-
-    //     Comentario comentario = PopularidadRecetaRepository.findById(request.getId()).get();
-
-    //     PopularidadUserProto.Comentario a = PopularidadUserProto.PopularidadReceta.newBuilder()
-    //                 .setId(popularidadUser.getId())
-    //                 .build();
-
-    //     responseObserver.onNext(a);
-    //     responseObserver.onCompleted();
+    @Override
+	public void findAll(Empty request, StreamObserver<PopularidadUserProto.PopularidadUsers> responseObserver) {
+        List<PopularidadUserProto.PopularidadUser> popularidadUserdb = new ArrayList<>();
         
-    // }
+        for (PopularidadUser popularidadUser : popularidadUserRepository.findAll()) {
+            PopularidadUserProto.PopularidadUser popularidadUserProto = PopularidadUserProto.PopularidadUser.newBuilder()
+                .setPuntaje(popularidadUser.getPuntaje())
+                .setUser(UserProto.User.newBuilder()
+                    .setNombre(popularidadUser.getUser().getNombre())
+                    .build())
+                .build();
+                    
+            popularidadUserdb.add(popularidadUserProto);
+        }
 
-   	// @Override
-	// public void findAll(Empty request, StreamObserver<PopularidadUserProto.PopularidadUsers> responseObserver) {
-    //     List<PopularidadUsersProto.PopularidadUsers> popularidadUserdb = new ArrayList<>();
-    //     for (PopularidadUser id : popularidadUserRepository.findAll()) {
-    //         PopularidadUserProto.PopularidadUser popularidadUserProto = PopularidadUserProto.Comentario.newBuilder()
-    //                 .setId(popularidadUser.getId())
-    //                 .build();
-    //         popularidadUserdb.add(popularidadUserProto);
-    //     }
-
-    //     PopularidadUserProto.PopularidadUser a = PopularidadUserProto.PopularidadUser.newBuilder()
-    //         .addAllPopularidadReceta(popularidadUserdb)
-    //         .build();
-    //     responseObserver.onNext(a);
-    //     responseObserver.onCompleted();
-    // }
+        PopularidadUserProto.PopularidadUsers a = PopularidadUserProto.PopularidadUsers.newBuilder()
+            .addAllPopularidadUser(popularidadUserdb)
+            .build();
+        responseObserver.onNext(a);
+        responseObserver.onCompleted();
+    }
+    
 }

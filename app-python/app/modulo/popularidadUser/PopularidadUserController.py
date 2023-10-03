@@ -99,3 +99,14 @@ def popularidadUsuario():
 
     # Devolver la lista de usuarios guardados como JSON
     return jsonify({"usuariosGuardados": usuarios_guardados})
+
+
+
+@popularidadUser_blueprint.route("/popularidadUsuarios",methods = ['GET'])
+def findAll():
+    logger.info("/popularidadUsuarios")
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = PopularidadUsersServiceStub(channel)
+        response = stub.FindAll(PopularidadUser()) 
+    print("Greeter client received: " + str(response))    
+    return MessageToJson(response)

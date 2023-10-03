@@ -114,6 +114,5 @@ def findAll():
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = PopularidadRecetasServiceStub(channel)
         response = stub.FindAll(PopularidadReceta()) 
-        popularidadRecetas = response.popularidadReceta 
     print("Greeter client received: " + str(response))    
     return MessageToJson(response)

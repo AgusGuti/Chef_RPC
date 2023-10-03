@@ -107,25 +107,41 @@
 
         // Código JavaScript para cargar la lista de popularidad de usuarios
         $(document).ready(function() {
-            $.get("/popularidadUsuario", function(data) {
-                var listaPopularidadUsuario = $("#lista-popularidadUsuario"); // Cambia el ID
-                data.forEach(function(usuario) {
-                    // Accede a las propiedades del objeto usuario directamente
-                    var nombreUsuario = usuario[0]; // El nombre de usuario
-                    var popularidad = usuario[1]; // La popularidad acumulada
+            $.ajax({
+                type: 'GET',
+                url: '/popularidadUsuarios',
+                dataType: 'json',
+                success: function(data) {
+                    var listaPopularidadUsuario = $("#lista-popularidadUsuario");
+                    
+                    if (data && data.popularidadUser && Array.isArray(data.popularidadUser)) {
+                        data.popularidadUser.forEach(function(usuario) {
+                            var nombreUsuario = usuario.user.nombre;
+                            var puntaje = parseFloat(usuario.puntaje);
 
-                    // Construye el HTML para mostrar la información de la popularidad de usuarios
-                    var usuarioHTML = '<div class="usuario-container d-flex flex-column align-items-center">';
-                    usuarioHTML += '<div class="usuario-info">';
-                    usuarioHTML += '<i class="bi bi-star-fill star-icon text-warning"></i>';
-                    usuarioHTML += '<p>Nombre de Usuario: ' + nombreUsuario + '</p>';
-                    usuarioHTML += '<p>Popularidad: ' + popularidad + '</p>';
-                    usuarioHTML += '</div>';
-                    usuarioHTML += '</div>';
-                    listaPopularidadUsuario.append(usuarioHTML);
-                });
+                            if (!isNaN(puntaje) && nombreUsuario) {
+                                var usuarioHTML = '<div class="usuario-container d-flex flex-column align-items-center">';
+                                usuarioHTML += '<div class="usuario-info">';
+                                usuarioHTML += '<i class="bi bi-star-fill star-icon text-warning"></i>';
+                                usuarioHTML += '<p>Nombre de Usuario: ' + nombreUsuario + '</p>';
+                                usuarioHTML += '<p>Puntaje: ' + puntaje.toFixed(2) + '</p>';
+                                usuarioHTML += '</div>';
+                                usuarioHTML += '</div>';
+                                listaPopularidadUsuario.append(usuarioHTML);
+                            } else {
+                                console.error("Invalid data in usuario:", usuario);
+                            }
+                        });
+                    } else {
+                        console.error("Data is not in the expected format:", data);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error:", status, error);
+                }
             });
         });
+
 
         // Código JavaScript para cargar la lista de popularidad de recetas
         $(document).ready(function() {
