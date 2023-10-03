@@ -19,27 +19,27 @@ public final class PopularidadRecetaProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+     * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
      */
-    java.util.List<com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas> 
+    java.util.List<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> 
         getPopularidadRecetaList();
     /**
-     * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+     * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
      */
-    com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas getPopularidadReceta(int index);
+    com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta getPopularidadReceta(int index);
     /**
-     * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+     * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
      */
     int getPopularidadRecetaCount();
     /**
-     * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+     * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
      */
-    java.util.List<? extends com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetasOrBuilder> 
+    java.util.List<? extends com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetaOrBuilder> 
         getPopularidadRecetaOrBuilderList();
     /**
-     * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+     * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
      */
-    com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetasOrBuilder getPopularidadRecetaOrBuilder(
+    com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetaOrBuilder getPopularidadRecetaOrBuilder(
         int index);
   }
   /**
@@ -91,11 +91,11 @@ public final class PopularidadRecetaProto {
               break;
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                popularidadReceta_ = new java.util.ArrayList<com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas>();
+                popularidadReceta_ = new java.util.ArrayList<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta>();
                 mutable_bitField0_ |= 0x00000001;
               }
               popularidadReceta_.add(
-                  input.readMessage(com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas.parser(), extensionRegistry));
+                  input.readMessage(com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.parser(), extensionRegistry));
               break;
             }
             default: {
@@ -134,36 +134,36 @@ public final class PopularidadRecetaProto {
     }
 
     public static final int POPULARIDADRECETA_FIELD_NUMBER = 1;
-    private java.util.List<com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas> popularidadReceta_;
+    private java.util.List<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> popularidadReceta_;
     /**
-     * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+     * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
      */
-    public java.util.List<com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas> getPopularidadRecetaList() {
+    public java.util.List<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> getPopularidadRecetaList() {
       return popularidadReceta_;
     }
     /**
-     * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+     * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
      */
-    public java.util.List<? extends com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetasOrBuilder> 
+    public java.util.List<? extends com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetaOrBuilder> 
         getPopularidadRecetaOrBuilderList() {
       return popularidadReceta_;
     }
     /**
-     * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+     * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
      */
     public int getPopularidadRecetaCount() {
       return popularidadReceta_.size();
     }
     /**
-     * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+     * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
      */
-    public com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas getPopularidadReceta(int index) {
+    public com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta getPopularidadReceta(int index) {
       return popularidadReceta_.get(index);
     }
     /**
-     * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+     * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
      */
-    public com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetasOrBuilder getPopularidadRecetaOrBuilder(
+    public com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetaOrBuilder getPopularidadRecetaOrBuilder(
         int index) {
       return popularidadReceta_.get(index);
     }
@@ -510,22 +510,22 @@ public final class PopularidadRecetaProto {
       }
       private int bitField0_;
 
-      private java.util.List<com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas> popularidadReceta_ =
+      private java.util.List<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> popularidadReceta_ =
         java.util.Collections.emptyList();
       private void ensurePopularidadRecetaIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          popularidadReceta_ = new java.util.ArrayList<com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas>(popularidadReceta_);
+          popularidadReceta_ = new java.util.ArrayList<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta>(popularidadReceta_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas, com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas.Builder, com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetasOrBuilder> popularidadRecetaBuilder_;
+          com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta, com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.Builder, com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetaOrBuilder> popularidadRecetaBuilder_;
 
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
-      public java.util.List<com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas> getPopularidadRecetaList() {
+      public java.util.List<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> getPopularidadRecetaList() {
         if (popularidadRecetaBuilder_ == null) {
           return java.util.Collections.unmodifiableList(popularidadReceta_);
         } else {
@@ -533,7 +533,7 @@ public final class PopularidadRecetaProto {
         }
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
       public int getPopularidadRecetaCount() {
         if (popularidadRecetaBuilder_ == null) {
@@ -543,9 +543,9 @@ public final class PopularidadRecetaProto {
         }
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
-      public com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas getPopularidadReceta(int index) {
+      public com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta getPopularidadReceta(int index) {
         if (popularidadRecetaBuilder_ == null) {
           return popularidadReceta_.get(index);
         } else {
@@ -553,10 +553,10 @@ public final class PopularidadRecetaProto {
         }
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
       public Builder setPopularidadReceta(
-          int index, com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas value) {
+          int index, com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta value) {
         if (popularidadRecetaBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -570,10 +570,10 @@ public final class PopularidadRecetaProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
       public Builder setPopularidadReceta(
-          int index, com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas.Builder builderForValue) {
+          int index, com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.Builder builderForValue) {
         if (popularidadRecetaBuilder_ == null) {
           ensurePopularidadRecetaIsMutable();
           popularidadReceta_.set(index, builderForValue.build());
@@ -584,9 +584,9 @@ public final class PopularidadRecetaProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
-      public Builder addPopularidadReceta(com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas value) {
+      public Builder addPopularidadReceta(com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta value) {
         if (popularidadRecetaBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -600,10 +600,10 @@ public final class PopularidadRecetaProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
       public Builder addPopularidadReceta(
-          int index, com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas value) {
+          int index, com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta value) {
         if (popularidadRecetaBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -617,10 +617,10 @@ public final class PopularidadRecetaProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
       public Builder addPopularidadReceta(
-          com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas.Builder builderForValue) {
+          com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.Builder builderForValue) {
         if (popularidadRecetaBuilder_ == null) {
           ensurePopularidadRecetaIsMutable();
           popularidadReceta_.add(builderForValue.build());
@@ -631,10 +631,10 @@ public final class PopularidadRecetaProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
       public Builder addPopularidadReceta(
-          int index, com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas.Builder builderForValue) {
+          int index, com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.Builder builderForValue) {
         if (popularidadRecetaBuilder_ == null) {
           ensurePopularidadRecetaIsMutable();
           popularidadReceta_.add(index, builderForValue.build());
@@ -645,10 +645,10 @@ public final class PopularidadRecetaProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
       public Builder addAllPopularidadReceta(
-          java.lang.Iterable<? extends com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas> values) {
+          java.lang.Iterable<? extends com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> values) {
         if (popularidadRecetaBuilder_ == null) {
           ensurePopularidadRecetaIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -660,7 +660,7 @@ public final class PopularidadRecetaProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
       public Builder clearPopularidadReceta() {
         if (popularidadRecetaBuilder_ == null) {
@@ -673,7 +673,7 @@ public final class PopularidadRecetaProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
       public Builder removePopularidadReceta(int index) {
         if (popularidadRecetaBuilder_ == null) {
@@ -686,16 +686,16 @@ public final class PopularidadRecetaProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
-      public com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas.Builder getPopularidadRecetaBuilder(
+      public com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.Builder getPopularidadRecetaBuilder(
           int index) {
         return getPopularidadRecetaFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
-      public com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetasOrBuilder getPopularidadRecetaOrBuilder(
+      public com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetaOrBuilder getPopularidadRecetaOrBuilder(
           int index) {
         if (popularidadRecetaBuilder_ == null) {
           return popularidadReceta_.get(index);  } else {
@@ -703,9 +703,9 @@ public final class PopularidadRecetaProto {
         }
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
-      public java.util.List<? extends com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetasOrBuilder> 
+      public java.util.List<? extends com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetaOrBuilder> 
            getPopularidadRecetaOrBuilderList() {
         if (popularidadRecetaBuilder_ != null) {
           return popularidadRecetaBuilder_.getMessageOrBuilderList();
@@ -714,33 +714,33 @@ public final class PopularidadRecetaProto {
         }
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
-      public com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas.Builder addPopularidadRecetaBuilder() {
+      public com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.Builder addPopularidadRecetaBuilder() {
         return getPopularidadRecetaFieldBuilder().addBuilder(
-            com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas.getDefaultInstance());
+            com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.getDefaultInstance());
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
-      public com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas.Builder addPopularidadRecetaBuilder(
+      public com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.Builder addPopularidadRecetaBuilder(
           int index) {
         return getPopularidadRecetaFieldBuilder().addBuilder(
-            index, com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas.getDefaultInstance());
+            index, com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.getDefaultInstance());
       }
       /**
-       * <code>repeated .model.PopularidadRecetas popularidadReceta = 1;</code>
+       * <code>repeated .model.PopularidadReceta popularidadReceta = 1;</code>
        */
-      public java.util.List<com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas.Builder> 
+      public java.util.List<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.Builder> 
            getPopularidadRecetaBuilderList() {
         return getPopularidadRecetaFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas, com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas.Builder, com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetasOrBuilder> 
+          com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta, com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.Builder, com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetaOrBuilder> 
           getPopularidadRecetaFieldBuilder() {
         if (popularidadRecetaBuilder_ == null) {
           popularidadRecetaBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas, com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas.Builder, com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetasOrBuilder>(
+              com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta, com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.Builder, com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetaOrBuilder>(
                   popularidadReceta_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
@@ -1656,17 +1656,17 @@ public final class PopularidadRecetaProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\027popularidadReceta.proto\022\005model\032\033google" +
-      "/protobuf/empty.proto\032\014receta.proto\"J\n\022P" +
-      "opularidadRecetas\0224\n\021popularidadReceta\030\001" +
-      " \003(\0132\031.model.PopularidadRecetas\"O\n\021Popul" +
-      "aridadReceta\022\n\n\002id\030\001 \001(\005\022\017\n\007puntaje\030\002 \001(" +
-      "\t\022\035\n\006receta\030\003 \001(\0132\r.model.Receta2\255\001\n\031Pop" +
-      "ularidadRecetasService\022>\n\007FindAll\022\026.goog" +
-      "le.protobuf.Empty\032\031.model.PopularidadRec" +
-      "etas\"\000\022P\n\030GuardarPopularidadReceta\022\030.mod" +
-      "el.PopularidadReceta\032\030.model.Popularidad" +
-      "Receta\"\000B.\n\024com.chefencasa.modelB\026Popula" +
-      "ridadRecetaProtob\006proto3"
+      "/protobuf/empty.proto\032\014receta.proto\"I\n\022P" +
+      "opularidadRecetas\0223\n\021popularidadReceta\030\001" +
+      " \003(\0132\030.model.PopularidadReceta\"O\n\021Popula" +
+      "ridadReceta\022\n\n\002id\030\001 \001(\005\022\017\n\007puntaje\030\002 \001(\t" +
+      "\022\035\n\006receta\030\003 \001(\0132\r.model.Receta2\255\001\n\031Popu" +
+      "laridadRecetasService\022>\n\007FindAll\022\026.googl" +
+      "e.protobuf.Empty\032\031.model.PopularidadRece" +
+      "tas\"\000\022P\n\030GuardarPopularidadReceta\022\030.mode" +
+      "l.PopularidadReceta\032\030.model.PopularidadR" +
+      "eceta\"\000B.\n\024com.chefencasa.modelB\026Popular" +
+      "idadRecetaProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

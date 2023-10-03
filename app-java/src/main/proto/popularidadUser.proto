@@ -16,7 +16,7 @@ service PopularidadUsersService {
 }
 
 message PopularidadUsers {
-  repeated PopularidadUsers popularidadUser = 1;
+  repeated PopularidadUser popularidadUser = 1;
 }
 
 message PopularidadUser {

@@ -1,5 +1,8 @@
 package com.chefencasa.app.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +11,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import com.chefencasa.app.entities.PopularidadReceta;
 import com.chefencasa.app.repository.PopularidadRecetaRepository;
 import com.chefencasa.app.repository.RecetaRepository;
+import com.chefencasa.model.CategoriaProto;
 import com.chefencasa.model.PopularidadRecetaProto;
 import com.chefencasa.model.PopularidadRecetasServiceGrpc;
 import com.chefencasa.model.RecetaProto;
+import com.google.protobuf.Empty;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -65,36 +70,28 @@ public class PopularidadRecetaService extends PopularidadRecetasServiceGrpc.Popu
             logger.error("Error al agregar Popularidad Receta", e);
         }
     }
-    
 
-    // @Override
-    // public void traerComentario(PopularidadRecetaProto.Comentario request,StreamObserver<PopularidadRecetaProto.Comentario> responseObserver) {
 
-    //     Comentario comentario = PopularidadRecetaRepository.findById(request.getId()).get();
-
-    //     PopularidadRecetaProto.Comentario a = PopularidadRecetaProto.PopularidadReceta.newBuilder()
-    //                 .setId(popularidadReceta.getId())
-    //                 .build();
-
-    //     responseObserver.onNext(a);
-    //     responseObserver.onCompleted();
+   	@Override
+	public void findAll(Empty request, StreamObserver<PopularidadRecetaProto.PopularidadRecetas> responseObserver) {
+        List<PopularidadRecetaProto.PopularidadReceta> popularidadRecetadb = new ArrayList<>();
         
-    // }
+        for (PopularidadReceta popularidadReceta : popularidadRecetaRepository.findAll()) {
+            PopularidadRecetaProto.PopularidadReceta popularidadRecetaProto = PopularidadRecetaProto.PopularidadReceta.newBuilder()
+                .setPuntaje(popularidadReceta.getPuntaje())
+                .setReceta(RecetaProto.Receta.newBuilder()
+                    .setTituloReceta(popularidadReceta.getReceta().getTituloReceta())
+                    .build())
+                    
+                .build();
+                    
+            popularidadRecetadb.add(popularidadRecetaProto);
+        }
 
-   	// @Override
-	// public void findAll(Empty request, StreamObserver<PopularidadRecetaProto.PopularidadRecetas> responseObserver) {
-    //     List<PopularidadRecetasProto.PopularidadRecetas> popularidadRecetadb = new ArrayList<>();
-    //     for (PopularidadReceta id : popularidadRecetaRepository.findAll()) {
-    //         PopularidadRecetaProto.PopularidadReceta popularidadRecetaProto = PopularidadRecetaProto.Comentario.newBuilder()
-    //                 .setId(popularidadReceta.getId())
-    //                 .build();
-    //         popularidadRecetadb.add(popularidadRecetaProto);
-    //     }
-
-    //     PopularidadRecetaProto.PopularidadReceta a = PopularidadRecetaProto.PopularidadReceta.newBuilder()
-    //         .addAllPopularidadReceta(popularidadRecetadb)
-    //         .build();
-    //     responseObserver.onNext(a);
-    //     responseObserver.onCompleted();
-    // }
+        PopularidadRecetaProto.PopularidadRecetas a = PopularidadRecetaProto.PopularidadRecetas.newBuilder()
+            .addAllPopularidadReceta(popularidadRecetadb)
+            .build();
+        responseObserver.onNext(a);
+        responseObserver.onCompleted();
+    }
 }

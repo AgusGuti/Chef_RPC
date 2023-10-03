@@ -15,7 +15,7 @@ service PopularidadRecetasService {
 
 
 message PopularidadRecetas {
-  repeated PopularidadRecetas popularidadReceta = 1;
+  repeated PopularidadReceta popularidadReceta = 1;
 }
 
 message PopularidadReceta {

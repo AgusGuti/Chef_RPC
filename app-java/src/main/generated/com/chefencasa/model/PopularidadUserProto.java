@@ -19,27 +19,27 @@ public final class PopularidadUserProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+     * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
      */
-    java.util.List<com.chefencasa.model.PopularidadUserProto.PopularidadUsers> 
+    java.util.List<com.chefencasa.model.PopularidadUserProto.PopularidadUser> 
         getPopularidadUserList();
     /**
-     * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+     * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
      */
-    com.chefencasa.model.PopularidadUserProto.PopularidadUsers getPopularidadUser(int index);
+    com.chefencasa.model.PopularidadUserProto.PopularidadUser getPopularidadUser(int index);
     /**
-     * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+     * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
      */
     int getPopularidadUserCount();
     /**
-     * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+     * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
      */
-    java.util.List<? extends com.chefencasa.model.PopularidadUserProto.PopularidadUsersOrBuilder> 
+    java.util.List<? extends com.chefencasa.model.PopularidadUserProto.PopularidadUserOrBuilder> 
         getPopularidadUserOrBuilderList();
     /**
-     * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+     * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
      */
-    com.chefencasa.model.PopularidadUserProto.PopularidadUsersOrBuilder getPopularidadUserOrBuilder(
+    com.chefencasa.model.PopularidadUserProto.PopularidadUserOrBuilder getPopularidadUserOrBuilder(
         int index);
   }
   /**
@@ -91,11 +91,11 @@ public final class PopularidadUserProto {
               break;
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                popularidadUser_ = new java.util.ArrayList<com.chefencasa.model.PopularidadUserProto.PopularidadUsers>();
+                popularidadUser_ = new java.util.ArrayList<com.chefencasa.model.PopularidadUserProto.PopularidadUser>();
                 mutable_bitField0_ |= 0x00000001;
               }
               popularidadUser_.add(
-                  input.readMessage(com.chefencasa.model.PopularidadUserProto.PopularidadUsers.parser(), extensionRegistry));
+                  input.readMessage(com.chefencasa.model.PopularidadUserProto.PopularidadUser.parser(), extensionRegistry));
               break;
             }
             default: {
@@ -134,36 +134,36 @@ public final class PopularidadUserProto {
     }
 
     public static final int POPULARIDADUSER_FIELD_NUMBER = 1;
-    private java.util.List<com.chefencasa.model.PopularidadUserProto.PopularidadUsers> popularidadUser_;
+    private java.util.List<com.chefencasa.model.PopularidadUserProto.PopularidadUser> popularidadUser_;
     /**
-     * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+     * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
      */
-    public java.util.List<com.chefencasa.model.PopularidadUserProto.PopularidadUsers> getPopularidadUserList() {
+    public java.util.List<com.chefencasa.model.PopularidadUserProto.PopularidadUser> getPopularidadUserList() {
       return popularidadUser_;
     }
     /**
-     * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+     * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
      */
-    public java.util.List<? extends com.chefencasa.model.PopularidadUserProto.PopularidadUsersOrBuilder> 
+    public java.util.List<? extends com.chefencasa.model.PopularidadUserProto.PopularidadUserOrBuilder> 
         getPopularidadUserOrBuilderList() {
       return popularidadUser_;
     }
     /**
-     * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+     * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
      */
     public int getPopularidadUserCount() {
       return popularidadUser_.size();
     }
     /**
-     * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+     * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
      */
-    public com.chefencasa.model.PopularidadUserProto.PopularidadUsers getPopularidadUser(int index) {
+    public com.chefencasa.model.PopularidadUserProto.PopularidadUser getPopularidadUser(int index) {
       return popularidadUser_.get(index);
     }
     /**
-     * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+     * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
      */
-    public com.chefencasa.model.PopularidadUserProto.PopularidadUsersOrBuilder getPopularidadUserOrBuilder(
+    public com.chefencasa.model.PopularidadUserProto.PopularidadUserOrBuilder getPopularidadUserOrBuilder(
         int index) {
       return popularidadUser_.get(index);
     }
@@ -510,22 +510,22 @@ public final class PopularidadUserProto {
       }
       private int bitField0_;
 
-      private java.util.List<com.chefencasa.model.PopularidadUserProto.PopularidadUsers> popularidadUser_ =
+      private java.util.List<com.chefencasa.model.PopularidadUserProto.PopularidadUser> popularidadUser_ =
         java.util.Collections.emptyList();
       private void ensurePopularidadUserIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          popularidadUser_ = new java.util.ArrayList<com.chefencasa.model.PopularidadUserProto.PopularidadUsers>(popularidadUser_);
+          popularidadUser_ = new java.util.ArrayList<com.chefencasa.model.PopularidadUserProto.PopularidadUser>(popularidadUser_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.chefencasa.model.PopularidadUserProto.PopularidadUsers, com.chefencasa.model.PopularidadUserProto.PopularidadUsers.Builder, com.chefencasa.model.PopularidadUserProto.PopularidadUsersOrBuilder> popularidadUserBuilder_;
+          com.chefencasa.model.PopularidadUserProto.PopularidadUser, com.chefencasa.model.PopularidadUserProto.PopularidadUser.Builder, com.chefencasa.model.PopularidadUserProto.PopularidadUserOrBuilder> popularidadUserBuilder_;
 
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
-      public java.util.List<com.chefencasa.model.PopularidadUserProto.PopularidadUsers> getPopularidadUserList() {
+      public java.util.List<com.chefencasa.model.PopularidadUserProto.PopularidadUser> getPopularidadUserList() {
         if (popularidadUserBuilder_ == null) {
           return java.util.Collections.unmodifiableList(popularidadUser_);
         } else {
@@ -533,7 +533,7 @@ public final class PopularidadUserProto {
         }
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
       public int getPopularidadUserCount() {
         if (popularidadUserBuilder_ == null) {
@@ -543,9 +543,9 @@ public final class PopularidadUserProto {
         }
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
-      public com.chefencasa.model.PopularidadUserProto.PopularidadUsers getPopularidadUser(int index) {
+      public com.chefencasa.model.PopularidadUserProto.PopularidadUser getPopularidadUser(int index) {
         if (popularidadUserBuilder_ == null) {
           return popularidadUser_.get(index);
         } else {
@@ -553,10 +553,10 @@ public final class PopularidadUserProto {
         }
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
       public Builder setPopularidadUser(
-          int index, com.chefencasa.model.PopularidadUserProto.PopularidadUsers value) {
+          int index, com.chefencasa.model.PopularidadUserProto.PopularidadUser value) {
         if (popularidadUserBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -570,10 +570,10 @@ public final class PopularidadUserProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
       public Builder setPopularidadUser(
-          int index, com.chefencasa.model.PopularidadUserProto.PopularidadUsers.Builder builderForValue) {
+          int index, com.chefencasa.model.PopularidadUserProto.PopularidadUser.Builder builderForValue) {
         if (popularidadUserBuilder_ == null) {
           ensurePopularidadUserIsMutable();
           popularidadUser_.set(index, builderForValue.build());
@@ -584,9 +584,9 @@ public final class PopularidadUserProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
-      public Builder addPopularidadUser(com.chefencasa.model.PopularidadUserProto.PopularidadUsers value) {
+      public Builder addPopularidadUser(com.chefencasa.model.PopularidadUserProto.PopularidadUser value) {
         if (popularidadUserBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -600,10 +600,10 @@ public final class PopularidadUserProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
       public Builder addPopularidadUser(
-          int index, com.chefencasa.model.PopularidadUserProto.PopularidadUsers value) {
+          int index, com.chefencasa.model.PopularidadUserProto.PopularidadUser value) {
         if (popularidadUserBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -617,10 +617,10 @@ public final class PopularidadUserProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
       public Builder addPopularidadUser(
-          com.chefencasa.model.PopularidadUserProto.PopularidadUsers.Builder builderForValue) {
+          com.chefencasa.model.PopularidadUserProto.PopularidadUser.Builder builderForValue) {
         if (popularidadUserBuilder_ == null) {
           ensurePopularidadUserIsMutable();
           popularidadUser_.add(builderForValue.build());
@@ -631,10 +631,10 @@ public final class PopularidadUserProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
       public Builder addPopularidadUser(
-          int index, com.chefencasa.model.PopularidadUserProto.PopularidadUsers.Builder builderForValue) {
+          int index, com.chefencasa.model.PopularidadUserProto.PopularidadUser.Builder builderForValue) {
         if (popularidadUserBuilder_ == null) {
           ensurePopularidadUserIsMutable();
           popularidadUser_.add(index, builderForValue.build());
@@ -645,10 +645,10 @@ public final class PopularidadUserProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
       public Builder addAllPopularidadUser(
-          java.lang.Iterable<? extends com.chefencasa.model.PopularidadUserProto.PopularidadUsers> values) {
+          java.lang.Iterable<? extends com.chefencasa.model.PopularidadUserProto.PopularidadUser> values) {
         if (popularidadUserBuilder_ == null) {
           ensurePopularidadUserIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -660,7 +660,7 @@ public final class PopularidadUserProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
       public Builder clearPopularidadUser() {
         if (popularidadUserBuilder_ == null) {
@@ -673,7 +673,7 @@ public final class PopularidadUserProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
       public Builder removePopularidadUser(int index) {
         if (popularidadUserBuilder_ == null) {
@@ -686,16 +686,16 @@ public final class PopularidadUserProto {
         return this;
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
-      public com.chefencasa.model.PopularidadUserProto.PopularidadUsers.Builder getPopularidadUserBuilder(
+      public com.chefencasa.model.PopularidadUserProto.PopularidadUser.Builder getPopularidadUserBuilder(
           int index) {
         return getPopularidadUserFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
-      public com.chefencasa.model.PopularidadUserProto.PopularidadUsersOrBuilder getPopularidadUserOrBuilder(
+      public com.chefencasa.model.PopularidadUserProto.PopularidadUserOrBuilder getPopularidadUserOrBuilder(
           int index) {
         if (popularidadUserBuilder_ == null) {
           return popularidadUser_.get(index);  } else {
@@ -703,9 +703,9 @@ public final class PopularidadUserProto {
         }
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
-      public java.util.List<? extends com.chefencasa.model.PopularidadUserProto.PopularidadUsersOrBuilder> 
+      public java.util.List<? extends com.chefencasa.model.PopularidadUserProto.PopularidadUserOrBuilder> 
            getPopularidadUserOrBuilderList() {
         if (popularidadUserBuilder_ != null) {
           return popularidadUserBuilder_.getMessageOrBuilderList();
@@ -714,33 +714,33 @@ public final class PopularidadUserProto {
         }
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
-      public com.chefencasa.model.PopularidadUserProto.PopularidadUsers.Builder addPopularidadUserBuilder() {
+      public com.chefencasa.model.PopularidadUserProto.PopularidadUser.Builder addPopularidadUserBuilder() {
         return getPopularidadUserFieldBuilder().addBuilder(
-            com.chefencasa.model.PopularidadUserProto.PopularidadUsers.getDefaultInstance());
+            com.chefencasa.model.PopularidadUserProto.PopularidadUser.getDefaultInstance());
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
-      public com.chefencasa.model.PopularidadUserProto.PopularidadUsers.Builder addPopularidadUserBuilder(
+      public com.chefencasa.model.PopularidadUserProto.PopularidadUser.Builder addPopularidadUserBuilder(
           int index) {
         return getPopularidadUserFieldBuilder().addBuilder(
-            index, com.chefencasa.model.PopularidadUserProto.PopularidadUsers.getDefaultInstance());
+            index, com.chefencasa.model.PopularidadUserProto.PopularidadUser.getDefaultInstance());
       }
       /**
-       * <code>repeated .model.PopularidadUsers popularidadUser = 1;</code>
+       * <code>repeated .model.PopularidadUser popularidadUser = 1;</code>
        */
-      public java.util.List<com.chefencasa.model.PopularidadUserProto.PopularidadUsers.Builder> 
+      public java.util.List<com.chefencasa.model.PopularidadUserProto.PopularidadUser.Builder> 
            getPopularidadUserBuilderList() {
         return getPopularidadUserFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.chefencasa.model.PopularidadUserProto.PopularidadUsers, com.chefencasa.model.PopularidadUserProto.PopularidadUsers.Builder, com.chefencasa.model.PopularidadUserProto.PopularidadUsersOrBuilder> 
+          com.chefencasa.model.PopularidadUserProto.PopularidadUser, com.chefencasa.model.PopularidadUserProto.PopularidadUser.Builder, com.chefencasa.model.PopularidadUserProto.PopularidadUserOrBuilder> 
           getPopularidadUserFieldBuilder() {
         if (popularidadUserBuilder_ == null) {
           popularidadUserBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.chefencasa.model.PopularidadUserProto.PopularidadUsers, com.chefencasa.model.PopularidadUserProto.PopularidadUsers.Builder, com.chefencasa.model.PopularidadUserProto.PopularidadUsersOrBuilder>(
+              com.chefencasa.model.PopularidadUserProto.PopularidadUser, com.chefencasa.model.PopularidadUserProto.PopularidadUser.Builder, com.chefencasa.model.PopularidadUserProto.PopularidadUserOrBuilder>(
                   popularidadUser_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
@@ -1805,17 +1805,17 @@ public final class PopularidadUserProto {
     java.lang.String[] descriptorData = {
       "\n\025popularidadUser.proto\022\005model\032\033google/p" +
       "rotobuf/empty.proto\032\036google/protobuf/wra" +
-      "ppers.proto\032\nuser.proto\"D\n\020PopularidadUs" +
-      "ers\0220\n\017popularidadUser\030\001 \003(\0132\027.model.Pop" +
-      "ularidadUsers\"`\n\017PopularidadUser\022\n\n\002id\030\001" +
-      " \001(\005\022\025\n\rnombreUsuario\030\002 \001(\t\022\017\n\007puntaje\030\003" +
-      " \001(\t\022\031\n\004user\030\004 \001(\0132\013.model.User2\243\001\n\027Popu" +
-      "laridadUsersService\022<\n\007FindAll\022\026.google." +
-      "protobuf.Empty\032\027.model.PopularidadUsers\"" +
-      "\000\022J\n\026GuardarPopularidadUser\022\026.model.Popu" +
-      "laridadUser\032\026.model.PopularidadUser\"\000B,\n" +
-      "\024com.chefencasa.modelB\024PopularidadUserPr" +
-      "otob\006proto3"
+      "ppers.proto\032\nuser.proto\"C\n\020PopularidadUs" +
+      "ers\022/\n\017popularidadUser\030\001 \003(\0132\026.model.Pop" +
+      "ularidadUser\"`\n\017PopularidadUser\022\n\n\002id\030\001 " +
+      "\001(\005\022\025\n\rnombreUsuario\030\002 \001(\t\022\017\n\007puntaje\030\003 " +
+      "\001(\t\022\031\n\004user\030\004 \001(\0132\013.model.User2\243\001\n\027Popul" +
+      "aridadUsersService\022<\n\007FindAll\022\026.google.p" +
+      "rotobuf.Empty\032\027.model.PopularidadUsers\"\000" +
+      "\022J\n\026GuardarPopularidadUser\022\026.model.Popul" +
+      "aridadUser\032\026.model.PopularidadUser\"\000B,\n\024" +
+      "com.chefencasa.modelB\024PopularidadUserPro" +
+      "tob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

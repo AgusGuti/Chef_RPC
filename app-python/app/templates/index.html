@@ -129,23 +129,34 @@
 
         // Código JavaScript para cargar la lista de popularidad de recetas
         $(document).ready(function() {
-            $.get("/popularidadReceta", function(data) {
-                var listaPopularidadReceta = $("#lista-popularidadReceta"); // Cambia el ID
-                data.forEach(function(receta) {
-                    // Accede a las propiedades del objeto receta directamente
-                    var idReceta = receta[0]; // El ID de la receta
-                    var popularidad = receta[1]; // La popularidad promedio
-
-                    // Construye el HTML para mostrar la información de la popularidad de recetas
-                    var recetaHTML = '<div class="receta-container d-flex flex-column align-items-center">';
-                    recetaHTML += '<div class="receta-info">';
-                    recetaHTML += '<i class="bi bi-star-fill star-icon text-warning"></i>';
-                    recetaHTML += '<p>ID de Receta: ' + idReceta + '</p>';
-                    recetaHTML += '<p>Popularidad Promedio: ' + popularidad.toFixed(2) + '</p>'; // Mostrar dos decimales
-                    recetaHTML += '</div>';
-                    recetaHTML += '</div>';
-                    listaPopularidadReceta.append(recetaHTML);
-                });
+            $.ajax({
+                type: 'GET',
+                url: '/popularidadRecetas',
+                dataType: 'json',
+                success: function(data) {
+                    var listaPopularidadReceta = $("#lista-popularidadReceta");
+                    
+                    data.popularidadReceta.forEach(function(item) {
+                        var puntaje = parseFloat(item.puntaje);
+                        var tituloReceta = item.receta.tituloReceta;
+        
+                        if (!isNaN(puntaje) && tituloReceta) {
+                            var recetaHTML = '<div class="receta-container d-flex flex-column align-items-center">';
+                            recetaHTML += '<div class="receta-info">';
+                            recetaHTML += '<i class="bi bi-star-fill star-icon text-warning"></i>';
+                            recetaHTML += '<p>Título de Receta: ' + tituloReceta + '</p>';
+                            recetaHTML += '<p>Puntaje: ' + puntaje.toFixed(2) + '</p>';
+                            recetaHTML += '</div>';
+                            recetaHTML += '</div>';
+                            listaPopularidadReceta.append(recetaHTML);
+                        } else {
+                            console.error("Invalid data in item:", item);
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error:", status, error);
+                }
             });
         });
     </script>  

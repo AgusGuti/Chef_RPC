@@ -105,3 +105,15 @@ def popularidadReceta():
 
     # Devolver las recetas guardadas como JSON
     return jsonify({"recetasGuardadas": recetas_guardadas})
+
+
+
+@popularidadReceta_blueprint.route("/popularidadRecetas",methods = ['GET'])
+def findAll():
+    logger.info("/popularidadRecetas")
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = PopularidadRecetasServiceStub(channel)
+        response = stub.FindAll(PopularidadReceta()) 
+        popularidadRecetas = response.popularidadReceta 
+    print("Greeter client received: " + str(response))    
+    return MessageToJson(response)

@@ -10,8 +10,8 @@ DESCRIPTOR: _descriptor.FileDescriptor
 class PopularidadRecetas(_message.Message):
     __slots__ = ["popularidadReceta"]
     POPULARIDADRECETA_FIELD_NUMBER: _ClassVar[int]
-    popularidadReceta: _containers.RepeatedCompositeFieldContainer[PopularidadRecetas]
-    def __init__(self, popularidadReceta: _Optional[_Iterable[_Union[PopularidadRecetas, _Mapping]]] = ...) -> None: ...
+    popularidadReceta: _containers.RepeatedCompositeFieldContainer[PopularidadReceta]
+    def __init__(self, popularidadReceta: _Optional[_Iterable[_Union[PopularidadReceta, _Mapping]]] = ...) -> None: ...
 
 class PopularidadReceta(_message.Message):
     __slots__ = ["id", "puntaje", "receta"]

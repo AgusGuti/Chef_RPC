@@ -11,8 +11,8 @@ DESCRIPTOR: _descriptor.FileDescriptor
 class PopularidadUsers(_message.Message):
     __slots__ = ["popularidadUser"]
     POPULARIDADUSER_FIELD_NUMBER: _ClassVar[int]
-    popularidadUser: _containers.RepeatedCompositeFieldContainer[PopularidadUsers]
-    def __init__(self, popularidadUser: _Optional[_Iterable[_Union[PopularidadUsers, _Mapping]]] = ...) -> None: ...
+    popularidadUser: _containers.RepeatedCompositeFieldContainer[PopularidadUser]
+    def __init__(self, popularidadUser: _Optional[_Iterable[_Union[PopularidadUser, _Mapping]]] = ...) -> None: ...
 
 class PopularidadUser(_message.Message):
     __slots__ = ["id", "nombreUsuario", "puntaje", "user"]
