@@ -14,10 +14,12 @@ import com.chefencasa.app.entities.User;
 @Repository("popularidadUserRepository")
 public interface PopularidadUserRepository extends JpaRepository<PopularidadUser, Serializable> {
 
-@Query("SELECT CASE WHEN COUNT(p) > 0 THEN true ELSE false END FROM PopularidadUser p WHERE p.user.nombre = :nombreUsuario")
-    boolean existsByNombreUsuario(@Param("nombreUsuario") String nombreUsuario);
+    boolean existsByNombreUsuario(String nombreUsuario);
 
-@Query("SELECT p FROM PopularidadUser p WHERE p.user = :user")
+    @Query("SELECT pu FROM PopularidadUser pu WHERE pu.nombreUsuario = :nombreUsuario")
+    PopularidadUser findByNombreUsuario(@Param("nombreUsuario") String nombreUsuario);
+
+    @Query("SELECT p FROM PopularidadUser p WHERE p.user = :user")
     public abstract PopularidadUser findByUser(User user);
 
 }

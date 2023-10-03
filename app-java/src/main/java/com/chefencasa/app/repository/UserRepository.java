@@ -18,4 +18,6 @@ public interface UserRepository extends JpaRepository<User, Serializable> {
 	
 	public abstract User findById(int id);
 
+	User findByNombre(String nombre);
+
 }

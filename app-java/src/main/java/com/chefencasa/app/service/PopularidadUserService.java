@@ -45,12 +45,12 @@ public class PopularidadUserService extends PopularidadUsersServiceGrpc.Populari
     
             // Verificar si la PopularidadUser ya existe para este nombre de usuario
             boolean popularidadUserExistente = popularidadUserRepository.existsByNombreUsuario(nombreUsuario);
-            
-            logger.info("PopularidadExistente: "+popularidadUserExistente);
-
+    
+            logger.info("PopularidadExistente: " + popularidadUserExistente);
+    
             if (popularidadUserExistente) {
                 // Si la PopularidadUser ya existe, actualiza su puntaje y guárdala
-                PopularidadUser popularidadUser = popularidadUserRepository.findByUser(usuarioRepository.findById(request.getUser().getId()));
+                PopularidadUser popularidadUser = popularidadUserRepository.findByNombreUsuario(nombreUsuario);
                 popularidadUser.setPuntaje(request.getPuntaje());
                 popularidadUserRepository.save(popularidadUser);
     
@@ -58,29 +58,29 @@ public class PopularidadUserService extends PopularidadUsersServiceGrpc.Populari
                 PopularidadUserProto.PopularidadUser popularidadUserModificada = PopularidadUserProto.PopularidadUser.newBuilder()
                     .setId(popularidadUser.getId())
                     .setPuntaje(request.getPuntaje())
-                    .setUser(UserProto.User.newBuilder().setNombre(nombreUsuario).build())
+                    .setUser(request.getUser())  // Usa el objeto User de la request
                     .build();
                 responseObserver.onNext(popularidadUserModificada);
             } else {
                 // Si la PopularidadUser no existe, crea una nueva instancia y guárdala
-                PopularidadUser nuevaPopularidadUser = new PopularidadUser(request.getNombreUsuario(),request.getPuntaje()); // No asociar con un objeto User
+                User user = usuarioRepository.findByNombre(nombreUsuario);
+                PopularidadUser nuevaPopularidadUser = new PopularidadUser(user, nombreUsuario, request.getPuntaje());
                 popularidadUserRepository.save(nuevaPopularidadUser);
     
                 // Envía una respuesta con la información creada
                 PopularidadUserProto.PopularidadUser a = PopularidadUserProto.PopularidadUser.newBuilder()
                     .setId(nuevaPopularidadUser.getId())
                     .setPuntaje(request.getPuntaje())
-                    .setUser(UserProto.User.newBuilder().setNombre(nombreUsuario).build())
+                    .setUser(request.getUser())  // Usa el objeto User de la request
                     .build();
                 responseObserver.onNext(a);
-            }
+            }   
     
             responseObserver.onCompleted();
         } catch (Exception e) {
             logger.error("Error al agregar Popularidad User", e);
         }
     }
-    
     
 
     // @Override

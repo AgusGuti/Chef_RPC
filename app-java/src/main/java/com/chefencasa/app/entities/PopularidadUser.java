@@ -54,6 +54,15 @@ public class PopularidadUser implements Serializable {
 		this.puntaje = puntaje;
 	}
 
+	
+
+
+	public PopularidadUser(User user, String nombreUsuario, String puntaje) {
+		this.user = user;
+		this.nombreUsuario = nombreUsuario;
+		this.puntaje = puntaje;
+	}
+
 
 
 	public static long getSerialversionuid() {

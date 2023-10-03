@@ -60,16 +60,13 @@ def popularidadUsuario():
 
             # Calcular la popularidad de los usuarios en función de los mensajes recibidos
             popularidad_usuarios = {}
+            contador_puntajes = {}  # Mantener un contador de puntajes para cada usuario
 
             for mensaje in lista_mensajes:
                 mensaje_decodificado = mensaje['popularidadUsuario']
-                if 'nombreUsuario' in mensaje_decodificado and 'puntaje' in mensaje_decodificado:
-                    nombre_usuario = mensaje_decodificado['nombreUsuario']
-                    puntaje = mensaje_decodificado['puntaje']
+                nombre_usuario = mensaje_decodificado['nombreUsuario']
+                puntaje = mensaje_decodificado['puntaje']
                 
-                else:
-                    logger.warning("Mensaje incompleto: {}".format(mensaje_decodificado))
-
                 # Convertir puntaje a entero
                 if puntaje == "+1":
                     puntaje_entero = 1
@@ -78,33 +75,27 @@ def popularidadUsuario():
                 else:
                     puntaje_entero = 0  # Manejar otros valores de puntaje como 0
 
-                # Actualizar la suma de puntajes para el usuario
+                # Actualizar la suma de puntajes y el contador de puntajes para el usuario
                 if nombre_usuario in popularidad_usuarios:
                     popularidad_usuarios[nombre_usuario] += puntaje_entero
+                    contador_puntajes[nombre_usuario] += 1
                 else:
                     popularidad_usuarios[nombre_usuario] = puntaje_entero
+                    contador_puntajes[nombre_usuario] = 1
 
-            # Ordenar los usuarios por popularidad en orden descendente
-            usuarios_ordenados = sorted(popularidad_usuarios.items(), key=lambda x: x[1], reverse=True)
-
-            # Obtener los usuarios más populares (por ejemplo, los 5 mejores)
-            usuarios_populares = usuarios_ordenados[:2]
-
-            for nombre_usuario, puntaje_usuario in usuarios_populares:
-                with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
-                    stub = PopularidadUsersServiceStub(channel)
-                    try:
-                        response = stub.GuardarPopularidadUser(
-                            PopularidadUser(nombreUsuario=nombre_usuario, puntaje=str(puntaje_usuario)))
-                        logger.info("Popularidad " + MessageToJson(response))
-                        usuario_guardado = {"popularidadUsuario": MessageToJson(response)}
-                        usuarios_guardados.append(usuario_guardado)
-                    except Exception as e:
-                        logger.error("Error al llamar a gRPC: {}".format(str(e)))
+            with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+                stub = PopularidadUsersServiceStub(channel)
+                for nombre_usuario, puntaje_sum in popularidad_usuarios.items():
+                    puntaje_promedio = puntaje_sum / contador_puntajes[nombre_usuario]
+                    response = stub.GuardarPopularidadUser(
+                        PopularidadUser(user=User(nombre=nombre_usuario), nombreUsuario=nombre_usuario, puntaje=str(puntaje_promedio)))
+                    usuario_guardado = {"popularidadUsuario": MessageToJson(response)}
+                    usuarios_guardados.append(usuario_guardado)
+                    
             time.sleep(5)
 
     finally:
         consumer.close()
 
-    # Devolver los usuarios populares como JSON
-    return jsonify(usuarios_populares)
+    # Devolver la lista de usuarios guardados como JSON
+    return jsonify({"usuariosGuardados": usuarios_guardados})

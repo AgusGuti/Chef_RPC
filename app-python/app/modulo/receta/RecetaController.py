@@ -70,32 +70,35 @@ def agregarComentario():
 def novedades():
     # Crear un consumidor Kafka
     consumer = KafkaConsumer(
-        'novedades', # Nombre del tema al que suscribirse
+        'novedades',  # Nombre del tema al que suscribirse
         **kafka_config
     )
-    
+
     lista_mensajes = []
     try:
-        for msg in consumer:
-            if msg is not None:
-                mensaje = msg.value.decode('utf-8')
-                logger.info(mensaje)
-                logger.info(msg.offset)
-                # Decodifica el JSON en cada mensaje para eliminar las barras invertidas "\" en las URL
-                mensaje_decodificado = json.loads(mensaje)
-                lista_mensajes.append({'novedades': mensaje_decodificado})
-                
-            if len(lista_mensajes)>=5:
+        while len(lista_mensajes) < 5:  # Recibir solo los primeros 5 mensajes
+            mensaje = consumer.poll(60000)  # Obtener mensajes de Kafka
+            if not mensaje:
+                # Si no hay más mensajes, salir del ciclo
                 break
+            for msg in mensaje.values():
+                for mensaje_info in msg:
+                    mensaje_decodificado = mensaje_info.value.decode('utf-8')
+                    logger.info(mensaje_decodificado)
+                    # Decodifica el JSON en cada mensaje para eliminar las barras invertidas "\" en las URL
+                    mensaje_decodificado = json.loads(mensaje_decodificado)
+                    lista_mensajes.append({'novedades': mensaje_decodificado})
     finally:
         consumer.close()
-    
-    # Invertir la pila para que los mensajes más recientes estén en la parte superior
+
+    # Invertir la lista para que los mensajes más recientes estén en la parte superior
     lista_mensajes.reverse()
     
+    # Tomar solo los 5 mensajes más recientes
+    lista_mensajes = lista_mensajes[:5]
+
     # Convierte la lista de mensajes en un JSON array y retorna la respuesta como JSON
     return jsonify(lista_mensajes)
-
 
 
 @receta_blueprint.route("/comentarios", methods=['GET'])
