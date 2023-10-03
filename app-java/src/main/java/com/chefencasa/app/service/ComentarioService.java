@@ -47,8 +47,8 @@ public class ComentarioService extends ComentariosServiceGrpc.ComentariosService
     
                 if (receta != null) {
                     Comentario comentario = new Comentario(
-                        usuarioComentario, // Swap with recetaComentada
-                        recetaComentada, // Swap with usuarioComentario
+                        usuarioComentario, 
+                        recetaComentada,
                         request.getComentario(),
                         receta
                     );
@@ -75,29 +75,29 @@ public class ComentarioService extends ComentariosServiceGrpc.ComentariosService
             logger.error("Error al agregar Comentario", e);
         }
     }
-    
-    
 
-
-    // public void findAllByReceta(ComentarioProto.Comentario request, StreamObserver<ComentarioProto.Comentarios> responseObserver) {
-    //     int recetaId = request.getReceta().getIdReceta();
+    public void findAllByReceta(ComentarioProto.Comentario request, StreamObserver<ComentarioProto.Comentarios> responseObserver) {
         
-    //     List<Comentario> comentarios = comentarioRepository.findAllByReceta(recetaId);
-
-    //     List<ComentarioProto.Comentario> comentarioProtos = new ArrayList<>();
-    //     for (Comentario comentario : comentarios) {
-    //         ComentarioProto.Comentario comentarioProto = ComentarioProto.Comentario.newBuilder()
-    //                 .setId(comentario.getId())
-    //                 .setComentario(comentario.getComentario())
-    //                 .build();
-    //         comentarioProtos.add(comentarioProto);
-    //     }
-
-    //     ComentarioProto.Comentarios comentariosResponse = ComentarioProto.Comentarios.newBuilder()
-    //             .addAllComentario(comentarioProtos)
-    //             .build();
+        int recetaId = request.getReceta().getIdReceta();
         
-    //     responseObserver.onNext(comentariosResponse);
-    //     responseObserver.onCompleted();
-    // }
+        List<Comentario> comentarios = comentarioRepository.findByRecetaRecetaId(recetaId);
+
+        List<ComentarioProto.Comentario> comentarioProtos = new ArrayList<>();
+        for (Comentario comentario : comentarios) {
+            ComentarioProto.Comentario comentarioProto = ComentarioProto.Comentario.newBuilder()
+                    .setId(comentario.getId())
+                    .setRecetaComentada(comentario.getRecetaComentada())
+                    .setUsuarioComentario(comentario.getUsuarioComentario())
+                    .setComentario(comentario.getComentario())
+                    .build();
+            comentarioProtos.add(comentarioProto);
+        }
+
+        ComentarioProto.Comentarios comentariosResponse = ComentarioProto.Comentarios.newBuilder()
+                .addAllComentario(comentarioProtos)
+                .build();
+        
+        responseObserver.onNext(comentariosResponse);
+        responseObserver.onCompleted();
+    }
 }

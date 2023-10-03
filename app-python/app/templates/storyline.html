@@ -83,7 +83,7 @@
     function inicio() {
       cargarIngredientesYReceta(recetaId);
       addFavorito(recetaId);
-      mostrarComentarios(nombreReceta);
+      mostrarComentarios(recetaId);
     }
 
     function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
@@ -204,30 +204,47 @@
       xhr.send(data);
     }
     
-
-    function mostrarComentarios(nombreReceta) {
-      // Realiza una solicitud Fetch para obtener los comentarios
-      fetch("/comentariosReceta/" + nombreReceta) // Ajusta la ruta según tu lógica de enrutamiento
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (comentarios) {
-          var comentariosContainer = document.getElementById("comentariosContainer");
-          comentariosContainer.innerHTML = ""; // Limpia el contenedor
+    function mostrarComentarios(recetaId) {
+      var xhr = new XMLHttpRequest();
+      
+      // Configure the request
+      xhr.open("GET", `/comentario/findAllByReceta/${recetaId}`, true);
     
-          comentarios.forEach(function (comentario) {
-            var comentarioDiv = document.createElement("div");
-            comentarioDiv.textContent = "Usuario: " + comentario.usuarioComentario + ", Comentario: " + comentario.comentario;
-            comentariosContainer.appendChild(comentarioDiv);
-          });
+      // Define a function to handle the response
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            try {
+              var comentariosJson = JSON.parse(xhr.responseText);
+              var comentariosContainer = document.getElementById("comentariosContainer");
+              comentariosContainer.innerHTML = ""; // Limpia el contenedor
     
-          // Abre el modal de comentarios
-          $("#modalComentarios").modal("show");
-        })
-        .catch(function (error) {
-          console.error("Error al cargar comentarios:", error);
-        });
+              var comentarios = comentariosJson.comentario || [];
+    
+              comentarios.forEach(function (comentario) {
+                var comentarioDiv = document.createElement("div");
+                comentarioDiv.textContent =
+                  "Usuario: " + comentario.usuarioComentario + ", Comentario: " + comentario.comentario;
+                comentariosContainer.appendChild(comentarioDiv);
+              });
+    
+              console.log("Received comentarios:", comentarios);
+    
+              // Abre el modal de comentarios
+              $("#modalComentarios").modal("show");
+            } catch (error) {
+              console.error("Error parsing JSON:", error);
+            }
+          } else {
+            console.error("Network response was not ok");
+          }
+        }
+      };
+    
+      // Send the request
+      xhr.send();
     }
+    
     
     window.onload = inicio;
 
@@ -361,7 +378,7 @@
                   <i class="fa-solid fa-user-plus"></i>               
                 </button>
                 &nbsp; <!--espacio en blanco-->
-                <button class="btn btn-recetas btn-sm" onclick="mostrarComentarios('{{ receta.tituloReceta }}')">
+                <button class="btn btn-recetas btn-sm" onclick="mostrarComentarios('{{ receta.idReceta }}')">
                   <i class="fa-solid fa-message" style="color: #ffffff;"></i>
                 </button>
               </td>

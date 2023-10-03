@@ -86,3 +86,11 @@ def comentario():
 
 
 
+@comentario_blueprint.route("/comentario/findAllByReceta/<int:id>",methods = ['GET'])
+def findById(id):
+    logger.info("/comentario/findAllByReceta %s",request.args.get('id'))
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = ComentariosServiceStub(channel)
+        response = stub.findAllByReceta(Comentario(receta=Receta(idReceta=id)))
+    print("Greeter client received: " + str(response))    
+    return MessageToJson(response)
