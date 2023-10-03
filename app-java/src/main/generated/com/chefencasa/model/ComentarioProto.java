@@ -1958,11 +1958,11 @@ public final class ComentarioProto {
       "mentario\022\n\n\002id\030\001 \001(\005\022\027\n\017recetaComentada\030" +
       "\002 \001(\t\022\031\n\021usuarioComentario\030\003 \001(\t\022\022\n\ncome" +
       "ntario\030\004 \001(\t\022\035\n\006receta\030\005 \001(\0132\r.model.Rec" +
-      "eta2\210\001\n\022ComentariosService\0229\n\017TraerComen" +
-      "tario\022\021.model.Comentario\032\021.model.Comenta" +
-      "rio\"\000\0227\n\007FindAll\022\026.google.protobuf.Empty" +
-      "\032\022.model.Comentarios\"\000B\'\n\024com.chefencasa" +
-      ".modelB\017ComentarioProtob\006proto3"
+      "eta2\215\001\n\022ComentariosService\022:\n\017findAllByR" +
+      "eceta\022\021.model.Comentario\032\022.model.Comenta" +
+      "rios\"\000\022;\n\021GuardarComentario\022\021.model.Come" +
+      "ntario\032\021.model.Comentario\"\000B\'\n\024com.chefe" +
+      "ncasa.modelB\017ComentarioProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

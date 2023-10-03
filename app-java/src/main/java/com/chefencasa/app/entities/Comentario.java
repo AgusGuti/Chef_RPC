@@ -52,11 +52,16 @@ public class Comentario implements Serializable {
 		
 	}
 	
-	public Comentario(String comentario) {
-		
+	
+
+	public Comentario(String usuarioComentario, String recetaComentada, String comentario, Receta receta) {
+		this.usuarioComentario = usuarioComentario;
+		this.recetaComentada = recetaComentada;
 		this.comentario = comentario;
-		
+		this.receta = receta;
 	}
+
+
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

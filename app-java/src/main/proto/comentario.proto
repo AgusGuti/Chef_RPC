@@ -10,8 +10,8 @@ import "google/protobuf/wrappers.proto";
 import "receta.proto";
 
 service ComentariosService {
-  rpc TraerComentario(Comentario) returns (Comentario) {}
-  rpc FindAll(google.protobuf.Empty) returns (Comentarios) {}
+  rpc findAllByReceta(Comentario) returns (Comentarios) {}
+  rpc GuardarComentario(Comentario) returns (Comentario) {}
 }
 
 message Comentarios {

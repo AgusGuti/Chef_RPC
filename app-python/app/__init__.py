@@ -36,6 +36,7 @@ def register_blueprints(app):
     from app.modulo.seguido import seguido_blueprint
     from app.modulo.popularidadReceta import popularidadReceta_blueprint
     from app.modulo.popularidadUser import popularidadUser_blueprint
+    from app.modulo.comentario import comentario_blueprint
     app.register_blueprint(user_blueprint)
     app.register_blueprint(receta_blueprint)
     app.register_blueprint(ingrediente_blueprint)
@@ -44,7 +45,7 @@ def register_blueprints(app):
     app.register_blueprint(seguido_blueprint)
     app.register_blueprint(popularidadReceta_blueprint)
     app.register_blueprint(popularidadUser_blueprint)
-
+    app.register_blueprint(comentario_blueprint)
 
     
     

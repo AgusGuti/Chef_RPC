@@ -16,65 +16,65 @@ public final class ComentariosServiceGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.ComentarioProto.Comentario,
-      com.chefencasa.model.ComentarioProto.Comentario> getTraerComentarioMethod;
+      com.chefencasa.model.ComentarioProto.Comentarios> getFindAllByRecetaMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "TraerComentario",
+      fullMethodName = SERVICE_NAME + '/' + "findAllByReceta",
+      requestType = com.chefencasa.model.ComentarioProto.Comentario.class,
+      responseType = com.chefencasa.model.ComentarioProto.Comentarios.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.chefencasa.model.ComentarioProto.Comentario,
+      com.chefencasa.model.ComentarioProto.Comentarios> getFindAllByRecetaMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.ComentarioProto.Comentario, com.chefencasa.model.ComentarioProto.Comentarios> getFindAllByRecetaMethod;
+    if ((getFindAllByRecetaMethod = ComentariosServiceGrpc.getFindAllByRecetaMethod) == null) {
+      synchronized (ComentariosServiceGrpc.class) {
+        if ((getFindAllByRecetaMethod = ComentariosServiceGrpc.getFindAllByRecetaMethod) == null) {
+          ComentariosServiceGrpc.getFindAllByRecetaMethod = getFindAllByRecetaMethod =
+              io.grpc.MethodDescriptor.<com.chefencasa.model.ComentarioProto.Comentario, com.chefencasa.model.ComentarioProto.Comentarios>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "findAllByReceta"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.ComentarioProto.Comentario.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.ComentarioProto.Comentarios.getDefaultInstance()))
+              .setSchemaDescriptor(new ComentariosServiceMethodDescriptorSupplier("findAllByReceta"))
+              .build();
+        }
+      }
+    }
+    return getFindAllByRecetaMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.ComentarioProto.Comentario,
+      com.chefencasa.model.ComentarioProto.Comentario> getGuardarComentarioMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GuardarComentario",
       requestType = com.chefencasa.model.ComentarioProto.Comentario.class,
       responseType = com.chefencasa.model.ComentarioProto.Comentario.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<com.chefencasa.model.ComentarioProto.Comentario,
-      com.chefencasa.model.ComentarioProto.Comentario> getTraerComentarioMethod() {
-    io.grpc.MethodDescriptor<com.chefencasa.model.ComentarioProto.Comentario, com.chefencasa.model.ComentarioProto.Comentario> getTraerComentarioMethod;
-    if ((getTraerComentarioMethod = ComentariosServiceGrpc.getTraerComentarioMethod) == null) {
+      com.chefencasa.model.ComentarioProto.Comentario> getGuardarComentarioMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.ComentarioProto.Comentario, com.chefencasa.model.ComentarioProto.Comentario> getGuardarComentarioMethod;
+    if ((getGuardarComentarioMethod = ComentariosServiceGrpc.getGuardarComentarioMethod) == null) {
       synchronized (ComentariosServiceGrpc.class) {
-        if ((getTraerComentarioMethod = ComentariosServiceGrpc.getTraerComentarioMethod) == null) {
-          ComentariosServiceGrpc.getTraerComentarioMethod = getTraerComentarioMethod =
+        if ((getGuardarComentarioMethod = ComentariosServiceGrpc.getGuardarComentarioMethod) == null) {
+          ComentariosServiceGrpc.getGuardarComentarioMethod = getGuardarComentarioMethod =
               io.grpc.MethodDescriptor.<com.chefencasa.model.ComentarioProto.Comentario, com.chefencasa.model.ComentarioProto.Comentario>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "TraerComentario"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GuardarComentario"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.chefencasa.model.ComentarioProto.Comentario.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.chefencasa.model.ComentarioProto.Comentario.getDefaultInstance()))
-              .setSchemaDescriptor(new ComentariosServiceMethodDescriptorSupplier("TraerComentario"))
+              .setSchemaDescriptor(new ComentariosServiceMethodDescriptorSupplier("GuardarComentario"))
               .build();
         }
       }
     }
-    return getTraerComentarioMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Empty,
-      com.chefencasa.model.ComentarioProto.Comentarios> getFindAllMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "FindAll",
-      requestType = com.google.protobuf.Empty.class,
-      responseType = com.chefencasa.model.ComentarioProto.Comentarios.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.google.protobuf.Empty,
-      com.chefencasa.model.ComentarioProto.Comentarios> getFindAllMethod() {
-    io.grpc.MethodDescriptor<com.google.protobuf.Empty, com.chefencasa.model.ComentarioProto.Comentarios> getFindAllMethod;
-    if ((getFindAllMethod = ComentariosServiceGrpc.getFindAllMethod) == null) {
-      synchronized (ComentariosServiceGrpc.class) {
-        if ((getFindAllMethod = ComentariosServiceGrpc.getFindAllMethod) == null) {
-          ComentariosServiceGrpc.getFindAllMethod = getFindAllMethod =
-              io.grpc.MethodDescriptor.<com.google.protobuf.Empty, com.chefencasa.model.ComentarioProto.Comentarios>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FindAll"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.google.protobuf.Empty.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.chefencasa.model.ComentarioProto.Comentarios.getDefaultInstance()))
-              .setSchemaDescriptor(new ComentariosServiceMethodDescriptorSupplier("FindAll"))
-              .build();
-        }
-      }
-    }
-    return getFindAllMethod;
+    return getGuardarComentarioMethod;
   }
 
   /**
@@ -127,16 +127,16 @@ public final class ComentariosServiceGrpc {
 
     /**
      */
-    default void traerComentario(com.chefencasa.model.ComentarioProto.Comentario request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentario> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getTraerComentarioMethod(), responseObserver);
+    default void findAllByReceta(com.chefencasa.model.ComentarioProto.Comentario request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentarios> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindAllByRecetaMethod(), responseObserver);
     }
 
     /**
      */
-    default void findAll(com.google.protobuf.Empty request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentarios> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindAllMethod(), responseObserver);
+    default void guardarComentario(com.chefencasa.model.ComentarioProto.Comentario request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentario> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGuardarComentarioMethod(), responseObserver);
     }
   }
 
@@ -169,18 +169,18 @@ public final class ComentariosServiceGrpc {
 
     /**
      */
-    public void traerComentario(com.chefencasa.model.ComentarioProto.Comentario request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentario> responseObserver) {
+    public void findAllByReceta(com.chefencasa.model.ComentarioProto.Comentario request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentarios> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getTraerComentarioMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getFindAllByRecetaMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void findAll(com.google.protobuf.Empty request,
-        io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentarios> responseObserver) {
+    public void guardarComentario(com.chefencasa.model.ComentarioProto.Comentario request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentario> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getFindAllMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getGuardarComentarioMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -202,16 +202,16 @@ public final class ComentariosServiceGrpc {
 
     /**
      */
-    public com.chefencasa.model.ComentarioProto.Comentario traerComentario(com.chefencasa.model.ComentarioProto.Comentario request) {
+    public com.chefencasa.model.ComentarioProto.Comentarios findAllByReceta(com.chefencasa.model.ComentarioProto.Comentario request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getTraerComentarioMethod(), getCallOptions(), request);
+          getChannel(), getFindAllByRecetaMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public com.chefencasa.model.ComentarioProto.Comentarios findAll(com.google.protobuf.Empty request) {
+    public com.chefencasa.model.ComentarioProto.Comentario guardarComentario(com.chefencasa.model.ComentarioProto.Comentario request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getFindAllMethod(), getCallOptions(), request);
+          getChannel(), getGuardarComentarioMethod(), getCallOptions(), request);
     }
   }
 
@@ -233,23 +233,23 @@ public final class ComentariosServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.ComentarioProto.Comentario> traerComentario(
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.ComentarioProto.Comentarios> findAllByReceta(
         com.chefencasa.model.ComentarioProto.Comentario request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getTraerComentarioMethod(), getCallOptions()), request);
+          getChannel().newCall(getFindAllByRecetaMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.ComentarioProto.Comentarios> findAll(
-        com.google.protobuf.Empty request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.ComentarioProto.Comentario> guardarComentario(
+        com.chefencasa.model.ComentarioProto.Comentario request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getFindAllMethod(), getCallOptions()), request);
+          getChannel().newCall(getGuardarComentarioMethod(), getCallOptions()), request);
     }
   }
 
-  private static final int METHODID_TRAER_COMENTARIO = 0;
-  private static final int METHODID_FIND_ALL = 1;
+  private static final int METHODID_FIND_ALL_BY_RECETA = 0;
+  private static final int METHODID_GUARDAR_COMENTARIO = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -268,13 +268,13 @@ public final class ComentariosServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_TRAER_COMENTARIO:
-          serviceImpl.traerComentario((com.chefencasa.model.ComentarioProto.Comentario) request,
-              (io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentario>) responseObserver);
-          break;
-        case METHODID_FIND_ALL:
-          serviceImpl.findAll((com.google.protobuf.Empty) request,
+        case METHODID_FIND_ALL_BY_RECETA:
+          serviceImpl.findAllByReceta((com.chefencasa.model.ComentarioProto.Comentario) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentarios>) responseObserver);
+          break;
+        case METHODID_GUARDAR_COMENTARIO:
+          serviceImpl.guardarComentario((com.chefencasa.model.ComentarioProto.Comentario) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.ComentarioProto.Comentario>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -295,19 +295,19 @@ public final class ComentariosServiceGrpc {
   public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
     return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
         .addMethod(
-          getTraerComentarioMethod(),
+          getFindAllByRecetaMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.chefencasa.model.ComentarioProto.Comentario,
+              com.chefencasa.model.ComentarioProto.Comentarios>(
+                service, METHODID_FIND_ALL_BY_RECETA)))
+        .addMethod(
+          getGuardarComentarioMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
               com.chefencasa.model.ComentarioProto.Comentario,
               com.chefencasa.model.ComentarioProto.Comentario>(
-                service, METHODID_TRAER_COMENTARIO)))
-        .addMethod(
-          getFindAllMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
-            new MethodHandlers<
-              com.google.protobuf.Empty,
-              com.chefencasa.model.ComentarioProto.Comentarios>(
-                service, METHODID_FIND_ALL)))
+                service, METHODID_GUARDAR_COMENTARIO)))
         .build();
   }
 
@@ -356,8 +356,8 @@ public final class ComentariosServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new ComentariosServiceFileDescriptorSupplier())
-              .addMethod(getTraerComentarioMethod())
-              .addMethod(getFindAllMethod())
+              .addMethod(getFindAllByRecetaMethod())
+              .addMethod(getGuardarComentarioMethod())
               .build();
         }
       }
