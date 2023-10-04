@@ -148,3 +148,15 @@ table.table td i {
 .favorito-activo .fa-heart {
     color: red;
   }
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'montserrat';
+    background-image: url("../static/fondo-comida.jpg"); /* Ruta de la imagen de fondo */
+    background-size: cover; /* Para cubrir toda la pantalla */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-attachment: fixed; /* Fija la imagen en su lugar mientras se desplaza la página */
+    box-sizing: border-box;
+}
