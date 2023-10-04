@@ -173,7 +173,7 @@
     }
 
     function addSeguido(seguidoId,userId) {
-
+      
        // Verifica si el usuario actual es el autor de la receta
       if (seguidoId === userId) {
         // Si es el autor, no hagas nada o muestra un mensaje
@@ -518,7 +518,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 <!-- Botón para seguir o dejar de seguir al autor -->
-                <button class="btn btn-success" onclick="addSeguido('{{ receta.user.id }}')">Seguir</button>
+                <button class="btn btn-success" onclick="addSeguido('{{ receta.user.id }}', '{{ usuario_autenticado }}')">Seguir</button>
             </div>
         </div>
     </div>
