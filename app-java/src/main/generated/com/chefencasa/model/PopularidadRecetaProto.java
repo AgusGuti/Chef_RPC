@@ -1660,13 +1660,15 @@ public final class PopularidadRecetaProto {
       "opularidadRecetas\0223\n\021popularidadReceta\030\001" +
       " \003(\0132\030.model.PopularidadReceta\"O\n\021Popula" +
       "ridadReceta\022\n\n\002id\030\001 \001(\005\022\017\n\007puntaje\030\002 \001(\t" +
-      "\022\035\n\006receta\030\003 \001(\0132\r.model.Receta2\255\001\n\031Popu" +
-      "laridadRecetasService\022>\n\007FindAll\022\026.googl" +
-      "e.protobuf.Empty\032\031.model.PopularidadRece" +
-      "tas\"\000\022P\n\030GuardarPopularidadReceta\022\030.mode" +
-      "l.PopularidadReceta\032\030.model.PopularidadR" +
-      "eceta\"\000B.\n\024com.chefencasa.modelB\026Popular" +
-      "idadRecetaProtob\006proto3"
+      "\022\035\n\006receta\030\003 \001(\0132\r.model.Receta2\374\001\n\031Popu" +
+      "laridadRecetasService\022M\n\025TraerPuntajePor" +
+      "Receta\022\030.model.PopularidadReceta\032\030.model" +
+      ".PopularidadReceta\"\000\022>\n\007FindAll\022\026.google" +
+      ".protobuf.Empty\032\031.model.PopularidadRecet" +
+      "as\"\000\022P\n\030GuardarPopularidadReceta\022\030.model" +
+      ".PopularidadReceta\032\030.model.PopularidadRe" +
+      "ceta\"\000B.\n\024com.chefencasa.modelB\026Populari" +
+      "dadRecetaProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -34,7 +34,7 @@ public class ComentarioService extends ComentariosServiceGrpc.ComentariosService
 	private RecetaRepository recetaRepository;
 
 
-    Logger logger = LoggerFactory.getLogger(RecetaService.class);
+    Logger logger = LoggerFactory.getLogger(ComentarioService.class);
 
     
     public void guardarComentario(ComentarioProto.Comentario request, StreamObserver<ComentarioProto.Comentario> responseObserver) {

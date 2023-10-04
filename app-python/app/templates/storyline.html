@@ -84,6 +84,7 @@
       cargarIngredientesYReceta(recetaId);
       addFavorito(recetaId);
       mostrarComentarios(recetaId);
+      mostrarPuntaje(recetaId);
     }
 
     function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
@@ -241,10 +242,55 @@
         }
       };
     
-      // Send the request
       xhr.send();
     }
+
+    function mostrarPuntaje(recetaId) {
+      
+      var xhr = new XMLHttpRequest();
     
+      xhr.open("GET", `/popularidadReceta/traerPuntajePorReceta/${recetaId}`, true);
+    
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            try {
+              var data = JSON.parse(xhr.responseText);
+    
+              // Verifica si la respuesta contiene un puntaje
+              if (data.puntaje !== undefined) {
+                // Extrae el puntaje decimal de la respuesta JSON
+                const puntaje = parseFloat(data.puntaje);
+    
+                const puntajePorcentaje = puntaje;
+    
+                // Obtén el elemento donde mostrar el puntaje
+                const puntajePorcentajeDiv = document.getElementById("puntajePorcentaje");
+    
+                // Muestra el puntaje como porcentaje en el modal
+                puntajePorcentajeDiv.textContent = `Puntaje de la receta: ${puntajePorcentaje.toFixed(2)}%`;
+    
+                // Abre el modal
+                const modal = document.getElementById("modalPuntaje");
+                $(modal).modal("show");
+              } else {
+                // Si no hay puntaje, oculta el botón o muestra un mensaje de error
+                const boton = document.querySelector(`button[data-id="${recetaId}"]`);
+                if (boton) {
+                  boton.style.display = "none";
+                }
+              }
+            } catch (error) {
+              console.error("Error parsing JSON:", error);
+            }
+          } else {
+            console.error("Network response was not ok");
+          }
+        }
+      };
+    
+      xhr.send();
+    }
     
     window.onload = inicio;
 
@@ -381,6 +427,10 @@
                 <button class="btn btn-recetas btn-sm" onclick="mostrarComentarios('{{ receta.idReceta }}')">
                   <i class="fa-solid fa-message" style="color: #ffffff;"></i>
                 </button>
+                &nbsp; <!--espacio en blanco-->
+                <button class="btn btn-recetas btn-sm" onclick="mostrarPuntaje('{{ receta.idReceta }}')">
+                  <i class="fa-solid fa-star" style="color: #ffffff;"></i>
+                </button>                
               </td>
             </tr>
           {% endfor %}
@@ -493,7 +543,29 @@
       </div>
     </div>
   </div>
+  
+  <!-- Modal de porcentaje de receta  -->
 
+  <div class="modal fade" id="modalPuntaje" tabindex="-1" role="dialog" aria-labelledby="modalPuntajeLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalPuntajeLabel">Puntaje de la Receta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Aquí mostrarás el puntaje como porcentaje -->
+          <div id="puntajePorcentaje"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   {% endfor %}
   <script>
    

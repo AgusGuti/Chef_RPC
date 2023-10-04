@@ -40,7 +40,7 @@ public class SeguidoService extends SeguidosServiceGrpc.SeguidosServiceImplBase 
 	@Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    Logger logger = LoggerFactory.getLogger(RecetaService.class);
+    Logger logger = LoggerFactory.getLogger(SeguidoService.class);
 
 
     @Override

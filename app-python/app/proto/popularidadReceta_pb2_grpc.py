@@ -15,6 +15,11 @@ class PopularidadRecetasServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.TraerPuntajePorReceta = channel.unary_unary(
+                '/model.PopularidadRecetasService/TraerPuntajePorReceta',
+                request_serializer=popularidadReceta__pb2.PopularidadReceta.SerializeToString,
+                response_deserializer=popularidadReceta__pb2.PopularidadReceta.FromString,
+                )
         self.FindAll = channel.unary_unary(
                 '/model.PopularidadRecetasService/FindAll',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
@@ -29,6 +34,12 @@ class PopularidadRecetasServiceStub(object):
 
 class PopularidadRecetasServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
+
+    def TraerPuntajePorReceta(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def FindAll(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -45,6 +56,11 @@ class PopularidadRecetasServiceServicer(object):
 
 def add_PopularidadRecetasServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'TraerPuntajePorReceta': grpc.unary_unary_rpc_method_handler(
+                    servicer.TraerPuntajePorReceta,
+                    request_deserializer=popularidadReceta__pb2.PopularidadReceta.FromString,
+                    response_serializer=popularidadReceta__pb2.PopularidadReceta.SerializeToString,
+            ),
             'FindAll': grpc.unary_unary_rpc_method_handler(
                     servicer.FindAll,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
@@ -64,6 +80,23 @@ def add_PopularidadRecetasServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class PopularidadRecetasService(object):
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def TraerPuntajePorReceta(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/model.PopularidadRecetasService/TraerPuntajePorReceta',
+            popularidadReceta__pb2.PopularidadReceta.SerializeToString,
+            popularidadReceta__pb2.PopularidadReceta.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def FindAll(request,

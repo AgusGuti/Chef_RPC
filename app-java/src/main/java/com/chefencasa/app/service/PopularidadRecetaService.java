@@ -3,6 +3,8 @@ package com.chefencasa.app.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,7 @@ public class PopularidadRecetaService extends PopularidadRecetasServiceGrpc.Popu
 	@Qualifier("recetaRepository")
 	private RecetaRepository recetaRepository;
 
-    Logger logger = LoggerFactory.getLogger(FavoritoService.class);
+    Logger logger = LoggerFactory.getLogger(PopularidadRecetaService.class);
 
     public void guardarPopularidadReceta(PopularidadRecetaProto.PopularidadReceta request, StreamObserver<PopularidadRecetaProto.PopularidadReceta> responseObserver) {
         
@@ -93,4 +95,25 @@ public class PopularidadRecetaService extends PopularidadRecetasServiceGrpc.Popu
         responseObserver.onNext(a);
         responseObserver.onCompleted();
     }
+   	
+    public void traerPuntajePorReceta(PopularidadRecetaProto.PopularidadReceta request, StreamObserver<PopularidadRecetaProto.PopularidadReceta> responseObserver) {
+        try {
+                        
+            PopularidadReceta popularidadReceta= popularidadRecetaRepository.findByRecetaId(request.getReceta().getIdReceta());           
+            PopularidadRecetaProto.PopularidadReceta popularidadRecetaProto = PopularidadRecetaProto.PopularidadReceta.newBuilder()
+                .setPuntaje(popularidadReceta.getPuntaje())
+                .setReceta(RecetaProto.Receta.newBuilder()
+                    .setIdReceta(popularidadReceta.getReceta().getId())
+                    .build())
+                .build();
+
+            // Envía la respuesta al cliente gRPC
+            responseObserver.onNext(popularidadRecetaProto);
+            responseObserver.onCompleted();
+           
+        } catch (Exception e) {
+            logger.error("Error al traer el puntaje de la receta", e);
+        }
+    }
+
 }

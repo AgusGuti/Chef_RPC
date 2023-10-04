@@ -15,6 +15,37 @@ public final class PopularidadRecetasServiceGrpc {
   public static final java.lang.String SERVICE_NAME = "model.PopularidadRecetasService";
 
   // Static method descriptors that strictly reflect the proto.
+  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta,
+      com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> getTraerPuntajePorRecetaMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "TraerPuntajePorReceta",
+      requestType = com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.class,
+      responseType = com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta,
+      com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> getTraerPuntajePorRecetaMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta, com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> getTraerPuntajePorRecetaMethod;
+    if ((getTraerPuntajePorRecetaMethod = PopularidadRecetasServiceGrpc.getTraerPuntajePorRecetaMethod) == null) {
+      synchronized (PopularidadRecetasServiceGrpc.class) {
+        if ((getTraerPuntajePorRecetaMethod = PopularidadRecetasServiceGrpc.getTraerPuntajePorRecetaMethod) == null) {
+          PopularidadRecetasServiceGrpc.getTraerPuntajePorRecetaMethod = getTraerPuntajePorRecetaMethod =
+              io.grpc.MethodDescriptor.<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta, com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "TraerPuntajePorReceta"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta.getDefaultInstance()))
+              .setSchemaDescriptor(new PopularidadRecetasServiceMethodDescriptorSupplier("TraerPuntajePorReceta"))
+              .build();
+        }
+      }
+    }
+    return getTraerPuntajePorRecetaMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Empty,
       com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas> getFindAllMethod;
 
@@ -127,6 +158,13 @@ public final class PopularidadRecetasServiceGrpc {
 
     /**
      */
+    default void traerPuntajePorReceta(com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getTraerPuntajePorRecetaMethod(), responseObserver);
+    }
+
+    /**
+     */
     default void findAll(com.google.protobuf.Empty request,
         io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindAllMethod(), responseObserver);
@@ -169,6 +207,14 @@ public final class PopularidadRecetasServiceGrpc {
 
     /**
      */
+    public void traerPuntajePorReceta(com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getTraerPuntajePorRecetaMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void findAll(com.google.protobuf.Empty request,
         io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
@@ -198,6 +244,13 @@ public final class PopularidadRecetasServiceGrpc {
     protected PopularidadRecetasServiceBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new PopularidadRecetasServiceBlockingStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta traerPuntajePorReceta(com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getTraerPuntajePorRecetaMethod(), getCallOptions(), request);
     }
 
     /**
@@ -233,6 +286,14 @@ public final class PopularidadRecetasServiceGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta> traerPuntajePorReceta(
+        com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getTraerPuntajePorRecetaMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas> findAll(
         com.google.protobuf.Empty request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
@@ -248,8 +309,9 @@ public final class PopularidadRecetasServiceGrpc {
     }
   }
 
-  private static final int METHODID_FIND_ALL = 0;
-  private static final int METHODID_GUARDAR_POPULARIDAD_RECETA = 1;
+  private static final int METHODID_TRAER_PUNTAJE_POR_RECETA = 0;
+  private static final int METHODID_FIND_ALL = 1;
+  private static final int METHODID_GUARDAR_POPULARIDAD_RECETA = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -268,6 +330,10 @@ public final class PopularidadRecetasServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_TRAER_PUNTAJE_POR_RECETA:
+          serviceImpl.traerPuntajePorReceta((com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta>) responseObserver);
+          break;
         case METHODID_FIND_ALL:
           serviceImpl.findAll((com.google.protobuf.Empty) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.PopularidadRecetaProto.PopularidadRecetas>) responseObserver);
@@ -294,6 +360,13 @@ public final class PopularidadRecetasServiceGrpc {
 
   public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
     return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+        .addMethod(
+          getTraerPuntajePorRecetaMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta,
+              com.chefencasa.model.PopularidadRecetaProto.PopularidadReceta>(
+                service, METHODID_TRAER_PUNTAJE_POR_RECETA)))
         .addMethod(
           getFindAllMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -356,6 +429,7 @@ public final class PopularidadRecetasServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new PopularidadRecetasServiceFileDescriptorSupplier())
+              .addMethod(getTraerPuntajePorRecetaMethod())
               .addMethod(getFindAllMethod())
               .addMethod(getGuardarPopularidadRecetaMethod())
               .build();

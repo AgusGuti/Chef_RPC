@@ -41,7 +41,7 @@ public class PopularidadUserService extends PopularidadUsersServiceGrpc.Populari
 	private UserRepository usuarioRepository;
 
 
-    Logger logger = LoggerFactory.getLogger(FavoritoService.class);
+    Logger logger = LoggerFactory.getLogger(PopularidadUserService.class);
 
     public void guardarPopularidadUser(PopularidadUserProto.PopularidadUser request, StreamObserver<PopularidadUserProto.PopularidadUser> responseObserver) {
         try {

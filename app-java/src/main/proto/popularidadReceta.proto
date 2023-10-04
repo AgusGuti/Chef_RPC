@@ -9,6 +9,7 @@ import "google/protobuf/empty.proto";
 import "receta.proto";
 
 service PopularidadRecetasService {
+  rpc TraerPuntajePorReceta(PopularidadReceta) returns (PopularidadReceta) {}
   rpc FindAll(google.protobuf.Empty) returns (PopularidadRecetas) {}
   rpc GuardarPopularidadReceta(PopularidadReceta) returns (PopularidadReceta) {}
 }

@@ -116,3 +116,14 @@ def findAll():
         response = stub.FindAll(PopularidadReceta()) 
     print("Greeter client received: " + str(response))    
     return MessageToJson(response)
+
+
+
+@popularidadReceta_blueprint.route("/popularidadReceta/traerPuntajePorReceta/<int:id>", methods=['GET'])
+def traerPuntajePorReceta(id):
+    logger.info(f"/popularidadReceta/traerPuntajePorReceta {id}")
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = PopularidadRecetasServiceStub(channel)
+        response = stub.TraerPuntajePorReceta(PopularidadReceta(receta=Receta(idReceta=id)))
+    print("Greeter client received: " + str(response))    
+    return MessageToJson(response)

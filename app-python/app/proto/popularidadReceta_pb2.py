@@ -15,7 +15,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17popularidadReceta.proto\x12\x05model\x1a\x1bgoogle/protobuf/empty.proto\x1a\x0creceta.proto\"I\n\x12PopularidadRecetas\x12\x33\n\x11popularidadReceta\x18\x01 \x03(\x0b\x32\x18.model.PopularidadReceta\"O\n\x11PopularidadReceta\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07puntaje\x18\x02 \x01(\t\x12\x1d\n\x06receta\x18\x03 \x01(\x0b\x32\r.model.Receta2\xad\x01\n\x19PopularidadRecetasService\x12>\n\x07\x46indAll\x12\x16.google.protobuf.Empty\x1a\x19.model.PopularidadRecetas\"\x00\x12P\n\x18GuardarPopularidadReceta\x12\x18.model.PopularidadReceta\x1a\x18.model.PopularidadReceta\"\x00\x42.\n\x14\x63om.chefencasa.modelB\x16PopularidadRecetaProtob\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17popularidadReceta.proto\x12\x05model\x1a\x1bgoogle/protobuf/empty.proto\x1a\x0creceta.proto\"I\n\x12PopularidadRecetas\x12\x33\n\x11popularidadReceta\x18\x01 \x03(\x0b\x32\x18.model.PopularidadReceta\"O\n\x11PopularidadReceta\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07puntaje\x18\x02 \x01(\t\x12\x1d\n\x06receta\x18\x03 \x01(\x0b\x32\r.model.Receta2\xfc\x01\n\x19PopularidadRecetasService\x12M\n\x15TraerPuntajePorReceta\x12\x18.model.PopularidadReceta\x1a\x18.model.PopularidadReceta\"\x00\x12>\n\x07\x46indAll\x12\x16.google.protobuf.Empty\x1a\x19.model.PopularidadRecetas\"\x00\x12P\n\x18GuardarPopularidadReceta\x12\x18.model.PopularidadReceta\x1a\x18.model.PopularidadReceta\"\x00\x42.\n\x14\x63om.chefencasa.modelB\x16PopularidadRecetaProtob\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -29,5 +29,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_POPULARIDADRECETA']._serialized_start=152
   _globals['_POPULARIDADRECETA']._serialized_end=231
   _globals['_POPULARIDADRECETASSERVICE']._serialized_start=234
-  _globals['_POPULARIDADRECETASSERVICE']._serialized_end=407
+  _globals['_POPULARIDADRECETASSERVICE']._serialized_end=486
 # @@protoc_insertion_point(module_scope)
