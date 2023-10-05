@@ -207,43 +207,59 @@
     
     function mostrarComentarios(recetaId) {
       var xhr = new XMLHttpRequest();
-      
+  
       // Configure the request
       xhr.open("GET", `/comentario/findAllByReceta/${recetaId}`, true);
-    
+  
       // Define a function to handle the response
       xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            try {
-              var comentariosJson = JSON.parse(xhr.responseText);
-              var comentariosContainer = document.getElementById("comentariosContainer");
-              comentariosContainer.innerHTML = ""; // Limpia el contenedor
-    
-              var comentarios = comentariosJson.comentario || [];
-    
-              comentarios.forEach(function (comentario) {
-                var comentarioDiv = document.createElement("div");
-                comentarioDiv.textContent =
-                  "Usuario: " + comentario.usuarioComentario + ", Comentario: " + comentario.comentario;
-                comentariosContainer.appendChild(comentarioDiv);
-              });
-    
-              console.log("Received comentarios:", comentarios);
-    
-              // Abre el modal de comentarios
-              $("#modalComentarios").modal("show");
-            } catch (error) {
-              console.error("Error parsing JSON:", error);
-            }
-          } else {
-            console.error("Network response was not ok");
+          if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                  try {
+                      var comentariosJson = JSON.parse(xhr.responseText);
+                      var comentariosContainer = document.getElementById("comentariosContainer");
+                      comentariosContainer.innerHTML = ""; // Limpia el contenedor
+  
+                      var comentarios = comentariosJson.comentario || [];
+  
+                      comentarios.forEach(function (comentario) {
+                          var comentarioDiv = document.createElement("div");
+                          comentarioDiv.classList.add("comentario-cloud"); // Agrega una clase para dar estilo a la "nube"
+  
+                          // Crear una imagen de perfil predeterminada
+                          var imagenPerfil = document.createElement("img");
+                          imagenPerfil.src = "../static/icono-perfil.png"; // Ruta de la imagen predeterminada
+                          imagenPerfil.alt = comentario.usuarioComentario; // Puedes usar el nombre de usuario como texto alternativo
+  
+                          // Crear un div para el contenido del comentario
+                          var contenidoDiv = document.createElement("div");
+                          contenidoDiv.textContent = "Usuario: " + comentario.usuarioComentario + ", Comentario: " + comentario.comentario;
+  
+                          // Agregar la imagen de perfil y el contenido del comentario al div del comentario
+                          comentarioDiv.appendChild(imagenPerfil);
+                          comentarioDiv.appendChild(contenidoDiv);
+  
+                          // Agregar el div del comentario al contenedor de comentarios
+                          comentariosContainer.appendChild(comentarioDiv);
+                      });
+  
+                      console.log("Received comentarios:", comentarios);
+  
+                      // Abre el modal de comentarios
+                      $("#modalComentarios").modal("show");
+                  } catch (error) {
+                      console.error("Error parsing JSON:", error);
+                  }
+              } else {
+                  console.error("Network response was not ok");
+              }
           }
-        }
       };
-    
+  
       xhr.send();
-    }
+     }
+  
+  
 
     function mostrarPuntaje(recetaId) {
       

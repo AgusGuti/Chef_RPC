@@ -207,3 +207,25 @@ body {
     background-attachment: fixed; /* Fija la imagen en su lugar mientras se desplaza la página */
     box-sizing: border-box;
 }
+
+
+/* Estilos para el contenedor de "nube" */
+.comentario-cloud {
+    background-color: #f0f0f0; /* Color de fondo de la "nube" */
+    border-radius: 10px; /* Borde redondeado para la "nube" */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 10px; /* Espacio entre comentarios */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Sombra para el efecto de "nube" */
+}
+
+/* Estilos para la imagen de perfil dentro de la "nube" */
+.comentario-cloud img {
+    max-width: 50px; /* Ancho máximo para la imagen de perfil */
+    border-radius: 50%; /* Hacer que la imagen de perfil sea circular */
+    margin-right: 10px; /* Espacio a la derecha de la imagen de perfil */
+}
+
+.miniatura {
+    width: 50px; 
+    cursor: pointer;
+  }
