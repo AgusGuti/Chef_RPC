@@ -41,30 +41,39 @@ public class ComentarioService extends ComentariosServiceGrpc.ComentariosService
         try {
             String recetaComentada = request.getRecetaComentada();
             String usuarioComentario = request.getUsuarioComentario();
+            String textoComentario = request.getComentario();
     
             if (recetaComentada != null && usuarioComentario != null) {
                 Receta receta = recetaRepository.findByTituloReceta(recetaComentada);
     
                 if (receta != null) {
-                    Comentario comentario = new Comentario(
-                        usuarioComentario, 
-                        recetaComentada,
-                        request.getComentario(),
-                        receta
-                    );
+                    // Verificar si ya existe un comentario igual
+                    Comentario comentarioExistente = comentarioRepository.findByComentarioUserYReceta(
+                            textoComentario, usuarioComentario, recetaComentada);
     
-                    comentarioRepository.save(comentario);
+                    if (comentarioExistente == null) {
+                        Comentario comentario = new Comentario(
+                            usuarioComentario, 
+                            recetaComentada,
+                            textoComentario,
+                            receta
+                        );
     
-                    ComentarioProto.Comentario c = ComentarioProto.Comentario.newBuilder()
-                        .setId(comentario.getId())
-                        .setRecetaComentada(comentario.getRecetaComentada())
-                        .setUsuarioComentario(comentario.getUsuarioComentario())
-                        .setComentario(comentario.getComentario())
-                        .setReceta(RecetaProto.Receta.newBuilder().setIdReceta(receta.getId()).build())
-                        .build();
+                        comentarioRepository.save(comentario);
     
-                    responseObserver.onNext(c);
-                    responseObserver.onCompleted();
+                        ComentarioProto.Comentario c = ComentarioProto.Comentario.newBuilder()
+                            .setId(comentario.getId())
+                            .setRecetaComentada(comentario.getRecetaComentada())
+                            .setUsuarioComentario(comentario.getUsuarioComentario())
+                            .setComentario(comentario.getComentario())
+                            .setReceta(RecetaProto.Receta.newBuilder().setIdReceta(receta.getId()).build())
+                            .build();
+    
+                        responseObserver.onNext(c);
+                        responseObserver.onCompleted();
+                    } else {
+                        logger.warn("El comentario ya existe para esta receta, usuario y texto.");
+                    }
                 } else {
                     logger.error("Error, no existe receta con el título: " + recetaComentada);
                 }
@@ -75,7 +84,7 @@ public class ComentarioService extends ComentariosServiceGrpc.ComentariosService
             logger.error("Error al agregar Comentario", e);
         }
     }
-
+    
     public void findAllByReceta(ComentarioProto.Comentario request, StreamObserver<ComentarioProto.Comentarios> responseObserver) {
         
         int recetaId = request.getReceta().getIdReceta();

@@ -17,5 +17,7 @@ public interface ComentarioRepository extends JpaRepository<Comentario, Serializ
     @Query("SELECT DISTINCT c FROM Comentario c LEFT JOIN c.receta r WHERE r.id = :recetaId")
     public abstract List<Comentario> findByRecetaRecetaId(@Param("recetaId") int recetaId);
 
+    @Query("SELECT c FROM Comentario c WHERE c.comentario = :textoComentario AND c.usuarioComentario = :usuarioComentario AND c.recetaComentada = :recetaComentada")
+    public abstract Comentario findByComentarioUserYReceta(String textoComentario, String usuarioComentario, String recetaComentada);
 
 }
