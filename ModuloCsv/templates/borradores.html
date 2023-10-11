@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Borradores</title>
+</head>
+<body>
+    <h1>Lista de Borradores</h1>
+    {% for borrador_id, borradores in grouped_borradores.items() %}
+    <h2>Borrador {{ borrador_id }}</h2>
+    <table>
+        <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
+            <th>Tiempo de Preparación</th>
+            <th>Acciones</th>
+        </tr>
+        {% for borrador in borradores %}
+        <tr>
+            <td>{{ borrador.titulo_receta }}</td>
+            <td>{{ borrador.descripcion }}</td>
+            <td>{{ borrador.categoria_id }}</td>
+            <td>{{ borrador.tiempo_preparacion }}</td>
+            <td><a href="{{ url_for('editar_borrador', borrador_id=borrador.id) }}">Editar</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endfor %}
+</body>
+</html>
