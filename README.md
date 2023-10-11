@@ -85,3 +85,17 @@ Clases creadas en capa servidor:
 
 
 https://kafka-python.readthedocs.io/en/master/apidoc/KafkaConsumer.html
+
+## MÓDULO MENSAJES API REST
+
+BDD: H2
+Lenguaje de programación: Java
+Documentador: Swagger UI o Swagger desktop
+Framework: Spring Boot
+
+![image](https://github.com/AgusGuti/Chef_RPC/assets/143615767/5bd2e3b2-e955-4cb0-80df-662f44e5b23b)
+
+![image](https://github.com/AgusGuti/Chef_RPC/assets/143615767/ea03ac9b-29e4-48b7-b91d-01ac62cf047a)
+![image](https://github.com/AgusGuti/Chef_RPC/assets/143615767/0976eca8-db92-4bcb-8e0a-f22ba653bc33)
+
+
