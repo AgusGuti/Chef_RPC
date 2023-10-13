@@ -813,31 +813,58 @@ public final class DenunciaOuterClass {
     int getId();
 
     /**
-     * <code>.model.User user_creador = 2;</code>
-     * @return Whether the userCreador field is set.
+     * <code>.model.User user_id = 2;</code>
+     * @return Whether the userId field is set.
      */
-    boolean hasUserCreador();
+    boolean hasUserId();
     /**
-     * <code>.model.User user_creador = 2;</code>
-     * @return The userCreador.
+     * <code>.model.User user_id = 2;</code>
+     * @return The userId.
      */
-    com.chefencasa.model.UserProto.User getUserCreador();
+    com.chefencasa.model.UserProto.User getUserId();
     /**
-     * <code>.model.User user_creador = 2;</code>
+     * <code>.model.User user_id = 2;</code>
      */
-    com.chefencasa.model.UserProto.UserOrBuilder getUserCreadorOrBuilder();
+    com.chefencasa.model.UserProto.UserOrBuilder getUserIdOrBuilder();
 
     /**
-     * <code>string resuelto = 3;</code>
+     * <code>.model.Receta receta_id = 3;</code>
+     * @return Whether the recetaId field is set.
+     */
+    boolean hasRecetaId();
+    /**
+     * <code>.model.Receta receta_id = 3;</code>
+     * @return The recetaId.
+     */
+    com.chefencasa.model.RecetaProto.Receta getRecetaId();
+    /**
+     * <code>.model.Receta receta_id = 3;</code>
+     */
+    com.chefencasa.model.RecetaProto.RecetaOrBuilder getRecetaIdOrBuilder();
+
+    /**
+     * <code>string resuelto = 4;</code>
      * @return The resuelto.
      */
     java.lang.String getResuelto();
     /**
-     * <code>string resuelto = 3;</code>
+     * <code>string resuelto = 4;</code>
      * @return The bytes for resuelto.
      */
     com.google.protobuf.ByteString
         getResueltoBytes();
+
+    /**
+     * <code>string motivo = 5;</code>
+     * @return The motivo.
+     */
+    java.lang.String getMotivo();
+    /**
+     * <code>string motivo = 5;</code>
+     * @return The bytes for motivo.
+     */
+    com.google.protobuf.ByteString
+        getMotivoBytes();
   }
   /**
    * Protobuf type {@code model.Denuncia}
@@ -853,6 +880,7 @@ public final class DenunciaOuterClass {
     }
     private Denuncia() {
       resuelto_ = "";
+      motivo_ = "";
     }
 
     @java.lang.Override
@@ -892,21 +920,40 @@ public final class DenunciaOuterClass {
             }
             case 18: {
               com.chefencasa.model.UserProto.User.Builder subBuilder = null;
-              if (userCreador_ != null) {
-                subBuilder = userCreador_.toBuilder();
+              if (userId_ != null) {
+                subBuilder = userId_.toBuilder();
               }
-              userCreador_ = input.readMessage(com.chefencasa.model.UserProto.User.parser(), extensionRegistry);
+              userId_ = input.readMessage(com.chefencasa.model.UserProto.User.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(userCreador_);
-                userCreador_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(userId_);
+                userId_ = subBuilder.buildPartial();
               }
 
               break;
             }
             case 26: {
+              com.chefencasa.model.RecetaProto.Receta.Builder subBuilder = null;
+              if (recetaId_ != null) {
+                subBuilder = recetaId_.toBuilder();
+              }
+              recetaId_ = input.readMessage(com.chefencasa.model.RecetaProto.Receta.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(recetaId_);
+                recetaId_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
               resuelto_ = s;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              motivo_ = s;
               break;
             }
             default: {
@@ -951,33 +998,56 @@ public final class DenunciaOuterClass {
       return id_;
     }
 
-    public static final int USER_CREADOR_FIELD_NUMBER = 2;
-    private com.chefencasa.model.UserProto.User userCreador_;
+    public static final int USER_ID_FIELD_NUMBER = 2;
+    private com.chefencasa.model.UserProto.User userId_;
     /**
-     * <code>.model.User user_creador = 2;</code>
-     * @return Whether the userCreador field is set.
+     * <code>.model.User user_id = 2;</code>
+     * @return Whether the userId field is set.
      */
-    public boolean hasUserCreador() {
-      return userCreador_ != null;
+    public boolean hasUserId() {
+      return userId_ != null;
     }
     /**
-     * <code>.model.User user_creador = 2;</code>
-     * @return The userCreador.
+     * <code>.model.User user_id = 2;</code>
+     * @return The userId.
      */
-    public com.chefencasa.model.UserProto.User getUserCreador() {
-      return userCreador_ == null ? com.chefencasa.model.UserProto.User.getDefaultInstance() : userCreador_;
+    public com.chefencasa.model.UserProto.User getUserId() {
+      return userId_ == null ? com.chefencasa.model.UserProto.User.getDefaultInstance() : userId_;
     }
     /**
-     * <code>.model.User user_creador = 2;</code>
+     * <code>.model.User user_id = 2;</code>
      */
-    public com.chefencasa.model.UserProto.UserOrBuilder getUserCreadorOrBuilder() {
-      return getUserCreador();
+    public com.chefencasa.model.UserProto.UserOrBuilder getUserIdOrBuilder() {
+      return getUserId();
     }
 
-    public static final int RESUELTO_FIELD_NUMBER = 3;
+    public static final int RECETA_ID_FIELD_NUMBER = 3;
+    private com.chefencasa.model.RecetaProto.Receta recetaId_;
+    /**
+     * <code>.model.Receta receta_id = 3;</code>
+     * @return Whether the recetaId field is set.
+     */
+    public boolean hasRecetaId() {
+      return recetaId_ != null;
+    }
+    /**
+     * <code>.model.Receta receta_id = 3;</code>
+     * @return The recetaId.
+     */
+    public com.chefencasa.model.RecetaProto.Receta getRecetaId() {
+      return recetaId_ == null ? com.chefencasa.model.RecetaProto.Receta.getDefaultInstance() : recetaId_;
+    }
+    /**
+     * <code>.model.Receta receta_id = 3;</code>
+     */
+    public com.chefencasa.model.RecetaProto.RecetaOrBuilder getRecetaIdOrBuilder() {
+      return getRecetaId();
+    }
+
+    public static final int RESUELTO_FIELD_NUMBER = 4;
     private volatile java.lang.Object resuelto_;
     /**
-     * <code>string resuelto = 3;</code>
+     * <code>string resuelto = 4;</code>
      * @return The resuelto.
      */
     public java.lang.String getResuelto() {
@@ -993,7 +1063,7 @@ public final class DenunciaOuterClass {
       }
     }
     /**
-     * <code>string resuelto = 3;</code>
+     * <code>string resuelto = 4;</code>
      * @return The bytes for resuelto.
      */
     public com.google.protobuf.ByteString
@@ -1004,6 +1074,42 @@ public final class DenunciaOuterClass {
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         resuelto_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int MOTIVO_FIELD_NUMBER = 5;
+    private volatile java.lang.Object motivo_;
+    /**
+     * <code>string motivo = 5;</code>
+     * @return The motivo.
+     */
+    public java.lang.String getMotivo() {
+      java.lang.Object ref = motivo_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        motivo_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string motivo = 5;</code>
+     * @return The bytes for motivo.
+     */
+    public com.google.protobuf.ByteString
+        getMotivoBytes() {
+      java.lang.Object ref = motivo_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        motivo_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -1027,11 +1133,17 @@ public final class DenunciaOuterClass {
       if (id_ != 0) {
         output.writeInt32(1, id_);
       }
-      if (userCreador_ != null) {
-        output.writeMessage(2, getUserCreador());
+      if (userId_ != null) {
+        output.writeMessage(2, getUserId());
+      }
+      if (recetaId_ != null) {
+        output.writeMessage(3, getRecetaId());
       }
       if (!getResueltoBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, resuelto_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, resuelto_);
+      }
+      if (!getMotivoBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, motivo_);
       }
       unknownFields.writeTo(output);
     }
@@ -1046,12 +1158,19 @@ public final class DenunciaOuterClass {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, id_);
       }
-      if (userCreador_ != null) {
+      if (userId_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getUserCreador());
+          .computeMessageSize(2, getUserId());
+      }
+      if (recetaId_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, getRecetaId());
       }
       if (!getResueltoBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, resuelto_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, resuelto_);
+      }
+      if (!getMotivoBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, motivo_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1070,13 +1189,20 @@ public final class DenunciaOuterClass {
 
       if (getId()
           != other.getId()) return false;
-      if (hasUserCreador() != other.hasUserCreador()) return false;
-      if (hasUserCreador()) {
-        if (!getUserCreador()
-            .equals(other.getUserCreador())) return false;
+      if (hasUserId() != other.hasUserId()) return false;
+      if (hasUserId()) {
+        if (!getUserId()
+            .equals(other.getUserId())) return false;
+      }
+      if (hasRecetaId() != other.hasRecetaId()) return false;
+      if (hasRecetaId()) {
+        if (!getRecetaId()
+            .equals(other.getRecetaId())) return false;
       }
       if (!getResuelto()
           .equals(other.getResuelto())) return false;
+      if (!getMotivo()
+          .equals(other.getMotivo())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1090,12 +1216,18 @@ public final class DenunciaOuterClass {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId();
-      if (hasUserCreador()) {
-        hash = (37 * hash) + USER_CREADOR_FIELD_NUMBER;
-        hash = (53 * hash) + getUserCreador().hashCode();
+      if (hasUserId()) {
+        hash = (37 * hash) + USER_ID_FIELD_NUMBER;
+        hash = (53 * hash) + getUserId().hashCode();
+      }
+      if (hasRecetaId()) {
+        hash = (37 * hash) + RECETA_ID_FIELD_NUMBER;
+        hash = (53 * hash) + getRecetaId().hashCode();
       }
       hash = (37 * hash) + RESUELTO_FIELD_NUMBER;
       hash = (53 * hash) + getResuelto().hashCode();
+      hash = (37 * hash) + MOTIVO_FIELD_NUMBER;
+      hash = (53 * hash) + getMotivo().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1231,13 +1363,21 @@ public final class DenunciaOuterClass {
         super.clear();
         id_ = 0;
 
-        if (userCreadorBuilder_ == null) {
-          userCreador_ = null;
+        if (userIdBuilder_ == null) {
+          userId_ = null;
         } else {
-          userCreador_ = null;
-          userCreadorBuilder_ = null;
+          userId_ = null;
+          userIdBuilder_ = null;
+        }
+        if (recetaIdBuilder_ == null) {
+          recetaId_ = null;
+        } else {
+          recetaId_ = null;
+          recetaIdBuilder_ = null;
         }
         resuelto_ = "";
+
+        motivo_ = "";
 
         return this;
       }
@@ -1266,12 +1406,18 @@ public final class DenunciaOuterClass {
       public model.DenunciaOuterClass.Denuncia buildPartial() {
         model.DenunciaOuterClass.Denuncia result = new model.DenunciaOuterClass.Denuncia(this);
         result.id_ = id_;
-        if (userCreadorBuilder_ == null) {
-          result.userCreador_ = userCreador_;
+        if (userIdBuilder_ == null) {
+          result.userId_ = userId_;
         } else {
-          result.userCreador_ = userCreadorBuilder_.build();
+          result.userId_ = userIdBuilder_.build();
+        }
+        if (recetaIdBuilder_ == null) {
+          result.recetaId_ = recetaId_;
+        } else {
+          result.recetaId_ = recetaIdBuilder_.build();
         }
         result.resuelto_ = resuelto_;
+        result.motivo_ = motivo_;
         onBuilt();
         return result;
       }
@@ -1323,11 +1469,18 @@ public final class DenunciaOuterClass {
         if (other.getId() != 0) {
           setId(other.getId());
         }
-        if (other.hasUserCreador()) {
-          mergeUserCreador(other.getUserCreador());
+        if (other.hasUserId()) {
+          mergeUserId(other.getUserId());
+        }
+        if (other.hasRecetaId()) {
+          mergeRecetaId(other.getRecetaId());
         }
         if (!other.getResuelto().isEmpty()) {
           resuelto_ = other.resuelto_;
+          onChanged();
+        }
+        if (!other.getMotivo().isEmpty()) {
+          motivo_ = other.motivo_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -1389,128 +1542,247 @@ public final class DenunciaOuterClass {
         return this;
       }
 
-      private com.chefencasa.model.UserProto.User userCreador_;
+      private com.chefencasa.model.UserProto.User userId_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.User.Builder, com.chefencasa.model.UserProto.UserOrBuilder> userCreadorBuilder_;
+          com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.User.Builder, com.chefencasa.model.UserProto.UserOrBuilder> userIdBuilder_;
       /**
-       * <code>.model.User user_creador = 2;</code>
-       * @return Whether the userCreador field is set.
+       * <code>.model.User user_id = 2;</code>
+       * @return Whether the userId field is set.
        */
-      public boolean hasUserCreador() {
-        return userCreadorBuilder_ != null || userCreador_ != null;
+      public boolean hasUserId() {
+        return userIdBuilder_ != null || userId_ != null;
       }
       /**
-       * <code>.model.User user_creador = 2;</code>
-       * @return The userCreador.
+       * <code>.model.User user_id = 2;</code>
+       * @return The userId.
        */
-      public com.chefencasa.model.UserProto.User getUserCreador() {
-        if (userCreadorBuilder_ == null) {
-          return userCreador_ == null ? com.chefencasa.model.UserProto.User.getDefaultInstance() : userCreador_;
+      public com.chefencasa.model.UserProto.User getUserId() {
+        if (userIdBuilder_ == null) {
+          return userId_ == null ? com.chefencasa.model.UserProto.User.getDefaultInstance() : userId_;
         } else {
-          return userCreadorBuilder_.getMessage();
+          return userIdBuilder_.getMessage();
         }
       }
       /**
-       * <code>.model.User user_creador = 2;</code>
+       * <code>.model.User user_id = 2;</code>
        */
-      public Builder setUserCreador(com.chefencasa.model.UserProto.User value) {
-        if (userCreadorBuilder_ == null) {
+      public Builder setUserId(com.chefencasa.model.UserProto.User value) {
+        if (userIdBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          userCreador_ = value;
+          userId_ = value;
           onChanged();
         } else {
-          userCreadorBuilder_.setMessage(value);
+          userIdBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
-       * <code>.model.User user_creador = 2;</code>
+       * <code>.model.User user_id = 2;</code>
        */
-      public Builder setUserCreador(
+      public Builder setUserId(
           com.chefencasa.model.UserProto.User.Builder builderForValue) {
-        if (userCreadorBuilder_ == null) {
-          userCreador_ = builderForValue.build();
+        if (userIdBuilder_ == null) {
+          userId_ = builderForValue.build();
           onChanged();
         } else {
-          userCreadorBuilder_.setMessage(builderForValue.build());
+          userIdBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
-       * <code>.model.User user_creador = 2;</code>
+       * <code>.model.User user_id = 2;</code>
        */
-      public Builder mergeUserCreador(com.chefencasa.model.UserProto.User value) {
-        if (userCreadorBuilder_ == null) {
-          if (userCreador_ != null) {
-            userCreador_ =
-              com.chefencasa.model.UserProto.User.newBuilder(userCreador_).mergeFrom(value).buildPartial();
+      public Builder mergeUserId(com.chefencasa.model.UserProto.User value) {
+        if (userIdBuilder_ == null) {
+          if (userId_ != null) {
+            userId_ =
+              com.chefencasa.model.UserProto.User.newBuilder(userId_).mergeFrom(value).buildPartial();
           } else {
-            userCreador_ = value;
+            userId_ = value;
           }
           onChanged();
         } else {
-          userCreadorBuilder_.mergeFrom(value);
+          userIdBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
-       * <code>.model.User user_creador = 2;</code>
+       * <code>.model.User user_id = 2;</code>
        */
-      public Builder clearUserCreador() {
-        if (userCreadorBuilder_ == null) {
-          userCreador_ = null;
+      public Builder clearUserId() {
+        if (userIdBuilder_ == null) {
+          userId_ = null;
           onChanged();
         } else {
-          userCreador_ = null;
-          userCreadorBuilder_ = null;
+          userId_ = null;
+          userIdBuilder_ = null;
         }
 
         return this;
       }
       /**
-       * <code>.model.User user_creador = 2;</code>
+       * <code>.model.User user_id = 2;</code>
        */
-      public com.chefencasa.model.UserProto.User.Builder getUserCreadorBuilder() {
+      public com.chefencasa.model.UserProto.User.Builder getUserIdBuilder() {
         
         onChanged();
-        return getUserCreadorFieldBuilder().getBuilder();
+        return getUserIdFieldBuilder().getBuilder();
       }
       /**
-       * <code>.model.User user_creador = 2;</code>
+       * <code>.model.User user_id = 2;</code>
        */
-      public com.chefencasa.model.UserProto.UserOrBuilder getUserCreadorOrBuilder() {
-        if (userCreadorBuilder_ != null) {
-          return userCreadorBuilder_.getMessageOrBuilder();
+      public com.chefencasa.model.UserProto.UserOrBuilder getUserIdOrBuilder() {
+        if (userIdBuilder_ != null) {
+          return userIdBuilder_.getMessageOrBuilder();
         } else {
-          return userCreador_ == null ?
-              com.chefencasa.model.UserProto.User.getDefaultInstance() : userCreador_;
+          return userId_ == null ?
+              com.chefencasa.model.UserProto.User.getDefaultInstance() : userId_;
         }
       }
       /**
-       * <code>.model.User user_creador = 2;</code>
+       * <code>.model.User user_id = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.User.Builder, com.chefencasa.model.UserProto.UserOrBuilder> 
-          getUserCreadorFieldBuilder() {
-        if (userCreadorBuilder_ == null) {
-          userCreadorBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          getUserIdFieldBuilder() {
+        if (userIdBuilder_ == null) {
+          userIdBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.User.Builder, com.chefencasa.model.UserProto.UserOrBuilder>(
-                  getUserCreador(),
+                  getUserId(),
                   getParentForChildren(),
                   isClean());
-          userCreador_ = null;
+          userId_ = null;
         }
-        return userCreadorBuilder_;
+        return userIdBuilder_;
+      }
+
+      private com.chefencasa.model.RecetaProto.Receta recetaId_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.Receta.Builder, com.chefencasa.model.RecetaProto.RecetaOrBuilder> recetaIdBuilder_;
+      /**
+       * <code>.model.Receta receta_id = 3;</code>
+       * @return Whether the recetaId field is set.
+       */
+      public boolean hasRecetaId() {
+        return recetaIdBuilder_ != null || recetaId_ != null;
+      }
+      /**
+       * <code>.model.Receta receta_id = 3;</code>
+       * @return The recetaId.
+       */
+      public com.chefencasa.model.RecetaProto.Receta getRecetaId() {
+        if (recetaIdBuilder_ == null) {
+          return recetaId_ == null ? com.chefencasa.model.RecetaProto.Receta.getDefaultInstance() : recetaId_;
+        } else {
+          return recetaIdBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.model.Receta receta_id = 3;</code>
+       */
+      public Builder setRecetaId(com.chefencasa.model.RecetaProto.Receta value) {
+        if (recetaIdBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          recetaId_ = value;
+          onChanged();
+        } else {
+          recetaIdBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.model.Receta receta_id = 3;</code>
+       */
+      public Builder setRecetaId(
+          com.chefencasa.model.RecetaProto.Receta.Builder builderForValue) {
+        if (recetaIdBuilder_ == null) {
+          recetaId_ = builderForValue.build();
+          onChanged();
+        } else {
+          recetaIdBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.model.Receta receta_id = 3;</code>
+       */
+      public Builder mergeRecetaId(com.chefencasa.model.RecetaProto.Receta value) {
+        if (recetaIdBuilder_ == null) {
+          if (recetaId_ != null) {
+            recetaId_ =
+              com.chefencasa.model.RecetaProto.Receta.newBuilder(recetaId_).mergeFrom(value).buildPartial();
+          } else {
+            recetaId_ = value;
+          }
+          onChanged();
+        } else {
+          recetaIdBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.model.Receta receta_id = 3;</code>
+       */
+      public Builder clearRecetaId() {
+        if (recetaIdBuilder_ == null) {
+          recetaId_ = null;
+          onChanged();
+        } else {
+          recetaId_ = null;
+          recetaIdBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.model.Receta receta_id = 3;</code>
+       */
+      public com.chefencasa.model.RecetaProto.Receta.Builder getRecetaIdBuilder() {
+        
+        onChanged();
+        return getRecetaIdFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.model.Receta receta_id = 3;</code>
+       */
+      public com.chefencasa.model.RecetaProto.RecetaOrBuilder getRecetaIdOrBuilder() {
+        if (recetaIdBuilder_ != null) {
+          return recetaIdBuilder_.getMessageOrBuilder();
+        } else {
+          return recetaId_ == null ?
+              com.chefencasa.model.RecetaProto.Receta.getDefaultInstance() : recetaId_;
+        }
+      }
+      /**
+       * <code>.model.Receta receta_id = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.Receta.Builder, com.chefencasa.model.RecetaProto.RecetaOrBuilder> 
+          getRecetaIdFieldBuilder() {
+        if (recetaIdBuilder_ == null) {
+          recetaIdBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.Receta.Builder, com.chefencasa.model.RecetaProto.RecetaOrBuilder>(
+                  getRecetaId(),
+                  getParentForChildren(),
+                  isClean());
+          recetaId_ = null;
+        }
+        return recetaIdBuilder_;
       }
 
       private java.lang.Object resuelto_ = "";
       /**
-       * <code>string resuelto = 3;</code>
+       * <code>string resuelto = 4;</code>
        * @return The resuelto.
        */
       public java.lang.String getResuelto() {
@@ -1526,7 +1798,7 @@ public final class DenunciaOuterClass {
         }
       }
       /**
-       * <code>string resuelto = 3;</code>
+       * <code>string resuelto = 4;</code>
        * @return The bytes for resuelto.
        */
       public com.google.protobuf.ByteString
@@ -1543,7 +1815,7 @@ public final class DenunciaOuterClass {
         }
       }
       /**
-       * <code>string resuelto = 3;</code>
+       * <code>string resuelto = 4;</code>
        * @param value The resuelto to set.
        * @return This builder for chaining.
        */
@@ -1558,7 +1830,7 @@ public final class DenunciaOuterClass {
         return this;
       }
       /**
-       * <code>string resuelto = 3;</code>
+       * <code>string resuelto = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearResuelto() {
@@ -1568,7 +1840,7 @@ public final class DenunciaOuterClass {
         return this;
       }
       /**
-       * <code>string resuelto = 3;</code>
+       * <code>string resuelto = 4;</code>
        * @param value The bytes for resuelto to set.
        * @return This builder for chaining.
        */
@@ -1580,6 +1852,82 @@ public final class DenunciaOuterClass {
   checkByteStringIsUtf8(value);
         
         resuelto_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object motivo_ = "";
+      /**
+       * <code>string motivo = 5;</code>
+       * @return The motivo.
+       */
+      public java.lang.String getMotivo() {
+        java.lang.Object ref = motivo_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          motivo_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string motivo = 5;</code>
+       * @return The bytes for motivo.
+       */
+      public com.google.protobuf.ByteString
+          getMotivoBytes() {
+        java.lang.Object ref = motivo_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          motivo_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string motivo = 5;</code>
+       * @param value The motivo to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMotivo(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        motivo_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string motivo = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMotivo() {
+        
+        motivo_ = getDefaultInstance().getMotivo();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string motivo = 5;</code>
+       * @param value The bytes for motivo to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMotivoBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        motivo_ = value;
         onChanged();
         return this;
       }
@@ -1656,18 +2004,21 @@ public final class DenunciaOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\016denuncia.proto\022\005model\032\033google/protobuf" +
-      "/empty.proto\032\nuser.proto\".\n\tDenuncias\022!\n" +
-      "\010denuncia\030\001 \003(\0132\017.model.Denuncia\"K\n\010Denu" +
-      "ncia\022\n\n\002id\030\001 \001(\005\022!\n\014user_creador\030\002 \001(\0132\013" +
-      ".model.User\022\020\n\010resuelto\030\003 \001(\t2I\n\020Denunci" +
-      "asService\0225\n\007FindAll\022\026.google.protobuf.E" +
-      "mpty\032\020.model.Denuncias\"\000b\006proto3"
+      "/empty.proto\032\nuser.proto\032\014receta.proto\"." +
+      "\n\tDenuncias\022!\n\010denuncia\030\001 \003(\0132\017.model.De" +
+      "nuncia\"x\n\010Denuncia\022\n\n\002id\030\001 \001(\005\022\034\n\007user_i" +
+      "d\030\002 \001(\0132\013.model.User\022 \n\treceta_id\030\003 \001(\0132" +
+      "\r.model.Receta\022\020\n\010resuelto\030\004 \001(\t\022\016\n\006moti" +
+      "vo\030\005 \001(\t2I\n\020DenunciasService\0225\n\007FindAll\022" +
+      "\026.google.protobuf.Empty\032\020.model.Denuncia" +
+      "s\"\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.EmptyProto.getDescriptor(),
           com.chefencasa.model.UserProto.getDescriptor(),
+          com.chefencasa.model.RecetaProto.getDescriptor(),
         });
     internal_static_model_Denuncias_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -1680,9 +2031,10 @@ public final class DenunciaOuterClass {
     internal_static_model_Denuncia_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_Denuncia_descriptor,
-        new java.lang.String[] { "Id", "UserCreador", "Resuelto", });
+        new java.lang.String[] { "Id", "UserId", "RecetaId", "Resuelto", "Motivo", });
     com.google.protobuf.EmptyProto.getDescriptor();
     com.chefencasa.model.UserProto.getDescriptor();
+    com.chefencasa.model.RecetaProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

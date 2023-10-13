@@ -4,6 +4,7 @@ package model;
 
 import "google/protobuf/empty.proto";
 import "user.proto";
+import "receta.proto";
 
 
 service DenunciasService {
@@ -17,6 +18,8 @@ message Denuncias {
 
 message Denuncia {
   int32 id = 1;
-  User user_creador = 2;
-  string resuelto = 3;
+  User user_id = 2;
+  Receta receta_id = 3;
+  string resuelto = 4;
+  string motivo = 5;
 }
