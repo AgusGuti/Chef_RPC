@@ -47,6 +47,20 @@ public class User implements Serializable {
 	@Column(name = "fotoPerfil", nullable = false, length = 255, columnDefinition = "VARCHAR(255) DEFAULT ''")
 	private String fotoPerfil;
 
+	@Column(name = "moderador", nullable = false, length = 1, columnDefinition = "VARCHAR(1) DEFAULT '0'")
+	private String moderador;
+
+	public User(int id, String nombre, String apellido, String email, String clave, String fotoPerfil,
+			String moderador) {
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.clave = clave;
+		this.fotoPerfil = fotoPerfil;
+		this.moderador = moderador;
+	}
+
 	public User(int id, String nombre, String apellido, String email, String clave, String fotoPerfil) {
 		this.id = id;
 		this.nombre = nombre;
@@ -54,6 +68,7 @@ public class User implements Serializable {
 		this.email = email;
 		this.clave = clave;
 		this.fotoPerfil = fotoPerfil;
+		this.moderador = "0";
 	}
 
 	public User(String nombre, String apellido, String email, String clave, String fotoPerfil) {
@@ -62,6 +77,7 @@ public class User implements Serializable {
 		this.email = email;
 		this.clave = clave;
 		this.fotoPerfil = fotoPerfil;
+		this.moderador = "0";
 	}
 
 	public User(String nombre, String apellido, String email, String clave) {
@@ -70,6 +86,7 @@ public class User implements Serializable {
 		this.email = email;
 		this.clave = clave;
 		this.fotoPerfil = "";
+		this.moderador = "0";
 	}
 
 	@Override

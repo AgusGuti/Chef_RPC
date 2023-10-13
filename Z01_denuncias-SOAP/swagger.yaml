@@ -1,0 +1,27 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: 'Mi API SOAP'
+host: 'localhost:8000'
+basePath: /
+schemes:
+  - 'http'
+paths:
+  /multiplicar:
+    post:
+      operationId: 'soap_server.MiServicio.multiplicar'
+      consumes:
+        - 'text/xml'
+      parameters:
+        - in: 'body'
+          name: 'body'
+          schema:
+            type: 'object'
+            properties:
+              numero:
+                type: 'integer'
+      responses:
+        '200':
+          description: 'Número multiplicado correctamente'
+          schema:
+            type: 'integer'

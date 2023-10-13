@@ -2,9 +2,6 @@ syntax = "proto3";
 
 package model;
 
-option java_package = "com.chefencasa.model";
-option java_outer_classname = "UserProto";
-
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -27,5 +24,4 @@ message User {
   string email = 4;
   string clave = 5;
   string fotoPerfil = 6;
-  string moderador = 7;
 }
