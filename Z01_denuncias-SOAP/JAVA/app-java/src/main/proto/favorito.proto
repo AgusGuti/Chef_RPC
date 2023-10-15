@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package model;
+
+option java_package = "com.moddenuncias.model";
+option java_outer_classname = "FavoritoProto";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "user.proto";
+import "receta.proto";
+
+service FavoritosService {
+  rpc AddFavorito(Favorito) returns (Favorito) {}
+  rpc DeleteFavorito(Favorito) returns (Favorito) {}  
+  rpc FindAllById(Favorito) returns (Favoritos) {}
+}
+
+message Favoritos {
+  repeated Favorito favorito = 1;
+}
+
+message Favorito {
+  int32 id = 1;
+  User user = 2;
+  Receta receta = 3;
+}
+
+message FlagFavorito {
+  bool flagExiste = 1;
+}
