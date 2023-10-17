@@ -34,6 +34,7 @@ def autenticar():
         session['apellido']=response.apellido
         session['email']=response.email
         session['fotoPerfil']=response.fotoPerfil
+        session['moderador']=response.moderador
         return redirect('/index')
 
 @user_blueprint.route("/index",methods = ['GET'])

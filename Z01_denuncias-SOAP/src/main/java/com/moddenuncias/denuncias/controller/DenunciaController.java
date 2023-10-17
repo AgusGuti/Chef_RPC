@@ -1,5 +1,7 @@
 package com.moddenuncias.denuncias.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,8 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.moddenuncias.denuncias.entities.Denuncia;
+import com.moddenuncias.denuncias.entities.Motivo;
 import com.moddenuncias.denuncias.service.DenunciaService;
 
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/denuncias")
 public class DenunciaController {
 
     @Autowired
@@ -26,13 +33,13 @@ public class DenunciaController {
     }
 
     @GetMapping("/denunciasAbiertas")
-    public void verDenunciasAbiertas() {
-        denunciaService.findUnresolved();
+    public List<Denuncia> verDenunciasAbiertas() {
+        return denunciaService.findUnresolved();
     }
 
     @GetMapping("/verMotivos")
-    public void verMotivos() {
-        denunciaService.verMotivos();
+    public List<Motivo> verMotivos() {
+        return denunciaService.verMotivos();
     }
 
     
