@@ -106,7 +106,7 @@ Puerto: 10000
 
 ![image](https://github.com/AgusGuti/Chef_RPC/assets/143615767/755f5466-38ea-4a21-ae03-461591a1f547)
 
--Swagger: una vez corriendo el programa, levantar la aplicación en este link: http://localhost:8080/doc/swagger-ui/index.html#/
+-Swagger: una vez corriendo el programa, levantar la aplicación en este link: http://localhost:10000/doc/swagger-ui/index.html#/
 
 ![image](https://github.com/AgusGuti/Chef_RPC/assets/143615767/03a8058e-c111-4bdf-ae18-5a25a764e6cb)
 
