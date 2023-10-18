@@ -38,6 +38,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/seguidos">Seguidos</a>
                 </li>
+
+                {% if session['moderador'] == '1' %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/denuncias">Denuncias</a>
+                </li>
+                {% endif %}
+
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Cerrar Sesión <i class="bi bi-box-arrow-left" style="vertical-align: -1px"></i></a>
                 </li>
