@@ -88,12 +88,35 @@ https://kafka-python.readthedocs.io/en/master/apidoc/KafkaConsumer.html
 
 ## MÓDULO CORREO API REST
 
-BDD: mYsql
+BDD: MySql
+
 Lenguaje de programación: Java
+
 Documentador: Swagger UI o Swagger desktop
+
 Framework: Spring Boot
 
-##
+Puerto: 10000
+
+-Ejecución: Levantar aplicación con Spring Tool Suites, cargar la carpeta, elegir la carpeta "main" y presionar "run"
+
+![image](https://github.com/AgusGuti/Chef_RPC/assets/143615767/82883806-7bb9-4336-8d90-474cedbd308c)
+
+-Base de datos: crear el proyecto "apicorreo" y levantar la BDD (lee las tablas de la clase Entity)
+
+![image](https://github.com/AgusGuti/Chef_RPC/assets/143615767/755f5466-38ea-4a21-ae03-461591a1f547)
+
+-Swagger: una vez corriendo el programa, levantar la aplicación en este link: http://localhost:8080/doc/swagger-ui/index.html#/
+
+![image](https://github.com/AgusGuti/Chef_RPC/assets/143615767/03a8058e-c111-4bdf-ae18-5a25a764e6cb)
+
+
+![image](https://github.com/AgusGuti/Chef_RPC/assets/143615767/968bf5fa-a652-47d3-b491-6e1f846af59d)
+
+
+
+
+
 
 
 
