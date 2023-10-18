@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package model;
+
+import "google/protobuf/empty.proto";
+
+
+service MotivosService {
+  rpc FindAll(google.protobuf.Empty) returns (Motivos) {}
+}
+
+message Motivos {
+  repeated Motivo motivo = 1;
+}
+
+
+message Motivo {
+  int32 id = 1;
+  string motivo = 2;
+}
