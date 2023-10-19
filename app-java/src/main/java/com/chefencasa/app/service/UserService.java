@@ -31,7 +31,7 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
     public void addUser(UserProto.User request, StreamObserver<UserProto.User> responseObserver) {
        
         try {
-			usuarioRepository.save(new User(request.getNombre(),request.getApellido(),request.getEmail(),request.getClave(),request.getFotoPerfil()),request.getModerador());
+			usuarioRepository.save(new User(request.getNombre(),request.getApellido(),request.getEmail(),request.getClave(),request.getFotoPerfil(),request.getModerador()));
 		} catch (Exception e) {
 			try {
                 throw new Exception("No se pudo completar la operación,error al ingresar los datos o el usuario ya existe");
