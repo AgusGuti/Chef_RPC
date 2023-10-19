@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Website Grupo E</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index_styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='receta_styles.css') }}">
+    <!-- Incluir el archivo CSS de DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.6/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+</head>
+<body class="h-100">
+    <div class="form-outline">
+        <img src="{{ url_for('static', filename='chefencasa.png') }}" alt="Universidad Nacional de Lanús" style="vertical-align: Stickman; margin: 0px; padding: 16px">
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark nav-bk">
+        <a class="navbar-brand d-flex gap-lg-1 mx-lg-3" href="/index">
+            <i class="bi bi-house-fill text-white"></i> Inicio
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex align-items-center" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/myprofile">Mi Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/misMensajes">Mis Mensajes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/storyline">Publicaciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/misRecetas">Mis Recetas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/misRecetarios">Mis Recetarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/favoritos">Mis Favoritos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/seguidos">Seguidos</a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav navbar-nav navbar-right" id="collapsibleNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">
+                        Cerrar Sesión
+                        <i class="bi bi-box-arrow-left" style="vertical-align: -1px"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Tabla para mostrar mensajes recibidos -->
+    <div class="container-xl">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="form-outline mb-4">
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                            {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                        <div class="col-sm-8">
+                            <h2 style="margin-bottom: 20px;"><b>Mensajes Recibidos</b></h2>
+                        </div>
+                        <div class="btn-mensaje-container">
+                            <button type="button" class="btn btn-recetas" data-toggle="modal" data-target="#enviarMensajeModal">
+                                Enviar Mensaje
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% block content %}
+                <table id="example" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Asunto</th>
+                            <th>Remitente</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for mensaje in mensajes_recibidos %}
+                        <tr>
+                            <td>{{ mensaje.asunto }}</td>
+                            <td>{{ mensaje.remitente }}</td>
+                            <td>{{ mensaje.fecha }}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#verMensajeModal{{ mensaje.id }}">
+                                    Ver Mensaje
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <!-- Modal para enviar mensajes -->
+    <div class="modal fade" id="enviarMensajeModal" tabindex="-1" role="dialog"
+        aria-labelledby="enviarMensajeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="enviarMensajeModalLabel">Enviar Mensaje Privado</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="enviarMensajeForm" action="/enviarMensaje" method="POST">
+                        <!-- Selector de destinatario -->
+                        <div class="form-group">
+                            <label for "destinatario">Destinatario:</label>
+                            <select class="form-control" id="buscador">
+                                {% for seguido in seguidos %}
+                                <option value="{{ seguido.user.id }}"
+                                    selected="selected">{{ seguido.user.nombre }} {{ seguido.user.apellido }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <!-- Asunto del mensaje -->
+                        <div class="form-group">
+                            <label for "asunto">Asunto:</label>
+                            <input type="text" class="form-control" id="asunto" name="asunto" required>
+                        </div>
+                        <!-- Mensaje -->
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje:</label>
+                            <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" form="enviarMensajeForm" class="btn btn-recetas">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts al final del cuerpo del documento -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
+    <script>
+        jQuery(document).ready(function ($) {
+            $('#example').DataTable();
+            $('#buscador').select2({
+                placeholder: "Seleccione un destinatario",
+                allowClear: true
+            });
+        });
+    </script>
+</body>
+</html>
