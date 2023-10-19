@@ -77,3 +77,15 @@ def seguidos():
     
     return render_template('seguidos.html', seguidos = seguidos)
 
+def obtener_seguidos():
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = SeguidosServiceStub(channel)
+        response = stub.FindAllById(Seguido(user=User(id=session['user_id'])))
+        seguidos = response.seguido
+    return seguidos
+
+@seguido_blueprint.route("/misMensajes",methods = ['GET'])
+def misMensajes():
+    logger.info("/misMensajes")
+    seguidos = obtener_seguidos()
+    return render_template('mensajes.html',seguidos=seguidos)
