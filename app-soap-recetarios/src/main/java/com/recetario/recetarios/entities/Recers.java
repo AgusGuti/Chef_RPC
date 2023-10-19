@@ -1,8 +1,13 @@
 package com.recetario.recetarios.entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 
@@ -13,8 +18,10 @@ public class Recers {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="recetarioId", nullable = false)
-    private int recetarioId;
+    @ManyToOne
+    @JsonBackReference(value = "recetarioRecetas")
+    @JoinColumn(name = "recetarioId")
+    private Recetario recetario;
 
     @Column(name="recetaId", nullable = false)
     private int recetaId;
@@ -24,9 +31,8 @@ public class Recers {
     public Recers() {
     }
 
-    public Recers(int id, int recetarioId, int recetaId) {
-        this.id = id;
-        this.recetarioId = recetarioId;
+    public Recers(int recetaId, Recetario recetario) {  // Cambiar el orden de los argumentos
+        this.recetario = recetario;
         this.recetaId = recetaId;
     }
 
@@ -39,13 +45,13 @@ public class Recers {
         this.id = id;
     }
 
-    // Getter y Setter para 'recetarioId'
-    public int getRecetarioId() {
-        return recetarioId;
+    
+    public Recetario getRecetario() {
+        return recetario;
     }
 
-    public void setRecetarioId(int recetarioId) {
-        this.recetarioId = recetarioId;
+    public void setRecetario(Recetario recetario) {
+        this.recetario = recetario;
     }
 
     // Getter y Setter para 'recetaId'
@@ -59,7 +65,11 @@ public class Recers {
 
     @Override
     public String toString() {
-        return "ReceRs [id=" + id + ", recetarioId=" + recetarioId + ", recetaId=" + recetaId + "]";
+        return "Recers{" +
+               "id=" + id +
+               ", recetario=" + recetario +
+               ", recetaId=" + recetaId +
+               '}';
     }
     
     

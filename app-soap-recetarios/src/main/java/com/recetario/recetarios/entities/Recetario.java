@@ -1,8 +1,14 @@
 package com.recetario.recetarios.entities;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 
@@ -16,11 +22,18 @@ public class Recetario {
     @Column(name="nombre", nullable = false)
     private String nombre;
 
+    @Column(name="usuarioId", nullable = false)
+    private int usuarioId;
+
+    @OneToMany(mappedBy = "recetario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Recers> recers;
+
     public Recetario() {
     }
 
-    public Recetario(String nombre) {
+    public Recetario(String nombre, int usuarioId) {
         this.nombre = nombre;
+        this.usuarioId = usuarioId;
     }
 
     public int getId() {
@@ -35,9 +48,32 @@ public class Recetario {
         this.nombre = nombre;
     }
 
+    // Getter para 'usuarioId'
+    public int getUsuarioId() {
+        return usuarioId;
+    }
+
+    // Setter para 'usuarioId'
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public List<Recers> getRecers() {
+        return recers;
+    }
+
+    @JsonManagedReference (value = "recetarioRecetas")
+    public void setRecers(List<Recers> recers) {
+        this.recers = recers;
+    }
+
     @Override
     public String toString() {
-        return "Recetario [id=" + id + ", Nombre=" + nombre + "]";
+        return "Recetario{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", usuarioId='" + usuarioId + '\'' +
+                '}';
     }
     
     
