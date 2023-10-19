@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subir Archivo CSV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        form {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            width: 300px;
+            background-color: #f8f8f8;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <form action="http://localhost:5000/upload_csv" method="POST" enctype="multipart/form-data">
+        <h2>Subir Archivo.csv</h2>
+        <input type="file" name="file">
+        <br>
+        <input type="submit" value="Subir">
+    </form>
+</body>
+</html>

@@ -34,6 +34,7 @@ def autenticar():
         session['apellido']=response.apellido
         session['email']=response.email
         session['fotoPerfil']=response.fotoPerfil
+        session['moderador']=response.moderador
         return redirect('/index')
 
 @user_blueprint.route("/index",methods = ['GET'])
@@ -46,7 +47,7 @@ def registrarUser():
     logger.info("/registrar")
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = UsersServiceStub(channel)
-        response = stub.AddUser(User(nombre=request.form['nombre'],apellido=request.form['apellido'],email=request.form['email'],clave=request.form['clave'], fotoPerfil=request.form['fotoPerfil']))
+        response = stub.AddUser(User(nombre=request.form['nombre'],apellido=request.form['apellido'],email=request.form['email'],clave=request.form['clave'], fotoPerfil=request.form['fotoPerfil'], moderador=request.form['moderador']))
     print("Greeter client received: " + str(response))    
     user={"user":MessageToJson(response)}
     logger.info("user registrado %s",user)
@@ -71,6 +72,7 @@ def myprofile():
     logger.info("apellido: %s",session['apellido'])
     logger.info("email: %s",session['email'])
     logger.info("fotoPerfil: %s",session['fotoPerfil'])
+    logger.info("moderador: %s",session['moderador'])
 
 
     return render_template('myprofile.html', 
@@ -78,7 +80,8 @@ def myprofile():
                 nombre=session['nombre'],
                 apellido=session['apellido'],
                 email=session['email'],
-                fotoPerfil=session['fotoPerfil'])
+                fotoPerfil=session['fotoPerfil'],
+                moderador=session['moderador'])
 
 @user_blueprint.route("/logout",methods = ['GET'])
 def logout():
@@ -88,6 +91,7 @@ def logout():
     session.pop('apellido', None)
     session.pop('email', None)
     session.pop('fotoPerfil', None)
+    session.pop('moderador', None)
     return redirect('/')
 
 

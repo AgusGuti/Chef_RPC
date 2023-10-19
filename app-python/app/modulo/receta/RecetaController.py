@@ -13,6 +13,8 @@ from app.proto.categoria_pb2 import Categoria
 from app.proto.user_pb2 import User
 from app.proto.ingrediente_pb2 import Ingrediente
 from app.proto.receta_pb2 import Receta
+# from app.proto.denuncia_pb2 import Denuncia
+# from app.proto.motivo_pb2 import Motivo
 from app.proto.favorito_pb2 import Favorito
 
 from app.proto.receta_pb2_grpc import RecetasServiceStub

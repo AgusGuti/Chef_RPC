@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package model;
+
+import "google/protobuf/empty.proto";
+import "user.proto";
+import "receta.proto";
+import "motivo.proto";
+
+
+service DenunciasService {
+  rpc FindAll(google.protobuf.Empty) returns (Denuncias) {}
+}
+
+message Denuncias {
+  repeated Denuncia denuncia = 1;
+}
+
+
+message Denuncia {
+  int32 id = 1;
+  User user_id = 2;
+  Receta receta_id = 3;
+  string resuelta = 4;
+  Motivo motivo = 5;
+}

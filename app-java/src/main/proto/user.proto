@@ -27,4 +27,5 @@ message User {
   string email = 4;
   string clave = 5;
   string fotoPerfil = 6;
+  string moderador = 7;
 }

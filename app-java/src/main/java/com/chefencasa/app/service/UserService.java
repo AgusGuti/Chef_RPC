@@ -31,7 +31,7 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
     public void addUser(UserProto.User request, StreamObserver<UserProto.User> responseObserver) {
        
         try {
-			usuarioRepository.save(new User(request.getNombre(),request.getApellido(),request.getEmail(),request.getClave(),request.getFotoPerfil()));
+			usuarioRepository.save(new User(request.getNombre(),request.getApellido(),request.getEmail(),request.getClave(),request.getFotoPerfil(),request.getModerador()));
 		} catch (Exception e) {
 			try {
                 throw new Exception("No se pudo completar la operación,error al ingresar los datos o el usuario ya existe");
@@ -47,6 +47,7 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
         .setEmail(request.getEmail())
         .setClave(request.getClave())
         .setFotoPerfil(request.getFotoPerfil())
+        .setModerador(request.getModerador())
         .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();
@@ -70,6 +71,7 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
         .setEmail(user.getEmail())
         .setClave(user.getClave())
         .setFotoPerfil(user.getFotoPerfil())
+        .setModerador(user.getModerador())
         .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();
@@ -100,6 +102,7 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
                     .setNombre(user.getNombre())
                     .setApellido(user.getApellido())
                     .setFotoPerfil(user.getFotoPerfil())
+                    .setModerador(user.getModerador())
                     .build();
             userdb.add(userProto);
         }
