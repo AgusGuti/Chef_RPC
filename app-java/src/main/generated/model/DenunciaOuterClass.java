@@ -843,28 +843,31 @@ public final class DenunciaOuterClass {
     com.chefencasa.model.RecetaProto.RecetaOrBuilder getRecetaIdOrBuilder();
 
     /**
-     * <code>string resuelto = 4;</code>
-     * @return The resuelto.
+     * <code>string resuelta = 4;</code>
+     * @return The resuelta.
      */
-    java.lang.String getResuelto();
+    java.lang.String getResuelta();
     /**
-     * <code>string resuelto = 4;</code>
-     * @return The bytes for resuelto.
+     * <code>string resuelta = 4;</code>
+     * @return The bytes for resuelta.
      */
     com.google.protobuf.ByteString
-        getResueltoBytes();
+        getResueltaBytes();
 
     /**
-     * <code>string motivo = 5;</code>
+     * <code>.model.Motivo motivo = 5;</code>
+     * @return Whether the motivo field is set.
+     */
+    boolean hasMotivo();
+    /**
+     * <code>.model.Motivo motivo = 5;</code>
      * @return The motivo.
      */
-    java.lang.String getMotivo();
+    model.MotivoOuterClass.Motivo getMotivo();
     /**
-     * <code>string motivo = 5;</code>
-     * @return The bytes for motivo.
+     * <code>.model.Motivo motivo = 5;</code>
      */
-    com.google.protobuf.ByteString
-        getMotivoBytes();
+    model.MotivoOuterClass.MotivoOrBuilder getMotivoOrBuilder();
   }
   /**
    * Protobuf type {@code model.Denuncia}
@@ -879,8 +882,7 @@ public final class DenunciaOuterClass {
       super(builder);
     }
     private Denuncia() {
-      resuelto_ = "";
-      motivo_ = "";
+      resuelta_ = "";
     }
 
     @java.lang.Override
@@ -947,13 +949,20 @@ public final class DenunciaOuterClass {
             case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              resuelto_ = s;
+              resuelta_ = s;
               break;
             }
             case 42: {
-              java.lang.String s = input.readStringRequireUtf8();
+              model.MotivoOuterClass.Motivo.Builder subBuilder = null;
+              if (motivo_ != null) {
+                subBuilder = motivo_.toBuilder();
+              }
+              motivo_ = input.readMessage(model.MotivoOuterClass.Motivo.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(motivo_);
+                motivo_ = subBuilder.buildPartial();
+              }
 
-              motivo_ = s;
               break;
             }
             default: {
@@ -1044,36 +1053,36 @@ public final class DenunciaOuterClass {
       return getRecetaId();
     }
 
-    public static final int RESUELTO_FIELD_NUMBER = 4;
-    private volatile java.lang.Object resuelto_;
+    public static final int RESUELTA_FIELD_NUMBER = 4;
+    private volatile java.lang.Object resuelta_;
     /**
-     * <code>string resuelto = 4;</code>
-     * @return The resuelto.
+     * <code>string resuelta = 4;</code>
+     * @return The resuelta.
      */
-    public java.lang.String getResuelto() {
-      java.lang.Object ref = resuelto_;
+    public java.lang.String getResuelta() {
+      java.lang.Object ref = resuelta_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        resuelto_ = s;
+        resuelta_ = s;
         return s;
       }
     }
     /**
-     * <code>string resuelto = 4;</code>
-     * @return The bytes for resuelto.
+     * <code>string resuelta = 4;</code>
+     * @return The bytes for resuelta.
      */
     public com.google.protobuf.ByteString
-        getResueltoBytes() {
-      java.lang.Object ref = resuelto_;
+        getResueltaBytes() {
+      java.lang.Object ref = resuelta_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        resuelto_ = b;
+        resuelta_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -1081,39 +1090,26 @@ public final class DenunciaOuterClass {
     }
 
     public static final int MOTIVO_FIELD_NUMBER = 5;
-    private volatile java.lang.Object motivo_;
+    private model.MotivoOuterClass.Motivo motivo_;
     /**
-     * <code>string motivo = 5;</code>
-     * @return The motivo.
+     * <code>.model.Motivo motivo = 5;</code>
+     * @return Whether the motivo field is set.
      */
-    public java.lang.String getMotivo() {
-      java.lang.Object ref = motivo_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        motivo_ = s;
-        return s;
-      }
+    public boolean hasMotivo() {
+      return motivo_ != null;
     }
     /**
-     * <code>string motivo = 5;</code>
-     * @return The bytes for motivo.
+     * <code>.model.Motivo motivo = 5;</code>
+     * @return The motivo.
      */
-    public com.google.protobuf.ByteString
-        getMotivoBytes() {
-      java.lang.Object ref = motivo_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        motivo_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public model.MotivoOuterClass.Motivo getMotivo() {
+      return motivo_ == null ? model.MotivoOuterClass.Motivo.getDefaultInstance() : motivo_;
+    }
+    /**
+     * <code>.model.Motivo motivo = 5;</code>
+     */
+    public model.MotivoOuterClass.MotivoOrBuilder getMotivoOrBuilder() {
+      return getMotivo();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1139,11 +1135,11 @@ public final class DenunciaOuterClass {
       if (recetaId_ != null) {
         output.writeMessage(3, getRecetaId());
       }
-      if (!getResueltoBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, resuelto_);
+      if (!getResueltaBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, resuelta_);
       }
-      if (!getMotivoBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, motivo_);
+      if (motivo_ != null) {
+        output.writeMessage(5, getMotivo());
       }
       unknownFields.writeTo(output);
     }
@@ -1166,11 +1162,12 @@ public final class DenunciaOuterClass {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, getRecetaId());
       }
-      if (!getResueltoBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, resuelto_);
+      if (!getResueltaBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, resuelta_);
       }
-      if (!getMotivoBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, motivo_);
+      if (motivo_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, getMotivo());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1199,10 +1196,13 @@ public final class DenunciaOuterClass {
         if (!getRecetaId()
             .equals(other.getRecetaId())) return false;
       }
-      if (!getResuelto()
-          .equals(other.getResuelto())) return false;
-      if (!getMotivo()
-          .equals(other.getMotivo())) return false;
+      if (!getResuelta()
+          .equals(other.getResuelta())) return false;
+      if (hasMotivo() != other.hasMotivo()) return false;
+      if (hasMotivo()) {
+        if (!getMotivo()
+            .equals(other.getMotivo())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1224,10 +1224,12 @@ public final class DenunciaOuterClass {
         hash = (37 * hash) + RECETA_ID_FIELD_NUMBER;
         hash = (53 * hash) + getRecetaId().hashCode();
       }
-      hash = (37 * hash) + RESUELTO_FIELD_NUMBER;
-      hash = (53 * hash) + getResuelto().hashCode();
-      hash = (37 * hash) + MOTIVO_FIELD_NUMBER;
-      hash = (53 * hash) + getMotivo().hashCode();
+      hash = (37 * hash) + RESUELTA_FIELD_NUMBER;
+      hash = (53 * hash) + getResuelta().hashCode();
+      if (hasMotivo()) {
+        hash = (37 * hash) + MOTIVO_FIELD_NUMBER;
+        hash = (53 * hash) + getMotivo().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1375,10 +1377,14 @@ public final class DenunciaOuterClass {
           recetaId_ = null;
           recetaIdBuilder_ = null;
         }
-        resuelto_ = "";
+        resuelta_ = "";
 
-        motivo_ = "";
-
+        if (motivoBuilder_ == null) {
+          motivo_ = null;
+        } else {
+          motivo_ = null;
+          motivoBuilder_ = null;
+        }
         return this;
       }
 
@@ -1416,8 +1422,12 @@ public final class DenunciaOuterClass {
         } else {
           result.recetaId_ = recetaIdBuilder_.build();
         }
-        result.resuelto_ = resuelto_;
-        result.motivo_ = motivo_;
+        result.resuelta_ = resuelta_;
+        if (motivoBuilder_ == null) {
+          result.motivo_ = motivo_;
+        } else {
+          result.motivo_ = motivoBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -1475,13 +1485,12 @@ public final class DenunciaOuterClass {
         if (other.hasRecetaId()) {
           mergeRecetaId(other.getRecetaId());
         }
-        if (!other.getResuelto().isEmpty()) {
-          resuelto_ = other.resuelto_;
+        if (!other.getResuelta().isEmpty()) {
+          resuelta_ = other.resuelta_;
           onChanged();
         }
-        if (!other.getMotivo().isEmpty()) {
-          motivo_ = other.motivo_;
-          onChanged();
+        if (other.hasMotivo()) {
+          mergeMotivo(other.getMotivo());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1780,156 +1789,199 @@ public final class DenunciaOuterClass {
         return recetaIdBuilder_;
       }
 
-      private java.lang.Object resuelto_ = "";
+      private java.lang.Object resuelta_ = "";
       /**
-       * <code>string resuelto = 4;</code>
-       * @return The resuelto.
+       * <code>string resuelta = 4;</code>
+       * @return The resuelta.
        */
-      public java.lang.String getResuelto() {
-        java.lang.Object ref = resuelto_;
+      public java.lang.String getResuelta() {
+        java.lang.Object ref = resuelta_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          resuelto_ = s;
+          resuelta_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string resuelto = 4;</code>
-       * @return The bytes for resuelto.
+       * <code>string resuelta = 4;</code>
+       * @return The bytes for resuelta.
        */
       public com.google.protobuf.ByteString
-          getResueltoBytes() {
-        java.lang.Object ref = resuelto_;
+          getResueltaBytes() {
+        java.lang.Object ref = resuelta_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          resuelto_ = b;
+          resuelta_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string resuelto = 4;</code>
-       * @param value The resuelto to set.
+       * <code>string resuelta = 4;</code>
+       * @param value The resuelta to set.
        * @return This builder for chaining.
        */
-      public Builder setResuelto(
+      public Builder setResuelta(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        resuelto_ = value;
+        resuelta_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string resuelto = 4;</code>
+       * <code>string resuelta = 4;</code>
        * @return This builder for chaining.
        */
-      public Builder clearResuelto() {
+      public Builder clearResuelta() {
         
-        resuelto_ = getDefaultInstance().getResuelto();
+        resuelta_ = getDefaultInstance().getResuelta();
         onChanged();
         return this;
       }
       /**
-       * <code>string resuelto = 4;</code>
-       * @param value The bytes for resuelto to set.
+       * <code>string resuelta = 4;</code>
+       * @param value The bytes for resuelta to set.
        * @return This builder for chaining.
        */
-      public Builder setResueltoBytes(
+      public Builder setResueltaBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        resuelto_ = value;
+        resuelta_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object motivo_ = "";
+      private model.MotivoOuterClass.Motivo motivo_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          model.MotivoOuterClass.Motivo, model.MotivoOuterClass.Motivo.Builder, model.MotivoOuterClass.MotivoOrBuilder> motivoBuilder_;
       /**
-       * <code>string motivo = 5;</code>
+       * <code>.model.Motivo motivo = 5;</code>
+       * @return Whether the motivo field is set.
+       */
+      public boolean hasMotivo() {
+        return motivoBuilder_ != null || motivo_ != null;
+      }
+      /**
+       * <code>.model.Motivo motivo = 5;</code>
        * @return The motivo.
        */
-      public java.lang.String getMotivo() {
-        java.lang.Object ref = motivo_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          motivo_ = s;
-          return s;
+      public model.MotivoOuterClass.Motivo getMotivo() {
+        if (motivoBuilder_ == null) {
+          return motivo_ == null ? model.MotivoOuterClass.Motivo.getDefaultInstance() : motivo_;
         } else {
-          return (java.lang.String) ref;
+          return motivoBuilder_.getMessage();
         }
       }
       /**
-       * <code>string motivo = 5;</code>
-       * @return The bytes for motivo.
+       * <code>.model.Motivo motivo = 5;</code>
        */
-      public com.google.protobuf.ByteString
-          getMotivoBytes() {
-        java.lang.Object ref = motivo_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          motivo_ = b;
-          return b;
+      public Builder setMotivo(model.MotivoOuterClass.Motivo value) {
+        if (motivoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          motivo_ = value;
+          onChanged();
         } else {
-          return (com.google.protobuf.ByteString) ref;
+          motivoBuilder_.setMessage(value);
         }
+
+        return this;
       }
       /**
-       * <code>string motivo = 5;</code>
-       * @param value The motivo to set.
-       * @return This builder for chaining.
+       * <code>.model.Motivo motivo = 5;</code>
        */
       public Builder setMotivo(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        motivo_ = value;
-        onChanged();
+          model.MotivoOuterClass.Motivo.Builder builderForValue) {
+        if (motivoBuilder_ == null) {
+          motivo_ = builderForValue.build();
+          onChanged();
+        } else {
+          motivoBuilder_.setMessage(builderForValue.build());
+        }
+
         return this;
       }
       /**
-       * <code>string motivo = 5;</code>
-       * @return This builder for chaining.
+       * <code>.model.Motivo motivo = 5;</code>
+       */
+      public Builder mergeMotivo(model.MotivoOuterClass.Motivo value) {
+        if (motivoBuilder_ == null) {
+          if (motivo_ != null) {
+            motivo_ =
+              model.MotivoOuterClass.Motivo.newBuilder(motivo_).mergeFrom(value).buildPartial();
+          } else {
+            motivo_ = value;
+          }
+          onChanged();
+        } else {
+          motivoBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.model.Motivo motivo = 5;</code>
        */
       public Builder clearMotivo() {
-        
-        motivo_ = getDefaultInstance().getMotivo();
-        onChanged();
+        if (motivoBuilder_ == null) {
+          motivo_ = null;
+          onChanged();
+        } else {
+          motivo_ = null;
+          motivoBuilder_ = null;
+        }
+
         return this;
       }
       /**
-       * <code>string motivo = 5;</code>
-       * @param value The bytes for motivo to set.
-       * @return This builder for chaining.
+       * <code>.model.Motivo motivo = 5;</code>
        */
-      public Builder setMotivoBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
+      public model.MotivoOuterClass.Motivo.Builder getMotivoBuilder() {
         
-        motivo_ = value;
         onChanged();
-        return this;
+        return getMotivoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.model.Motivo motivo = 5;</code>
+       */
+      public model.MotivoOuterClass.MotivoOrBuilder getMotivoOrBuilder() {
+        if (motivoBuilder_ != null) {
+          return motivoBuilder_.getMessageOrBuilder();
+        } else {
+          return motivo_ == null ?
+              model.MotivoOuterClass.Motivo.getDefaultInstance() : motivo_;
+        }
+      }
+      /**
+       * <code>.model.Motivo motivo = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          model.MotivoOuterClass.Motivo, model.MotivoOuterClass.Motivo.Builder, model.MotivoOuterClass.MotivoOrBuilder> 
+          getMotivoFieldBuilder() {
+        if (motivoBuilder_ == null) {
+          motivoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              model.MotivoOuterClass.Motivo, model.MotivoOuterClass.Motivo.Builder, model.MotivoOuterClass.MotivoOrBuilder>(
+                  getMotivo(),
+                  getParentForChildren(),
+                  isClean());
+          motivo_ = null;
+        }
+        return motivoBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -2004,14 +2056,15 @@ public final class DenunciaOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\016denuncia.proto\022\005model\032\033google/protobuf" +
-      "/empty.proto\032\nuser.proto\032\014receta.proto\"." +
-      "\n\tDenuncias\022!\n\010denuncia\030\001 \003(\0132\017.model.De" +
-      "nuncia\"x\n\010Denuncia\022\n\n\002id\030\001 \001(\005\022\034\n\007user_i" +
-      "d\030\002 \001(\0132\013.model.User\022 \n\treceta_id\030\003 \001(\0132" +
-      "\r.model.Receta\022\020\n\010resuelto\030\004 \001(\t\022\016\n\006moti" +
-      "vo\030\005 \001(\t2I\n\020DenunciasService\0225\n\007FindAll\022" +
-      "\026.google.protobuf.Empty\032\020.model.Denuncia" +
-      "s\"\000b\006proto3"
+      "/empty.proto\032\nuser.proto\032\014receta.proto\032\014" +
+      "motivo.proto\".\n\tDenuncias\022!\n\010denuncia\030\001 " +
+      "\003(\0132\017.model.Denuncia\"\207\001\n\010Denuncia\022\n\n\002id\030" +
+      "\001 \001(\005\022\034\n\007user_id\030\002 \001(\0132\013.model.User\022 \n\tr" +
+      "eceta_id\030\003 \001(\0132\r.model.Receta\022\020\n\010resuelt" +
+      "a\030\004 \001(\t\022\035\n\006motivo\030\005 \001(\0132\r.model.Motivo2I" +
+      "\n\020DenunciasService\0225\n\007FindAll\022\026.google.p" +
+      "rotobuf.Empty\032\020.model.Denuncias\"\000b\006proto" +
+      "3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2019,6 +2072,7 @@ public final class DenunciaOuterClass {
           com.google.protobuf.EmptyProto.getDescriptor(),
           com.chefencasa.model.UserProto.getDescriptor(),
           com.chefencasa.model.RecetaProto.getDescriptor(),
+          model.MotivoOuterClass.getDescriptor(),
         });
     internal_static_model_Denuncias_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -2031,10 +2085,11 @@ public final class DenunciaOuterClass {
     internal_static_model_Denuncia_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_model_Denuncia_descriptor,
-        new java.lang.String[] { "Id", "UserId", "RecetaId", "Resuelto", "Motivo", });
+        new java.lang.String[] { "Id", "UserId", "RecetaId", "Resuelta", "Motivo", });
     com.google.protobuf.EmptyProto.getDescriptor();
     com.chefencasa.model.UserProto.getDescriptor();
     com.chefencasa.model.RecetaProto.getDescriptor();
+    model.MotivoOuterClass.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
