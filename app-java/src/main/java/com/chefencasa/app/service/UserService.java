@@ -71,7 +71,7 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
         .setEmail(user.getEmail())
         .setClave(user.getClave())
         .setFotoPerfil(user.getFotoPerfil())
-        .setModerador(request.getModerador())
+        .setModerador(user.getModerador())
         .build();
         responseObserver.onNext(a);
         responseObserver.onCompleted();

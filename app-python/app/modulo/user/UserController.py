@@ -72,6 +72,7 @@ def myprofile():
     logger.info("apellido: %s",session['apellido'])
     logger.info("email: %s",session['email'])
     logger.info("fotoPerfil: %s",session['fotoPerfil'])
+    logger.info("moderador: %s",session['moderador'])
 
 
     return render_template('myprofile.html', 
@@ -79,7 +80,8 @@ def myprofile():
                 nombre=session['nombre'],
                 apellido=session['apellido'],
                 email=session['email'],
-                fotoPerfil=session['fotoPerfil'])
+                fotoPerfil=session['fotoPerfil'],
+                moderador=session['moderador'])
 
 @user_blueprint.route("/logout",methods = ['GET'])
 def logout():
@@ -89,6 +91,7 @@ def logout():
     session.pop('apellido', None)
     session.pop('email', None)
     session.pop('fotoPerfil', None)
+    session.pop('moderador', None)
     return redirect('/')
 
 
