@@ -1,4 +1,4 @@
-package main.java.com.recetario.recetarios;
+package com.recetario.recetarios;
 
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
@@ -15,6 +15,7 @@ import org.springframework.xml.xsd.XsdSchema;
 @EnableWs
 @Configuration
 public class WebServiceConfig extends WsConfigurerAdapter {
+    
 	@Bean
 	public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
 		MessageDispatcherServlet servlet = new MessageDispatcherServlet();
@@ -24,14 +25,14 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	}
 
 	@Bean(name = "recetarios")
-    public DefaultWsdl11Definition agregarRecetarioDefinition(XsdSchema recetariosSchema) {
-        DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("RecetariosPort");
-        wsdl11Definition.setLocationUri("/modrecetarios");
-        wsdl11Definition.setTargetNamespace("http://spring.io/guides/gs-producing-web-service");
-        wsdl11Definition.setSchema(recetariosSchema);
-        return wsdl11Definition;
-    }
+	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema recetariosSchema) {
+		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setPortTypeName("RecetariosPort");
+		wsdl11Definition.setLocationUri("/modrecetarios");
+		wsdl11Definition.setTargetNamespace("http://spring.io/guides/gs-producing-web-service");
+		wsdl11Definition.setSchema(recetariosSchema);
+		return wsdl11Definition;
+	}
 
 	@Bean
 	public XsdSchema recetariosSchema() {

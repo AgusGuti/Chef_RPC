@@ -9,7 +9,7 @@ import com.recetario.recetarios.entities.Recetario;
 import com.recetario.recetarios.service.RecetarioService;
 
 @RestController
-@RequestMapping("/recetarios")
+@RequestMapping("/recetariossss")
 public class RecetarioController {
     @Autowired
     private RecetarioService recetarioService;

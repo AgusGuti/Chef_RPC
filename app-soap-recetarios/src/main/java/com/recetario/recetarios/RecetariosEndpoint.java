@@ -1,4 +1,4 @@
-package main.java.com.recetario.recetarios.Endpoint;
+package com.recetario.recetarios;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -18,16 +18,22 @@ public class RecetariosEndpoint {
 
     private RecetarioService recetarioService;
 
+    @Autowired
+    public RecetariosEndpoint(RecetarioService recetarioService){
+        this.recetarioService = recetarioService;
+    }
+
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "agregarRecetarioRequest")
     @ResponsePayload
     public AgregarRecetarioResponse agregarRecetario(@RequestPayload AgregarRecetarioRequest request) {
         AgregarRecetarioResponse response = new AgregarRecetarioResponse();
+        System.out.println("a ver");
         recetarioService.addRecetario(request.getNombre(), request.getUsuarioId());
-        Recetario recetarioxsd = new Recetario();
+        /*Recetario recetarioxsd = new Recetario();
         recetarioxsd.setId(1);
         recetarioxsd.setNombre(request.getNombre());
         recetarioxsd.setUsuarioId(request.getUsuarioId());
-        response.setRecetario(recetarioxsd);
+        response.setRecetario(recetarioxsd);*/
 
         return response;
     }
