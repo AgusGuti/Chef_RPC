@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Website Grupo E</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index_styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='receta_styles.css') }}">
+    <!-- Incluir el archivo CSS de DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.6/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+</head>
+<body class="h-100">
+    <div class="form-outline">
+        <img src="{{ url_for('static', filename='chefencasa.png') }}" alt="Universidad Nacional de Lanús" style="vertical-align: Stickman; margin: 0px; padding: 16px">
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark nav-bk">
+        <a class="navbar-brand d-flex gap-lg-1 mx-lg-3" href="/index">
+            <i class="bi bi-house-fill text-white"></i> Inicio
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex align-items-center" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/myprofile">Mi Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/misMensajes">Mis Mensajes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/storyline">Publicaciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/misRecetas">Mis Recetas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/misRecetarios">Mis Recetarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/favoritos">Mis Favoritos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/borradores">Mis Borradores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/seguidos">Seguidos</a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav navbar-nav navbar-right" id="collapsibleNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">
+                        Cerrar Sesión
+                        <i class="bi bi-box-arrow-left" style="vertical-align: -1px"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Tabla para mostrar borradores -->
+    <div class="container-xl">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2 style="margin-bottom: 20px;"><b>Borradores</b></h2>
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="button" class="btn btn-recetas float-end" data-toggle="modal" data-target="#crearBorradorModal">
+                                Crear Borrador
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <table id="example" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Categoría</th>
+                            <th>Descripción</th>
+                            <th>Tiempo de Preparación</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for borrador in borradores %}
+                            <tr>
+                                <td>{{ borrador.titulo_receta }}</td>
+                                <td>{{ borrador.categoria_id }}</td>
+                                <td>{{ borrador.descripcion }}</td>
+                                <td>{{ borrador.tiempo_preparacion }} minutos</td>
+                                <td>
+                                    <button class="btn btn-recetas btn-sm"
+                                        data-toggle="modal"
+                                        data-borrador-id="{{ borrador.id }}"
+                                        data-target="#modalBorrador{{ borrador.id }}">
+                                        <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+                                    </button>
+                                    &nbsp; <!--espacio en blanco-->
+                                    <button class="btn btn-recetas btn-sm ml-1"
+                                        data-toggle="modal"
+                                        data-borrador-id="{{ borrador.id }}"
+                                        data-target="#modalModificarBorrador"
+                                        data-borrador-titulo="{{ borrador.titulo }}"
+                                        data-borrador-descripcion="{{ borrador.descripcion }}"
+                                        data-borrador-foto1="{{ borrador.foto1 }}"
+                                        data-borrador-foto2="{{ borrador.foto2 }}"
+                                        data-borrador-foto3="{{ borrador.foto3 }}"
+                                        data-borrador-foto4="{{ borrador.foto4 }}"
+                                        data-borrador-foto5="{{ borrador.foto5 }}"
+                                        data-borrador-categoria="{{ borrador.categoria }}"
+                                        data-borrador-tiempo="{{ borrador.tiempo_preparacion }}">
+                                        <i class="fas fa-pencil-alt icono"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para el detalle de los borradores -->
+    {% for borrador in borradores %}
+    <div
+    class="modal fade"
+    id="modalBorrador{{ borrador.id }}"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalBorrador{{ borrador.id }}Label"
+    aria-hidden="true"
+    >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalBorrador{{ borrador.id }}Label">{{ borrador.titulo_receta }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <img src="{{ borrador.foto1 }}" alt="{{ borrador.titulo_receta }}" width="200" height="150" class="detalle-imagen">
+            <p>
+            <p>Categoría: {{ borrador.categoria_id }}</p>
+            <p>Descripción: {{ borrador.descripcion }}</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+
+    <!-- JavaScript para cargar los datos de borradores -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script>
+        // Realiza una solicitud para obtener los datos de borradores
+        $.ajax({
+            url: "/borradores",  // Modifica la URL para apuntar a la ruta /borradores
+            method: "GET",
+            success: function(data) {
+                // Procesa los datos y muestra la información en la tabla
+                if (data.error) {
+                    console.error(data.error);
+                } else {
+                    data.forEach(function(borrador) {
+                        $("#example tbody").append('<tr><td>' + borrador.titulo_receta + '</td><td>' + borrador.categoria_id + '</td><td>' + borrador.descripcion + '</td><td>' + borrador.tiempo_preparacion + ' minutos</td></tr>');
+                    });
+                }
+            },
+            error: function(error) {
+                console.error("Error al obtener los borradores: " + error.responseText);
+            }
+        });
+    </script>
+    <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $('#example').DataTable();
+        });
+    </script>
+</body>
+</html>

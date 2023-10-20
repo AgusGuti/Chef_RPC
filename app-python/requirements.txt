@@ -6,3 +6,4 @@ python-dotenv
 flask_table
 kafka-python
 Flask-APScheduler
+requests
