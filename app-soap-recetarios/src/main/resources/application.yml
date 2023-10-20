@@ -7,11 +7,8 @@ spring:
         show-sql: true
         hibernate:
             ddl-auto: update
-            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+            naming-strategy: org.hibernate.cfg.ImprovedNaming.Strategy
             properties:
                 dialect: org.hibernate.dialect.MySQL5Dialect
-    
 
-server:
-  port : 8090
-
+server.port: ${SPRING_PORT:8088}

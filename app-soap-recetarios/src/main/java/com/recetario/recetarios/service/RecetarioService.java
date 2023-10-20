@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.recetario.recetarios.entities.Recetario;
 import com.recetario.recetarios.repository.RecetarioRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 @Service("recetarioService")
 public class RecetarioService {
 
