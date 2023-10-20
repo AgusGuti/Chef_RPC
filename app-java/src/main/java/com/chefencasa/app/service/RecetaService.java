@@ -19,6 +19,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.converter.StringJsonMessageConverter;
 
 import com.chefencasa.app.entities.Receta;
+import com.chefencasa.app.entities.Receta;
 import com.chefencasa.app.entities.Ingrediente;
 import com.chefencasa.app.repository.CategoriaRepository;
 import com.chefencasa.app.repository.IngredienteRepository;
@@ -28,12 +29,14 @@ import com.chefencasa.model.CategoriaProto;
 import com.chefencasa.model.IngredienteProto;
 import com.chefencasa.model.RecetaProto;
 import com.chefencasa.model.RecetasServiceGrpc;
+import com.chefencasa.model.RecetaProto;
 import com.chefencasa.model.UserProto;
 import com.google.gson.Gson;
 import com.google.protobuf.Empty;
 import com.chefencasa.app.dto.ComentarioDTO;
 import com.chefencasa.app.dto.NovedadesDTO;
 import com.chefencasa.app.dto.PopularidadRecetaDTO;
+import com.chefencasa.app.dto.PopularidadUsuarioDTO;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -377,4 +380,25 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 		responseObserver.onNext(a);
 		responseObserver.onCompleted();
 	}
+
+
+	@Transactional
+    public void deleteReceta(RecetaProto.Receta request, StreamObserver<RecetaProto.Receta> responseObserver) {
+    
+        try {
+			Receta receta = recetaRepository.findById(request.getIdReceta());
+            logger.info("Receta a eliminar"+ receta);
+                        
+            recetaRepository.delete(receta);
+            
+		} catch (Exception e) {
+            logger.error("Error al eliminar Receta", e);
+        }
+
+        RecetaProto.Receta a = RecetaProto.Receta.newBuilder()
+            .setIdReceta(request.getIdReceta())
+            .build();
+        responseObserver.onNext(a);
+        responseObserver.onCompleted();
+    }
 }

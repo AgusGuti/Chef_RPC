@@ -7,3 +7,5 @@ flask_table
 kafka-python
 Flask-APScheduler
 requests
+schedule
+zeep
