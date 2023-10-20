@@ -73,6 +73,10 @@ Clases creadas en capa servidor:
 
    python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/comentario.proto;
 
+   python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/denuncia.proto;
+
+   python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/motivo.proto;
+
 4. python main.py
 
 ## BD MYSQL

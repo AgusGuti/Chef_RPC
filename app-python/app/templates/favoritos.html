@@ -345,7 +345,21 @@
           </button>
         </div>
         <div class="modal-body">
-          <img src="{{ favorito.receta.foto1 }}" alt="{{ favorito.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% if favorito.receta.foto1 is not none and favorito.receta.foto1 != '' %}
+            <img src="{{ favorito.receta.foto1 }}" alt="{{ favorito.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
+          {% if favorito.receta.foto2 is not none and favorito.receta.foto2 != '' %}
+            <img src="{{ favorito.receta.foto2 }}" alt="{{ favorito.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
+          {% if favorito.receta.foto3 is not none and favorito.receta.foto3 != '' %}
+            <img src="{{ favorito.receta.foto3 }}" alt="{{ favorito.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
+          {% if favorito.receta.foto4 is not none and favorito.receta.foto4 != '' %}
+            <img src="{{ favorito.receta.foto4 }}" alt="{{ favorito.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
+          {% if favorito.receta.foto5 is not none and favorito.receta.foto5 != '' %}
+            <img src="{{ favorito.receta.foto5 }}" alt="{{ favorito.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
           <p>
           <p>Usuario: 
             {{ favorito.receta.id }}

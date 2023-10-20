@@ -459,7 +459,15 @@
                 &nbsp; <!--espacio en blanco-->
                 <button class="btn btn-recetas btn-sm" onclick="mostrarPuntaje('{{ receta.idReceta }}')">
                   <i class="fa-solid fa-star" style="color: #ffffff;"></i>
-                </button>                
+                </button>
+                {% if receta.user.id != usuario_autenticado %}
+                    &nbsp; <!--espacio en blanco-->
+                    <button class="btn btn-recetas btn-sm" id="denunciaButton_{{ receta.idReceta }}"
+                      data-toggle="modal" data-target="modalDenuncia" onclick="addDenuncia({{ receta.idReceta }})"
+                      data-receta-id="{{ receta.idReceta }}">
+                      <i class="fas fa-exclamation-triangle" id="favoritoIcon_{{ receta.idReceta }}" style="color: #ffcc00;"></i>
+                    </button>
+                  {% endif %}                
               </td>
             </tr>
           {% endfor %}
@@ -490,7 +498,21 @@
           </button>
         </div>
         <div class="modal-body">
-          <img src="{{ receta.foto1 }}" alt="{{ receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% if receta.foto1 is not none and receta.foto1 != '' %}
+            <img src="{{ receta.foto1 }}" alt="{{ receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
+          {% if receta.foto2 is not none and receta.foto2 != '' %}
+            <img src="{{ receta.foto2 }}" alt="{{ receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
+          {% if receta.foto3 is not none and receta.foto3 != '' %}
+            <img src="{{ receta.foto3 }}" alt="{{ receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
+          {% if receta.foto4 is not none and receta.foto4 != '' %}
+            <img src="{{ receta.foto4 }}" alt="{{ receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
+          {% if receta.foto5 is not none and receta.foto5 != '' %}
+            <img src="{{ receta.foto5 }}" alt="{{ receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
           <p>
           <p>Categoria: {{ receta.categoria.categoria }}</p>
           <p>Descripcion: {{ receta.descripcion }}</p>

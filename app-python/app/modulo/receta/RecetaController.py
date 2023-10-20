@@ -13,8 +13,10 @@ from app.proto.categoria_pb2 import Categoria
 from app.proto.user_pb2 import User
 from app.proto.ingrediente_pb2 import Ingrediente
 from app.proto.receta_pb2 import Receta
-# from app.proto.denuncia_pb2 import Denuncia
-# from app.proto.motivo_pb2 import Motivo
+
+from app.proto.denuncia_pb2 import Denuncia
+from app.proto.motivo_pb2 import Motivo
+
 from app.proto.favorito_pb2 import Favorito
 
 from app.proto.receta_pb2_grpc import RecetasServiceStub
@@ -25,8 +27,18 @@ from google.protobuf.json_format import MessageToDict, MessageToJson
 from google.protobuf.timestamp_pb2 import Timestamp
 import datetime
 
+from zeep import Client
+
 
 from kafka import KafkaConsumer
+
+
+# URL del servicio WSDL - DENUNCIAS
+wsdl_url_denuncias = 'http://localhost:8085/moddenuncias/denuncias.wsdl'
+
+# Crear un cliente para el servicio SOAP - DENUNCIAS
+clientDenuncias = Client(wsdl_url_denuncias)
+
 
 
 logger = logging.getLogger(__name__)
@@ -202,3 +214,39 @@ def modificarReceta():
             flash('Receta modificada exitosamente!','success')
             return redirect('/misRecetas')
 
+
+@receta_blueprint.route("/denuncias",methods=['GET'])
+def findDenunciasAbiertas():
+    logger.info("/denuncias")
+
+    inst_denuncia = Denuncia()
+    inst_motivo = Motivo()
+
+    denuncias_abiertas = clientDenuncias.service.getUnresolved()
+    motivos = clientDenuncias.service.getMotivos()
+
+    if denuncias_abiertas=="{}":
+        flash('Error al intentar traer Denuncias','danger')
+        return redirect('/storyline')
+    elif motivos=="{}":
+        flash('Error al intentar traer Motivos','danger')
+        return redirect('/storyline')
+    else:
+        return render_template('denuncias.html', denuncias_abiertas=denuncias_abiertas, motivos=motivos)
+    
+
+@receta_blueprint.route("/addDenuncia",methods=['POST'])
+def addDenuncia():
+    logger.info("/addDenuncia")
+
+    recetaId = int(request.form["receta_id"])
+    motivoId = int(request.form["motivo_id"])
+    
+
+    clientDenuncias.service.addDenuncia(user_id=session['user_id'], receta_id= recetaId, motivo_id= motivoId)
+
+    if not isinstance(session['user_id'], int) and not isinstance(recetaId, int) and not isinstance(motivoId, int):
+        flash('Error al intentar guardar Denuncia','danger')
+        return redirect('/storyline')
+    else:
+        return render_template('denuncias.html', denuncias_abiertas=denuncias_abiertas, motivos=motivos)
