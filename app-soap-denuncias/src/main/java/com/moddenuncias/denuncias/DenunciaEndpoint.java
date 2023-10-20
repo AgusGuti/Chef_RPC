@@ -41,12 +41,11 @@ public class DenunciaEndpoint {
 		GetUnresolvedResponse response = new GetUnresolvedResponse();
 
 		List<Denuncia> lista_denuncia = denunciaService.findUnresolved();
-
-		io.spring.guides.gs_producing_web_service.Denuncia denuncia_xsd = new io.spring.guides.gs_producing_web_service.Denuncia();
-
-		io.spring.guides.gs_producing_web_service.Motivo motivo_xsd = new io.spring.guides.gs_producing_web_service.Motivo();
-
+		
 		for(Denuncia denuncia : lista_denuncia){
+
+			io.spring.guides.gs_producing_web_service.Denuncia denuncia_xsd = new io.spring.guides.gs_producing_web_service.Denuncia();
+			io.spring.guides.gs_producing_web_service.Motivo motivo_xsd = new io.spring.guides.gs_producing_web_service.Motivo();
 
 			motivo_xsd.setId(denuncia.getMotivo_id().getId());
 			motivo_xsd.setMotivo(denuncia.getMotivo_id().getMotivo());
@@ -59,47 +58,29 @@ public class DenunciaEndpoint {
 
 			response.getDenuncias().add(denuncia_xsd);
 		}
-
+		
 		return response;
 	}
+
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getMotivosRequest")
 	@ResponsePayload
 	public GetMotivosResponse getMotivos(@RequestPayload GetMotivosRequest request) {
 		GetMotivosResponse response = new GetMotivosResponse();
+		
 		List<Motivo> lista = denunciaService.verMotivos();
-
-		io.spring.guides.gs_producing_web_service.Motivo motivo_xsd = new io.spring.guides.gs_producing_web_service.Motivo();
-
-		List<io.spring.guides.gs_producing_web_service.Motivo> lista_xsd = new ArrayList<>();
-
-		int cont = 0;
-
+		
 		for(Motivo motivo : lista){
 
-			System.out.println(motivo.toString());
-			System.out.println();
+			io.spring.guides.gs_producing_web_service.Motivo motivo_xsd = new io.spring.guides.gs_producing_web_service.Motivo();
 
 			motivo_xsd.setId(motivo.getId());
 			motivo_xsd.setMotivo(motivo.getMotivo());
 
-			System.out.println(motivo_xsd.toString());
-			System.out.println();
-			
+			response.getMotivos().add(motivo_xsd);
 
-			lista_xsd.add(cont, motivo_xsd);
-
-			System.out.println(lista_xsd.toString());
-
-			cont += 1;
 		}
-
-		System.out.println(lista.toString());
-		System.out.println();
-		System.out.println(lista_xsd.toString());
-
-		response.getMotivos().addAll(lista_xsd);
-
+		
 		return response;
 	}
 
