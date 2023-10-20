@@ -17,7 +17,10 @@ import com.moddenuncias.denuncias.service.DenunciaService;
 
 import io.spring.guides.gs_producing_web_service.GetUnresolvedRequest;
 import io.spring.guides.gs_producing_web_service.GetUnresolvedResponse;
-
+import io.spring.guides.gs_producing_web_service.ResolverDenunciaRequest;
+import io.spring.guides.gs_producing_web_service.ResolverDenunciaResponse;
+import io.spring.guides.gs_producing_web_service.AddDenunciaRequest;
+import io.spring.guides.gs_producing_web_service.AddDenunciaResponse;
 import io.spring.guides.gs_producing_web_service.GetMotivosRequest;
 import io.spring.guides.gs_producing_web_service.GetMotivosResponse;
 
@@ -70,16 +73,73 @@ public class DenunciaEndpoint {
 
 		List<io.spring.guides.gs_producing_web_service.Motivo> lista_xsd = new ArrayList<>();
 
+		int cont = 0;
+
 		for(Motivo motivo : lista){
+
+			System.out.println(motivo.toString());
+			System.out.println();
 
 			motivo_xsd.setId(motivo.getId());
 			motivo_xsd.setMotivo(motivo.getMotivo());
 
-			lista_xsd.add(motivo_xsd);
+			System.out.println(motivo_xsd.toString());
+			System.out.println();
+			
+
+			lista_xsd.add(cont, motivo_xsd);
+
+			System.out.println(lista_xsd.toString());
+
+			cont += 1;
 		}
+
+		System.out.println(lista.toString());
+		System.out.println();
+		System.out.println(lista_xsd.toString());
 
 		response.getMotivos().addAll(lista_xsd);
 
+		return response;
+	}
+
+
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "addDenunciaRequest")
+	@ResponsePayload
+	public AddDenunciaResponse addDenuncia(@RequestPayload AddDenunciaRequest request) {
+		AddDenunciaResponse response = new AddDenunciaResponse();
+		
+		response.setConfirmacion(0);
+
+
+		try {
+			denunciaService.addDenuncia(request.getUserId(), request.getRecetaId(), request.getMotivoId());
+
+			response.setConfirmacion(1);
+		} catch (Exception e) {
+			System.out.println("ERROR al agregar Denuncia:\n\n" + e.getMessage());
+		}
+		
+		return response;
+	}
+
+
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "resolverDenunciaRequest")
+	@ResponsePayload
+	public ResolverDenunciaResponse resolverDenuncia(@RequestPayload ResolverDenunciaRequest request) {
+		ResolverDenunciaResponse response = new ResolverDenunciaResponse();
+		
+		response.setConfirmacion(0);
+
+		try {
+			denunciaService.resolverDenuncia(request.getId());
+
+			response.setConfirmacion(1);
+		} catch (Exception e) {
+			System.out.println("ERROR al resolver Denuncia:\n\n" + e.getMessage());		
+
+		}
+		
 		return response;
 	}
 }
