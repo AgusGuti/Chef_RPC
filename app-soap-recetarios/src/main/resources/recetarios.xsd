@@ -6,14 +6,14 @@
             <xs:element name="id" type="xs:int"/>
             <xs:element name="nombre" type="xs:string"/>
             <xs:element name="usuarioId" type="xs:int"/>
-            <xs:element name="recers" type="tns:recers" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="recers">
         <xs:sequence>
             <xs:element name="id" type="xs:int"/>
-            <xs:element name="recetaId" type="xs:int"/>            
+            <xs:element name="recetaId" type="xs:int"/>   
+            <xs:element name="recetarioId" type="xs:int"/>         
         </xs:sequence>
     </xs:complexType>
 
@@ -77,6 +77,39 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="confirmacion" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="AgregarRecetasEnRecetarioRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="recetaId" type="xs:int"/>
+                <xs:element name="recetarioId" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="AgregarRecetasEnRecetarioResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="confirmacion" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="TraerRecetasPorRecetariosRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="recetarioId" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="TraerRecetasPorRecetariosResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="recers" type="tns:recers" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

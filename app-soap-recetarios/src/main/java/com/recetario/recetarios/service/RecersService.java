@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.recetario.recetarios.entities.Recers;
 import com.recetario.recetarios.repository.RecersRepository;
 import com.recetario.recetarios.repository.RecetarioRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.stereotype.Component;
 
@@ -27,6 +28,11 @@ public class RecersService {
 
     public List<Recers> TraerRecetasPorRecetario(final int recetarioId) {
     return recersRepository.TraerRecetasPorRecetario(recetarioId);
+  }
+
+    @Transactional
+    public void eliminarRecetarios(int recetarioId){
+        recersRepository.eliminarRecetarios(recetarioId);
   }
     
 }

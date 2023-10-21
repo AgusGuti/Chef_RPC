@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.recetario.recetarios.entities.Recers;
-import com.recetario.recetarios.entities.Recetario;
 import com.recetario.recetarios.service.RecersService;
 import com.recetario.recetarios.service.RecetarioService;
 

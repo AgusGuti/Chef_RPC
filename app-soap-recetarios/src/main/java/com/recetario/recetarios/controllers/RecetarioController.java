@@ -8,11 +8,17 @@ import org.springframework.web.bind.annotation.*;
 import com.recetario.recetarios.entities.Recetario;
 import com.recetario.recetarios.service.RecetarioService;
 
+import com.recetario.recetarios.service.RecersService;
+
 @RestController
 @RequestMapping("/recetariossss")
 public class RecetarioController {
     @Autowired
     private RecetarioService recetarioService;
+
+    @Autowired
+    private RecersService recersService;
+
 
     @PostMapping("/agregar")
     public Recetario agregarRecetario(@RequestParam("nombre") String nombre, @RequestParam("usarioId") int usarioId) {
@@ -22,6 +28,7 @@ public class RecetarioController {
     @DeleteMapping("/eliminar/{recetarioId}")
     public void eliminarRecetario(@PathVariable int recetarioId) {
         recetarioService.deleteRecetario(recetarioId);
+        recersService.eliminarRecetarios(recetarioId);
     }
 
     @GetMapping("/allRecetarios")
