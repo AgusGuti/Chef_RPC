@@ -18,10 +18,8 @@ public class Recers {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JsonBackReference(value = "recetarioRecetas")
-    @JoinColumn(name = "recetarioId")
-    private Recetario recetario;
+    @Column(name = "recetarioId")
+    private int recetarioId;
 
     @Column(name="recetaId", nullable = false)
     private int recetaId;
@@ -31,12 +29,11 @@ public class Recers {
     public Recers() {
     }
 
-    public Recers(int recetaId, Recetario recetario) {  // Cambiar el orden de los argumentos
-        this.recetario = recetario;
+    public Recers(int recetaId, int recetarioId) {
+        this.recetarioId = recetarioId;
         this.recetaId = recetaId;
     }
 
-    // Getter y Setter para 'id'
     public int getId() {
         return id;
     }
@@ -45,16 +42,14 @@ public class Recers {
         this.id = id;
     }
 
-    
-    public Recetario getRecetario() {
-        return recetario;
+    public int getRecetarioId() {
+        return recetarioId;
     }
 
-    public void setRecetario(Recetario recetario) {
-        this.recetario = recetario;
+    public void setRecetarioId(int recetarioId) {
+        this.recetarioId = recetarioId;
     }
 
-    // Getter y Setter para 'recetaId'
     public int getRecetaId() {
         return recetaId;
     }
@@ -65,12 +60,8 @@ public class Recers {
 
     @Override
     public String toString() {
-        return "Recers{" +
-               "id=" + id +
-               ", recetario=" + recetario +
-               ", recetaId=" + recetaId +
-               '}';
+        return "Recers [id=" + id + ", recetarioId=" + recetarioId + ", recetaId=" + recetaId + "]";
     }
-    
+
     
 }

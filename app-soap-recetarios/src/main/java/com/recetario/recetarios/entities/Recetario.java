@@ -25,9 +25,6 @@ public class Recetario {
     @Column(name="usuarioId", nullable = false)
     private int usuarioId;
 
-    @OneToMany(mappedBy = "recetario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Recers> recers;
-
     public Recetario() {
     }
 
@@ -58,14 +55,6 @@ public class Recetario {
         this.usuarioId = usuarioId;
     }
 
-    public List<Recers> getRecers() {
-        return recers;
-    }
-
-    @JsonManagedReference (value = "recetarioRecetas")
-    public void setRecers(List<Recers> recers) {
-        this.recers = recers;
-    }
 
     @Override
     public String toString() {
