@@ -54,6 +54,7 @@
                 </li>
             </ul>
         </div>
+
         <div class="nav navbar-nav navbar-right" id="collapsibleNavbar">
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item">
@@ -65,6 +66,7 @@
             </ul>
         </div>
     </nav>
+    
     <!-- Tabla para mostrar borradores -->
     <div class="container-xl">
         <div class="table-responsive">
@@ -75,7 +77,7 @@
                             <h2 style="margin-bottom: 20px;"><b>Borradores</b></h2>
                         </div>
                         <div class="col-sm-4">
-                            <button type="button" class="btn btn-recetas float-end" data-toggle="modal" data-target="#crearBorradorModal">
+                            <button type="button" class="btn btn-recetas float-end" id="crearBorradorBtn" data-toggle="modal" data-target="#modalCargarCSV" data-dismiss="modal">
                                 Crear Borrador
                             </button>
                         </div>
@@ -92,103 +94,210 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for borrador in borradores %}
-                            <tr>
-                                <td>{{ borrador.titulo_receta }}</td>
-                                <td>{{ borrador.categoria_id }}</td>
-                                <td>{{ borrador.descripcion }}</td>
-                                <td>{{ borrador.tiempo_preparacion }} minutos</td>
-                                <td>
-                                    <button class="btn btn-recetas btn-sm"
-                                        data-toggle="modal"
-                                        data-borrador-id="{{ borrador.id }}"
-                                        data-target="#modalBorrador{{ borrador.id }}">
-                                        <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
-                                    </button>
-                                    &nbsp; <!--espacio en blanco-->
-                                    <button class="btn btn-recetas btn-sm ml-1"
-                                        data-toggle="modal"
-                                        data-borrador-id="{{ borrador.id }}"
-                                        data-target="#modalModificarBorrador"
-                                        data-borrador-titulo="{{ borrador.titulo }}"
-                                        data-borrador-descripcion="{{ borrador.descripcion }}"
-                                        data-borrador-foto1="{{ borrador.foto1 }}"
-                                        data-borrador-foto2="{{ borrador.foto2 }}"
-                                        data-borrador-foto3="{{ borrador.foto3 }}"
-                                        data-borrador-foto4="{{ borrador.foto4 }}"
-                                        data-borrador-foto5="{{ borrador.foto5 }}"
-                                        data-borrador-categoria="{{ borrador.categoria }}"
-                                        data-borrador-tiempo="{{ borrador.tiempo_preparacion }}">
-                                        <i class="fas fa-pencil-alt icono"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        {% endfor %}
+                        <!-- Aquí se agregarán los datos de los borradores desde la solicitud AJAX -->
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <!-- Modal para el detalle de los borradores -->
-    {% for borrador in borradores %}
-    <div
-    class="modal fade"
-    id="modalBorrador{{ borrador.id }}"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="modalBorrador{{ borrador.id }}Label"
-    aria-hidden="true"
-    >
+    <!-- Modal para actualizar el borrador -->
+    <div class="modal fade" id="modalModificarBorrador" tabindex="-1" role="dialog" aria-labelledby="modalModificarBorradorLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalModificarBorradorLabel">Actualizar Borrador</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Campos de actualización -->
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input type="text" class="form-control" id="titulo" placeholder="Ingrese el título">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion" placeholder="Ingrese la descripción">
+                    </div>
+                    <div class="form-group">
+                        <label for="foto1">Foto 1 (URL):</label>
+                        <input type="text" class="form-control" id="foto1" placeholder="URL de la foto 1">
+                    </div>
+                    <div class="form-group">
+                        <label for="foto2">Foto 2 (URL):</label>
+                        <input type="text" class="form-control" id="foto2" placeholder="URL de la foto 2">
+                    </div>
+                    <div class="form-group">
+                        <label for="foto3">Foto 3 (URL):</label>
+                        <input type="text" class="form-control" id="foto3" placeholder="URL de la foto 3">
+                    </div>
+                    <div class "form-group">
+                        <label for="foto4">Foto 4 (URL):</label>
+                        <input type="text" class="form-control" id="foto4" placeholder="URL de la foto 4">
+                    </div>
+                    <div class="form-group">
+                        <label for="foto5">Foto 5 (URL):</label>
+                        <input type="text" class="form-control" id="foto5" placeholder="URL de la foto 5">
+                    </div>
+                    <div class="form-group">
+                        <label for="mod_ingredientes">Ingredientes:</label>
+                        <select class="form-control" id="mod_ingredientes" name="mod_ingredientes" multiple></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoriaID">ID de Categoría:</label>
+                        <input type="number" class="form-control" id="categoriaID">
+                    </div>
+                    <div class="form-group">
+                        <label for="pasos">Pasos de Preparación:</label>
+                        <textarea class="form-control" id="pasos" placeholder="Ingrese los pasos de preparación"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="tiempoPreparacion">Tiempo de Preparación (minutos):</label>
+                        <input type="number" class="form-control" id="tiempoPreparacion">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-recetas" id="actualizarBorradorBtn">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para cargar archivo CSV -->
+    <div class="modal fade" id="modalCargarCSV" tabindex="-1" role="dialog" aria-labelledby="modalCargarCSVLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="modalBorrador{{ borrador.id }}Label">{{ borrador.titulo_receta }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <img src="{{ borrador.foto1 }}" alt="{{ borrador.titulo_receta }}" width="200" height="150" class="detalle-imagen">
-            <p>
-            <p>Categoría: {{ borrador.categoria_id }}</p>
-            <p>Descripción: {{ borrador.descripcion }}</p>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCargarCSVLabel">Cargar archivo CSV</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Selecciona un archivo CSV para cargar:</p>
+                <input type="file" class="form-control" id="fileInput" accept=".csv">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-recetas" id="cargarCSVBtn">Cargar CSV</button>
+            </div>
         </div>
     </div>
-    </div>
-    {% endfor %}
-
+</div>
+    
     <!-- JavaScript para cargar los datos de borradores -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script>
-        // Realiza una solicitud para obtener los datos de borradores
-        $.ajax({
-            url: "/borradores",  // Modifica la URL para apuntar a la ruta /borradores
-            method: "GET",
-            success: function(data) {
-                // Procesa los datos y muestra la información en la tabla
-                if (data.error) {
-                    console.error(data.error);
-                } else {
-                    data.forEach(function(borrador) {
-                        $("#example tbody").append('<tr><td>' + borrador.titulo_receta + '</td><td>' + borrador.categoria_id + '</td><td>' + borrador.descripcion + '</td><td>' + borrador.tiempo_preparacion + ' minutos</td></tr>');
-                    });
-                }
-            },
-            error: function(error) {
-                console.error("Error al obtener los borradores: " + error.responseText);
-            }
-        });
-    </script>
     <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.6/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
-        jQuery(document).ready(function ($) {
+        $(document).ready(function() {
+            // Realiza una solicitud para obtener los datos de borradores
+            $.ajax({
+                url: "/api/borradores", 
+                method: "GET",
+                success: function(data) {
+                    // Procesa los datos y muestra la información en la tabla
+                    if (data.error) {
+                        console.error(data.error);
+                    } else {
+                        data.forEach(function(borrador) {
+                            const modificarButton = '<button class="btn btn-recetas btn-sm" data-toggle="modal" data-target="#modalModificarBorrador" data-borrador-id="' + borrador.id + '"><i class="fas fa-pencil-alt icono"></i></button>';
+                            $("#example tbody").append('<tr><td>' + borrador.titulo_receta + '</td><td>' + borrador.categoria_id + '</td><td>' + borrador.descripcion + '</td><td>' + borrador.tiempo_preparacion + ' minutos</td><td>' + modificarButton + '</td></tr>');
+                        });
+                    }
+                },
+                error: function(error) {
+                    console.error("Error al obtener los borradores: " + error.responseText);
+                }
+            });
+
+            cargarIngredientes();
+        });
+    </script>
+    
+    <script>
+        // Variable para almacenar los datos del borrador seleccionado
+        var borradorSeleccionado = null;
+    
+        // Función para cargar los datos del borrador en la modal de actualización
+        function cargarDatosEnModal() {
+            if (borradorSeleccionado) {
+                // Rellenar los campos de la modal con los datos del borrador
+                $("#titulo").val(borradorSeleccionado.titulo_receta);
+                $("#descripcion").val(borradorSeleccionado.descripcion);
+                $("#categoriaID").val(borradorSeleccionado.categoria_id);
+                $("#tiempoPreparacion").val(borradorSeleccionado.tiempo_preparacion);
+                $("#foto1").val(borradorSeleccionado.foto1);
+                $("#foto2").val(borradorSeleccionado.foto2);
+                $("#foto3").val(borradorSeleccionado.foto3);
+                $("#foto4").val(borradorSeleccionado.foto4);
+                $("#foto5").val(borradorSeleccionado.foto5);
+                $("#pasos").val(borradorSeleccionado.pasos);
+            }
+        }
+    
+        // Evento para abrir la modal de actualización y cargar los datos del borrador
+        $('#modalModificarBorrador').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var borradorId = button.data('borrador-id');
+    
+            // Realiza una solicitud para obtener los datos del borrador seleccionado
+            $.ajax({
+                url: "api/borradores/" + borradorId,  // Modifica la URL para apuntar a la ruta que obtiene los datos de un borrador específico
+                method: "GET",
+                success: function(data) {
+                    // Almacenar los datos del borrador seleccionado
+                    borradorSeleccionado = data;
+                    // Cargar los datos en la modal de actualización
+                    cargarDatosEnModal();
+                },
+                error: function(error) {
+                    console.error("Error al obtener los datos del borrador: " + error.responseText);
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // Cargar la lista de ingredientes al cargar la página
+        function cargarIngredientes() {
+            console.log("cargarIngredientes function called");
+            $.ajax({
+                url: "/ingredientes",
+                method: "GET",
+                success: function (response) {
+                    // Intentar analizar la respuesta como JSON
+                    var data = JSON.parse(response);
+                
+                    console.log("Datos de ingredientes recibidos:", data);
+                    
+                    var modIngredientesSelect = $("#mod_ingredientes");
+                    var ingredientes = data.ingrediente;
+                
+                    console.log("Datos de response.ingrediente:", ingredientes);
+                
+                    if (Array.isArray(ingredientes)) { 
+                        ingredientes.forEach(function (ingrediente) { 
+                            modIngredientesSelect.append($("<option>", {
+                                value: ingrediente.id,
+                                text: ingrediente.nombre
+                            }));
+                        });
+                    } else {
+                        console.error("La respuesta del servidor no contiene una lista de ingredientes válida:", data);
+                    }
+                } 
+            });
+        }
+    </script>    
+    
+    <script>
+        $(document).ready(function() {
             $('#example').DataTable();
         });
     </script>

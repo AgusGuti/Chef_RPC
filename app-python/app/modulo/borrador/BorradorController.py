@@ -5,28 +5,23 @@ import logging
 import os
 logger = logging.getLogger(__name__)
 
+
 @borrador_blueprint.route("/borradores", methods=["GET"])
-def obtener_borradores():
-    response = requests.get('http://'+os.getenv("SERVER-REST-CARGAMASIVA")+'/api/borradores')
-    
-    if response.status_code == 200:
-        borradores_data = response.json()
-        return render_template('borradores.html', borradores=borradores_data)
-    else:
-        mensaje_error = "No se pudieron obtener los datos de borradores. Por favor, inténtalo de nuevo más tarde."
-        return render_template('error.html', mensaje=mensaje_error), 500  # Renderiza una plantilla de error y establece un código de respuesta 500
+def vista_borrador():
+    return render_template('borradores.html')
 
 
 @borrador_blueprint.route("/api/borradores", methods=["GET"])
-def apiborradores():
-    response = requests.get('http://'+os.getenv("SERVER-REST-CARGAMASIVA")+'/api/borradores')
-    
+def obtener_borradores():
+    response = requests.get('http://' + os.getenv("SERVER-REST-CARGAMASIVA") + '/api/borradores')
+
     if response.status_code == 200:
-        return jsonify(response.json())
+        borradores_data = response.json()
+        return jsonify(borradores_data)
     else:
         mensaje_error = "No se pudieron obtener los datos de borradores. Por favor, inténtalo de nuevo más tarde."
         return jsonify({'error': mensaje_error}), 500  # Devuelve un JSON con el mensaje de error y establece un código de respuesta 500
-    
+
 
 @borrador_blueprint.route("/api/borradores/<borrador_id>", methods=["GET"])
 def obtener_borrador(borrador_id):
