@@ -21,6 +21,7 @@ from app.proto.favorito_pb2 import Favorito
 
 from app.proto.receta_pb2_grpc import RecetasServiceStub
 from app.proto.favorito_pb2_grpc import FavoritosServiceStub
+from app.proto.user_pb2_grpc import UsersServiceStub
 
 from logging.config import dictConfig
 from google.protobuf.json_format import MessageToDict, MessageToJson
@@ -218,12 +219,34 @@ def modificarReceta():
 @receta_blueprint.route("/denuncias",methods=['GET'])
 def findDenunciasAbiertas():
     logger.info("/denuncias")
-
-    inst_denuncia = Denuncia()
-    inst_motivo = Motivo()
-
+    
     denuncias_abiertas = clientDenuncias.service.getUnresolved()
     motivos = clientDenuncias.service.getMotivos()
+    recetasId = clientDenuncias.service.getRecetasIds()
+
+    denuncia_recetas = []
+
+    for denuncia in denuncias_abiertas:
+        # Traigo Receta por ID
+        with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+            stub = RecetasServiceStub(channel)
+            recetas_x_denuncia = stub.FindById(Receta(idReceta= denuncia.receta_id))
+        
+
+        with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+            stub = UsersServiceStub(channel)
+            user_x_denuncia = stub.FindUserById(User(id= denuncia.user_id))
+                
+        if recetas_x_denuncia and user_x_denuncia:
+            # Si hay recetas coincidentes, agregar la denuncia y las recetas a la lista denuncia_recetas
+            denuncia_recetas.append({
+                'denuncia': denuncia,
+                'receta': recetas_x_denuncia,
+                'user' : user_x_denuncia
+            })
+
+    logger.info(denuncia_recetas)
+
 
     if denuncias_abiertas=="{}":
         flash('Error al intentar traer Denuncias','danger')
@@ -232,7 +255,8 @@ def findDenunciasAbiertas():
         flash('Error al intentar traer Motivos','danger')
         return redirect('/storyline')
     else:
-        return render_template('denuncias.html', denuncias_abiertas=denuncias_abiertas, motivos=motivos)
+        #return render_template('denuncias.html', denuncias_abiertas=denuncias_abiertas, motivos=motivos, recetas_denunciadas= recetas_denunciadas)
+        return render_template('denuncias.html', denuncia_recetas= denuncia_recetas, motivos=motivos)
     
 
 @receta_blueprint.route("/addDenuncia",methods=['POST'])
@@ -242,11 +266,32 @@ def addDenuncia():
     recetaId = int(request.form["receta_id"])
     motivoId = int(request.form["motivo_id"])
     
-
-    clientDenuncias.service.addDenuncia(user_id=session['user_id'], receta_id= recetaId, motivo_id= motivoId)
-
+    
     if not isinstance(session['user_id'], int) and not isinstance(recetaId, int) and not isinstance(motivoId, int):
         flash('Error al intentar guardar Denuncia','danger')
         return redirect('/storyline')
     else:
-        return render_template('denuncias.html', denuncias_abiertas=denuncias_abiertas, motivos=motivos)
+
+        clientDenuncias.service.addDenuncia(user_id=session['user_id'], receta_id= recetaId, motivo_id= motivoId)
+
+        flash('Receta denunciada!','message')
+        return redirect('/storyline')
+    
+    
+    
+@receta_blueprint.route("/resolverDenuncia",methods=['POST'])
+def resolverDenuncia():
+    logger.info("/resolverDenuncia")
+    
+    denuncia_id = request.form["denuncia_id"]
+    
+
+    if not isinstance(denuncia_id, int):
+        flash('Error al intentar resolver Denuncia','danger')
+        return redirect('/storyline')
+    else:
+
+        clientDenuncias.service.resolverDenuncia(id=denuncia_id)
+
+        flash('Receta resuelta!','message')
+        return redirect('/storyline')

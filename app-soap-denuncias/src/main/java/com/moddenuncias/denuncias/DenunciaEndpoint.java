@@ -23,6 +23,9 @@ import io.spring.guides.gs_producing_web_service.AddDenunciaRequest;
 import io.spring.guides.gs_producing_web_service.AddDenunciaResponse;
 import io.spring.guides.gs_producing_web_service.GetMotivosRequest;
 import io.spring.guides.gs_producing_web_service.GetMotivosResponse;
+import io.spring.guides.gs_producing_web_service.GetRecetasIdsRequest;
+import io.spring.guides.gs_producing_web_service.GetRecetasIdsResponse;
+
 
 @Endpoint
 public class DenunciaEndpoint {
@@ -123,4 +126,20 @@ public class DenunciaEndpoint {
 		
 		return response;
 	}
+
+
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getRecetasIdsRequest")
+	@ResponsePayload
+	public GetRecetasIdsResponse getRecetasIds(@RequestPayload GetRecetasIdsRequest request) {
+		GetRecetasIdsResponse response = new GetRecetasIdsResponse();
+		
+		List<Integer> lista_ids = denunciaService.findRecetasIds();
+		
+		
+		
+		response.getRecetasId().addAll(lista_ids);
+
+		return response;
+	}
+
 }

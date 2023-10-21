@@ -340,13 +340,22 @@
           <a class="nav-link" href="/myprofile">Mi Perfil</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/misMensajes">Mis Mensajes</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/storyline">Publicaciones</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/misRecetas">Mis Recetas</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/misRecetarios">Mis Recetarios</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/favoritos">Mis Favoritos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/borradores">Mis Borradores</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/seguidos">Seguidos</a>
@@ -396,64 +405,36 @@
         <table id="example" class="table table-striped" style="width:100%">
           <thead>
             <tr>
-              <th>Título</th>
-              <th>Tiempo de Preparación</th>
-              <th>Foto en Miniatura</th>
-              <th style="display:none;">Categoría</th> <!-- Columna de Categoría oculta -->
-              <th style="display:none;">Ingredientes</th> <!-- Columna de Ingredientes oculta -->
+              <th>Nro Denuncia</th>
+              <th>Denunciado por</th>
+              <th>Motivo</th>
+              <th>Nombre de Receta</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {% for receta in recetas %}
+            {% for denuncia_receta in denuncia_recetas %}
             <tr>
-              <td>{{ receta.tituloReceta }}</td>
-              <td>{{ receta.tiempoPreparacion }} minutos</td>
-              <td>
-                <img
-                  src="{{ receta.foto1 }}"
-                  alt="{{ receta.tituloReceta }}"
-                  class="miniatura"
-                  data-toggle="modal"
-                  data-target="#modalReceta{{ receta.idReceta }}"
-                >
-              </td>
-              <td style="display:none;">
-                {{ receta.categoria.categoria }}</td> <!-- Columna de Categoría oculta -->
-              <td style="display:none;">
-                {% for ingrediente in receta.ingredientes %}
-                  {{ ingrediente.nombre }}
-                  {% if not loop.last %}, {% endif %}
-                {% endfor %}
-              </td> <!-- Columna de Ingredientes oculta -->          
+              <td>{{ denuncia_receta.denuncia.id }}</td>
+              <td>{{ denuncia_receta.user.nombre }} {{ denuncia_receta.user.apellido }}</td>
+              <td>{{ denuncia_receta.denuncia.motivo_id.motivo }}</td>              
+              <td>{{ denuncia_receta.receta.tituloReceta }}</td>
               <td>
                 <div class="btn-group">
-                  <button class="btn btn-recetas btn-sm"
+
+                <button class="btn btn-recetas btn-sm"
                   data-toggle="modal"
-                  data-receta-id="{{ receta.idReceta}}"
-                  data-target="#modalReceta{{ receta.idReceta }}">
+                  data-receta-id="{{ denuncia_receta.denuncia.receta_id }}"
+                  data-target="#modalReceta{{ denuncia_receta.denuncia.receta_id }}">
                   <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
-                  </button>
-                  {% if receta.user.id != usuario_autenticado %}
-                    &nbsp; <!--espacio en blanco-->
-                    <button class="btn btn-recetas btn-sm" id="favoritoButton_{{ receta.idReceta }}"
-                      data-toggle="modal" data-target="modalFavorito" onclick="addFavorito({{ receta.idReceta }})"
-                      data-receta-id="{{ receta.idReceta }}">
-                      <i class="fa-solid fa-heart" id="favoritoIcon_{{ receta.idReceta }}" style="color: #ffffff;"></i>
-                    </button>
-                  {% endif %}
-                &nbsp; <!--espacio en blanco-->
-                <button class="btn btn-recetas btn-sm" data-toggle="modal" data-target="#modalUsuario{{ receta.user.id }}">
-                  <i class="fa-solid fa-user-plus"></i>               
                 </button>
+                  
                 &nbsp; <!--espacio en blanco-->
-                <button class="btn btn-recetas btn-sm" onclick="mostrarComentarios('{{ receta.idReceta }}')">
-                  <i class="fa-solid fa-message" style="color: #ffffff;"></i>
-                </button>
-                &nbsp; <!--espacio en blanco-->
-                <button class="btn btn-recetas btn-sm" onclick="mostrarPuntaje('{{ receta.idReceta }}')">
-                  <i class="fa-solid fa-star" style="color: #ffffff;"></i>
+                <button class="btn btn-recetas btn-sm" data-toggle="modal" 
+                  data-target="#modalDecision{{ denuncia_receta.denuncia.id }}">
+                  <i class="fa fa-gavel" style="color: #e7723b;"></i>               
                 </button>                
+                             
               </td>
             </tr>
           {% endfor %}
@@ -466,52 +447,52 @@
 </div>
 
   <!-- Modal para el detalle de las recetas -->
-  {% for receta in recetas %}
+
+  {% for denuncia_receta in denuncia_recetas %}
   <div
     class="modal fade"
-    id="modalReceta{{ receta.idReceta }}"
+    id="modalReceta{{ denuncia_receta.receta.idReceta }}"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="modalReceta{{ receta.idReceta }}Label"
+    aria-labelledby="modalReceta{{ denuncia_receta.receta.idReceta }}Label"
     aria-hidden="true"
   >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalReceta{{ receta.idReceta }}Label">{{ receta.tituloReceta }}</h5>
+          <h5 class="modal-title" id="modalReceta{{ denuncia_receta.receta.idReceta }}Label">{{ denuncia_receta.receta.tituloReceta }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <img src="{{ receta.foto1 }}" alt="{{ receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% if denuncia_receta.receta.foto1 is not none and denuncia_receta.receta.foto1 != '' %}
+            <img src="{{ denuncia_receta.receta.foto1 }}" alt="{{ denuncia_receta.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
+          {% if denuncia_receta.receta.foto2 is not none and denuncia_receta.receta.foto2 != '' %}
+            <img src="{{ denuncia_receta.receta.foto2 }}" alt="{{ denuncia_receta.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
+          {% if denuncia_receta.receta.foto3 is not none and denuncia_receta.receta.foto3 != '' %}
+            <img src="{{ denuncia_receta.receta.foto3 }}" alt="{{ denuncia_receta.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
+          {% if denuncia_receta.receta.foto4 is not none and denuncia_receta.receta.foto4 != '' %}
+            <img src="{{ denuncia_receta.receta.foto4 }}" alt="{{ denuncia_receta.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
+          {% if denuncia_receta.receta.foto5 is not none and denuncia_receta.receta.foto5 != '' %}
+            <img src="{{ denuncia_receta.receta.foto5 }}" alt="{{ denuncia_receta.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
+          {% endif %}
           <p>
-          <p>Categoria: {{ receta.categoria.categoria }}</p>
-          <p>Descripcion: {{ receta.descripcion }}</p>
+          <p>Categoria: {{ denuncia_receta.receta.categoria.categoria }}</p>
+          <p>Descripcion: {{ denuncia_receta.receta.descripcion }}</p>
           <p>Ingredientes:
-            {% for ingrediente in receta.ingredientes %}
+            {% for ingrediente in denuncia_receta.receta.ingredientes %}
               {{ ingrediente.nombre }}
               {% if not loop.last %}, {% endif %}
             {% endfor %}
           </p>
-          <p>Pasos de preparación: {{ receta.pasos }}</p>
-
-          <form action="/agregarComentario" method="post">
-            <textarea rows="5" cols="50" id="comentario" name="comentario"></textarea><br><br>
-            <input id="tituloReceta" type="hidden" name="tituloReceta" value={{receta.tituloReceta}}>
-            <input id="idReceta" type="hidden" name="idReceta" value="{{receta.idReceta}}">
-            <input type="submit" value="Enviar comentario">
-          </form>
-          {% if receta.user.id != usuario_autenticado %}
-            <div id="form-container">
-              <p>Calificación:</p>
-              <form action="/agregarPuntaje" method="post">
-                <input id="puntaje" name="puntaje" type="text" class="rating" data-size="sm" >
-                <input type="hidden" name="idReceta" value="{{receta.idReceta}}">
-                <input type="submit" value="Enviar">
-              </form>
-            </div>
-          {% endif %}
+          <p>Pasos de preparación: {{ denuncia_receta.receta.pasos }}</p>
+          
+          
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -520,84 +501,48 @@
     </div>
   </div>
 
-   <!-- Modal para mostrar la información del usuario -->
-   <div class="modal fade" id="modalUsuario{{ receta.user.id }}" tabindex="-1" role="dialog" aria-labelledby="modalUsuarioLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalUsuarioLabel">Perfil</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-              <img src="{{ receta.user.fotoPerfil }}" width="200" height="150" class="detalle-imagen">
-                <p>
-                <p>Nombre: {{ receta.user.nombre }}</p>
-                <p>Apellido: {{ receta.user.apellido }}</p>
-                <p>Email: {{receta.user.email}}</p>
-                <!-- Agrega más información del usuario aquí si es necesario -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <!-- Botón para seguir o dejar de seguir al autor -->
-                <button class="btn btn-success" onclick="addSeguido('{{ receta.user.id }}', '{{ usuario_autenticado }}')">Seguir</button>
-            </div>
-        </div>
-    </div>
-  </div>
-
-  <!-- Modal de comentarios (oculto por defecto) -->
-  <div class="modal fade" id="modalComentarios" tabindex="-1" role="dialog" aria-labelledby="modalComentariosLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalComentariosLabel">Comentarios</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div id="comentariosContainer"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Modal de porcentaje de receta  -->
-
-  <div class="modal fade" id="modalPuntaje" tabindex="-1" role="dialog" aria-labelledby="modalPuntajeLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalPuntajeLabel">Puntaje de la Receta</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <!-- Aquí mostrarás el puntaje como porcentaje -->
-          <div id="puntajePorcentaje"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
   {% endfor %}
-  <script>
-   
-        // initialize with defaults
-        $("#puntaje").rating();
 
-        // with plugin options (do not attach the CSS class "rating" to your input if using this approach)
-        $("#puntaje").rating({'size':'lg'});
-      
-  </script>
+
+
+  <!-- Modal para la decision de denuncia -->
+
+  {% for denuncia_receta in denuncia_recetas %}
+  <div
+    class="modal fade"
+    id="modalDecision{{ denuncia_receta.denuncia.id }}"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalDecision{{ denuncia_receta.denuncia.id }}Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalDecision{{ denuncia_receta.denuncia.id }}Label">Decision sobre la denuncia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Usted puede elegir Ignorar la denuncia o Eliminar la receta</p>
+
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-recetas">Ignorar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp; 
+            <button type="submit" class="btn btn-danger">ELIMINAR</button>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+
+  
   </body>
   </html>
