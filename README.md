@@ -14,6 +14,14 @@ Comandos Apache Kafka:
 .\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
 
 
+# Correr Modulos
+
+DENUNCIAS: (PORT: 8085)
+   1. cd app-soap-denuncias
+   2. mvn clean install
+   3. mvn spring-boot:run
+
+
 Clases creadas en capa servidor:
 
 .Categoría
@@ -72,6 +80,10 @@ Clases creadas en capa servidor:
    python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/popularidadUser.proto
 
    python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/comentario.proto;
+
+   python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/denuncia.proto;
+
+   python -m grpc_tools.protoc -I../app-java/src/main/proto --python_out=. --pyi_out=. --grpc_python_out=. ../app-java/src/main/proto/motivo.proto;
 
 4. python main.py
 

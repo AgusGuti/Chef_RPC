@@ -263,6 +263,37 @@ public final class RecetasServiceGrpc {
     return getAddPuntajeMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.Receta,
+      com.chefencasa.model.RecetaProto.Receta> getDeleteRecetaMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "DeleteReceta",
+      requestType = com.chefencasa.model.RecetaProto.Receta.class,
+      responseType = com.chefencasa.model.RecetaProto.Receta.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.Receta,
+      com.chefencasa.model.RecetaProto.Receta> getDeleteRecetaMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.Receta> getDeleteRecetaMethod;
+    if ((getDeleteRecetaMethod = RecetasServiceGrpc.getDeleteRecetaMethod) == null) {
+      synchronized (RecetasServiceGrpc.class) {
+        if ((getDeleteRecetaMethod = RecetasServiceGrpc.getDeleteRecetaMethod) == null) {
+          RecetasServiceGrpc.getDeleteRecetaMethod = getDeleteRecetaMethod =
+              io.grpc.MethodDescriptor.<com.chefencasa.model.RecetaProto.Receta, com.chefencasa.model.RecetaProto.Receta>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DeleteReceta"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.RecetaProto.Receta.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.RecetaProto.Receta.getDefaultInstance()))
+              .setSchemaDescriptor(new RecetasServiceMethodDescriptorSupplier("DeleteReceta"))
+              .build();
+        }
+      }
+    }
+    return getDeleteRecetaMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -366,6 +397,13 @@ public final class RecetasServiceGrpc {
         io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Receta> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddPuntajeMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void deleteReceta(com.chefencasa.model.RecetaProto.Receta request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Receta> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteRecetaMethod(), responseObserver);
+    }
   }
 
   /**
@@ -458,6 +496,14 @@ public final class RecetasServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getAddPuntajeMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void deleteReceta(com.chefencasa.model.RecetaProto.Receta request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Receta> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getDeleteRecetaMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -530,6 +576,13 @@ public final class RecetasServiceGrpc {
     public com.chefencasa.model.RecetaProto.Receta addPuntaje(com.chefencasa.model.RecetaProto.Receta request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getAddPuntajeMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.RecetaProto.Receta deleteReceta(com.chefencasa.model.RecetaProto.Receta request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDeleteRecetaMethod(), getCallOptions(), request);
     }
   }
 
@@ -612,6 +665,14 @@ public final class RecetasServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getAddPuntajeMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.RecetaProto.Receta> deleteReceta(
+        com.chefencasa.model.RecetaProto.Receta request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getDeleteRecetaMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_ADD_RECETA = 0;
@@ -622,6 +683,7 @@ public final class RecetasServiceGrpc {
   private static final int METHODID_FIND_ALL_BY_ID = 5;
   private static final int METHODID_ADD_COMENTARIO = 6;
   private static final int METHODID_ADD_PUNTAJE = 7;
+  private static final int METHODID_DELETE_RECETA = 8;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -670,6 +732,10 @@ public final class RecetasServiceGrpc {
           break;
         case METHODID_ADD_PUNTAJE:
           serviceImpl.addPuntaje((com.chefencasa.model.RecetaProto.Receta) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Receta>) responseObserver);
+          break;
+        case METHODID_DELETE_RECETA:
+          serviceImpl.deleteReceta((com.chefencasa.model.RecetaProto.Receta) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.RecetaProto.Receta>) responseObserver);
           break;
         default:
@@ -746,6 +812,13 @@ public final class RecetasServiceGrpc {
               com.chefencasa.model.RecetaProto.Receta,
               com.chefencasa.model.RecetaProto.Receta>(
                 service, METHODID_ADD_PUNTAJE)))
+        .addMethod(
+          getDeleteRecetaMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.chefencasa.model.RecetaProto.Receta,
+              com.chefencasa.model.RecetaProto.Receta>(
+                service, METHODID_DELETE_RECETA)))
         .build();
   }
 
@@ -802,6 +875,7 @@ public final class RecetasServiceGrpc {
               .addMethod(getFindAllByIdMethod())
               .addMethod(getAddComentarioMethod())
               .addMethod(getAddPuntajeMethod())
+              .addMethod(getDeleteRecetaMethod())
               .build();
         }
       }

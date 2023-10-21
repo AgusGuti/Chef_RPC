@@ -21,6 +21,7 @@ service RecetasService {
   rpc FindAllById(Receta) returns (Recetas) {}
   rpc AddComentario(Receta) returns (Receta){}
   rpc AddPuntaje(Receta) returns (Receta){}
+  rpc DeleteReceta(Receta) returns (Receta) {}
 }
 
 message Empty {

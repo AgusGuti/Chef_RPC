@@ -5139,7 +5139,7 @@ public final class RecetaProto {
       "rio\030\017 \001(\t\022\017\n\007puntaje\030\020 \001(\t\"y\n\014RecetaFilt" +
       "ro\022\021\n\tcategoria\030\001 \001(\t\022\016\n\006nombre\030\002 \001(\t\022\024\n" +
       "\014ingredientes\030\003 \003(\t\022\027\n\017tiempoPrepDesde\030\004" +
-      " \001(\005\022\027\n\017tiempoPrepHasta\030\005 \001(\0052\222\003\n\016Receta" +
+      " \001(\005\022\027\n\017tiempoPrepHasta\030\005 \001(\0052\302\003\n\016Receta" +
       "sService\022+\n\tAddReceta\022\r.model.Receta\032\r.m" +
       "odel.Receta\"\000\0223\n\007FindAll\022\026.google.protob" +
       "uf.Empty\032\016.model.Recetas\"\000\0221\n\017ModificarR" +
@@ -5149,8 +5149,10 @@ public final class RecetaProto {
       "l.Recetas\"\000\022.\n\013FindAllById\022\r.model.Recet" +
       "a\032\016.model.Recetas\"\000\022/\n\rAddComentario\022\r.m" +
       "odel.Receta\032\r.model.Receta\"\000\022,\n\nAddPunta" +
-      "je\022\r.model.Receta\032\r.model.Receta\"\000B#\n\024co" +
-      "m.chefencasa.modelB\013RecetaProtob\006proto3"
+      "je\022\r.model.Receta\032\r.model.Receta\"\000\022.\n\014De" +
+      "leteReceta\022\r.model.Receta\032\r.model.Receta" +
+      "\"\000B#\n\024com.chefencasa.modelB\013RecetaProtob" +
+      "\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
