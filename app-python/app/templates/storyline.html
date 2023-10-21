@@ -85,6 +85,7 @@
       addFavorito(recetaId);
       mostrarComentarios(recetaId);
       mostrarPuntaje(recetaId);
+      cargarMotivo(denunciaId);
     }
 
     function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
@@ -258,9 +259,7 @@
   
       xhr.send();
      }
-  
-  
-
+    
     function mostrarPuntaje(recetaId) {
       
       var xhr = new XMLHttpRequest();
@@ -307,6 +306,57 @@
     
       xhr.send();
     }
+
+    function cargarMotivo(denunciaId, motivoSeleccionado) {
+      console.log("cargarMotivo function called");
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/getMotivos", true);
+    
+      // Define motivosSelect para seleccionar el elemento HTML
+      var motivosSelect = document.getElementById("motivos");
+    
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            var motivos = response.motivo;
+    
+            console.log("Respuesta del servidor:", motivos);
+    
+            if (Array.isArray(motivos)) {
+              motivosSelect.innerHTML = ""; // Limpia el contenido actual
+    
+              var motivosSet = new Set(motivoSeleccionado);
+    
+              motivos.forEach(function (motivo) {
+                var option = document.createElement("option");
+                option.value = motivo.id;
+                option.text = motivo.motivo;
+    
+                // Verifica si el motivo actual está en el conjunto de motivos seleccionados
+                if (motivosSet.has(motivo.id)) {
+                  option.selected = true;
+                }
+    
+                motivosSelect.appendChild(option);
+              });
+    
+              // Asegúrate de que el elemento select permita la selección múltiple
+              motivosSelect.setAttribute("multiple", "multiple");
+            } else {
+              console.error(
+                "La respuesta del servidor no contiene una lista de motivos válida:",
+                response
+              );
+            }
+          } else {
+            console.error("Error al cargar motivos:", xhr.status);
+          }
+        }
+      };
+      xhr.send();
+    }
+
     
     window.onload = inicio;
 
@@ -462,15 +512,7 @@
                 &nbsp; <!--espacio en blanco-->
                 <button class="btn btn-recetas btn-sm" onclick="mostrarPuntaje('{{ receta.idReceta }}')">
                   <i class="fa-solid fa-star" style="color: #ffffff;"></i>
-                </button>
-                {% if receta.user.id != usuario_autenticado %}
-                    &nbsp; <!--espacio en blanco-->
-                    <button class="btn btn-recetas btn-sm" id="denunciaButton_{{ receta.idReceta }}"
-                      data-toggle="modal" data-target="modalDenuncia" onclick="addDenuncia({{ receta.idReceta }})"
-                      data-receta-id="{{ receta.idReceta }}">
-                      <i class="fas fa-exclamation-triangle" id="favoritoIcon_{{ receta.idReceta }}" style="color: #ffcc00;"></i>
-                    </button>
-                  {% endif %}                
+                </button>                               
               </td>
             </tr>
           {% endfor %}
@@ -545,6 +587,30 @@
           {% endif %}
         </div>
         <div class="modal-footer">
+          {% if receta.user.id != usuario_autenticado %}
+            &nbsp; <!--espacio en blanco-->
+            
+            <!-- <button class="btn btn-recetas btn-sm" id="agregarDenuncia{{ receta.idReceta }}"
+              data-toggle="modal" data-target="modalDenuncia" onclick="addDenuncia({{ receta.idReceta }})"
+              data-receta-id="{{ receta.idReceta }}">
+              <i class="fas fa-exclamation-triangle" id="favoritoIcon_{{ receta.idReceta }}" style="color: #ffcc00;"></i>
+            </button> -->
+
+            <!-- <form action="/addDenuncia" method="post">
+              <input type="hidden" name="receta_id" value="{{receta.idReceta}}" >
+              <input type="hidden" name="motivo_id" value="3">
+              <input type="submit" value="Denunciar">
+            </form> -->
+
+              <button type="button" class="btn btn-recetas" data-toggle="modal" 
+                  data-target="#modalAgregarDenuncia"> 
+                    Generar Denuncia
+              </button>
+
+            
+          {% endif %}           
+
+          <!-- <button type="button" class="btn btn-recetas" id="agregarRecetario{{ receta.idReceta }}">Denunciar</button> -->
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
       </div>
@@ -616,6 +682,60 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para agregar una denuncia -->
+  <div
+    class="modal fade"
+    id="modalAgregarDenuncia"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalAgregarDenunciaLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form action="/altaReceta" method="post">
+          <!-- Formulario principal -->
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalAgregarDenunciaLabel">Denunciar</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+                      
+            <form action="/addDenuncia" method="post">
+
+              <input id="receta_id" type="hidden" name="receta_id" value="{{ receta.idReceta }}">
+              <input type="hidden" id="user_id" name="user_id" value="{{ usuario_autenticado }}">
+              
+              <select id="opcionesSelect"></select>
+
+              <script>
+                  
+                  const select = document.getElementById('opcionesSelect');
+
+                  // Llenar el select con opciones del JSON
+                  motivos.forEach(opcion => {
+                      const option = document.createElement('option');
+                      option.value = opcion.id;
+                      option.textContent = opcion.motivo;
+                      select.appendChild(option);
+                  });
+              </script>
+            </form>
+            
+          </div>
+          <div class="modal-footer">
+            
+            <button type="submit" class="btn-danger">Denunciar</button>
+            
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            
+          </div>
+        </form>
       </div>
     </div>
   </div>

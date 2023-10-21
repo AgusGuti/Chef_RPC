@@ -71,6 +71,7 @@
     .modal.show .modal-body {
       display: block;
     }
+
   </style>
 </head>
 <body onload="inicio();"  class="h-100">
@@ -82,9 +83,6 @@
 
     function inicio() {
       cargarIngredientesYReceta(recetaId);
-      addFavorito(recetaId);
-      mostrarComentarios(recetaId);
-      mostrarPuntaje(recetaId);
     }
 
     function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
@@ -136,68 +134,22 @@
       };
       xhr.send();
     }
-
-
-    function addFavorito(recetaId) {
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "/addFavorito", true);
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     
-      var data = "recetaId=" + recetaId;
-    
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            console.log("Response Text: " + xhr.responseText);
-            var response = JSON.parse(xhr.responseText);
-            if (response.success) {
-              var favoritoIcon = document.getElementById("favoritoIcon_" + recetaId);
-              if (favoritoIcon) {
-                favoritoIcon.style.color = "red";
-              }
-              var heartIcon = document.querySelector("#favoritoButton_" + recetaId + " .fa-regular.fa-heart");
-              if (heartIcon) {
-                heartIcon.style.display = "none";
-              }
-              window.alert("Receta agregada a favoritos con éxito");
-            } else {
-              window.alert("La receta ya está en favoritos");
-            }
-          } else {
-            console.error("Error al agregar la receta a favoritos:", xhr.status);
-          }
-        }
-      };
-    
-      xhr.send(data);
-    }
-
-    function addSeguido(seguidoId,userId) {
+    function resolverDenuncia(denuncia_id,receta_id, flg_eliminar) {
       
-       // Verifica si el usuario actual es el autor de la receta
-      if (seguidoId === userId) {
-        // Si es el autor, no hagas nada o muestra un mensaje
-        window.alert("Eres el autor de la receta, no puedes seguirte a ti mismo.");
-        return;
-      }
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", "/addSeguido", true);
+      xhr.open("POST", "/resolverDenuncia", true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     
-      var data = "seguidoId=" + seguidoId;
+      var data = "denuncia_id="+denuncia_id + "&receta_id="+receta_id + "&flg_eliminar="+flg_eliminar;
     
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
             console.log("Response Text: " + xhr.responseText);
-            var response = JSON.parse(xhr.responseText);
-            if (response.success) {
-              window.alert("Usuario seguido con éxito");
-            } else {
-              window.alert("Ya sigues al usuario");
-            }
+            var response = JSON.parse(xhr.responseText);          
           } else {
-            console.error("Error no se puede seguir al usuario", xhr.status);
+            console.error("ERROR resolviendo denuncia", xhr.status);
           }
         }
       };
@@ -205,109 +157,7 @@
       xhr.send(data);
     }
     
-    function mostrarComentarios(recetaId) {
-      var xhr = new XMLHttpRequest();
-  
-      // Configure the request
-      xhr.open("GET", `/comentario/findAllByReceta/${recetaId}`, true);
-  
-      // Define a function to handle the response
-      xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-              if (xhr.status === 200) {
-                  try {
-                      var comentariosJson = JSON.parse(xhr.responseText);
-                      var comentariosContainer = document.getElementById("comentariosContainer");
-                      comentariosContainer.innerHTML = ""; // Limpia el contenedor
-  
-                      var comentarios = comentariosJson.comentario || [];
-  
-                      comentarios.forEach(function (comentario) {
-                          var comentarioDiv = document.createElement("div");
-                          comentarioDiv.classList.add("comentario-cloud"); // Agrega una clase para dar estilo a la "nube"
-  
-                          // Crear una imagen de perfil predeterminada
-                          var imagenPerfil = document.createElement("img");
-                          imagenPerfil.src = "../static/icono-perfil.png"; // Ruta de la imagen predeterminada
-                          imagenPerfil.alt = comentario.usuarioComentario; // Puedes usar el nombre de usuario como texto alternativo
-  
-                          // Crear un div para el contenido del comentario
-                          var contenidoDiv = document.createElement("div");
-                          contenidoDiv.textContent = "Usuario: " + comentario.usuarioComentario + ", Comentario: " + comentario.comentario;
-  
-                          // Agregar la imagen de perfil y el contenido del comentario al div del comentario
-                          comentarioDiv.appendChild(imagenPerfil);
-                          comentarioDiv.appendChild(contenidoDiv);
-  
-                          // Agregar el div del comentario al contenedor de comentarios
-                          comentariosContainer.appendChild(comentarioDiv);
-                      });
-  
-                      console.log("Received comentarios:", comentarios);
-  
-                      // Abre el modal de comentarios
-                      $("#modalComentarios").modal("show");
-                  } catch (error) {
-                      console.error("Error parsing JSON:", error);
-                  }
-              } else {
-                  console.error("Network response was not ok");
-              }
-          }
-      };
-  
-      xhr.send();
-     }
-  
-  
 
-    function mostrarPuntaje(recetaId) {
-      
-      var xhr = new XMLHttpRequest();
-    
-      xhr.open("GET", `/popularidadReceta/traerPuntajePorReceta/${recetaId}`, true);
-    
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            try {
-              var data = JSON.parse(xhr.responseText);
-    
-              // Verifica si la respuesta contiene un puntaje
-              if (data.puntaje !== undefined) {
-                // Extrae el puntaje decimal de la respuesta JSON
-                const puntaje = parseFloat(data.puntaje);
-    
-                const puntajePorcentaje = puntaje;
-    
-                // Obtén el elemento donde mostrar el puntaje
-                const puntajePorcentajeDiv = document.getElementById("puntajePorcentaje");
-    
-                // Muestra el puntaje como porcentaje en el modal
-                puntajePorcentajeDiv.textContent = `Puntaje de la receta: ${puntajePorcentaje.toFixed(2)}%`;
-    
-                // Abre el modal
-                const modal = document.getElementById("modalPuntaje");
-                $(modal).modal("show");
-              } else {
-                // Si no hay puntaje, oculta el botón o muestra un mensaje de error
-                const boton = document.querySelector(`button[data-id="${recetaId}"]`);
-                if (boton) {
-                  boton.style.display = "none";
-                }
-              }
-            } catch (error) {
-              console.error("Error parsing JSON:", error);
-            }
-          } else {
-            console.error("Network response was not ok");
-          }
-        }
-      };
-    
-      xhr.send();
-    }
-    
     window.onload = inicio;
 
   </script>
@@ -424,13 +274,14 @@
 
                 <button class="btn btn-recetas btn-sm"
                   data-toggle="modal"
-                  data-receta-id="{{ denuncia_receta.denuncia.receta_id }}"
-                  data-target="#modalReceta{{ denuncia_receta.denuncia.receta_id }}">
+                  data-receta-id="{{ denuncia_receta.denuncia.id }}"
+                  data-target="#modalReceta{{ denuncia_receta.denuncia.id }}">
                   <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
                 </button>
                   
                 &nbsp; <!--espacio en blanco-->
                 <button class="btn btn-recetas btn-sm" data-toggle="modal" 
+                  data-denuncia-id="{{ denuncia_receta.denuncia.id }}"
                   data-target="#modalDecision{{ denuncia_receta.denuncia.id }}">
                   <i class="fa fa-gavel" style="color: #e7723b;"></i>               
                 </button>                
@@ -446,21 +297,24 @@
   </div>
 </div>
 
-  <!-- Modal para el detalle de las recetas -->
 
-  {% for denuncia_receta in denuncia_recetas %}
+
+{% for denuncia_receta in denuncia_recetas %}
+
+<!-- Modal para el detalle de las recetas -->
+
   <div
     class="modal fade"
-    id="modalReceta{{ denuncia_receta.receta.idReceta }}"
+    id="modalReceta{{ denuncia_receta.denuncia.id }}"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="modalReceta{{ denuncia_receta.receta.idReceta }}Label"
+    aria-labelledby="modalReceta{{ denuncia_receta.denuncia.id }}Label"
     aria-hidden="true"
   >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalReceta{{ denuncia_receta.receta.idReceta }}Label">{{ denuncia_receta.receta.tituloReceta }}</h5>
+          <h5 class="modal-title" id="modalReceta{{ denuncia_receta.denuncia.id }}Label">{{ denuncia_receta.receta.tituloReceta }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -501,13 +355,9 @@
     </div>
   </div>
 
-  {% endfor %}
-
-
 
   <!-- Modal para la decision de denuncia -->
-
-  {% for denuncia_receta in denuncia_recetas %}
+  
   <div
     class="modal fade"
     id="modalDecision{{ denuncia_receta.denuncia.id }}"
@@ -519,18 +369,39 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalDecision{{ denuncia_receta.denuncia.id }}Label">Decision sobre la denuncia</h5>
+          <h5 class="modal-title" id="modalDecision{{ denuncia_receta.denuncia.id }}Label">Decision sobre la denuncia de Receta: {{ denuncia_receta.receta.tituloReceta }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>Usted puede elegir Ignorar la denuncia o Eliminar la receta</p>
+          <p>Usted puede elegir Ignorar la denuncia o Eliminar la denuncia {{ denuncia_receta.denuncia.id }}</p>
 
           <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-recetas">Ignorar</button>
-            &nbsp;&nbsp;&nbsp;&nbsp; 
-            <button type="submit" class="btn btn-danger">ELIMINAR</button>
+              <form action="/resolverDenuncia" method="post" id="formDecisionIgnorar{{ denuncia_receta.denuncia.id }}">
+                <input type="hidden" name="receta_id" id="receta_id" value="{{ denuncia_receta.receta.idReceta }}">
+                <input type="hidden" name="denuncia_id" id="denuncia_id" value="{{ denuncia_receta.denuncia.id }}">
+                <input type="hidden" name="flg_eliminar" id="flg_eliminar" value="0">
+                <input type="submit" value="Ignorar">
+              
+              &nbsp;&nbsp;&nbsp;&nbsp; 
+
+              <form action="/resolverDenuncia" method="post" id="formDecisionEliminar{{ denuncia_receta.denuncia.id }}">
+                <input type="hidden" name="receta_id" value="{{ denuncia_receta.receta.idReceta }}">
+                <input type="hidden" name="denuncia_id" value="{{ denuncia_receta.denuncia.id }}">
+                <input type="hidden" name="flg_eliminar" value="1">
+                <input type="submit" value="ELIMINAR">
+
+              <!-- <button class="btn btn-success" onclick="resolverDenuncia('{{ denuncia_receta.denuncia.id }}', '{{ denuncia_receta.receta.idReceta }}', '0')">Ignorar</button>
+              
+              &nbsp;&nbsp;&nbsp;&nbsp;
+
+              <button class="btn btn-danger" onclick="resolverDenuncia('{{ denuncia_receta.denuncia.id }}', '{{ denuncia_receta.receta.idReceta }}', '1')">ELIMINAR</button> -->
+
+<!-- 
+            <button type="submit" class="btn btn-recetas"id="ignorarReceta{{ denuncia_receta.denuncia.id }}">Ignorar</button>
+            
+            <button type="submit" class="btn btn-danger" id="eliminarReceta{{ denuncia_receta.denuncia.id }}">ELIMINAR</button> -->
           </div>
 
         </div>
@@ -541,7 +412,7 @@
     </div>
   </div>
 
-  {% endfor %}
+{% endfor %}
 
   
   </body>
