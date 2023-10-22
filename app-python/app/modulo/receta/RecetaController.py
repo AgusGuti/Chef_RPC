@@ -247,7 +247,6 @@ def findDenunciasAbiertas():
     logger.info("/denuncias")
     
     denuncias_abiertas = clientDenuncias.service.getUnresolved()
-    motivos = clientDenuncias.service.getMotivos()
 
     denuncia_recetas = []
 
@@ -276,11 +275,8 @@ def findDenunciasAbiertas():
     if denuncias_abiertas=="{}":
         flash('Error al intentar traer Denuncias','danger')
         return redirect('/storyline')
-    elif motivos=="{}":
-        flash('Error al intentar traer Motivos','danger')
-        return redirect('/storyline')
     else:
-        return render_template('denuncias.html', denuncia_recetas= denuncia_recetas, motivos=motivos)
+        return render_template('denuncias.html', denuncia_recetas= denuncia_recetas)
     
 
 @receta_blueprint.route("/addDenuncia",methods=['POST'])
@@ -341,15 +337,20 @@ def resolverDenuncia():
 def getMotivos():
     logger.info("/getMotivos")
     
-    motivos = clientDenuncias.service.getMotivos()    
-    
-    motivos_dict = helpers.serialize_object(motivos, dict)
-    
-    motivos_JSON = jsonify({'motivos': motivos_dict})
+    motivos_crudo = clientDenuncias.service.getMotivos()
 
+    motivos = []
+
+    for motivo in motivos_crudo:
+        motivos.append({
+                    'motivo': motivo
+                })
     
     if motivos=="{}":
         flash('Error al intentar traer Motivos','danger')
         return redirect('/storyline')
     else:                
-        return  motivos_JSON
+        return  motivos
+    
+    
+################  FIN Metodos de Modulo DENUNCIAS  ##################

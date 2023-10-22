@@ -7,7 +7,7 @@ select * from motivo;
 
 /*
 SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE mod-denuncias.motivo;
+TRUNCATE `mod-denuncias`.motivo;
 SET FOREIGN_KEY_CHECKS = 1;
 */
 
@@ -27,6 +27,6 @@ select * from denuncia;
 
 /*
 SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE denuncia;
+TRUNCATE `mod-denuncias`.denuncia;
 SET FOREIGN_KEY_CHECKS = 1;
 */

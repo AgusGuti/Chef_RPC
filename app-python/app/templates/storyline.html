@@ -85,13 +85,14 @@
     });
 
     function inicio() {
+      selectMotivos();
       cargarIngredientesYReceta(recetaId);
       addFavorito(recetaId);
       mostrarComentarios(recetaId);
-      mostrarPuntaje(recetaId);
-      selectMotivos();
+      mostrarPuntaje(recetaId);      
     }
 
+    
 
     function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
       console.log("cargarIngredientesYReceta function called");
@@ -312,33 +313,9 @@
       xhr.send();
     }
 
-
-    //select Motivos
-    function selectMotivos() {
-      console.log("selectMotivos function called");
-    var out = ""  
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "/getMotivos", false);
-    xhttp.setRequestHeader("Content-Type", "application/json");
-    xhttp.send();
-    var data = JSON.parse(xhttp.responseText);
-
-    console.log(data);
-
-    for (let i = 0; i < data.motivos.length; i++) {
-      out +=
-        '<option value="' + data.motivos[i].id + '">' +
-        data.motivos[i].motivo + "</option>";
-    }
+  
     
-    console.log(out);
 
-
-
-    document.getElementById("motivosSelect").innerHTML = out;
-  }
-    
-    
   window.onload = inicio;
 
   </script>
@@ -471,8 +448,7 @@
                   <button class="btn btn-recetas btn-sm"
                   data-toggle="modal"
                   data-receta-id="{{ receta.idReceta}}"
-                  data-target="#modalReceta{{ receta.idReceta }}"
-                    onclick="selectMotivos()">
+                  data-target="#modalReceta{{ receta.idReceta }}">
                   <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
                   </button>
                   {% if receta.user.id != usuario_autenticado %}
@@ -502,9 +478,8 @@
         </table>
         {% endblock %}
       </div>
-    </div>
   </div>
-</div>
+ 
 
   <!-- Modal para el detalle de las recetas -->
   {% for receta in recetas %}
@@ -572,9 +547,10 @@
           {% if receta.user.id != usuario_autenticado %}
             &nbsp; <!--espacio en blanco-->
             
-              <button type="button" class="btn btn-recetas" data-toggle="modal" 
-                  data-target="#modalAgregarDenuncia{{ receta.idReceta }}" data-dismiss="modal"
-                    >
+              <button type="button" class="btn btn-recetas" id="btn_generar_denuncia" 
+                  data-toggle="modal" data-receta-id="{{ receta.idReceta }}"
+                  data-target="#modalAgregarDenuncia{{ receta.idReceta }}"
+                  data-dismiss="modal">
                     Generar Denuncia
               </button>
             
@@ -587,6 +563,7 @@
     </div>
   </div>
 
+  
    <!-- Modal para mostrar la información del usuario -->
    <div class="modal fade" id="modalUsuario{{ receta.user.id }}" tabindex="-1" role="dialog" aria-labelledby="modalUsuarioLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -667,76 +644,44 @@
   >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
+
         <form action="/addDenuncia" method="post">
           <!-- Formulario principal -->
+
           <div class="modal-header">
-            <h5 class="modal-title" id="modalAgregarDenunciaLabel">Denunciar receta {{ receta.tituloReceta }}</h5>
+            <h3 class="modal-title" id="modalAgregarDenuncia{{ receta.idReceta }}Label">Denunciar receta "{{ receta.tituloReceta }}"</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+
+
           <div class="modal-body">            
             <form action="/addDenuncia" method="post">
 
               <input type="hidden" id="receta_id" name="receta_id" value="{{ receta.idReceta }}">
               <input type="hidden" id="user_id" name="user_id" value="{{ usuario_autenticado }}">
               
-              <div class="form-group">
-                <label for="motivo-form">Elija motivo:</label>
+              <div>
                 <br>
-                <br>      
-                
-                <div class="form-group">
-                  <label for="motivo-form">Motivos:</label>
-                  <select class="form-control form-control-sm" id="motivosSelect" 
-                  name="motivosSelect">
-                  </select>
-                </div>
+                <h5>Elija motivo:</h5>
+                <br>
 
+                {% for motivo in motivos %}
+                                  
+                  <div>
+                    <input type="radio" id="motivo_id" name="motivo_id" value="{{ motivo.motivo.id }}" />
+                    <label class="" for="Motivo{{ motivo.motivo.id }}">{{ motivo.motivo.motivo }}</label>
+                  </div>
 
-                <script>
-
-                var select = document.getElementById("motivosSelect");
-
-                var xhttp = new XMLHttpRequest();
-                xhttp.open("GET", "/getMotivos", false);
-                xhttp.setRequestHeader("Content-Type", "application/json");
-                xhttp.send();
-                var data = JSON.parse(xhttp.responseText);
-
-                for (var i = 0; i < data.motivos.length; i++) {
-                    var option = document.createElement("option");
-                    option.value = data.motivos[i].id;
-                    option.text = data.motivos[i].motivo;
-                    select.add(option);
-                }
-
-              </script>
-
-                  <!-- <fieldset>
-                    <div>
-                      <input type="radio" id="motivo_id" name="motivo_id" value="1" />
-                      <label for="Motivo1{{ receta.idReceta }}">Contenido inapropiado</label>
-                    </div>
-                  
-                    <div>
-                      <input type="radio" id="motivo_id" name="motivo_id" value="2" />
-                      <label for="Motivo2{{ receta.idReceta }}">Ingredientes prohibidos</label>
-                    </div>
-                  
-                    <div>
-                      <input type="radio" id="motivo_id" name="motivo_id" value="3" />
-                      <label for="Motivo3{{ receta.idReceta }}">Peligroso para la salud</label>
-                    </div>
-                  </fieldset> -->
+                {% endfor %}
 
                 <br>                  
                      
                 <div class="modal-footer">
                   <button type="submit" class="btn-danger">Denunciar</button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                </div>
-                
+                </div>        
                 
 
               </div>              
@@ -751,6 +696,8 @@
   </div>
   
   {% endfor %}
+
+
   <script>
    
         // initialize with defaults
