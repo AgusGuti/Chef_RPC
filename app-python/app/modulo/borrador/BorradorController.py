@@ -48,9 +48,9 @@ def obtener_borradores():
         return {}
     
     
-@borrador_blueprint.route("/api/borradores/<borrador_id>", methods=["GET"])
-def obtener_borrador(borrador_id):
-    response = requests.get('http://'+os.getenv("SERVER-REST-CARGAMASIVA")+'/api/borradores/' + borrador_id)
+@borrador_blueprint.route("/api/borradores/<int:id>", methods=["GET"])
+def obtener_borrador(id):
+    response = requests.get('http://'+os.getenv("SERVER-REST-CARGAMASIVA")+'/api/borradores/' + str(id))
     
     if response.status_code == 200:
         return jsonify(response.json())
@@ -59,31 +59,51 @@ def obtener_borrador(borrador_id):
         return jsonify({'error': mensaje_error}), 500  # Devuelve un JSON con el mensaje de error y establece un código de respuesta 500
 
 
-@borrador_blueprint.route("/api/borradores/<borrador_id>", methods=["PUT"])
-def actualizar_borrador(borrador_id):
+
+@borrador_blueprint.route("/api/borradores/<int:id>", methods=["PUT"])
+def actualizar_borrador(id):
     # Log the received data
-    logger.info('Received PUT request for updating draft with ID %s', borrador_id)
+    logger.info('Received PUT request for updating draft with ID %s', str(id))
     logger.info('Received data: %s', request.form)
 
     # Retrieve and log any specific data you want to inspect
-    nuevoTitulo = request.form.get('titulo')
+    nuevoTitulo = request.form.get('titulo_receta')
     nuevaDescripcion = request.form.get('descripcion')
     categoriaID = request.form.get('categoria_id')
     tiempoPreparacion = request.form.get('tiempo_preparacion')
+    foto1 = request.form.get('foto1')
+    foto2 = request.form.get('foto2')
+    foto3 = request.form.get('foto3')
+    foto4 = request.form.get('foto4')
+    foto5 = request.form.get('foto5')
+    pasos = request.form.get('pasos')
 
     logger.info('Updated values - Titulo: %s, Descripcion: %s, Categoria ID: %s, Tiempo de Preparacion: %s', nuevoTitulo, nuevaDescripcion, categoriaID, tiempoPreparacion)
 
-    # Make a PUT request to update the draft
-    response = requests.put('http://' + os.getenv("SERVER-REST-CARGAMASIVA") + '/api/borradores/' + borrador_id)
+    # Define los datos actualizados en un diccionario
+    datos_actualizados = {
+        'titulo_receta': nuevoTitulo,
+        'descripcion': nuevaDescripcion,
+        'categoria_id': categoriaID,
+        'tiempo_preparacion': tiempoPreparacion,
+        'foto1': foto1,
+        'foto2': foto2,
+        'foto3': foto3,
+        'foto4': foto4,
+        'foto5': foto5,
+        'pasos': pasos
+    }
+
+    # Realiza una solicitud PUT para enviar los datos actualizados al servidor REST
+    response = requests.put('http://' + os.getenv("SERVER-REST-CARGAMASIVA") + '/api/borradores/' + str(id), json=datos_actualizados)
 
     if response.status_code == 200:
-        logger.info('Draft updated successfully')
+        logger.info('Borrador actualizado correctamente')
         return jsonify({'mensaje': 'Borrador actualizado correctamente'})
     else:
         mensaje_error = "No se pudo actualizar el borrador. Por favor, inténtalo de nuevo más tarde."
-        logger.error('Error updating draft')
+        logger.error('Error al actualizar el borrador')
         return jsonify({'error': mensaje_error}), 500
-
 
 
 @borrador_blueprint.route("/api/guardar_como_receta/<borrador_id>/", methods=["POST"])

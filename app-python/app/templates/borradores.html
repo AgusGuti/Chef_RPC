@@ -99,19 +99,22 @@
                                 <td>{{ borrador.descripcion }}</td>
                                 <td>{{ borrador.categoria_id }}</td>
                                 <td>{{ borrador.tiempo_preparacion }}</td>
-                                <td>{{ borrador.foto1 }}</td>
-                                <td>{{ borrador.foto2 }}</td>
-                                <td>{{ borrador.foto3 }}</td>
-                                <td>{{ borrador.foto4 }}</td>
-                                <td>{{ borrador.foto5 }}</td>
+                                <td><img src="{{ borrador.foto1 }}" alt="Imagen 1" width="50" height="50"></td>
+                                <td><img src="{{ borrador.foto2 }}" alt="Imagen 2" width="50" height="50"></td>
+                                <td><img src="{{ borrador.foto3 }}" alt="Imagen 3" width="50" height="50"></td>
+                                <td><img src="{{ borrador.foto4 }}" alt="Imagen 4" width="50" height="50"></td>
+                                <td><img src="{{ borrador.foto5 }}" alt="Imagen 3" width="50" height="50"></td>
                                 <td>{{ borrador.pasos }}</td>
                                 <td>
-                                    <button class="btn btn-recetas btn-sm" data-toggle="modal" data-target="#modalModificarBorrador" data-borrador-id="' + borrador.id + '"><i class="fas fa-pencil-alt icono"></i></button>
+                                    <button class="btn btn-recetas btn-sm" data-toggle="modal" data-target="#modalModificarBorrador" data-borrador-id="{{ borrador.id }}"><i class="fas fa-pencil-alt icono"></i></button>
                                 </td>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
+                    <button type="button" class="btn btn-recetas" id="guardarComoRecetaBtn" disabled data-borrador-id="{{ borrador_id }}">
+                        Guardar Receta <i class="fas fa-save ml-auto"></i>
+                    </button>             
                     {% endfor %}
                 </div>
             </div>
@@ -220,29 +223,38 @@
                 url: "/api/borradores",
                 method: "GET",
                 success: function (data) {
-                    // Procesa los datos y muestra la información en la tabla
-                    if (data.error) {
-                        console.error(data.error);
+                    // Agrega un console.log para inspeccionar los datos
+                    console.log(data);
+        
+                    if (typeof data === "object" && data !== null) {
+                        for (var key in data) {
+                            if (data.hasOwnProperty(key)) {
+                                var borradores = data[key];
+                                borradores.forEach(function (borrador) {
+                                    const modificarButton = '<button class="btn btn-recetas btn-sm" data-toggle="modal" data-target="#modalModificarBorrador" data-borrador-id="' + borrador.id + '"><i class="fas fa-pencil-alt icono"></i></button>';
+                                    $("#example tbody").append('<tr><td>' + borrador.titulo_receta + '</td><td>' + borrador.descripcion + '</td><td>' + borrador.categoria_id + '</td><td>' + borrador.tiempo_preparacion + ' minutos</td><td>' + borrador.foto1 + '</td><td>' + borrador.foto2 + '</td><td>' + borrador.foto3 + '</td><td>' + borrador.foto4 + '</td><td>' + borrador.foto5 + '</td><td>' + borrador.pasos + '</td><td>' + modificarButton + '</td></tr>');
+                                });
+                            }
+                        }
                     } else {
-                        data.forEach(function (borrador) {
-                            const modificarButton = '<button class="btn btn-recetas btn-sm" data-toggle="modal" data-target="#modalModificarBorrador" data-borrador-id="' + borrador.id + '"><i class="fas fa-pencil-alt icono"></i></button>';
-                            $("#example tbody").append('<tr><td>' + borrador.titulo_receta + '</td><td>' + borrador.categoria_id + '</td><td>' + borrador.descripcion + '</td><td>' + borrador.tiempo_preparacion + ' minutos</td><td>' + borrador.foto1 + '</td><td>' + borrador.foto2 + '</td><td>' + borrador.foto3 + '</td><td>' + borrador.foto4 + '</td><td>' + borrador.foto5 + '</td><td>' + borrador.pasos + '</td><td>' + modificarButton + '</td></tr>');
-                        });
+                        console.error("Los datos no son un objeto JSON válido.");
                     }
                 },
                 error: function (error) {
                     console.error("Error al obtener los borradores: " + error.responseText);
                 }
             });
-
+        
             cargarIngredientes();
         });
+        
+
     </script>
     
     <script>
         // Variable para almacenar los datos del borrador seleccionado
         var borradorSeleccionado = null;
-
+    
         // Función para cargar los datos del borrador en la modal de actualización
         function cargarDatosEnModal() {
             if (borradorSeleccionado) {
@@ -260,15 +272,15 @@
                 $("#mod_ingredientes").val(borradorSeleccionado.ingredientes).trigger('change');
             }
         }
-
+    
         // Evento para abrir la modal de actualización y cargar los datos del borrador
         $('#modalModificarBorrador').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             var borradorId = button.data('borrador-id');
-
+    
             // Realiza una solicitud para obtener los datos del borrador seleccionado
             $.ajax({
-                url: "api/borradores/" + borradorId,
+                url: "/api/borradores/" + borradorId,  // Corrige la construcción de la URL
                 method: "GET",
                 success: function (data) {
                     // Almacenar los datos del borrador seleccionado
@@ -280,17 +292,23 @@
                     console.error("Error al obtener los datos del borrador: " + error.responseText);
                 }
             });
+            
         });
+    
         // Evento para actualizar el borrador
         $('#actualizarBorradorBtn').click(function () {
             if (borradorSeleccionado) {
                 // Obtén los valores actualizados de los campos
-                
                 var nuevoTitulo = $("#titulo").val();
                 var nuevaDescripcion = $("#descripcion").val();
                 var nuevaCategoriaID = $("#categoriaID").val();
                 var nuevoTiempoPreparacion = $("#tiempoPreparacion").val();
-                // Obten los valores de otros campos actualizados aquí
+                var nuevoFoto1 = $("#foto1").val();
+                var nuevoFoto2 = $("#foto2").val();
+                var nuevoFoto3 = $("#foto3").val();
+                var nuevoFoto4 = $("#foto4").val();
+                var nuevoFoto5 = $("#foto5").val();
+                var nuevoPasos = $("#pasos").val();
 
                 // Log the data before making the AJAX request
                 console.log("Updating with data: ");
@@ -298,17 +316,28 @@
                 console.log("Nueva Descripcion: " + nuevaDescripcion);
                 console.log("Nueva Categoria ID: " + nuevaCategoriaID);
                 console.log("Nuevo Tiempo de Preparación: " + nuevoTiempoPreparacion);
+                console.log("Nuevo Foto1: " + nuevoFoto1);
+                console.log("Nuevo Foto2: " + nuevoFoto2);
+                console.log("Nuevo Foto3: " + nuevoFoto3);
+                console.log("Nuevo Foto4: " + nuevoFoto4);
+                console.log("Nuevo Foto5: " + nuevoFoto5);
+                console.log("Nuevo Pasos: " + nuevoPasos);
 
                 // Realiza una solicitud para actualizar el borrador
                 $.ajax({
                     url: "/api/borradores/" + borradorSeleccionado.id,
                     method: "PUT",
                     data: {
-                        titulo: nuevoTitulo,
+                        titulo_receta: nuevoTitulo, 
                         descripcion: nuevaDescripcion,
                         categoria_id: nuevaCategoriaID,
-                        tiempo_preparacion: nuevoTiempoPreparacion
-                        // Envía otros campos actualizados aquí
+                        tiempo_preparacion: nuevoTiempoPreparacion,
+                        foto1: nuevoFoto1,
+                        foto2: nuevoFoto2,
+                        foto3: nuevoFoto3,
+                        foto4: nuevoFoto4,
+                        foto5: nuevoFoto5,
+                        pasos: nuevoPasos
                     },
                     success: function (data) {
                         console.log("Update success response: ", data);
@@ -322,67 +351,7 @@
                 });
             }
         });
-
     </script>
-
-    <script>
-        // Función para verificar si todos los campos de un borrador están completos
-        function verificarCamposCompletos(borradores) {
-            for (const borradorId in borradores) {
-                const borrador = borradores[borradorId];
-                if (
-                    !borrador.titulo_receta ||
-                    !borrador.descripcion ||
-                    !borrador.categoria_id ||
-                    !borrador.tiempo_preparacion ||
-                    !borrador.foto1 ||
-                    !borrador.pasos
-                ) {
-                    return false;
-                }
-            }
-            return true;
-        }
-    
-        // Función para habilitar o deshabilitar el botón "Guardar Receta"
-        function actualizarEstadoBoton(borradores) {
-            const boton = document.getElementById("guardarReceta");
-            boton.disabled = !verificarCamposCompletos(borradores);
-        }
-    
-        // Función para guardar la receta
-        function guardarReceta(recetaId) {
-            const borradores = {{ borradores|tojson|safe }};
-            if (verificarCamposCompletos(borradores)) {
-                // Realizar la solicitud POST al servidor Flask para guardar la receta
-                fetch('/api/guardar_como_receta/' + recetaId, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ "borrador_id": recetaId })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Manejar la respuesta del servidor, por ejemplo, mostrar un mensaje de éxito o error
-                    console.log(data);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-            } else {
-                // Mostrar un mensaje de error al usuario indicando que los campos requeridos no están llenos
-                console.error('No se pueden guardar los datos como receta. Algunos campos requeridos no están llenos.');
-            }
-        }
-    
-        // Obtener los datos de los borradores (debes proporcionar los datos en formato JSON)
-        const borradores = {{ borradores|tojson|safe }};
-        
-        // Inicializar el estado del botón "Guardar Receta"
-        actualizarEstadoBoton(borradores);
-    </script>
-
 
     <script>
         // Cargar la lista de ingredientes al cargar la página
@@ -457,8 +426,82 @@
                 });
             });
         });
-    </script>    
-
+    </script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const guardarRecetaButtons = document.querySelectorAll(".guardar-receta-btn");
+    
+          // Función para verificar si todos los borradores están completos
+          async function verificarBorradoresCompletos() {
+            const borradoresCompletos = await Promise.all(
+              guardarRecetaButtons.map(async (boton) => {
+                const borradorId = boton.getAttribute("data-borrador-id");
+                const borrador = await obtenerBorradorPorId(borradorId);
+                console.log(`Verificando borrador con ID ${borradorId}:`, borrador);
+                return verificarCamposCompletos(borrador);
+              })
+            );
+    
+            return borradoresCompletos.every((completo) => completo);
+          }
+    
+          // Función para actualizar el estado de todos los botones "Guardar Receta"
+          async function actualizarEstadoBotones() {
+            const todosCompletos = await verificarBorradoresCompletos();
+            console.log("Todos los borradores completos:", todosCompletos);
+    
+            guardarRecetaButtons.forEach((boton) => {
+              boton.disabled = !todosCompletos;
+            });
+          }
+    
+          // Agregar eventos para los botones "Guardar Receta" de cada borrador
+          guardarRecetaButtons.forEach((boton) => {
+            boton.addEventListener("click", async function () {
+              const borradorId = boton.getAttribute("data-borrador-id");
+              const borrador = await obtenerBorradorPorId(borradorId);
+              console.log(`Haciendo clic en el botón para guardar el borrador con ID ${borradorId}. Borrador:`, borrador);
+    
+              if (verificarCamposCompletos(borrador)) {
+                // Realizar la solicitud POST al servidor Flask para guardar la receta
+                fetch(`/api/guardar_como_receta/${borradorId}`, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ borrador_id: borradorId }),
+                })
+                  .then((response) => response.json())
+                  .then((data) => {
+                    // Manejar la respuesta del servidor, por ejemplo, mostrar un mensaje de éxito o error
+                    console.log("Respuesta del servidor al guardar como receta:", data);
+                  })
+                  .catch((error) => {
+                    console.error("Error al guardar como receta:", error);
+                  });
+              } else {
+                // Mostrar un mensaje de error al usuario indicando que los campos requeridos no están llenos
+                console.error("No se pueden guardar los datos como receta. Algunos campos requeridos no están llenos.");
+              }
+            });
+          });
+    
+          // Inicialmente, deshabilita todos los botones de "Guardar Receta"
+          guardarRecetaButtons.forEach((boton) => {
+            boton.addEventListener("click", async function () {
+            console.log("Botón clickeado");
+            boton.disabled = true;
+          });
+    
+          // Actualiza el estado de los botones una vez al cargar la página
+          actualizarEstadoBotones();
+        });
+    </script>
+    
+      
+      
+      
     
     <script>
         $(document).ready(function () {
