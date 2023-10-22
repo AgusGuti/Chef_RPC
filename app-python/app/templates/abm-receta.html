@@ -95,6 +95,9 @@
       xhttp.setRequestHeader("Content-Type", "application/json");
       xhttp.send();
       var data = JSON.parse(xhttp.responseText);
+
+      console.log(data);
+
       for (let i = 0; i < data.categoria.length; i++) {
         out +=
           '<option value="' +
@@ -103,6 +106,9 @@
           data.categoria[i].categoria +
           "</option>";
       }
+
+      console.log(out);
+
       document.getElementById("categoria").innerHTML = out;
     }
     

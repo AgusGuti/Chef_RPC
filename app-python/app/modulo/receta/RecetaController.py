@@ -176,7 +176,7 @@ def findAll():
         response = stub.FindAll(Receta()) 
         recetas = response.receta 
 
-    motivos = clientDenuncias.service.getMotivos()
+    motivos = getMotivos()
 
     print("Greeter client received: " + str(response))    
     return render_template('storyline.html', recetas=recetas,usuario_autenticado=user_id, motivos= motivos)
