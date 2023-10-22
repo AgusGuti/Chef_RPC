@@ -76,7 +76,7 @@ public class RecetariosEndpoint {
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "TraerRecetariosPorUsuarioRequest")
     @ResponsePayload
-    public TraerRecetariosPorUsuarioResponse listarRecetarios(@RequestPayload TraerRecetariosPorUsuarioRequest request) {
+    public TraerRecetariosPorUsuarioResponse listarRecetariosPorUser(@RequestPayload TraerRecetariosPorUsuarioRequest request) {
         TraerRecetariosPorUsuarioResponse response = new TraerRecetariosPorUsuarioResponse();
 
         List<Recetario> recetarios = recetarioService.TraerRecetariosPorUsuario(request.getUsuarioId());
