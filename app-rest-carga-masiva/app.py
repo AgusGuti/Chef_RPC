@@ -28,13 +28,13 @@ def spec():
     }
 
     # Define la descripcion de la ruta /api/borradores/{borrador_id}
-    swag['paths']['/api/borradores/{borrador_id}'] = {
+    swag['paths']['/api/borradores/{id}'] = {
         'get': {
             'summary': 'Obtener datos de un borrador',
             'description': 'Obtiene datos de un borrador específico por su ID.',
             'parameters': [
                 {
-                    'name': 'borrador_id',
+                    'name': 'id',
                     'in': 'path',
                     'description': 'ID del borrador a consultar',
                     'required': True,
@@ -54,7 +54,7 @@ def spec():
     'description': 'Actualiza un elemento de un borrador .',
     'parameters': [
         {
-            'name': 'borrador_id',
+            'name': 'id',
             'in': 'path',
             'description': 'ID del borrador a actualizar',
             'required': True,
@@ -277,9 +277,9 @@ def borradores():
 
     return render_template('borradores.html', grouped_borradores=grouped_borradores)
 
-@app.route('/editar_borrador/<int:borrador_id>', methods=['GET', 'POST'])
-def editar_borrador(borrador_id):
-    borrador = Borrador.query.get(borrador_id)
+@app.route('/editar_borrador/<int:id>', methods=['GET', 'POST'])
+def editar_borrador(id):
+    borrador = Borrador.query.get(id)
 
     if request.method == 'POST':
         # Procesar los datos enviados por el formulario de edicion

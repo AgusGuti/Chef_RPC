@@ -8,7 +8,7 @@
 <body>
     <h1>Editar Borrador</h1>
 
-    <form method="POST" action="{{ url_for('editar_borrador', borrador_id=borrador.id) }}">
+    <form method="POST" action="{{ url_for('editar_borrador', id=borrador.id) }}">
         <label for="titulo_receta">Título de la Receta:</label>
         <input type="text" id="titulo_receta" name="titulo_receta" value="{{ borrador.titulo_receta }}"><br>
 
