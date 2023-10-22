@@ -86,6 +86,7 @@
       mostrarComentarios(recetaId);
       mostrarPuntaje(recetaId);
       cargarMotivo(denunciaId);
+      selectMotivos();
     }
 
     function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
@@ -357,6 +358,24 @@
       xhr.send();
     }
 
+    //select Motivos
+    function selectMotivos() {
+    var out = "";
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "/getMotivos", false);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.send();
+    var data = JSON.parse(xhttp.responseText);
+    for (let i = 0; i < data.motivo.length; i++) {
+      out +=
+        '<option value="' +
+        data.motivo[i].id +
+        '">' +
+        data.motivo[i].motivo +
+        "</option>";
+    }
+    document.getElementById("motivo").innerHTML = out;
+  }
     
     window.onload = inicio;
 
@@ -603,10 +622,9 @@
             </form> -->
 
               <button type="button" class="btn btn-recetas" data-toggle="modal" 
-                  data-target="#modalAgregarDenuncia"> 
+                  data-target="#modalAgregarDenuncia" data-dismiss="modal">
                     Generar Denuncia
               </button>
-
             
           {% endif %}           
 
@@ -705,26 +723,18 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-                      
+          <div class="modal-body">            
             <form action="/addDenuncia" method="post">
 
               <input id="receta_id" type="hidden" name="receta_id" value="{{ receta.idReceta }}">
               <input type="hidden" id="user_id" name="user_id" value="{{ usuario_autenticado }}">
               
-              <select id="opcionesSelect"></select>
-
-              <script>
-                  
-                  const select = document.getElementById('opcionesSelect');
-
-                  // Llenar el select con opciones del JSON
-                  motivos.forEach(opcion => {
-                      const option = document.createElement('option');
-                      option.value = opcion.id;
-                      option.textContent = opcion.motivo;
-                      select.appendChild(option);
-                  });
-              </script>
+              <div class="form-group">
+                <label for="motivo-form">Elija motivo:</label>
+                <select class="form-control form-control-sm" id="motivo" name="motivo">
+                </select>
+              </div>
+              
             </form>
             
           </div>

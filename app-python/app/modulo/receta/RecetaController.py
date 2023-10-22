@@ -217,6 +217,27 @@ def modificarReceta():
         else:
             flash('Receta modificada exitosamente!','success')
             return redirect('/misRecetas')
+        
+@receta_blueprint.route("/eliminarReceta/<int:id>",methods=["POST"])
+def eliminarReceta(id):
+    logger.info("/eliminarReceta %s"+str(id))
+    user_id=session['user_id']
+    
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = RecetasServiceStub(channel)
+        response = stub.DeleteReceta(Receta(idReceta= id))
+        print("Greeter client received: " + str(response))    
+        receta={"receta":MessageToJson(response)}
+
+        if receta["receta"]=="{}":
+            flash('Error al eliminar el receta','danger')
+        else:
+            flash('Receta eliminado exitosamente!','success')
+        
+        return redirect('/denuncias')
+
+
+###################  Metodos de Modulo DENUNCIAS  ###################
 
 
 @receta_blueprint.route("/denuncias",methods=['GET'])
@@ -297,7 +318,7 @@ def resolverDenuncia():
     logger.info("FLG Denuncia: %s", flg_eliminar)
 
     
-    if not isinstance(denuncia_id, int):
+    if int(denuncia_id) <= 0:
         flash('Error al intentar resolver Denuncia','danger')
         return redirect('/denuncias')
     
@@ -306,20 +327,21 @@ def resolverDenuncia():
         if flg_eliminar == "1":
             with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
                 stub = RecetasServiceStub(channel)
-                stub.DeleteReceta(Receta(idReceta= receta_id))
+                stub.DeleteReceta(Receta(idReceta= int(receta_id)))
 
-        clientDenuncias.service.resolverDenuncia(id=denuncia_id)
+        #clientDenuncias.service.resolverDenuncia(id=denuncia_id)
 
         flash('Receta resuelta!','message')
         return redirect('/denuncias')
     
     
-
 @receta_blueprint.route("/getMotivos",methods=['GET'])
 def getMotivos():
     logger.info("/getMotivos")
     
-    motivos = clientDenuncias.service.getMotivos()    
+    motivos = clientDenuncias.service.getMotivos()
+    
+        
 
     if motivos=="{}":
         flash('Error al intentar traer Motivos','danger')

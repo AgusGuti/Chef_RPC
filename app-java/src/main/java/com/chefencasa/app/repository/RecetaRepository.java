@@ -5,15 +5,20 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chefencasa.app.entities.Receta;
+
 
 @Repository("recetaRepository")
 public interface RecetaRepository extends JpaRepository<Receta, Serializable>, JpaSpecificationExecutor<Receta> {
 
+
+	
 	public abstract List<Receta> findAll();
 	
 	
@@ -30,4 +35,9 @@ public interface RecetaRepository extends JpaRepository<Receta, Serializable>, J
 	
 	@Query("SELECT r FROM Receta r WHERE r.tituloReceta = :tituloReceta")
 	Receta findByTituloReceta(String tituloReceta);
+
+	@Modifying
+	@Transactional
+    @Query("DELETE FROM Receta r WHERE r.id = :recetaId")
+    public void deleteRecetaById(@Param("recetaId") int recetaId);
 }

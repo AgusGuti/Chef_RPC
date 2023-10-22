@@ -58,11 +58,5 @@ public class DenunciaService {
 
     };
 
-    public List<Integer> findRecetasIds(){
-
-        return denunciaRepository.findRecetasIds();
-
-    };
-
     
 }
