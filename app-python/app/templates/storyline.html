@@ -67,6 +67,10 @@
       display: none;
     }
 
+    .input{
+      display: inline;
+    }
+
     /* Estilo para mostrar el detalle de la receta cuando se muestra el modal */
     .modal.show .modal-body {
       display: block;
@@ -360,7 +364,6 @@
 
     //select Motivos
     function selectMotivos() {
-    var out = "";
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "/getMotivos", false);
     xhttp.setRequestHeader("Content-Type", "application/json");
@@ -374,7 +377,7 @@
         data.motivo[i].motivo +
         "</option>";
     }
-    document.getElementById("motivo").innerHTML = out;
+    document.getElementById("motivo").innerHTML = "";
   }
     
     window.onload = inicio;
@@ -609,20 +612,8 @@
           {% if receta.user.id != usuario_autenticado %}
             &nbsp; <!--espacio en blanco-->
             
-            <!-- <button class="btn btn-recetas btn-sm" id="agregarDenuncia{{ receta.idReceta }}"
-              data-toggle="modal" data-target="modalDenuncia" onclick="addDenuncia({{ receta.idReceta }})"
-              data-receta-id="{{ receta.idReceta }}">
-              <i class="fas fa-exclamation-triangle" id="favoritoIcon_{{ receta.idReceta }}" style="color: #ffcc00;"></i>
-            </button> -->
-
-            <!-- <form action="/addDenuncia" method="post">
-              <input type="hidden" name="receta_id" value="{{receta.idReceta}}" >
-              <input type="hidden" name="motivo_id" value="3">
-              <input type="submit" value="Denunciar">
-            </form> -->
-
               <button type="button" class="btn btn-recetas" data-toggle="modal" 
-                  data-target="#modalAgregarDenuncia" data-dismiss="modal">
+                  data-target="#modalAgregarDenuncia{{ receta.idReceta }}" data-dismiss="modal">
                     Generar Denuncia
               </button>
             
@@ -707,18 +698,18 @@
   <!-- Modal para agregar una denuncia -->
   <div
     class="modal fade"
-    id="modalAgregarDenuncia"
+    id="modalAgregarDenuncia{{ receta.idReceta }}"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="modalAgregarDenunciaLabel"
+    aria-labelledby="modalAgregarDenuncia{{ receta.idReceta }}Label"
     aria-hidden="true"
   >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <form action="/altaReceta" method="post">
+        <form action="/addDenuncia" method="post">
           <!-- Formulario principal -->
           <div class="modal-header">
-            <h5 class="modal-title" id="modalAgregarDenunciaLabel">Denunciar</h5>
+            <h5 class="modal-title" id="modalAgregarDenunciaLabel">Denunciar receta {{ receta.tituloReceta }}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -726,25 +717,45 @@
           <div class="modal-body">            
             <form action="/addDenuncia" method="post">
 
-              <input id="receta_id" type="hidden" name="receta_id" value="{{ receta.idReceta }}">
+              <input type="hidden" id="receta_id" name="receta_id" value="{{ receta.idReceta }}">
               <input type="hidden" id="user_id" name="user_id" value="{{ usuario_autenticado }}">
               
               <div class="form-group">
                 <label for="motivo-form">Elija motivo:</label>
-                <select class="form-control form-control-sm" id="motivo" name="motivo">
-                </select>
-              </div>
-              
-            </form>
+                <br>
+                <br>                
+                  <fieldset>
+                    <div>
+                      <input type="radio" id="motivo_id" name="motivo_id" value="1" />
+                      <label for="Motivo1{{ receta.idReceta }}">Contenido inapropiado</label>
+                    </div>
+                  
+                    <div>
+                      <input type="radio" id="motivo_id" name="motivo_id" value="2" />
+                      <label for="Motivo2{{ receta.idReceta }}">Ingredientes prohibidos</label>
+                    </div>
+                  
+                    <div>
+                      <input type="radio" id="motivo_id" name="motivo_id" value="3" />
+                      <label for="Motivo3{{ receta.idReceta }}">Peligroso para la salud</label>
+                    </div>
+                  </fieldset>
+
+                <br>                  
+                     
+                <div class="modal-footer">
+                  <button type="submit" class="btn-danger">Denunciar</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+                
+                
+
+              </div>              
+            </form>     
+
             
           </div>
-          <div class="modal-footer">
-            
-            <button type="submit" class="btn-danger">Denunciar</button>
-            
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            
-          </div>
+          
         </form>
       </div>
     </div>

@@ -28,7 +28,9 @@ from google.protobuf.json_format import MessageToDict, MessageToJson
 from google.protobuf.timestamp_pb2 import Timestamp
 import datetime
 
-from zeep import Client
+from zeep import Client, helpers
+import xml.etree.ElementTree as ET
+import json
 
 
 from kafka import KafkaConsumer
@@ -339,12 +341,15 @@ def resolverDenuncia():
 def getMotivos():
     logger.info("/getMotivos")
     
-    motivos = clientDenuncias.service.getMotivos()
+    motivos = clientDenuncias.service.getMotivos()    
     
-        
+    motivos_dict = helpers.serialize_object(motivos, dict)
+    
+    motivos_JSON = jsonify({'motivos': motivos_dict})
 
+    
     if motivos=="{}":
         flash('Error al intentar traer Motivos','danger')
         return redirect('/storyline')
-    else:
-        return motivos
+    else:                
+        return  motivos_JSON
