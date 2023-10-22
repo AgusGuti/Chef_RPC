@@ -299,7 +299,7 @@ def editar_borrador(borrador_id):
 
     return render_template('editar_borrador.html', borrador=borrador)
 
-@app.route('/api/upload_csv/<int:idusuario>', methods=['POST'])
+@app.route('/api/upload_csv/<idusuario>', methods=['POST'])
 def upload_csv(idusuario):
     if request.method == 'POST':
         if 'file' not in request.files:

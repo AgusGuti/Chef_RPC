@@ -37,7 +37,7 @@ from kafka import KafkaConsumer
 wsdl_url_denuncias = 'http://localhost:8085/moddenuncias/denuncias.wsdl'
 
 # Crear un cliente para el servicio SOAP - DENUNCIAS
-clientDenuncias = Client(wsdl_url_denuncias)
+#clientDenuncias = Client(wsdl_url_denuncias)
 
 
 
