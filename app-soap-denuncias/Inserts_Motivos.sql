@@ -23,7 +23,7 @@ INSERT INTO `mod-denuncias`.`denuncia` (`receta_id`, `resuelta`, `user_id`, `mot
 (7, 1, 7, 1),
 (8, 0, 8, 2),
 (9, 1, 9, 3),
-(10, 0, 11, 1);
+(10, 0, 4, 1);
 
 select * from `mod-denuncias`.denuncia;
 

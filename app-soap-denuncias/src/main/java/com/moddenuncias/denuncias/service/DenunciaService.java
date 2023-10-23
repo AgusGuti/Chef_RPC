@@ -51,12 +51,26 @@ public class DenunciaService {
         denunciaRepository.saveAndFlush(modificada);
     };
 
+    public void resolverDenunciaPorBajaReceta(int receta_id){
+
+        List<Denuncia> modificadas = denunciaRepository.findByRecetaId(receta_id);
+
+        for (Denuncia modificada : modificadas) {
+            modificada.setResuelta("1");
+
+            denunciaRepository.saveAndFlush(modificada);
+        }
+        
+    };
+
 
     public List<Motivo> verMotivos(){
 
         return motivoRepository.findAll();
 
     };
+
+    
 
     
 }

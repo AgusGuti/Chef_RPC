@@ -19,6 +19,8 @@ import io.spring.guides.gs_producing_web_service.GetUnresolvedRequest;
 import io.spring.guides.gs_producing_web_service.GetUnresolvedResponse;
 import io.spring.guides.gs_producing_web_service.ResolverDenunciaRequest;
 import io.spring.guides.gs_producing_web_service.ResolverDenunciaResponse;
+import io.spring.guides.gs_producing_web_service.ResolverDenunciasPorBajaRecetaRequest;
+import io.spring.guides.gs_producing_web_service.ResolverDenunciasPorBajaRecetaResponse;
 import io.spring.guides.gs_producing_web_service.AddDenunciaRequest;
 import io.spring.guides.gs_producing_web_service.AddDenunciaResponse;
 import io.spring.guides.gs_producing_web_service.GetMotivosRequest;
@@ -115,6 +117,26 @@ public class DenunciaEndpoint {
 
 		try {
 			denunciaService.resolverDenuncia(request.getId());
+
+			response.setConfirmacion(1);
+		} catch (Exception e) {
+			System.out.println("ERROR al resolver Denuncia:\n\n" + e.getMessage());		
+
+		}
+		
+		return response;
+	}
+
+
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "resolverDenunciasPorBajaRecetaRequest")
+	@ResponsePayload
+	public ResolverDenunciasPorBajaRecetaResponse resolverDenunciasPorBajaReceta(@RequestPayload ResolverDenunciasPorBajaRecetaRequest request) {
+		ResolverDenunciasPorBajaRecetaResponse response = new ResolverDenunciasPorBajaRecetaResponse();
+		
+		response.setConfirmacion(0);
+
+		try {
+			denunciaService.resolverDenunciaPorBajaReceta(request.getIdReceta());
 
 			response.setConfirmacion(1);
 		} catch (Exception e) {

@@ -47,6 +47,7 @@ message Receta {
   string foto5 = 14; 
   string comentario = 15;
   string puntaje = 16;
+  string baja = 17;
 }
 
 message RecetaFiltro{

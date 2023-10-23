@@ -22,22 +22,21 @@ public interface RecetaRepository extends JpaRepository<Receta, Serializable>, J
 	public abstract List<Receta> findAll();
 	
 	
-	@Query("SELECT DISTINCT r FROM Receta r LEFT JOIN FETCH r.ingredientes")
+	@Query("SELECT DISTINCT r FROM Receta r LEFT JOIN FETCH r.ingredientes WHERE r.baja <> '1'")
 	public abstract List<Receta> findAllRecetasIngredientes();
 
 	public abstract List<Receta> findByUserIdOrderByFechaCreacionDesc(int userId);
 	
-	@Query("SELECT r FROM Receta r LEFT JOIN FETCH r.ingredientes LEFT JOIN FETCH r.categoria WHERE r.id = :id")
+	@Query("SELECT r FROM Receta r LEFT JOIN FETCH r.ingredientes LEFT JOIN FETCH r.categoria WHERE r.id = :id AND r.baja <> '1'")
 	public abstract Receta findById(int id);
 	
-	@Query("SELECT DISTINCT r FROM Receta r LEFT JOIN FETCH r.ingredientes WHERE r.user.id = :userId ORDER BY r.fechaCreacion DESC")
+	@Query("SELECT DISTINCT r FROM Receta r LEFT JOIN FETCH r.ingredientes WHERE r.user.id = :userId AND r.baja <> '1' ORDER BY r.fechaCreacion DESC")
 	public abstract List<Receta> findAllRecetasByUserId(@Param("userId") int userId);
 	
-	@Query("SELECT r FROM Receta r WHERE r.tituloReceta = :tituloReceta")
+	@Query("SELECT r FROM Receta r WHERE r.tituloReceta = :tituloReceta AND r.baja <> '1'")
 	Receta findByTituloReceta(String tituloReceta);
 
-	@Modifying
-	@Transactional
-    @Query("DELETE FROM Receta r WHERE r.id = :recetaId")
-    public void deleteRecetaById(@Param("recetaId") int recetaId);
+	
+
+
 }
