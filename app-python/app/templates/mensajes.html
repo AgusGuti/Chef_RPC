@@ -95,7 +95,8 @@
                     <thead>
                         <tr>
                             <th>Asunto</th>
-                            <th>Remitente</th>
+                            <th>Mensaje</th>
+                            <th>Destinatario</th>
                             <th>Fecha</th>
                             <th>Acciones</th>
                         </tr>
@@ -104,13 +105,19 @@
                         {% for mensaje in mensajes %}
                         <tr>
                             <td>{{ mensaje.asunto }}</td>
-                            <td>{{ mensaje.remitente }}</td>
-                            <td>{{ mensaje.fecha }}</td>
+                            <td>{{ mensaje.cuerpo }}</td>
+                            <td>{{ mensaje.emisor.nombre }}</td>
+                            <td>{{ mensaje.fechaHora }}</td>
                             <td>
-                                <button class="btn btn-primary btn-sm" data-toggle="modal"
-                                    data-target="#verMensajeModal{{ mensaje.id }}">
-                                    Ver Mensaje
+                                <!-- Botón para abrir el modal de detalle mensaje -->
+                                <button class="btn btn-recetas btn-sm" data-toggle="modal" data-target="#verMensajeModal{{ mensaje.id }}">
+                                    <i class="fas fa-envelope"></i>
                                 </button>
+
+                                <!-- Botón para abrir el modal de respuesta -->
+                                <button class="btn btn-recetas btn-sm" data-toggle="modal" data-target="#responderMensajeModal{{ mensaje.id }}" onclick="fillAsuntoField('{{ mensaje.id }}')">
+                                    <i class="fas fa-reply"></i>
+                                </button>                                
                             </td>
                         </tr>
                         {% endfor %}
@@ -133,16 +140,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="enviarMensajeForm" action="/mensaje" method="POST">
-                        <!-- Selector de emisor -->
-                        <div class="form-group">
-                            <label for="idEmisor">Emisor:</label>
-                            <select class="form-control" id="idEmisor" name="idEmisor">
-                                <option value="" disabled selected>Seleccione un emisor</option>
-                                {% for usuario in usuarios %}
-                                    <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
+
                         <!-- Selector de destinatario -->
                         <div class="form-group">
                             <label for="idReceptor">Destinatario:</label>
@@ -173,6 +171,72 @@
         </div>
     </div>
 
+    <!-- Modal para responder mensajes -->
+    {% for mensaje in mensajes %}
+    <div class="modal fade" id="responderMensajeModal{{ mensaje.id }}" tabindex="-1" role="dialog"
+        aria-labelledby="responderMensajeModalLabel{{ mensaje.id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="responderMensajeModalLabel{{ mensaje.id }}">Responder a {{ mensaje.emisor.nombre }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="responderMensajeForm{{ mensaje.id }}" action="/mensaje/resp" method="POST">
+                        <input type="hidden" name="idMensajeRespondido" value="{{ mensaje.id }}">
+                        <!-- Asunto del mensaje -->
+                        <div class="form-group">
+                            <label for="asunto{{ mensaje.id }}">Asunto:</label>
+                            <input type="text" class="form-control" id="asunto{{ mensaje.id }}" name="asunto" required>
+                        </div>                        
+                        <!-- Mensaje -->
+                        <div class="form-group">
+                            <label for="cuerpo">Mensaje:</label>
+                            <textarea class="form-control" id="cuerpo" name="cuerpo" rows="4" required></textarea>
+                        </div>
+                        <!-- Campo de entrada de texto oculto para el asunto -->
+                        <input type="hidden" name="asuntoOriginal" id="asuntoOriginal{{ mensaje.id }}" value="{{ mensaje.asunto }}">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" form="responderMensajeForm{{ mensaje.id }}" class="btn btn-recetas">Responder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+    <!-- Modal para ver el mensaje -->
+    {% for mensaje in mensajes %}
+    <div class="modal fade" id="verMensajeModal{{ mensaje.id }}" tabindex="-1" role="dialog" aria-labelledby="verMensajeModalLabel{{ mensaje.id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="verMensajeModalLabel{{ mensaje.id }}">Mensaje de {{ mensaje.emisor.nombre }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <strong>Asunto:</strong> {{ mensaje.asunto }}<br>
+                    <strong>Emisor:</strong> {{ mensaje.emisor.nombre }}<br>
+                    <strong>Fecha:</strong> {{ mensaje.fechaHora }}<br>
+                    <p><strong>Mensaje:</strong></p>
+                    <p>{{ mensaje.cuerpo }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    
     <!-- Scripts al final del cuerpo del documento -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
@@ -199,23 +263,14 @@
     </script>
 
     <script>
-        $(document).ready(function() {
-            // Realiza una solicitud GET para obtener la lista de usuarios (emisores)
-            $.get("/usuario/list", function(data) {
-                if (data.error) {
-                    // Manejar el error si es necesario
-                    console.error("Error al obtener la lista de usuarios (emisores):", data.error);
-                } else {
-                    // Llena el selector de emisores con los usuarios obtenidos
-                    var idEmisorSelect = $("#idEmisor");
-                    data.forEach(function(usuario) {
-                        idEmisorSelect.append("<option value='" + usuario.id + "'>" + usuario.nombre + "</option>");
-                    });
-                }
-            });
-        });
-    </script>
+        // Función para llenar el campo de asunto con el asunto original al abrir el modal
+        function fillAsuntoField(modalId) {
+            var asuntoOriginal = $("#asuntoOriginal" + modalId).val();
+            $("#asunto" + modalId).val(asuntoOriginal);
+        }
+    </script>    
     
+
     <script>
         jQuery(document).ready(function ($) {
             $('#example').DataTable();

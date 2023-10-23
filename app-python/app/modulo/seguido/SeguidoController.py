@@ -84,8 +84,3 @@ def obtener_seguidos():
         seguidos = response.seguido
     return seguidos
 
-@seguido_blueprint.route("/misMensajes",methods = ['GET'])
-def misMensajes():
-    logger.info("/misMensajes")
-    seguidos = obtener_seguidos()
-    return render_template('mensajes.html',seguidos=seguidos)

@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.*;
 
 import com.example.demo.entity.Mensaje;
 import com.example.demo.entity.MensajeDTO;
@@ -47,15 +47,17 @@ public class MensajeController {
 	}
 
 	@PostMapping("/resp")
-	public ResponseEntity<Object> crearRespuesta(Long idMensajeRespondido, String cuerpo) {
+	public ResponseEntity<Object> crearRespuesta(@RequestBody MensajeDTO mensajeDTO) {
 
 		try {
-			mensajeService.crearRespuesta(idMensajeRespondido, cuerpo);
+			mensajeService.crearRespuesta(mensajeDTO.getIdEmisor(), mensajeDTO.getCuerpo());
+			
+			return new ResponseEntity<Object>(HttpStatus.CREATED);
 		} catch (Exception e) {
 			System.err.println(e);
+			return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
-		return new ResponseEntity<Object>(HttpStatus.CREATED);
+		
 	}
 
 	@PutMapping("/{id}")
@@ -77,6 +79,7 @@ public class MensajeController {
 		}
 
 		return new ResponseEntity<Object>(HttpStatus.OK);
+		
 	}
 
 	@PutMapping("/resp/{id}")
@@ -121,8 +124,13 @@ public class MensajeController {
 		} catch (NumberFormatException exception) {
 			return new ResponseEntity<Mensaje>(HttpStatus.BAD_REQUEST);
 		}
+		Mensaje respuesta= mensajeService.traerRespuesta(id);
+		logger.info("RESPUESTA"+respuesta);
+		return Optional
+            .ofNullable( mensajeService.traerRespuesta(id) )
+            .map( mensaje -> ResponseEntity.ok().body(mensaje) )          //200 OK
+            .orElseGet( () -> ResponseEntity.notFound().build() );  //404 Not found
 
-		return ResponseEntity.ok(mensajeService.traerRespuesta(id));
 	}
 	
 	@GetMapping("/user/{id}")

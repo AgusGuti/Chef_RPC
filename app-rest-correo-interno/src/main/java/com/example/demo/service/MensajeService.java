@@ -12,9 +12,13 @@ import com.example.demo.repository.MensajeRepository;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.logging.Logger;
+
 @Service
 @RequiredArgsConstructor
 public class MensajeService {
+	private static final Logger logger = Logger.getLogger("com.example.demo.service.MensajeService");
+
 
 	private final MensajeRepository repository;
 
@@ -44,6 +48,10 @@ public class MensajeService {
 	}
 	
 	public void crearRespuesta(Long idMensajeRespondido, String cuerpo) throws Exception {
+		
+		logger.info("ID Mensaje Respondido: " + idMensajeRespondido);
+		logger.info("Cuerpo del Mensaje: " + cuerpo);
+
 		if (cuerpo == null)
 			throw new Exception("Error: el cuerpo no puede ser nulo");
 
