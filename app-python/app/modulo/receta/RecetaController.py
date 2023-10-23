@@ -371,37 +371,39 @@ def getRecetarios():
     recetarios = clientRecetarios.service.TraerRecetariosPorUsuario(session['user_id'])
     
 
-    recetarios_recetas = []
-
-    for recetario in recetarios:
-        recers = clientRecetarios.service.TraerRecetasPorRecetarios(recetario.id)
-        if recetario:
-            # Si hay recetas coincidentes, agregar el recetario
-            recetarios_recetas.append({
-                'recetario': recetario
-            })
-        for recetarioReceta in recers:
-            # Traigo Receta por ID
-            with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
-                stub = RecetasServiceStub(channel)
-                recetas_x_recetario = stub.FindById(Receta(idReceta=recetarioReceta.recetaId))
-            if recetas_x_recetario:
-                # Si hay recetas coincidentes, agregar el recetario
-                recetario_data = {
-                    'receta': recetas_x_recetario
-                }
-                recetarios_recetas.append(recetario_data)
-            
-
     logger.info(recetarios)
-    logger.info(recetarios_recetas)
 
 
-    if recetarios_recetas=="{}":
+    if recetarios=="{}":
         flash('Error al intentar traer las recetas por Recetario','danger')
         return redirect('/storyline')
     else:
         return recetarios
+
+
+
+@receta_blueprint.route("/getRecetaPorRecetario/<int:recetario_Id>", methods=['GET'])
+def getRecetaPorRecetario(recetario_Id):
+    logger.info("/getRecetaPorRecetario")
+
+    recetitaaa = clientRecetarios.service.TraerRecetasPorRecetarios(recetario_Id)
+
+    recetas = []
+
+  
+
+    for recetarioReceta in recetitaaa:
+        recetas_x_recetario = findById(recetarioReceta.recetaId)
+        if recetas_x_recetario:
+            recetas.append(recetas_x_recetario)
+
+    logger.info(recetas)
+    response_data = json.dumps({"recetas": recetas})
+
+    return response_data
+
+
+
 
 
 
@@ -412,6 +414,7 @@ def getRecetarios():
 def findRecetarios():
     logger.info("/misRecetarios")
     recetarios = getRecetarios()
+    
 
 
     if recetarios=="{}":
@@ -420,6 +423,8 @@ def findRecetarios():
     else:
         return render_template('recetarios.html', recetarios= recetarios)
     
+
+
 
 
 @receta_blueprint.route("/agregarRecetario", methods=['POST'])

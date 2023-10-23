@@ -544,7 +544,7 @@
           {% if receta.user.id != usuario_autenticado %}
             &nbsp; <!--espacio en blanco-->
             
-              <button type="button" class="btn btn-recetas" id="btn_generar_denuncia" 
+              <button type="button" class="btn btn-warning" id="btn_generar_denuncia" 
                   data-toggle="modal" data-receta-id="{{ receta.idReceta }}"
                   data-target="#modalAgregarDenuncia{{ receta.idReceta }}"
                   data-dismiss="modal">
@@ -743,7 +743,7 @@
                 <br>                  
                      
                 <div class="modal-footer">
-                  <button type="submit" class="btn-danger">Agregar</button>
+                  <button type="submit" class="btn btn-success"> Agregar</button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>        
                 
