@@ -32,6 +32,11 @@ public class DenunciaController {
         denunciaService.resolverDenuncia(denunciaId);
     }
 
+    @DeleteMapping("/resueltasPorBaja/{denunciaId}")
+    public void resolverDenunciasPorBajaReceta(@PathVariable int receta_id) {
+        denunciaService.resolverDenunciaPorBajaReceta(receta_id);
+    }
+
     @GetMapping("/denunciasAbiertas")
     public List<Denuncia> verDenunciasAbiertas() {
         return denunciaService.findUnresolved();

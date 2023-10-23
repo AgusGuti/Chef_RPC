@@ -6,6 +6,7 @@ import java.util.List;
 
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +18,8 @@ public interface RecetarioRepository extends JpaRepository<Recetario, Serializab
     @Query("SELECT r FROM Recetario r WHERE r.id = :id")
     public abstract Recetario findById(int id);
     
-
-
+    
+    @Query("SELECT r FROM Recetario r WHERE r.usuarioId = :usuarioId")
+    public abstract List<Recetario> TraerRecetariosPorUsuario(@Param("usuarioId") int usuarioId);
     
 }
