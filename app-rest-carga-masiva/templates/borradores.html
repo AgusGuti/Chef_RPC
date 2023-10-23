@@ -54,7 +54,7 @@
             <td>{{ borrador.foto4 }}</td>
             <td>{{ borrador.foto5 }}</td>
             <td>{{ borrador.pasos }}</td>
-            <td><a href="{{ url_for('editar_borrador', borrador_id=borrador.id) }}">Editar</a></td>
+            <td><a href="{{ url_for('editar_borrador', id=borrador.id) }}">Editar</a></td>
         </tr>
         {% endfor %}
     </table>
@@ -69,10 +69,6 @@
                 borrador.categoria_id &&
                 borrador.tiempo_preparacion&&
                 borrador.foto1&&
-                borrador.foto2&&
-                borrador.foto3&&
-                borrador.foto4&&
-                borrador.foto5&&
                 borrador.pasos
             );
         }

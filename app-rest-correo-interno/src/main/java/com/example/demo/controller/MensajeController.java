@@ -3,18 +3,22 @@ package com.example.demo.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Mensaje;
-
+import com.example.demo.entity.MensajeDTO;
 import com.example.demo.service.MensajeService;
 import com.example.demo.service.UsuarioService;
 
@@ -27,11 +31,14 @@ public class MensajeController {
 	private final MensajeService mensajeService;
 	private final UsuarioService usuarioService;
 
+	Logger logger = LoggerFactory.getLogger(MensajeController.class);
+
 	@PostMapping
-	public ResponseEntity<Object> crearMensaje(String asunto, String cuerpo, Long idEmisor, Long idReceptor) {
+	public ResponseEntity<Object> crearMensaje(@RequestBody MensajeDTO mensajeDTO) {
+		logger.info("crear mensaje"+mensajeDTO);
 		try {
-			mensajeService.crearMensaje(asunto, cuerpo, usuarioService.findById(idEmisor).orElse(null),
-					usuarioService.findById(idReceptor).orElse(null));
+			mensajeService.crearMensaje(mensajeDTO.getAsunto(), mensajeDTO.getCuerpo(), usuarioService.findById(mensajeDTO.getIdEmisor()).orElse(null),
+					usuarioService.findById(mensajeDTO.getIdReceptor()).orElse(null));
 		} catch (Exception e) {
 			System.err.println(e);
 		}

@@ -28,13 +28,13 @@ def spec():
     }
 
     # Define la descripcion de la ruta /api/borradores/{borrador_id}
-    swag['paths']['/api/borradores/{borrador_id}'] = {
+    swag['paths']['/api/borradores/{id}'] = {
         'get': {
             'summary': 'Obtener datos de un borrador',
             'description': 'Obtiene datos de un borrador específico por su ID.',
             'parameters': [
                 {
-                    'name': 'borrador_id',
+                    'name': 'id',
                     'in': 'path',
                     'description': 'ID del borrador a consultar',
                     'required': True,
@@ -54,7 +54,7 @@ def spec():
     'description': 'Actualiza un elemento de un borrador .',
     'parameters': [
         {
-            'name': 'borrador_id',
+            'name': 'id',
             'in': 'path',
             'description': 'ID del borrador a actualizar',
             'required': True,
@@ -143,7 +143,7 @@ def spec():
         
         
     }
-       
+    
     swag['paths']['/api/upload_csv/{idusuario}'] = {
     'post': {
         'summary': 'Subir archivo CSV',
@@ -174,6 +174,35 @@ def spec():
         },
     },
 }
+    
+    swag['paths']['/api/borradores/borrador_id/{borrador_id}'] = {
+    'get': {
+        'summary': 'Obtener borradores por ID',
+        'description': 'Obtiene todos los borradores que coinciden con un ID específico.',
+        'parameters': [
+            {
+                'name': 'borrador_id',
+                'in': 'path',
+                'description': 'ID del borrador a consultar',
+                'required': True,
+                'schema': {
+                    'type': 'integer'
+                }
+            }
+        ],
+        'responses': {
+            '200': {
+                'description': 'Éxito. Devuelve la lista de borradores por ID.'
+            },
+            '404': {
+                'description': 'No se encontraron borradores con el ID especificado.'
+            }
+        }
+    }
+}
+
+
+
     swag['paths']['/api/guardar_como_receta/{borrador_id}'] = {
     'post': {
         'summary': 'Guardar múltiples borradores como recetas',
@@ -201,6 +230,8 @@ def spec():
             }
         }
     }
+    
+    
 }
 
     return jsonify(swag)
@@ -277,9 +308,9 @@ def borradores():
 
     return render_template('borradores.html', grouped_borradores=grouped_borradores)
 
-@app.route('/editar_borrador/<int:borrador_id>', methods=['GET', 'POST'])
-def editar_borrador(borrador_id):
-    borrador = Borrador.query.get(borrador_id)
+@app.route('/editar_borrador/<int:id>', methods=['GET', 'POST'])
+def editar_borrador(id):
+    borrador = Borrador.query.get(id)
 
     if request.method == 'POST':
         # Procesar los datos enviados por el formulario de edicion
@@ -299,7 +330,7 @@ def editar_borrador(borrador_id):
 
     return render_template('editar_borrador.html', borrador=borrador)
 
-@app.route('/api/upload_csv/<int:idusuario>', methods=['POST'])
+@app.route('/api/upload_csv/<idusuario>', methods=['POST'])
 def upload_csv(idusuario):
     if request.method == 'POST':
         if 'file' not in request.files:
@@ -434,6 +465,16 @@ def guardar_como_receta(borrador_id):
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': 'Hubo un error al guardar las recetas', 'details': str(e)})
+
+@app.route('/api/borradores/borrador_id/<int:borrador_id>', methods=['GET'])
+def get_borradores_by_borrador_id(borrador_id):
+    borradores = Borrador.query.filter_by(borrador_id=borrador_id).all()
+
+    if not borradores:
+        return jsonify({'error': 'No se encontraron borradores con el ID especificado'})
+
+    return jsonify([borrador.as_dict() for borrador in borradores])
+
 
 if __name__ == '__main__':
     with app.app_context():
