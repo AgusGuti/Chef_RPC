@@ -65,7 +65,7 @@ label {
 }
 
 input[type="radio"] {
-    display: none;
+    display: inline;
 }
 
 

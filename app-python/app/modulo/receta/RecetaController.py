@@ -28,7 +28,9 @@ from google.protobuf.json_format import MessageToDict, MessageToJson
 from google.protobuf.timestamp_pb2 import Timestamp
 import datetime
 
-from zeep import Client
+from zeep import Client, helpers
+import xml.etree.ElementTree as ET
+import json
 
 
 from kafka import KafkaConsumer
@@ -181,7 +183,7 @@ def findAll():
         response = stub.FindAll(Receta()) 
         recetas = response.receta 
 
-    motivos = clientDenuncias.service.getMotivos()
+    motivos = getMotivos()
 
     print("Greeter client received: " + str(response))    
     return render_template('storyline.html', recetas=recetas,usuario_autenticado=user_id, motivos= motivos)
@@ -224,6 +226,27 @@ def modificarReceta():
         else:
             flash('Receta modificada exitosamente!','success')
             return redirect('/misRecetas')
+        
+@receta_blueprint.route("/eliminarReceta/<int:id>",methods=["POST"])
+def eliminarReceta(id):
+    logger.info("/eliminarReceta %s"+str(id))
+    user_id=session['user_id']
+    
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = RecetasServiceStub(channel)
+        response = stub.DeleteReceta(Receta(idReceta= id))
+        print("Greeter client received: " + str(response))    
+        receta={"receta":MessageToJson(response)}
+
+        if receta["receta"]=="{}":
+            flash('Error al eliminar el receta','danger')
+        else:
+            flash('Receta eliminado exitosamente!','success')
+        
+        return redirect('/denuncias')
+
+
+###################  Metodos de Modulo DENUNCIAS  ###################
 
 
 @receta_blueprint.route("/denuncias",methods=['GET'])
@@ -231,7 +254,6 @@ def findDenunciasAbiertas():
     logger.info("/denuncias")
     
     denuncias_abiertas = clientDenuncias.service.getUnresolved()
-    motivos = clientDenuncias.service.getMotivos()
 
     denuncia_recetas = []
 
@@ -260,11 +282,8 @@ def findDenunciasAbiertas():
     if denuncias_abiertas=="{}":
         flash('Error al intentar traer Denuncias','danger')
         return redirect('/storyline')
-    elif motivos=="{}":
-        flash('Error al intentar traer Motivos','danger')
-        return redirect('/storyline')
     else:
-        return render_template('denuncias.html', denuncia_recetas= denuncia_recetas, motivos=motivos)
+        return render_template('denuncias.html', denuncia_recetas= denuncia_recetas)
     
 
 @receta_blueprint.route("/addDenuncia",methods=['POST'])
@@ -304,7 +323,7 @@ def resolverDenuncia():
     logger.info("FLG Denuncia: %s", flg_eliminar)
 
     
-    if not isinstance(denuncia_id, int):
+    if int(denuncia_id) <= 0:
         flash('Error al intentar resolver Denuncia','danger')
         return redirect('/denuncias')
     
@@ -313,27 +332,35 @@ def resolverDenuncia():
         if flg_eliminar == "1":
             with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
                 stub = RecetasServiceStub(channel)
-                stub.DeleteReceta(Receta(idReceta= receta_id))
+                stub.DeleteReceta(Receta(idReceta= int(receta_id)))
 
-        clientDenuncias.service.resolverDenuncia(id=denuncia_id)
+        #clientDenuncias.service.resolverDenuncia(id=denuncia_id)
 
         flash('Receta resuelta!','message')
         return redirect('/denuncias')
     
     
-
 @receta_blueprint.route("/getMotivos",methods=['GET'])
 def getMotivos():
     logger.info("/getMotivos")
     
-    motivos = clientDenuncias.service.getMotivos()    
+    motivos_crudo = clientDenuncias.service.getMotivos()
 
+    motivos = []
+
+    for motivo in motivos_crudo:
+        motivos.append({
+                    'motivo': motivo
+                })
+    
     if motivos=="{}":
         flash('Error al intentar traer Motivos','danger')
         return redirect('/storyline')
-    else:
-        return motivos
-
+    else:                
+        return  motivos
+    
+    
+################  FIN Metodos de Modulo DENUNCIAS  ##################
 
 @receta_blueprint.route("/misRecetarios",methods=['GET'])
 def findRecetarios():
@@ -390,3 +417,4 @@ def addRecetario(nombreRecetario):
 
         flash('Recetario agregado', 'message')
         return redirect('/misRecetarios')
+

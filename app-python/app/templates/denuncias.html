@@ -136,7 +136,6 @@
     }
     
     function resolverDenuncia(denuncia_id,receta_id, flg_eliminar) {
-      
       var xhr = new XMLHttpRequest();
       xhr.open("POST", "/resolverDenuncia", true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -156,8 +155,7 @@
     
       xhr.send(data);
     }
-    
-
+ 
     window.onload = inicio;
 
   </script>
@@ -247,7 +245,7 @@
               {% endwith %}
             </div>
             <div class="col-sm-8">
-              <h2 style="margin-bottom: 20px;"><b>Publicaciones</b></h2>
+              <h2 style="margin-bottom: 20px;"><b>Denuncias</b></h2>
             </div>
         </div>
       </div>
@@ -259,6 +257,7 @@
               <th>Denunciado por</th>
               <th>Motivo</th>
               <th>Nombre de Receta</th>
+              <th>Preview Receta</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -269,6 +268,15 @@
               <td>{{ denuncia_receta.user.nombre }} {{ denuncia_receta.user.apellido }}</td>
               <td>{{ denuncia_receta.denuncia.motivo_id.motivo }}</td>              
               <td>{{ denuncia_receta.receta.tituloReceta }}</td>
+              <td>
+                <img
+                  src="{{ denuncia_receta.receta.foto1 }}"
+                  alt="{{ denuncia_receta.receta.tituloReceta }}"
+                  class="miniatura"
+                  data-toggle="modal"
+                  data-target="#modalReceta{{ denuncia_receta.receta.idReceta }}"
+                >
+              </td>
               <td>
                 <div class="btn-group">
 
@@ -283,7 +291,7 @@
                 <button class="btn btn-recetas btn-sm" data-toggle="modal" 
                   data-denuncia-id="{{ denuncia_receta.denuncia.id }}"
                   data-target="#modalDecision{{ denuncia_receta.denuncia.id }}">
-                  <i class="fa fa-gavel" style="color: #e7723b;"></i>               
+                  <i class="fa fa-gavel" style="color: #e7723b;"></i>
                 </button>                
                              
               </td>
@@ -293,9 +301,8 @@
         </table>
         {% endblock %}
       </div>
-    </div>
   </div>
-</div>
+
 
 
 
@@ -383,15 +390,23 @@
                 <input type="hidden" name="denuncia_id" id="denuncia_id" value="{{ denuncia_receta.denuncia.id }}">
                 <input type="hidden" name="flg_eliminar" id="flg_eliminar" value="0">
                 <input type="submit" value="Ignorar">
-              
+              </form>
+
               &nbsp;&nbsp;&nbsp;&nbsp; 
 
               <form action="/resolverDenuncia" method="post" id="formDecisionEliminar{{ denuncia_receta.denuncia.id }}">
-                <input type="hidden" name="receta_id" value="{{ denuncia_receta.receta.idReceta }}">
-                <input type="hidden" name="denuncia_id" value="{{ denuncia_receta.denuncia.id }}">
-                <input type="hidden" name="flg_eliminar" value="1">
+                <input type="hidden" name="receta_id" id="receta_id" value="{{ denuncia_receta.receta.idReceta }}">
+                <input type="hidden" name="denuncia_id" id="denuncia_id" value="{{ denuncia_receta.denuncia.id }}">
+                <input type="hidden" name="flg_eliminar" id="flg_eliminar" value="1">
                 <input type="submit" value="ELIMINAR">
+              </form>
 
+                &nbsp;&nbsp;&nbsp;&nbsp; 
+
+              <form action="/eliminarReceta/{{ denuncia_receta.receta.idReceta }}" method="post" id="test_borrar_receta_{{ denuncia_receta.receta.idReceta }}">
+                <input type="submit" value="TEST BORRAR RECETA">
+              </form>
+                
               <!-- <button class="btn btn-success" onclick="resolverDenuncia('{{ denuncia_receta.denuncia.id }}', '{{ denuncia_receta.receta.idReceta }}', '0')">Ignorar</button>
               
               &nbsp;&nbsp;&nbsp;&nbsp;

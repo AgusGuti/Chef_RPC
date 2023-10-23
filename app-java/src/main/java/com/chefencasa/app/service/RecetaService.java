@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -389,7 +389,7 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 			Receta receta = recetaRepository.findById(request.getIdReceta());
             logger.info("Receta a eliminar"+ receta);
                         
-            recetaRepository.delete(receta);
+            recetaRepository.deleteById(receta.getId());
             
 		} catch (Exception e) {
             logger.error("Error al eliminar Receta", e);
