@@ -40,7 +40,7 @@ from kafka import KafkaConsumer
 wsdl_url_denuncias = 'http://localhost:8085/moddenuncias/denuncias.wsdl'
 
 # Crear un cliente para el servicio SOAP - DENUNCIAS
-#clientDenuncias = Client(wsdl_url_denuncias)
+clientDenuncias = Client(wsdl_url_denuncias)
 
 # URL del servicio WSDL - RECETARIOS
 wsdl_url_recetarios = 'http://localhost:8088/modrecetarios/recetarios.wsdl'
@@ -329,6 +329,8 @@ def resolverDenuncia():
         return redirect('/denuncias')
     
     else:
+
+        mensaje= "No se llego a correr la eliminacion de denuncia"
 
         if flg_eliminar == "1":
             
