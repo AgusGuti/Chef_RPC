@@ -332,13 +332,13 @@ def resolverDenuncia():
 
         mensaje= "No se llego a correr la eliminacion de denuncia"
 
-        if flg_eliminar == "1":
+        if int(flg_eliminar) == 1:
             
             flg_confirm = clientDenuncias.service.resolverDenunciasPorBajaReceta(receta_id)
             
             eliminarReceta(int(receta_id))
 
-            if flg_confirm == "1": 
+            if int(flg_confirm) == 1: 
                 mensaje = "Receta borrada y denuncias resueltas!"
             else:
                 mensaje = "ERROR al resolver las denuncias"
@@ -347,7 +347,7 @@ def resolverDenuncia():
             
             flg_confirm = clientDenuncias.service.resolverDenuncia(id=denuncia_id)
 
-            if flg_confirm == "1":
+            if int(flg_confirm) == 1:
 
                 mensaje = "Denuncia ignorada y resuelta!"
 
