@@ -305,12 +305,11 @@
             <tr>
               <td>{{ recetario.nombre }}</td>
               <td>
-                <div class="btn-group">
-                  <!-- <button class="btn btn-recetas btn-sm"
+                <!-- <div class="btn-group">
+                  <button class="btn btn-recetas btn-sm"
                   data-toggle="modal"
                   data-receta-id="{{ recetario.id}}"
-                  data-target="#modalRecetario{{ recetario.id }}"
-                  onclick="getRecetaPorRecetario('{{ recetario.id }}')">
+                  data-target="#modalRecetario{{ recetario.id }}">
                   <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
                   </button> -->
                  
@@ -440,15 +439,29 @@
         </button>
       </div>
       <div class="modal-body">
-        <!-- Muestra el nombre del recetario -->
-        <p>Nombre del Recetario: {{ recetario.nombre }}</p>
+        
+        <div>
 
-        <!-- Muestra las recetas del recetario -->
-        <h5>Recetas:</h5>
-        <div id="recetasContainer{{ recetario.id }}">
-          <!-- Aquí deberías cargar las recetas dinámicamente -->
+          <input type="hidden" id="receta_id" name="receta_id" value="{{ receta.idReceta }}">
+          <input type="hidden" id="user_id" name="user_id" value="{{ usuario_autenticado }}">
+          
+          <div>
+
+            {% for recetaPorRecetario in recetas_x_recetario %}
+                              
+              <div>
+                <input type="radio" id="motivo_id" name="motivo_id" value="{{ motivo.motivo.id }}" />
+                <label for="Motivo{{ motivo.motivo.id }}">{{ motivo.motivo.motivo }}</label>
+              </div>
+
+            {% endfor %}
+          
+          </div>
         </div>
-      </div>
+
+
+
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>

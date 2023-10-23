@@ -186,7 +186,7 @@ def findAll():
 
 
     print("Greeter client received: " + str(response))    
-    return render_template('storyline.html', recetas=recetas,usuario_autenticado=user_id, motivos= motivos, recetarios= recetarios)
+    return render_template('storyline.html', recetas= recetas, usuario_autenticado= user_id, motivos= motivos, recetarios= recetarios)
 
 
 @receta_blueprint.route("/receta/findById/<int:id>",methods = ['GET'])
@@ -383,9 +383,7 @@ def getRecetarios():
     
     recetarios = clientRecetarios.service.TraerRecetariosPorUsuario(session['user_id'])
     
-
     logger.info(recetarios)
-
 
     if recetarios=="{}":
         flash('Error al intentar traer las recetas por Recetario','danger')
@@ -394,16 +392,13 @@ def getRecetarios():
         return recetarios
 
 
-
 @receta_blueprint.route("/getRecetaPorRecetario/<int:recetario_Id>", methods=['GET'])
 def getRecetaPorRecetario(recetario_Id):
     logger.info("/getRecetaPorRecetario")
 
     recetitaaa = clientRecetarios.service.TraerRecetasPorRecetarios(recetario_Id)
 
-    recetas = []
-
-  
+    recetas = []  
 
     for recetarioReceta in recetitaaa:
         recetas_x_recetario = findById(recetarioReceta.recetaId)
@@ -415,12 +410,31 @@ def getRecetaPorRecetario(recetario_Id):
 
     return response_data
 
+#################################################################################################
+#################################################################################################
 
+@receta_blueprint.route("/getTodoDelRecetario", methods=['GET'])
+def getTodoDelRecetario():
+    logger.info("/getTodoDelRecetario")
 
+    recetarios = clientRecetarios.service.TraerRecetarios()
 
+    recetas = []  
 
+    for recetaRecetario in recetarios:
+        recetas_x_recetario = findById(recetaRecetario.recetaId)
+        if recetas_x_recetario:
+            recetas.append({
+                'recetario_id' : recetaRecetario.id,
+                'receta': recetas_x_recetario
+                })
 
+    logger.info(recetas)
 
+    return recetas
+
+#################################################################################################
+#################################################################################################
 
 
 @receta_blueprint.route("/misRecetarios",methods=['GET'])
@@ -428,15 +442,14 @@ def findRecetarios():
     logger.info("/misRecetarios")
     recetarios = getRecetarios()
     
+    recetas_x_recetario = getTodoDelRecetario()
 
 
     if recetarios=="{}":
         flash('Error al intentar traer las recetas por Recetario','danger')
         return redirect('/storyline')
     else:
-        return render_template('recetarios.html', recetarios= recetarios)
-    
-
+        return render_template('recetarios.html', recetarios= recetarios, recetas_x_recetario= recetas_x_recetario) 
 
 
 
