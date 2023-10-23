@@ -137,33 +137,22 @@ def guardar_como_receta(borrador_id):
     # Verificar si el borrador está completo
     if es_borrador_completo(borrador_data):
         guardar_receta_response = requests.post('http://' + os.getenv("SERVER-REST-CARGAMASIVA") + f'/api/guardar_como_receta/{borrador_id}', json=borrador_data)
-
-        if guardar_receta_response.status_code == 200:
-            # Si la receta se guarda correctamente, elimina el borrador
-            borrador_delete_response = requests.delete('http://' + os.getenv("SERVER-REST-CARGAMASIVA") + '/api/borradores/' + borrador_id)
-
-            if borrador_delete_response.status_code == 200:
-                return jsonify({'mensaje': 'Borrador guardado como receta y eliminado correctamente'})
-            else:
-                mensaje_error = "No se pudo eliminar el borrador. Por favor, intentalo de nuevo mas tarde."
-                return jsonify({'error': mensaje_error}), 500
-        else:
-            mensaje_error = "No se pudo guardar el borrador como receta. Por favor, intentalo de nuevo mas tarde."
-            return jsonify({'error': mensaje_error}), 500
+        return jsonify({'mensaje': 'Borrador guardado como receta y eliminado correctamente'})
     else:
         mensaje_incompleto = "El borrador no esta completo. Por favor, completa todos los campos obligatorios."
         return jsonify({'error': mensaje_incompleto}), 400
 
 
 def es_borrador_completo(borrador_data):
-    required_fields = ['titulo_receta', 'descripcion', 'categoria_id', 'tiempo_preparacion', 'pasos']
+    required_fields = ['titulo_receta', 'descripcion', 'categoria_id', 'tiempo_preparacion', 'foto1', 'pasos']
     
-    for field in required_fields:
-        if all(item.get(field) is None for item in borrador_data):
-            logger.info(f"Falta el campo requerido: {field}")
-            return False
-    
-    # Si llega a este punto, todos los campos requeridos están presentes
+    for item in borrador_data:
+        for field in required_fields:
+            if item.get(field) is None:
+                logger.info(f"Falta el campo requerido: {field}")
+                return False
+
+    # Si llega a este punto, todos los campos requeridos están presentes en todos los elementos
     return True
 
 

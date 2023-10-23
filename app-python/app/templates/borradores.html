@@ -430,7 +430,7 @@
         function handleGuardarRecetaClick() {
             var button = $(this);
             var borradorId = button.data("borrador-id");
-    
+
             // Realiza la solicitud POST para guardar el borrador como receta
             $.ajax({
                 url: "/api/guardar_como_receta/" + borradorId,
@@ -438,7 +438,8 @@
                 success: function (data) {
                     if (data.mensaje) {
                         alert(data.mensaje);
-                        location.reload(); // Actualiza la página después de guardar la receta
+                        // Recarga la página después de guardar la receta
+                        location.reload();
                     } else if (data.error) {
                         alert(data.error);
                     } else {
@@ -450,9 +451,10 @@
                 }
             });
         }
-    
+
         // Vincula el evento clic al botón con el id "guardarComoRecetaBtn" (desvincula los demás botones)
         $('#guardarComoRecetaBtn').off('click', handleGuardarRecetaClick).on('click', handleGuardarRecetaClick);
+
     </script>
     
     <script>
