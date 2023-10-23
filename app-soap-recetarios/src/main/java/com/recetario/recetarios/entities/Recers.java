@@ -1,8 +1,13 @@
 package com.recetario.recetarios.entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 
@@ -13,7 +18,7 @@ public class Recers {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="recetarioId", nullable = false)
+    @Column(name = "recetarioId")
     private int recetarioId;
 
     @Column(name="recetaId", nullable = false)
@@ -24,13 +29,11 @@ public class Recers {
     public Recers() {
     }
 
-    public Recers(int id, int recetarioId, int recetaId) {
-        this.id = id;
+    public Recers(int recetaId, int recetarioId) {
         this.recetarioId = recetarioId;
         this.recetaId = recetaId;
     }
 
-    // Getter y Setter para 'id'
     public int getId() {
         return id;
     }
@@ -39,7 +42,6 @@ public class Recers {
         this.id = id;
     }
 
-    // Getter y Setter para 'recetarioId'
     public int getRecetarioId() {
         return recetarioId;
     }
@@ -48,7 +50,6 @@ public class Recers {
         this.recetarioId = recetarioId;
     }
 
-    // Getter y Setter para 'recetaId'
     public int getRecetaId() {
         return recetaId;
     }
@@ -59,8 +60,8 @@ public class Recers {
 
     @Override
     public String toString() {
-        return "ReceRs [id=" + id + ", recetarioId=" + recetarioId + ", recetaId=" + recetaId + "]";
+        return "Recers [id=" + id + ", recetarioId=" + recetarioId + ", recetaId=" + recetaId + "]";
     }
-    
+
     
 }

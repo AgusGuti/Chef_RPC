@@ -40,7 +40,14 @@ from kafka import KafkaConsumer
 wsdl_url_denuncias = 'http://localhost:8085/moddenuncias/denuncias.wsdl'
 
 # Crear un cliente para el servicio SOAP - DENUNCIAS
-clientDenuncias = Client(wsdl_url_denuncias)
+#clientDenuncias = Client(wsdl_url_denuncias)
+
+# URL del servicio WSDL - RECETARIOS
+wsdl_url_recetarios = 'http://localhost:8088/modrecetarios/recetarios.wsdl'
+
+# Crear un cliente para el servicio SOAP - RECETARIOS
+clientRecetarios = Client(wsdl_url_recetarios)
+
 
 
 
@@ -354,3 +361,60 @@ def getMotivos():
     
     
 ################  FIN Metodos de Modulo DENUNCIAS  ##################
+
+@receta_blueprint.route("/misRecetarios",methods=['GET'])
+def findRecetarios():
+    logger.info("/misRecetarios")
+    
+    recetarios = clientRecetarios.service.TraerRecetariosPorUsuario(session['user_id'])
+    
+
+    recetarios_recetas = []
+
+    for recetario in recetarios:
+        recers = clientRecetarios.service.TraerRecetasPorRecetarios(recetario.id)
+        if recetario:
+            # Si hay recetas coincidentes, agregar el recetario
+            recetarios_recetas.append({
+                'recetario': recetario
+            })
+        for recetarioReceta in recers:
+            # Traigo Receta por ID
+            with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+                stub = RecetasServiceStub(channel)
+                recetas_x_recetario = stub.FindById(Receta(idReceta=recetarioReceta.recetaId))
+            if recetas_x_recetario:
+                # Si hay recetas coincidentes, agregar el recetario
+                recetario_data = {
+                    'receta': recetas_x_recetario
+                }
+                recetarios_recetas.append(recetario_data)
+            
+
+    logger.info(recetarios)
+    logger.info(recetarios_recetas)
+
+
+    if recetarios_recetas=="{}":
+        flash('Error al intentar traer las recetas por Recetario','danger')
+        return redirect('/storyline')
+    else:
+        return render_template('recetarios.html', recetarios= recetarios)
+    
+
+
+@receta_blueprint.route("/agregarRecetario/<string:nombreRecetario>", methods=['GET'])
+def addRecetario(nombreRecetario):
+    logger.info("/agregarRecetario")
+
+    nombre_recetario = nombreRecetario
+    
+    if not isinstance(session['user_id'], int) and not isinstance(nombre_recetario, str):
+        flash('Error al intentar guardar el recetario', 'danger')
+        return redirect('/storyline')
+    else:
+        clientRecetarios.service.agregarRecetario(nombre=nombre_recetario, usuarioId=session['user_id'])
+
+        flash('Recetario agregado', 'message')
+        return redirect('/misRecetarios')
+
