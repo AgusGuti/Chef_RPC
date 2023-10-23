@@ -1,14 +1,12 @@
 package com.chefencasa.app.service;
 
-
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +18,15 @@ import org.springframework.kafka.support.converter.StringJsonMessageConverter;
 
 import com.chefencasa.app.entities.Receta;
 import com.chefencasa.app.entities.Receta;
+import com.chefencasa.app.entities.Comentario;
+import com.chefencasa.app.entities.Favorito;
 import com.chefencasa.app.entities.Ingrediente;
+import com.chefencasa.app.entities.PopularidadReceta;
 import com.chefencasa.app.repository.CategoriaRepository;
+import com.chefencasa.app.repository.ComentarioRepository;
+import com.chefencasa.app.repository.FavoritoRepository;
 import com.chefencasa.app.repository.IngredienteRepository;
+import com.chefencasa.app.repository.PopularidadRecetaRepository;
 import com.chefencasa.app.repository.RecetaRepository;
 import com.chefencasa.app.repository.UserRepository;
 import com.chefencasa.model.CategoriaProto;
@@ -59,6 +63,18 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 	@Autowired
 	@Qualifier("ingredienteRepository")
 	private IngredienteRepository ingredienteRepository;
+
+	@Autowired
+	@Qualifier("favoritoRepository")
+	private FavoritoRepository favoritoRepository;
+
+	@Autowired
+	@Qualifier("popularidadRecetaRepository")
+	private PopularidadRecetaRepository popularidadRecetaRepository;
+
+	@Autowired
+	@Qualifier("comentarioRepository")
+	private ComentarioRepository comentarioRepository;
 
 	// Inyecta el KafkaTemplate
 	@Autowired
@@ -385,14 +401,91 @@ public class RecetaService extends RecetasServiceGrpc.RecetasServiceImplBase {
 	@Transactional
     public void deleteReceta(RecetaProto.Receta request, StreamObserver<RecetaProto.Receta> responseObserver) {
     
+	try {
+		Receta receta = recetaRepository.findById(request.getIdReceta());
+        logger.info("Receta a eliminar"+ receta);
+	
+		if (receta.getBaja() == "1") {
+			throw new ArithmeticException("La Receta no existe (Ya está bajada)");
+		}
+
         try {
-			Receta receta = recetaRepository.findById(request.getIdReceta());
-            logger.info("Receta a eliminar"+ receta);
-                        
-            recetaRepository.delete(receta);
-            
+		            
+			//Doy baja a Receta
+            receta.setBaja("1");
+
+			recetaRepository.saveAndFlush(receta);
+
+			} catch (Exception e) {
+            logger.error("Error al bajar la Receta", e);
+        }
+
+		// try {
+
+		// 	//Elimino sus favoritos asociados
+		// 	List<Favorito> listFavoritos = favoritoRepository.findAllFavoritosByRecetaId(request.getIdReceta());
+		// 	// favoritoRepository.deleteAllInBatch(listFavoritos);
+
+		// 	Favorito favorito_aux = new Favorito();
+
+		// 	for (Favorito favorito : listFavoritos) {
+				
+		// 		if (favoritoRepository.existsById(favorito.getId())) {
+		// 			favorito_aux= favoritoRepository.findById(favorito.getId()).get();
+		// 			favoritoRepository.delete(favorito_aux);
+		// 		}				
+		// 	}			
+
+		// 	favoritoRepository.flush();
+
+		// 	} catch (Exception e) {
+        //     logger.error("Error al eliminar Receta -> Favoritos", e);
+        // }
+
+
+		try {
+
+			//Elimino su popularidad
+			// popularidadRecetaRepository.deleteAllPopulRecetaByRecetaId(request.getIdReceta());
+			// PopularidadReceta popularidad = popularidadRecetaRepository.findByRecetaId(request.getIdReceta());
+			PopularidadReceta popularidad_aux = popularidadRecetaRepository.findByRecetaId(request.getIdReceta());
+
+			PopularidadReceta popularidad = popularidadRecetaRepository.findById(popularidad_aux.getId());
+
+			popularidadRecetaRepository.delete(popularidad);
+
+			popularidadRecetaRepository.flush();
+
 		} catch (Exception e) {
-            logger.error("Error al eliminar Receta", e);
+            logger.error("Error al eliminar Receta -> Popularidad", e);
+        }
+
+		try {
+
+			//Elimino sus comentario
+			// comentarioRepository.deleteAllComentarioByRecetaId(request.getIdReceta());
+			List<Comentario> listComentarios = comentarioRepository.findByRecetaRecetaId(request.getIdReceta());
+			// comentarioRepository.deleteAllInBatch(listComentarios);
+            
+			Comentario comentario_aux = new Comentario();
+
+			for (Comentario comentario : listComentarios) {
+				
+				if (comentarioRepository.existsById(comentario.getId())) {
+					comentario_aux= comentarioRepository.findById(comentario.getId()).get();
+					comentarioRepository.delete(comentario_aux);
+				}				
+			}
+			
+			comentarioRepository.flush();
+
+
+		} catch (Exception e) {
+            logger.error("Error al eliminar Receta -> Comentario", e);
+        }
+
+		} catch (Exception f) {
+			logger.error("ERROR la receta no está activa", f);
         }
 
         RecetaProto.Receta a = RecetaProto.Receta.newBuilder()

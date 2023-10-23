@@ -21,13 +21,16 @@ from app.proto.favorito_pb2 import Favorito
 
 from app.proto.receta_pb2_grpc import RecetasServiceStub
 from app.proto.favorito_pb2_grpc import FavoritosServiceStub
+from app.proto.user_pb2_grpc import UsersServiceStub
 
 from logging.config import dictConfig
 from google.protobuf.json_format import MessageToDict, MessageToJson
 from google.protobuf.timestamp_pb2 import Timestamp
 import datetime
 
-from zeep import Client
+from zeep import Client, helpers
+import xml.etree.ElementTree as ET
+import json
 
 
 from kafka import KafkaConsumer
@@ -39,6 +42,11 @@ wsdl_url_denuncias = 'http://localhost:8085/moddenuncias/denuncias.wsdl'
 # Crear un cliente para el servicio SOAP - DENUNCIAS
 #clientDenuncias = Client(wsdl_url_denuncias)
 
+# URL del servicio WSDL - RECETARIOS
+wsdl_url_recetarios = 'http://localhost:8088/modrecetarios/recetarios.wsdl'
+
+# Crear un cliente para el servicio SOAP - RECETARIOS
+clientRecetarios = Client(wsdl_url_recetarios)
 
 
 logger = logging.getLogger(__name__)
@@ -172,8 +180,11 @@ def findAll():
         stub = RecetasServiceStub(channel)
         response = stub.FindAll(Receta()) 
         recetas = response.receta 
+
+    motivos = getMotivos()
+
     print("Greeter client received: " + str(response))    
-    return render_template('storyline.html', recetas=recetas,usuario_autenticado=user_id)
+    return render_template('storyline.html', recetas=recetas,usuario_autenticado=user_id, motivos= motivos)
 
 
 @receta_blueprint.route("/receta/findById/<int:id>",methods = ['GET'])
@@ -213,26 +224,65 @@ def modificarReceta():
         else:
             flash('Receta modificada exitosamente!','success')
             return redirect('/misRecetas')
+        
+@receta_blueprint.route("/eliminarReceta/<int:id>",methods=["POST"])
+def eliminarReceta(id):
+    logger.info("/eliminarReceta %s"+str(id))
+    
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = RecetasServiceStub(channel)
+        response = stub.DeleteReceta(Receta(idReceta= int(id)))
+        print("Greeter client received: " + str(response))    
+        receta={"receta":MessageToJson(response)}
+
+    return receta
+
+
+###################  Metodos de Modulo DENUNCIAS  ###################
 
 
 @receta_blueprint.route("/denuncias",methods=['GET'])
 def findDenunciasAbiertas():
     logger.info("/denuncias")
-
-    inst_denuncia = Denuncia()
-    inst_motivo = Motivo()
-
+    
     denuncias_abiertas = clientDenuncias.service.getUnresolved()
-    motivos = clientDenuncias.service.getMotivos()
+
+    logger.info(denuncias_abiertas)
+
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = RecetasServiceStub(channel)
+        response = stub.FindAll(Receta()) 
+        recetas = response.receta
+
+    denuncia_recetas = []
+
+    for denuncia in denuncias_abiertas:
+        # Traigo Receta por ID
+        with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+            stub = RecetasServiceStub(channel)
+            recetas_x_denuncia = stub.FindById(Receta(idReceta= int(denuncia.receta_id)))
+        
+
+        with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+            stub = UsersServiceStub(channel)
+            user_x_denuncia = stub.FindUserById(User(id= int(denuncia.user_id)))
+                
+        if recetas_x_denuncia and user_x_denuncia:
+            # Si hay recetas coincidentes, agregar la denuncia y las recetas a la lista denuncia_recetas
+            denuncia_recetas.append({
+                'denuncia': denuncia,
+                'receta': recetas_x_denuncia,
+                'user' : user_x_denuncia
+            })
+
+    logger.info(denuncia_recetas)
+
 
     if denuncias_abiertas=="{}":
         flash('Error al intentar traer Denuncias','danger')
         return redirect('/storyline')
-    elif motivos=="{}":
-        flash('Error al intentar traer Motivos','danger')
-        return redirect('/storyline')
     else:
-        return render_template('denuncias.html', denuncias_abiertas=denuncias_abiertas, motivos=motivos)
+        return render_template('denuncias.html', denuncia_recetas= denuncia_recetas)
     
 
 @receta_blueprint.route("/addDenuncia",methods=['POST'])
@@ -242,11 +292,140 @@ def addDenuncia():
     recetaId = int(request.form["receta_id"])
     motivoId = int(request.form["motivo_id"])
     
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+            stub = RecetasServiceStub(channel)
+            receta_denunciada = stub.FindById(Receta(idReceta= recetaId))
 
-    clientDenuncias.service.addDenuncia(user_id=session['user_id'], receta_id= recetaId, motivo_id= motivoId)
-
+    
     if not isinstance(session['user_id'], int) and not isinstance(recetaId, int) and not isinstance(motivoId, int):
-        flash('Error al intentar guardar Denuncia','danger')
+        flash(f'Error al intentar guardar Denuncia de receta "{receta_denunciada.tituloReceta}"', 'danger')
         return redirect('/storyline')
     else:
-        return render_template('denuncias.html', denuncias_abiertas=denuncias_abiertas, motivos=motivos)
+
+        clientDenuncias.service.addDenuncia(user_id=session['user_id'], receta_id= recetaId, motivo_id= motivoId)
+
+        flash(f'Receta "{receta_denunciada.tituloReceta}" denunciada!', 'message')
+        return redirect('/storyline')
+    
+
+    
+@receta_blueprint.route("/resolverDenuncia",methods=['POST'])
+def resolverDenuncia():
+    logger.info("/resolverDenuncia")
+    
+    denuncia_id = request.form["denuncia_id"]
+    receta_id = request.form["receta_id"]
+    flg_eliminar = request.form["flg_eliminar"]
+
+    logger.info("Resolviendo Denuncia: %s", denuncia_id)
+    logger.info("Receta Denunciada: %s", receta_id)
+    logger.info("FLG Denuncia: %s", flg_eliminar)
+
+    
+    if int(denuncia_id) <= 0:
+        flash('Error al intentar resolver Denuncia','danger')
+        return redirect('/denuncias')
+    
+    else:
+
+        if flg_eliminar == "1":
+            
+            flg_confirm = clientDenuncias.service.resolverDenunciasPorBajaReceta(receta_id)
+            
+            eliminarReceta(int(receta_id))
+
+            if flg_confirm == "1": 
+                mensaje = "Receta borrada y denuncias resueltas!"
+            else:
+                mensaje = "ERROR al resolver las denuncias"
+
+        else:
+            
+            flg_confirm = clientDenuncias.service.resolverDenuncia(id=denuncia_id)
+
+            if flg_confirm == "1":
+
+                mensaje = "Denuncia ignorada y resuelta!"
+
+        flash(mensaje,'message')
+        return redirect('/denuncias')
+    
+    
+@receta_blueprint.route("/getMotivos",methods=['GET'])
+def getMotivos():
+    logger.info("/getMotivos")
+    
+    motivos_crudo = clientDenuncias.service.getMotivos()
+
+    motivos = []
+
+    for motivo in motivos_crudo:
+        motivos.append({
+                    'motivo': motivo
+                })
+    
+    if motivos=="{}":
+        flash('Error al intentar traer Motivos','danger')
+        return redirect('/storyline')
+    else:                
+        return  motivos
+    
+    
+################  FIN Metodos de Modulo DENUNCIAS  ##################
+
+@receta_blueprint.route("/misRecetarios",methods=['GET'])
+def findRecetarios():
+    logger.info("/misRecetarios")
+    
+    recetarios = clientRecetarios.service.TraerRecetariosPorUsuario(session['user_id'])
+    
+
+    recetarios_recetas = []
+
+    for recetario in recetarios:
+        recers = clientRecetarios.service.TraerRecetasPorRecetarios(recetario.id)
+        if recetario:
+            # Si hay recetas coincidentes, agregar el recetario
+            recetarios_recetas.append({
+                'recetario': recetario
+            })
+        for recetarioReceta in recers:
+            # Traigo Receta por ID
+            with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+                stub = RecetasServiceStub(channel)
+                recetas_x_recetario = stub.FindById(Receta(idReceta=recetarioReceta.recetaId))
+            if recetas_x_recetario:
+                # Si hay recetas coincidentes, agregar el recetario
+                recetario_data = {
+                    'receta': recetas_x_recetario
+                }
+                recetarios_recetas.append(recetario_data)
+            
+
+    logger.info(recetarios)
+    logger.info(recetarios_recetas)
+
+
+    if recetarios_recetas=="{}":
+        flash('Error al intentar traer las recetas por Recetario','danger')
+        return redirect('/storyline')
+    else:
+        return render_template('recetarios.html', recetarios= recetarios)
+    
+
+
+@receta_blueprint.route("/agregarRecetario/<string:nombreRecetario>", methods=['GET'])
+def addRecetario(nombreRecetario):
+    logger.info("/agregarRecetario")
+
+    nombre_recetario = nombreRecetario
+    
+    if not isinstance(session['user_id'], int) and not isinstance(nombre_recetario, str):
+        flash('Error al intentar guardar el recetario', 'danger')
+        return redirect('/storyline')
+    else:
+        clientRecetarios.service.agregarRecetario(nombre=nombre_recetario, usuarioId=session['user_id'])
+
+        flash('Recetario agregado', 'message')
+        return redirect('/misRecetarios')
+

@@ -13,6 +13,7 @@ service UsersService {
   rpc ValidarCredenciales(User) returns (User) {}
   rpc TraerUser(User) returns (User) {}
   rpc FindAll(google.protobuf.Empty) returns (Users) {}
+  rpc FindUserById(User) returns (User) {}
 }
 
 message Users {

@@ -1,14 +1,4 @@
 
-SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE chefencasa.categoria;
-TRUNCATE chefencasa.favorito;
-TRUNCATE chefencasa.ingrediente;
-TRUNCATE chefencasa.receta;
-TRUNCATE chefencasa.receta_ingredientes;
-TRUNCATE chefencasa.seguido;
-TRUNCATE chefencasa.user;
-SET FOREIGN_KEY_CHECKS = 1;
-
 -- -----------------------------------------------------
 -- Table chefencasa.categoria
 -- -----------------------------------------------------
@@ -279,7 +269,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 /*
 SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE chefencasa.seguido;
+TRUNCATE chefencasa.seguido;id
 SET FOREIGN_KEY_CHECKS = 1;
 */
 

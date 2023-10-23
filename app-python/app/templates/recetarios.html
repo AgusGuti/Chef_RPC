@@ -71,7 +71,6 @@
     .modal.show .modal-body {
       display: block;
     }
-
   </style>
 </head>
 <body onload="inicio();"  class="h-100">
@@ -83,6 +82,7 @@
 
     function inicio() {
       cargarIngredientesYReceta(recetaId);
+      
     }
 
     function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
@@ -134,28 +134,58 @@
       };
       xhr.send();
     }
-    
-    function resolverDenuncia(denuncia_id,receta_id, flg_eliminar) {
+
+
+      console.log("cargarMotivo function called");
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", "/resolverDenuncia", true);
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.open("GET", "/getMotivos", true);
     
-      var data = "denuncia_id="+denuncia_id + "&receta_id="+receta_id + "&flg_eliminar="+flg_eliminar;
+      // Define motivosSelect para seleccionar el elemento HTML
+      var motivosSelect = document.getElementById("motivos");
     
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
-            console.log("Response Text: " + xhr.responseText);
-            var response = JSON.parse(xhr.responseText);          
+            var response = JSON.parse(xhr.responseText);
+            var motivos = response.motivo;
+    
+            console.log("Respuesta del servidor:", motivos);
+    
+            if (Array.isArray(motivos)) {
+              motivosSelect.innerHTML = ""; // Limpia el contenido actual
+    
+              var motivosSet = new Set(motivoSeleccionado);
+    
+              motivos.forEach(function (motivo) {
+                var option = document.createElement("option");
+                option.value = motivo.id;
+                option.text = motivo.motivo;
+    
+                // Verifica si el motivo actual está en el conjunto de motivos seleccionados
+                if (motivosSet.has(motivo.id)) {
+                  option.selected = true;
+                }
+    
+                motivosSelect.appendChild(option);
+              });
+    
+              // Asegúrate de que el elemento select permita la selección múltiple
+              motivosSelect.setAttribute("multiple", "multiple");
+            } else {
+              console.error(
+                "La respuesta del servidor no contiene una lista de motivos válida:",
+                response
+              );
+            }
           } else {
-            console.error("ERROR resolviendo denuncia", xhr.status);
+            console.error("Error al cargar motivos:", xhr.status);
           }
         }
       };
-    
-      xhr.send(data);
+      xhr.send();
     }
- 
+
+    
     window.onload = inicio;
 
   </script>
@@ -245,7 +275,7 @@
               {% endwith %}
             </div>
             <div class="col-sm-8">
-              <h2 style="margin-bottom: 20px;"><b>Denuncias</b></h2>
+              <h2 style="margin-bottom: 20px;"><b>Recetarios</b></h2>
             </div>
         </div>
       </div>
@@ -253,166 +283,54 @@
         <table id="example" class="table table-striped" style="width:100%">
           <thead>
             <tr>
-              <th>Nro Denuncia</th>
-              <th>Denunciado por</th>
-              <th>Motivo</th>
-              <th>Nombre de Receta</th>
-              <th>Preview Receta</th>
+              <th>Nombre Recetario</th>
+              <th style="display:none;">Categoría</th> <!-- Columna de Categoría oculta -->
+              <th style="display:none;">Ingredientes</th> <!-- Columna de Ingredientes oculta -->
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {% for denuncia_receta in denuncia_recetas %}
+            {% for recetario in recetarios %}
             <tr>
-              <td>{{ denuncia_receta.denuncia.id }}</td>
-              <td>{{ denuncia_receta.user.nombre }} {{ denuncia_receta.user.apellido }}</td>
-              <td>{{ denuncia_receta.denuncia.motivo_id.motivo }}</td>              
-              <td>{{ denuncia_receta.receta.tituloReceta }}</td>
-              <td>
-                <img
-                  src="{{ denuncia_receta.receta.foto1 }}"
-                  alt="{{ denuncia_receta.receta.tituloReceta }}"
-                  class="miniatura"
-                  data-toggle="modal"
-                  data-target="#modalReceta{{ denuncia_receta.receta.idReceta }}"
-                >
-              </td>
+              <td>{{ recetario.nombre }}</td>
               <td>
                 <div class="btn-group">
-
-                <button class="btn btn-recetas btn-sm"
+                  <button class="btn btn-recetas btn-sm"
                   data-toggle="modal"
-                  data-receta-id="{{ denuncia_receta.denuncia.id }}"
-                  data-target="#modalReceta{{ denuncia_receta.denuncia.id }}">
+                  data-receta-id="{{ recetario.id}}"
+                  data-target="#modalReceta{{ recetario.id }}">
                   <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
+                  </button>
+                  {% if recetario.usuario_id != usuario_autenticado %}
+                    &nbsp; 
+                    <button class="btn btn-recetas btn-sm" id="favoritoButton_{{ recetario.id }}"
+                      data-toggle="modal" data-target="modalFavorito" onclick="addFavorito({{ recetario.id }})"
+                      data-receta-id="{{ recetario.id }}">
+                      <i class="fa-solid fa-heart" id="favoritoIcon_{{ recetario.id }}" style="color: #ffffff;"></i>
+                    </button>
+                  {% endif %}
+                &nbsp; 
+                <button class="btn btn-recetas btn-sm" data-toggle="modal" data-target="#modalUsuario{{ recetario.usuario_id }}">
+                  <i class="fa-solid fa-user-plus"></i>               
                 </button>
-                  
-                &nbsp; <!--espacio en blanco-->
-                <button class="btn btn-recetas btn-sm" data-toggle="modal" 
-                  data-denuncia-id="{{ denuncia_receta.denuncia.id }}"
-                  data-target="#modalDecision{{ denuncia_receta.denuncia.id }}">
-                  <i class="fa fa-gavel" style="color: #e7723b;"></i>
-                </button>                
-                             
+                &nbsp; 
+                <button class="btn btn-recetas btn-sm" onclick="mostrarComentarios('{{ recetario.id }}')">
+                  <i class="fa-solid fa-message" style="color: #ffffff;"></i>
+                </button>
+                &nbsp; 
+                <button class="btn btn-recetas btn-sm" onclick="mostrarPuntaje('{{ recetario.id }}')">
+                  <i class="fa-solid fa-star" style="color: #ffffff;"></i>
+                </button>                               
               </td>
             </tr>
           {% endfor %}
-          </tbody>
+          </tbody> 
         </table>
         {% endblock %}
       </div>
-  </div>
-
-
-
-
-{% for denuncia_receta in denuncia_recetas %}
-
-<!-- Modal para el detalle de las recetas -->
-
-  <div
-    class="modal fade"
-    id="modalReceta{{ denuncia_receta.denuncia.id }}"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="modalReceta{{ denuncia_receta.denuncia.id }}Label"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalReceta{{ denuncia_receta.denuncia.id }}Label">{{ denuncia_receta.receta.tituloReceta }}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          {% if denuncia_receta.receta.foto1 is not none and denuncia_receta.receta.foto1 != '' %}
-            <img src="{{ denuncia_receta.receta.foto1 }}" alt="{{ denuncia_receta.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
-          {% endif %}
-          {% if denuncia_receta.receta.foto2 is not none and denuncia_receta.receta.foto2 != '' %}
-            <img src="{{ denuncia_receta.receta.foto2 }}" alt="{{ denuncia_receta.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
-          {% endif %}
-          {% if denuncia_receta.receta.foto3 is not none and denuncia_receta.receta.foto3 != '' %}
-            <img src="{{ denuncia_receta.receta.foto3 }}" alt="{{ denuncia_receta.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
-          {% endif %}
-          {% if denuncia_receta.receta.foto4 is not none and denuncia_receta.receta.foto4 != '' %}
-            <img src="{{ denuncia_receta.receta.foto4 }}" alt="{{ denuncia_receta.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
-          {% endif %}
-          {% if denuncia_receta.receta.foto5 is not none and denuncia_receta.receta.foto5 != '' %}
-            <img src="{{ denuncia_receta.receta.foto5 }}" alt="{{ denuncia_receta.receta.tituloReceta }}" width="200" height="150" class="detalle-imagen">
-          {% endif %}
-          <p>
-          <p>Categoria: {{ denuncia_receta.receta.categoria.categoria }}</p>
-          <p>Descripcion: {{ denuncia_receta.receta.descripcion }}</p>
-          <p>Ingredientes:
-            {% for ingrediente in denuncia_receta.receta.ingredientes %}
-              {{ ingrediente.nombre }}
-              {% if not loop.last %}, {% endif %}
-            {% endfor %}
-          </p>
-          <p>Pasos de preparación: {{ denuncia_receta.receta.pasos }}</p>
-          
-          
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
     </div>
   </div>
-
-
-  <!-- Modal para la decision de denuncia -->
-  
-  <div
-    class="modal fade"
-    id="modalDecision{{ denuncia_receta.denuncia.id }}"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="modalDecision{{ denuncia_receta.denuncia.id }}Label"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalDecision{{ denuncia_receta.denuncia.id }}Label">Decision sobre la denuncia de Receta: {{ denuncia_receta.receta.tituloReceta }}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Usted puede elegir Ignorar la denuncia o Eliminar la denuncia {{ denuncia_receta.denuncia.id }}</p>
-
-          <div class="d-flex justify-content-center">
-              <form action="/resolverDenuncia" method="post" id="formDecisionIgnorar{{ denuncia_receta.denuncia.id }}">
-                <input type="hidden" name="receta_id" id="receta_id" value="{{ denuncia_receta.receta.idReceta }}">
-                <input type="hidden" name="denuncia_id" id="denuncia_id" value="{{ denuncia_receta.denuncia.id }}">
-                <input type="hidden" name="flg_eliminar" id="flg_eliminar" value="0">
-                <input type="submit" value="Ignorar">
-              </form>
-
-              &nbsp;&nbsp;&nbsp;&nbsp; 
-
-              <form action="/resolverDenuncia" method="post" id="formDecisionEliminar{{ denuncia_receta.denuncia.id }}">
-                <input type="hidden" name="receta_id" id="receta_id" value="{{ denuncia_receta.receta.idReceta }}">
-                <input type="hidden" name="denuncia_id" id="denuncia_id" value="{{ denuncia_receta.denuncia.id }}">
-                <input type="hidden" name="flg_eliminar" id="flg_eliminar" value="1">
-                <input type="submit" value="ELIMINAR">
-              </form>
-                
-              
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-{% endfor %}
+</div>
 
   
   </body>

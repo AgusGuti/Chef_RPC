@@ -114,5 +114,23 @@ public class UserService extends UsersServiceGrpc.UsersServiceImplBase {
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void findUserById(UserProto.User request,StreamObserver<UserProto.User> responseObserver) {
+
+        User user =usuarioRepository.findById(request.getId());
+
+        UserProto.User a = UserProto.User.newBuilder()
+                    .setId(user.getId())
+                    .setNombre(user.getNombre())
+                    .setApellido(user.getApellido())
+                    .setFotoPerfil(user.getFotoPerfil())
+                    .setModerador(user.getModerador())
+                    .build();
+
+        responseObserver.onNext(a);
+        responseObserver.onCompleted();
+        
+    }
+
 }
 
