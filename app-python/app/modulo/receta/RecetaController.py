@@ -40,7 +40,7 @@ from kafka import KafkaConsumer
 wsdl_url_denuncias = 'http://localhost:8085/moddenuncias/denuncias.wsdl'
 
 # Crear un cliente para el servicio SOAP - DENUNCIAS
-#clientDenuncias = Client(wsdl_url_denuncias)
+clientDenuncias = Client(wsdl_url_denuncias)
 
 # URL del servicio WSDL - RECETARIOS
 wsdl_url_recetarios = 'http://localhost:8088/modrecetarios/recetarios.wsdl'
@@ -184,9 +184,11 @@ def findAll():
         recetas = response.receta 
 
     motivos = getMotivos()
+    recetarios = getRecetarios()
+
 
     print("Greeter client received: " + str(response))    
-    return render_template('storyline.html', recetas=recetas,usuario_autenticado=user_id, motivos= motivos)
+    return render_template('storyline.html', recetas=recetas,usuario_autenticado=user_id, motivos= motivos, recetarios= recetarios)
 
 
 @receta_blueprint.route("/receta/findById/<int:id>",methods = ['GET'])
@@ -362,9 +364,9 @@ def getMotivos():
     
 ################  FIN Metodos de Modulo DENUNCIAS  ##################
 
-@receta_blueprint.route("/misRecetarios",methods=['GET'])
-def findRecetarios():
-    logger.info("/misRecetarios")
+@receta_blueprint.route("/getRecetarios",methods=['GET'])
+def getRecetarios():
+    logger.info("/getRecetarios")
     
     recetarios = clientRecetarios.service.TraerRecetariosPorUsuario(session['user_id'])
     
@@ -399,6 +401,23 @@ def findRecetarios():
         flash('Error al intentar traer las recetas por Recetario','danger')
         return redirect('/storyline')
     else:
+        return recetarios
+
+
+
+
+
+
+@receta_blueprint.route("/misRecetarios",methods=['GET'])
+def findRecetarios():
+    logger.info("/misRecetarios")
+    recetarios = getRecetarios()
+
+
+    if recetarios=="{}":
+        flash('Error al intentar traer las recetas por Recetario','danger')
+        return redirect('/storyline')
+    else:
         return render_template('recetarios.html', recetarios= recetarios)
     
 
@@ -429,4 +448,18 @@ def deleteRecetario():
 
     flash(mensaje_recibido , 'message')
     return redirect('/misRecetarios')
+
+
+@receta_blueprint.route("/agregarEnRecetario",methods=['POST'])
+def AddRecetaToRecetarios():
+    logger.info("/agregarEnRecetario")
+    
+    id_receta = int(request.form["receta_id"])
+    id_recetario = int(request.form["recetario_id"])
+
+    mensaje_recibido = clientRecetarios.service.AgregarRecetasEnRecetario(id_receta,id_recetario)
+    
+
+    flash(mensaje_recibido , 'message')
+    return redirect('/storyline')
 
