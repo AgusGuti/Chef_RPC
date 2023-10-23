@@ -403,11 +403,11 @@ def findRecetarios():
     
 
 
-@receta_blueprint.route("/agregarRecetario/<string:nombreRecetario>", methods=['GET'])
-def addRecetario(nombreRecetario):
+@receta_blueprint.route("/agregarRecetario", methods=['POST'])
+def addRecetario():
     logger.info("/agregarRecetario")
 
-    nombre_recetario = nombreRecetario
+    nombre_recetario = str(request.form["nombre_recetario"])
     
     if not isinstance(session['user_id'], int) and not isinstance(nombre_recetario, str):
         flash('Error al intentar guardar el recetario', 'danger')
@@ -417,4 +417,16 @@ def addRecetario(nombreRecetario):
 
         flash('Recetario agregado', 'message')
         return redirect('/misRecetarios')
+
+
+@receta_blueprint.route("/elimarRecetario", methods=['POST'])
+def deleteRecetario():
+    logger.info("/elimarRecetario")
+
+    id_recetario = int(request.form["id_recetario"])
+    
+    mensaje_recibido = clientRecetarios.service.EliminarRecetario(id_recetario)
+
+    flash(mensaje_recibido , 'message')
+    return redirect('/misRecetarios')
 

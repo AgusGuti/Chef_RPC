@@ -68,7 +68,7 @@
     <xs:element name="EliminarRecetarioRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="usuarioId" type="xs:int"/>
+                <xs:element name="recetarioId" type="xs:int"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

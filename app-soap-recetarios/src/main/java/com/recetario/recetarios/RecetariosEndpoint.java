@@ -99,8 +99,8 @@ public class RecetariosEndpoint {
         response.setConfirmacion("no se encuentra el recetario a Eliminar");
 
         try {
-            recetarioService.deleteRecetario(request.getUsuarioId());
-            recersService.eliminarRecetarios(request.getUsuarioId());
+            recetarioService.deleteRecetario(request.getRecetarioId());
+            recersService.eliminarRecetarios(request.getRecetarioId());
             response.setConfirmacion("recetario eliminado");
         }catch(Exception e) {
 			System.out.println("ERROR al eliminar el recetario:\n\n" + e.getMessage());

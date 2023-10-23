@@ -277,6 +277,16 @@
             <div class="col-sm-8">
               <h2 style="margin-bottom: 20px;"><b>Recetarios</b></h2>
             </div>
+            <div class="btn-container">
+              <button
+                type="button"
+                class="btn btn-recetas"
+                data-toggle="modal"
+                data-target="#modalAgregarRecetario"
+              >
+                Agregar Recetario
+              </button>
+            </div>
         </div>
       </div>
         {% block content %}
@@ -301,25 +311,13 @@
                   data-target="#modalReceta{{ recetario.id }}">
                   <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
                   </button>
-                  {% if recetario.usuario_id != usuario_autenticado %}
-                    &nbsp; 
-                    <button class="btn btn-recetas btn-sm" id="favoritoButton_{{ recetario.id }}"
-                      data-toggle="modal" data-target="modalFavorito" onclick="addFavorito({{ recetario.id }})"
-                      data-receta-id="{{ recetario.id }}">
-                      <i class="fa-solid fa-heart" id="favoritoIcon_{{ recetario.id }}" style="color: #ffffff;"></i>
-                    </button>
-                  {% endif %}
+                 
                 &nbsp; 
-                <button class="btn btn-recetas btn-sm" data-toggle="modal" data-target="#modalUsuario{{ recetario.usuario_id }}">
-                  <i class="fa-solid fa-user-plus"></i>               
-                </button>
-                &nbsp; 
-                <button class="btn btn-recetas btn-sm" onclick="mostrarComentarios('{{ recetario.id }}')">
-                  <i class="fa-solid fa-message" style="color: #ffffff;"></i>
-                </button>
-                &nbsp; 
-                <button class="btn btn-recetas btn-sm" onclick="mostrarPuntaje('{{ recetario.id }}')">
-                  <i class="fa-solid fa-star" style="color: #ffffff;"></i>
+                <button class="btn btn-recetas btn-sm" 
+                  data-toggle="modal"
+                  data-target="#modalBorrarRecetario{{ recetario.id }}">
+                  <i class="fa fa-trash" style="color: #ecc720;"></i>
+                  
                 </button>                               
               </td>
             </tr>
@@ -332,6 +330,101 @@
   </div>
 </div>
 
-  
+   <!-- Modal para agregar una recetario -->
+   <div
+   class="modal fade"
+   id="modalAgregarRecetario"
+   tabindex="-1"
+   role="dialog"
+   aria-labelledby="modalAgregarRecetarioLabel"
+   aria-hidden="true"
+ >
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <form action="/agregarRecetario" method="post">
+         <!-- Formulario principal -->
+         <div class="modal-header">
+           <h5 class="modal-title" id="modalAgregarRecetarioLabel">Agregar Recetario</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+           <!-- Formulario para agregar un recetario -->
+           <div class="form-group">
+             <label for="user_id"></label>
+             <input
+               type="hidden"
+               id="user_id"
+               name="user_id"
+               value=""
+             >
+           </div>
+           <div class="form-group">
+             <label for="nombre_recetario">Nombre recetario:</label>
+             <input
+               type="text"
+               class="form-control"
+               id="nombre_recetario"
+               name="nombre_recetario"
+               placeholder="Ingrese el nombre del recetario"
+             >
+           </div>
+           
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+           <button type="submit" class="btn btn-recetas">Guardar</button>
+         </div>
+       </form>
+     </div>
+   </div>
+ </div>
+
+ {% for recetario in recetarios %}
+
+  <!-- Modal para eliminar una recetario -->
+  <div
+  class="modal fade"
+  id="modalBorrarRecetario{{ recetario.id }}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modalBorrarRecetario{{ recetario.id }}Label"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form action="/elimarRecetario" method="post">
+        <!-- Formulario principal -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalBorrarRecetario{{ recetario.id }}Label">Eliminar Recetario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario para eliminar un recetario -->
+          <div class="form-group">
+            <label for="user_id"></label>
+            <input
+              type="hidden"
+              id="id_recetario"
+              name="id_recetario"
+              value="{{ recetario.id }}"
+            >
+          </div>
+          
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn-danger">Aceptar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+ {% endfor %}
   </body>
   </html>
