@@ -3,16 +3,13 @@ package com.chefencasa.app.entities;
 import java.io.Serializable;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,8 +21,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -86,6 +81,9 @@ public class Receta implements Serializable {
 
 	@Column(name = "foto5", nullable = true)
 	private String foto5;
+
+	@Column(name = "baja", nullable = true, length = 1, columnDefinition = "VARCHAR(1) DEFAULT '0'")
+	private String baja;
 	
 	
 	public Receta(User user, Categoria categoria,
@@ -102,6 +100,7 @@ public class Receta implements Serializable {
 		this.foto3 = foto3;
 		this.foto4 = foto4;
 		this.foto5 = foto5;
+		this.baja = "0";
 	}
 
 	public static long getSerialversionuid() {

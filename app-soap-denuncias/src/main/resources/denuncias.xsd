@@ -83,6 +83,22 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
+    <xs:element name="resolverDenunciasPorBajaRecetaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id_receta" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="resolverDenunciasPorBajaRecetaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="confirmacion" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
    
     
 </xs:schema>

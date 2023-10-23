@@ -230,20 +230,14 @@ def modificarReceta():
 @receta_blueprint.route("/eliminarReceta/<int:id>",methods=["POST"])
 def eliminarReceta(id):
     logger.info("/eliminarReceta %s"+str(id))
-    user_id=session['user_id']
     
     with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
         stub = RecetasServiceStub(channel)
-        response = stub.DeleteReceta(Receta(idReceta= id))
+        response = stub.DeleteReceta(Receta(idReceta= int(id)))
         print("Greeter client received: " + str(response))    
         receta={"receta":MessageToJson(response)}
 
-        if receta["receta"]=="{}":
-            flash('Error al eliminar el receta','danger')
-        else:
-            flash('Receta eliminado exitosamente!','success')
-        
-        return redirect('/denuncias')
+    return receta
 
 
 ###################  Metodos de Modulo DENUNCIAS  ###################
@@ -255,18 +249,25 @@ def findDenunciasAbiertas():
     
     denuncias_abiertas = clientDenuncias.service.getUnresolved()
 
+    logger.info(denuncias_abiertas)
+
+    with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+        stub = RecetasServiceStub(channel)
+        response = stub.FindAll(Receta()) 
+        recetas = response.receta
+
     denuncia_recetas = []
 
     for denuncia in denuncias_abiertas:
         # Traigo Receta por ID
         with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
             stub = RecetasServiceStub(channel)
-            recetas_x_denuncia = stub.FindById(Receta(idReceta= denuncia.receta_id))
+            recetas_x_denuncia = stub.FindById(Receta(idReceta= int(denuncia.receta_id)))
         
 
         with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
             stub = UsersServiceStub(channel)
-            user_x_denuncia = stub.FindUserById(User(id= denuncia.user_id))
+            user_x_denuncia = stub.FindUserById(User(id= int(denuncia.user_id)))
                 
         if recetas_x_denuncia and user_x_denuncia:
             # Si hay recetas coincidentes, agregar la denuncia y las recetas a la lista denuncia_recetas
@@ -330,13 +331,25 @@ def resolverDenuncia():
     else:
 
         if flg_eliminar == "1":
-            with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
-                stub = RecetasServiceStub(channel)
-                stub.DeleteReceta(Receta(idReceta= int(receta_id)))
+            
+            flg_confirm = clientDenuncias.service.resolverDenunciasPorBajaReceta(receta_id)
+            
+            eliminarReceta(int(receta_id))
 
-        #clientDenuncias.service.resolverDenuncia(id=denuncia_id)
+            if flg_confirm == "1": 
+                mensaje = "Receta borrada y denuncias resueltas!"
+            else:
+                mensaje = "ERROR al resolver las denuncias"
 
-        flash('Receta resuelta!','message')
+        else:
+            
+            flg_confirm = clientDenuncias.service.resolverDenuncia(id=denuncia_id)
+
+            if flg_confirm == "1":
+
+                mensaje = "Denuncia ignorada y resuelta!"
+
+        flash(mensaje,'message')
         return redirect('/denuncias')
     
     

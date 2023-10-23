@@ -36,7 +36,7 @@ public class Favorito implements Serializable {
     private User user;
 
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
+	@ManyToOne(optional = false)
     @JoinColumn(name = "receta_id", nullable = false)
     private Receta receta;
 
