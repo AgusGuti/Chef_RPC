@@ -112,9 +112,9 @@
                             {% endfor %}
                         </tbody>
                     </table>
-                    <button type="button" class="btn btn-recetas" id="guardarComoRecetaBtn" disabled data-borrador-id="{{ borrador_id }}">
+                    <button type="button" class="btn btn-recetas" id="guardarComoRecetaBtn" data-borrador-id="{{ borrador_id }}">
                         Guardar Receta <i class="fas fa-save ml-auto"></i>
-                    </button>             
+                    </button>
                     {% endfor %}
                 </div>
             </div>
@@ -223,8 +223,6 @@
                 url: "/api/borradores",
                 method: "GET",
                 success: function (data) {
-                    // Agrega un console.log para inspeccionar los datos
-                    console.log(data);
         
                     if (typeof data === "object" && data !== null) {
                         for (var key in data) {
@@ -427,86 +425,41 @@
             });
         });
     </script>
-    
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          const guardarRecetaButtons = document.querySelectorAll(".guardar-receta-btn");
+        // Función para manejar el clic en el botón "Guardar Receta"
+        function handleGuardarRecetaClick() {
+            var button = $(this);
+            var borradorId = button.data("borrador-id");
     
-          // Función para verificar si todos los borradores están completos
-          async function verificarBorradoresCompletos() {
-            const borradoresCompletos = await Promise.all(
-              guardarRecetaButtons.map(async (boton) => {
-                const borradorId = boton.getAttribute("data-borrador-id");
-                const borrador = await obtenerBorradorPorId(borradorId);
-                console.log(`Verificando borrador con ID ${borradorId}:`, borrador);
-                return verificarCamposCompletos(borrador);
-              })
-            );
-    
-            return borradoresCompletos.every((completo) => completo);
-          }
-    
-          // Función para actualizar el estado de todos los botones "Guardar Receta"
-          async function actualizarEstadoBotones() {
-            const todosCompletos = await verificarBorradoresCompletos();
-            console.log("Todos los borradores completos:", todosCompletos);
-    
-            guardarRecetaButtons.forEach((boton) => {
-              boton.disabled = !todosCompletos;
+            // Realiza la solicitud POST para guardar el borrador como receta
+            $.ajax({
+                url: "/api/guardar_como_receta/" + borradorId,
+                type: "POST",
+                success: function (data) {
+                    if (data.mensaje) {
+                        alert(data.mensaje);
+                        location.reload(); // Actualiza la página después de guardar la receta
+                    } else if (data.error) {
+                        alert(data.error);
+                    } else {
+                        alert("Error al guardar la receta.");
+                    }
+                },
+                error: function (error) {
+                    alert("Error al guardar la receta: " + error.responseText);
+                }
             });
-          }
+        }
     
-          // Agregar eventos para los botones "Guardar Receta" de cada borrador
-          guardarRecetaButtons.forEach((boton) => {
-            boton.addEventListener("click", async function () {
-              const borradorId = boton.getAttribute("data-borrador-id");
-              const borrador = await obtenerBorradorPorId(borradorId);
-              console.log(`Haciendo clic en el botón para guardar el borrador con ID ${borradorId}. Borrador:`, borrador);
-    
-              if (verificarCamposCompletos(borrador)) {
-                // Realizar la solicitud POST al servidor Flask para guardar la receta
-                fetch(`/api/guardar_como_receta/${borradorId}`, {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({ borrador_id: borradorId }),
-                })
-                  .then((response) => response.json())
-                  .then((data) => {
-                    // Manejar la respuesta del servidor, por ejemplo, mostrar un mensaje de éxito o error
-                    console.log("Respuesta del servidor al guardar como receta:", data);
-                  })
-                  .catch((error) => {
-                    console.error("Error al guardar como receta:", error);
-                  });
-              } else {
-                // Mostrar un mensaje de error al usuario indicando que los campos requeridos no están llenos
-                console.error("No se pueden guardar los datos como receta. Algunos campos requeridos no están llenos.");
-              }
-            });
-          });
-    
-          // Inicialmente, deshabilita todos los botones de "Guardar Receta"
-          guardarRecetaButtons.forEach((boton) => {
-            boton.addEventListener("click", async function () {
-            console.log("Botón clickeado");
-            boton.disabled = true;
-          });
-    
-          // Actualiza el estado de los botones una vez al cargar la página
-          actualizarEstadoBotones();
-        });
+        // Vincula el evento clic al botón con el id "guardarComoRecetaBtn" (desvincula los demás botones)
+        $('#guardarComoRecetaBtn').off('click', handleGuardarRecetaClick).on('click', handleGuardarRecetaClick);
     </script>
-    
-      
-      
-      
     
     <script>
         $(document).ready(function () {
             $('#table-borradores').DataTable();
         });
     </script>
+    
 </body>
 </html>

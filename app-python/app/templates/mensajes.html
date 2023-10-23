@@ -101,7 +101,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for mensaje in mensajes_recibidos %}
+                        {% for mensaje in mensajes %}
                         <tr>
                             <td>{{ mensaje.asunto }}</td>
                             <td>{{ mensaje.remitente }}</td>
@@ -132,26 +132,36 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="enviarMensajeForm" action="/enviarMensaje" method="POST">
+                    <form id="enviarMensajeForm" action="/mensaje" method="POST">
+                        <!-- Selector de emisor -->
+                        <div class="form-group">
+                            <label for="idEmisor">Emisor:</label>
+                            <select class="form-control" id="idEmisor" name="idEmisor">
+                                <option value="" disabled selected>Seleccione un emisor</option>
+                                {% for usuario in usuarios %}
+                                    <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                         <!-- Selector de destinatario -->
                         <div class="form-group">
-                            <label for "destinatario">Destinatario:</label>
-                            <select class="form-control" id="buscador">
-                                {% for seguido in seguidos %}
-                                <option value="{{ seguido.user.id }}"
-                                    selected="selected">{{ seguido.user.nombre }} {{ seguido.user.apellido }}</option>
+                            <label for="idReceptor">Destinatario:</label>
+                            <select class="form-control" id="idReceptor" name="idReceptor">
+                                <option value="" disabled selected>Seleccione un destinatario</option>
+                                {% for usuario in usuarios %}
+                                    <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
                                 {% endfor %}
                             </select>
                         </div>
                         <!-- Asunto del mensaje -->
                         <div class="form-group">
-                            <label for "asunto">Asunto:</label>
+                            <label for="asunto">Asunto:</label>
                             <input type="text" class="form-control" id="asunto" name="asunto" required>
                         </div>
                         <!-- Mensaje -->
                         <div class="form-group">
-                            <label for="mensaje">Mensaje:</label>
-                            <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required></textarea>
+                            <label for="cuerpo">Mensaje:</label>
+                            <textarea class="form-control" id="cuerpo" name="cuerpo" rows="4" required></textarea>
                         </div>
                     </form>
                 </div>
@@ -169,11 +179,47 @@
     <script src="https://cdn.datatables.net/1.11.6/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        
+   
+    <script>
+        $(document).ready(function() {
+            // Realiza una solicitud GET para obtener la lista de usuarios
+            $.get("/usuario/list", function(data) {
+                if (data.error) {
+                    // Manejar el error si es necesario
+                    console.error("Error al obtener la lista de usuarios:", data.error);
+                } else {
+                    // Llena el selector de destinatarios con los usuarios obtenidos
+                    var idReceptorSelect = $("#idReceptor");
+                    data.forEach(function(usuario) {
+                        idReceptorSelect.append("<option value='" + usuario.id + "'>" + usuario.nombre + "</option>");
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Realiza una solicitud GET para obtener la lista de usuarios (emisores)
+            $.get("/usuario/list", function(data) {
+                if (data.error) {
+                    // Manejar el error si es necesario
+                    console.error("Error al obtener la lista de usuarios (emisores):", data.error);
+                } else {
+                    // Llena el selector de emisores con los usuarios obtenidos
+                    var idEmisorSelect = $("#idEmisor");
+                    data.forEach(function(usuario) {
+                        idEmisorSelect.append("<option value='" + usuario.id + "'>" + usuario.nombre + "</option>");
+                    });
+                }
+            });
+        });
+    </script>
+    
     <script>
         jQuery(document).ready(function ($) {
             $('#example').DataTable();
-            $('#buscador').select2({
+            $('#idReceptor').select2({
                 placeholder: "Seleccione un destinatario",
                 allowClear: true
             });

@@ -38,6 +38,7 @@ def register_blueprints(app):
     from app.modulo.popularidadUser import popularidadUser_blueprint
     from app.modulo.comentario import comentario_blueprint
     from app.modulo.borrador import borrador_blueprint
+    from app.modulo.mensaje import mensaje_blueprint
     app.register_blueprint(user_blueprint)
     app.register_blueprint(receta_blueprint)
     app.register_blueprint(ingrediente_blueprint)
@@ -48,6 +49,8 @@ def register_blueprints(app):
     app.register_blueprint(popularidadUser_blueprint)
     app.register_blueprint(comentario_blueprint)
     app.register_blueprint(borrador_blueprint)
+    app.register_blueprint(mensaje_blueprint)
+
 
     
     
