@@ -182,9 +182,11 @@ def findAll():
         recetas = response.receta 
 
     motivos = getMotivos()
+    recetarios = getRecetarios()
+
 
     print("Greeter client received: " + str(response))    
-    return render_template('storyline.html', recetas=recetas,usuario_autenticado=user_id, motivos= motivos)
+    return render_template('storyline.html', recetas=recetas,usuario_autenticado=user_id, motivos= motivos, recetarios= recetarios)
 
 
 @receta_blueprint.route("/receta/findById/<int:id>",methods = ['GET'])
@@ -375,40 +377,60 @@ def getMotivos():
     
 ################  FIN Metodos de Modulo DENUNCIAS  ##################
 
-@receta_blueprint.route("/misRecetarios",methods=['GET'])
-def findRecetarios():
-    logger.info("/misRecetarios")
+@receta_blueprint.route("/getRecetarios",methods=['GET'])
+def getRecetarios():
+    logger.info("/getRecetarios")
     
     recetarios = clientRecetarios.service.TraerRecetariosPorUsuario(session['user_id'])
     
 
-    recetarios_recetas = []
-
-    for recetario in recetarios:
-        recers = clientRecetarios.service.TraerRecetasPorRecetarios(recetario.id)
-        if recetario:
-            # Si hay recetas coincidentes, agregar el recetario
-            recetarios_recetas.append({
-                'recetario': recetario
-            })
-        for recetarioReceta in recers:
-            # Traigo Receta por ID
-            with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
-                stub = RecetasServiceStub(channel)
-                recetas_x_recetario = stub.FindById(Receta(idReceta=recetarioReceta.recetaId))
-            if recetas_x_recetario:
-                # Si hay recetas coincidentes, agregar el recetario
-                recetario_data = {
-                    'receta': recetas_x_recetario
-                }
-                recetarios_recetas.append(recetario_data)
-            
-
     logger.info(recetarios)
-    logger.info(recetarios_recetas)
 
 
-    if recetarios_recetas=="{}":
+    if recetarios=="{}":
+        flash('Error al intentar traer las recetas por Recetario','danger')
+        return redirect('/storyline')
+    else:
+        return recetarios
+
+
+
+@receta_blueprint.route("/getRecetaPorRecetario/<int:recetario_Id>", methods=['GET'])
+def getRecetaPorRecetario(recetario_Id):
+    logger.info("/getRecetaPorRecetario")
+
+    recetitaaa = clientRecetarios.service.TraerRecetasPorRecetarios(recetario_Id)
+
+    recetas = []
+
+  
+
+    for recetarioReceta in recetitaaa:
+        recetas_x_recetario = findById(recetarioReceta.recetaId)
+        if recetas_x_recetario:
+            recetas.append(recetas_x_recetario)
+
+    logger.info(recetas)
+    response_data = json.dumps({"recetas": recetas})
+
+    return response_data
+
+
+
+
+
+
+
+
+
+@receta_blueprint.route("/misRecetarios",methods=['GET'])
+def findRecetarios():
+    logger.info("/misRecetarios")
+    recetarios = getRecetarios()
+    
+
+
+    if recetarios=="{}":
         flash('Error al intentar traer las recetas por Recetario','danger')
         return redirect('/storyline')
     else:
@@ -416,11 +438,13 @@ def findRecetarios():
     
 
 
-@receta_blueprint.route("/agregarRecetario/<string:nombreRecetario>", methods=['GET'])
-def addRecetario(nombreRecetario):
+
+
+@receta_blueprint.route("/agregarRecetario", methods=['POST'])
+def addRecetario():
     logger.info("/agregarRecetario")
 
-    nombre_recetario = nombreRecetario
+    nombre_recetario = str(request.form["nombre_recetario"])
     
     if not isinstance(session['user_id'], int) and not isinstance(nombre_recetario, str):
         flash('Error al intentar guardar el recetario', 'danger')
@@ -430,4 +454,30 @@ def addRecetario(nombreRecetario):
 
         flash('Recetario agregado', 'message')
         return redirect('/misRecetarios')
+
+
+@receta_blueprint.route("/elimarRecetario", methods=['POST'])
+def deleteRecetario():
+    logger.info("/elimarRecetario")
+
+    id_recetario = int(request.form["id_recetario"])
+    
+    mensaje_recibido = clientRecetarios.service.EliminarRecetario(id_recetario)
+
+    flash(mensaje_recibido , 'message')
+    return redirect('/misRecetarios')
+
+
+@receta_blueprint.route("/agregarEnRecetario",methods=['POST'])
+def AddRecetaToRecetarios():
+    logger.info("/agregarEnRecetario")
+    
+    id_receta = int(request.form["receta_id"])
+    id_recetario = int(request.form["recetario_id"])
+
+    mensaje_recibido = clientRecetarios.service.AgregarRecetasEnRecetario(id_receta,id_recetario)
+    
+
+    flash(mensaje_recibido , 'message')
+    return redirect('/storyline')
 

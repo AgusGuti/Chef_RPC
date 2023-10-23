@@ -544,14 +544,22 @@
           {% if receta.user.id != usuario_autenticado %}
             &nbsp; <!--espacio en blanco-->
             
-              <button type="button" class="btn btn-recetas" id="btn_generar_denuncia" 
+              <button type="button" class="btn btn-warning" id="btn_generar_denuncia" 
                   data-toggle="modal" data-receta-id="{{ receta.idReceta }}"
                   data-target="#modalAgregarDenuncia{{ receta.idReceta }}"
                   data-dismiss="modal">
                     Generar Denuncia
               </button>
+              
             
-          {% endif %}           
+          {% endif %}  
+          
+          <button type="button" class="btn btn-recetas" id="btn_agregar_a_recetario" 
+                  data-toggle="modal" data-receta-id="{{ receta.idReceta }}"
+                  data-target="#modalAgregarARecetario{{ receta.idReceta }}"
+                  data-dismiss="modal">
+                    Agregar a recetario
+          </button>
 
           <!-- <button type="button" class="btn btn-recetas" id="agregarRecetario{{ receta.idReceta }}">Denunciar</button> -->
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -677,6 +685,65 @@
                      
                 <div class="modal-footer">
                   <button type="submit" class="btn-danger">Denunciar</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>        
+                
+
+              </div>              
+            </form>     
+
+            
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para agregar receta a recetario -->
+  <div
+    class="modal fade"
+    id="modalAgregarARecetario{{ receta.idReceta }}"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalAgregarARecetario{{ receta.idReceta }}Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <form action="/agregarEnRecetario" method="post">
+          <!-- Formulario principal -->
+
+          <div class="modal-header">
+            <h3 class="modal-title" id="modalAgregarARecetario{{ receta.idReceta }}Label">Agregar Receta "{{ receta.tituloReceta }}" a recetario: </h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+
+          <div class="modal-body">            
+            <form action="/agregarEnRecetario" method="post">
+
+              <input type="hidden" id="receta_id" name="receta_id" value="{{ receta.idReceta }}">
+              
+              <div>
+                
+
+                {% for recetario in recetarios %}
+                                  
+                  <div>
+                    <input type="radio" id="recetario_id" name="recetario_id" value="{{ recetario.id }}" />
+                    <label class="" for="Recetario{{ recetario.id }}">{{ recetario.nombre }}</label>
+                  </div>
+
+                {% endfor %}
+
+                <br>                  
+                     
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success"> Agregar</button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>        
                 

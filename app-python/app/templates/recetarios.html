@@ -54,7 +54,8 @@
 <!-- optionally if you need translation for your language then include locale file as mentioned below (replace LANG.js with your own locale file) -->
 <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/locales/LANG.js"></script>
 
-  
+
+
   <style>
     /* Estilo para las miniaturas de las recetas en la tabla */
     .miniatura {
@@ -277,6 +278,16 @@
             <div class="col-sm-8">
               <h2 style="margin-bottom: 20px;"><b>Recetarios</b></h2>
             </div>
+            <div class="btn-container">
+              <button
+                type="button"
+                class="btn btn-recetas"
+                data-toggle="modal"
+                data-target="#modalAgregarRecetario"
+              >
+                Agregar Recetario
+              </button>
+            </div>
         </div>
       </div>
         {% block content %}
@@ -295,31 +306,20 @@
               <td>{{ recetario.nombre }}</td>
               <td>
                 <div class="btn-group">
-                  <button class="btn btn-recetas btn-sm"
+                  <!-- <button class="btn btn-recetas btn-sm"
                   data-toggle="modal"
                   data-receta-id="{{ recetario.id}}"
-                  data-target="#modalReceta{{ recetario.id }}">
+                  data-target="#modalRecetario{{ recetario.id }}"
+                  onclick="getRecetaPorRecetario('{{ recetario.id }}')">
                   <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
-                  </button>
-                  {% if recetario.usuario_id != usuario_autenticado %}
-                    &nbsp; 
-                    <button class="btn btn-recetas btn-sm" id="favoritoButton_{{ recetario.id }}"
-                      data-toggle="modal" data-target="modalFavorito" onclick="addFavorito({{ recetario.id }})"
-                      data-receta-id="{{ recetario.id }}">
-                      <i class="fa-solid fa-heart" id="favoritoIcon_{{ recetario.id }}" style="color: #ffffff;"></i>
-                    </button>
-                  {% endif %}
+                  </button> -->
+                 
                 &nbsp; 
-                <button class="btn btn-recetas btn-sm" data-toggle="modal" data-target="#modalUsuario{{ recetario.usuario_id }}">
-                  <i class="fa-solid fa-user-plus"></i>               
-                </button>
-                &nbsp; 
-                <button class="btn btn-recetas btn-sm" onclick="mostrarComentarios('{{ recetario.id }}')">
-                  <i class="fa-solid fa-message" style="color: #ffffff;"></i>
-                </button>
-                &nbsp; 
-                <button class="btn btn-recetas btn-sm" onclick="mostrarPuntaje('{{ recetario.id }}')">
-                  <i class="fa-solid fa-star" style="color: #ffffff;"></i>
+                <button class="btn btn-recetas btn-sm" 
+                  data-toggle="modal"
+                  data-target="#modalBorrarRecetario{{ recetario.id }}">
+                  <i class="fa fa-trash" style="color: #ecc720;"></i>
+                  
                 </button>                               
               </td>
             </tr>
@@ -332,6 +332,185 @@
   </div>
 </div>
 
-  
+   <!-- Modal para agregar un recetario -->
+   <div
+   class="modal fade"
+   id="modalAgregarRecetario"
+   tabindex="-1"
+   role="dialog"
+   aria-labelledby="modalAgregarRecetarioLabel"
+   aria-hidden="true"
+ >
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <form action="/agregarRecetario" method="post">
+         <!-- Formulario principal -->
+         <div class="modal-header">
+           <h5 class="modal-title" id="modalAgregarRecetarioLabel">Agregar Recetario</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+           <!-- Formulario para agregar un recetario -->
+           <div class="form-group">
+             <label for="user_id"></label>
+             <input
+               type="hidden"
+               id="user_id"
+               name="user_id"
+               value=""
+             >
+           </div>
+           <div class="form-group">
+             <label for="nombre_recetario">Nombre recetario:</label>
+             <input
+               type="text"
+               class="form-control"
+               id="nombre_recetario"
+               name="nombre_recetario"
+               placeholder="Ingrese el nombre del recetario"
+             >
+           </div>
+           
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+           <button type="submit" class="btn btn-recetas">Guardar</button>
+         </div>
+       </form>
+     </div>
+   </div>
+ </div>
+
+ {% for recetario in recetarios %}
+
+  <!-- Modal para eliminar una recetario -->
+  <div
+  class="modal fade"
+  id="modalBorrarRecetario{{ recetario.id }}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modalBorrarRecetario{{ recetario.id }}Label"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form action="/elimarRecetario" method="post">
+        <!-- Formulario principal -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalBorrarRecetario{{ recetario.id }}Label">Eliminar Recetario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario para eliminar un recetario -->
+          <div class="form-group">
+            <label for="user_id"></label>
+            <input
+              type="hidden"
+              id="id_recetario"
+              name="id_recetario"
+              value="{{ recetario.id }}"
+            >
+          </div>
+          
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn-danger">Aceptar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal para mostrar recetas del recetario -->
+<div class="modal fade" id="modalRecetario{{ recetario.id }}" tabindex="-1" role="dialog" aria-labelledby="modalRecetario{{ recetario.id }}Label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalRecetario{{ recetario.id }}Label">Detalle Recetario {{ recetario.nombre }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Muestra el nombre del recetario -->
+        <p>Nombre del Recetario: {{ recetario.nombre }}</p>
+
+        <!-- Muestra las recetas del recetario -->
+        <h5>Recetas:</h5>
+        <div id="recetasContainer{{ recetario.id }}">
+          <!-- Aquí deberías cargar las recetas dinámicamente -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+<script>
+  // Función para cargar las recetas en el modal del recetario
+  function cargarRecetasEnModal(recetarioId) {
+    var modal = document.getElementById("modalRecetario" + recetarioId); // Obtén el modal
+    var recetasContainer = document.getElementById("recetasContainer" + recetarioId); // Contenedor de recetas en el modal
+
+    // Realiza una solicitud AJAX para obtener las recetas del recetario
+    $.ajax({
+      url: "/obtenerRecetasPorRecetario/" + recetarioId,
+      method: "GET",
+      success: function (data) {
+        // Rellena el contenedor de recetas con los datos obtenidos
+        recetasContainer.innerHTML = data;
+        modal.style.display = "block"; // Abre el modal
+      },
+      error: function (error) {
+        console.error("Error al cargar las recetas: " + error);
+      }
+    });
+  }
+</script>
+
+
+<script>
+  function abrirModalRecetario(data) {
+    var modal = document.getElementById("modalRecetario"); // Obtén el modal
+    var recetasContainer = document.getElementById("recetasContainer"); // Contenedor de recetas en el modal
+
+    // Procesa los datos JSON recibidos
+    var recetasData = JSON.parse(data);
+
+    // Rellena el nombre del recetario en el modal
+    var nombreRecetario = recetasData.nombreRecetario;
+    document.getElementById("nombreRecetario").textContent = "Nombre del Recetario: " + nombreRecetario;
+
+    // Limpia el contenedor de recetas
+    recetasContainer.innerHTML = "";
+
+    // Itera sobre las recetas y muestra sus detalles
+    recetasData.recetas.forEach(function (receta) {
+      // Crea elementos HTML para mostrar los datos de cada receta
+      var recetaDiv = document.createElement("div");
+      recetaDiv.innerHTML = "<p>Título de la Receta: " + receta.tituloReceta + "</p>" +
+        "<p>Descripción: " + receta.descripcion + "</p>" +
+        '<img src="' + receta.foto1 + '" alt="Imagen de la Receta">';
+
+      // Agrega el elemento al contenedor de recetas
+      recetasContainer.appendChild(recetaDiv);
+    });
+
+    // Abre el modal
+    modal.style.display = "block";
+  }
+</script>
+
+
   </body>
   </html>
