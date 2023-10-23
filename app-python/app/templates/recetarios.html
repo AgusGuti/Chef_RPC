@@ -306,20 +306,15 @@
               <td>{{ recetario.nombre }}</td>
               <td>
                 <div class="btn-group">
-                  <!-- <button class="btn btn-recetas btn-sm"
-                  data-toggle="modal"
-                  data-receta-id="{{ recetario.id}}"
-                  data-target="#modalRecetario{{ recetario.id }}"
-                  onclick="getRecetaPorRecetario('{{ recetario.id }}')">
-                  <i class="fa-solid fa-plus" style="color: #ffffff;"></i>                  
-                  </button> -->
-                 
-                &nbsp; 
-                <button class="btn btn-recetas btn-sm" 
-                  data-toggle="modal"
-                  data-target="#modalBorrarRecetario{{ recetario.id }}">
-                  <i class="fa fa-trash" style="color: #ecc720;"></i>
-                  
+                    <button class="btn btn-recetas btn-sm" data-toggle="modal" data-target="#modalRecetario{{ recetario.id }}"
+                      onclick="cargarRecetasEnModal({{ recetario.id }})">
+                      <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+                    </button>
+                    &nbsp; 
+                    <button class="btn btn-recetas btn-sm" 
+                      data-toggle="modal"
+                      data-target="#modalBorrarRecetario{{ recetario.id }}">
+                      <i class="fa fa-trash" style="color: #ecc720;"></i>
                 </button>                               
               </td>
             </tr>
@@ -427,8 +422,6 @@
   </div>
 </div>
 
-
-
 <!-- Modal para mostrar recetas del recetario -->
 <div class="modal fade" id="modalRecetario{{ recetario.id }}" tabindex="-1" role="dialog" aria-labelledby="modalRecetario{{ recetario.id }}Label" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -440,13 +433,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <!-- Muestra el nombre del recetario -->
-        <p>Nombre del Recetario: {{ recetario.nombre }}</p>
-
         <!-- Muestra las recetas del recetario -->
         <h5>Recetas:</h5>
         <div id="recetasContainer{{ recetario.id }}">
-          <!-- Aquí deberías cargar las recetas dinámicamente -->
+          <!-- Aquí se carga las recetas dinámicamente -->
         </div>
       </div>
       <div class="modal-footer">
@@ -456,6 +446,14 @@
   </div>
 </div>
 {% endfor %}
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.6/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script>
   // Función para cargar las recetas en el modal del recetario
   function cargarRecetasEnModal(recetarioId) {
@@ -510,6 +508,66 @@
     modal.style.display = "block";
   }
 </script>
+
+
+
+<script>
+  function cargarRecetasEnModal(recetarioId) {
+    var modal = document.getElementById("modalRecetario" + recetarioId);
+    var recetasContainer = document.getElementById("recetasContainer" + recetarioId);
+
+    $.ajax({
+      url: "/getRecetaPorRecetario/" + recetarioId,
+      method: "GET",
+      success: function (data) {
+        try {
+          var jsonData = JSON.parse(data);
+          var recetasArray = jsonData.recetas;
+
+          // Verifica si 'recetas' está definido en la respuesta
+          if (recetasArray) {
+            // Limpia el contenedor de recetas antes de agregar nuevas
+            recetasContainer.innerHTML = "";
+
+            // Recorre las recetas y muestra sus datos
+            recetasArray.forEach(function (receta) {
+              // Convierte la cadena JSON en un objeto
+              var recetaObj = JSON.parse(receta);
+
+              // Crea un elemento div para cada receta
+              var recetaElement = document.createElement("div");
+
+              // Agrega la imagen de la receta con estilos CSS para reducir el tamaño
+              recetaElement.innerHTML = "<div style='display: flex; align-items: center;'>" +
+                "<img src='" + recetaObj.foto1 + "' alt='Foto de la receta' style='max-width: 100px; max-height: 100px;' />" +
+                "<div style='margin-left: 10px;'>" +
+                "<h3 style='margin-bottom: 5px;'>" + recetaObj.tituloReceta + "</h3>" +
+                "<p>" + recetaObj.descripcion + "</p>" +
+                "</div></div>";
+              // Puedes seguir agregando más campos aquí
+
+              // Agrega un espacio entre las recetas
+              recetaElement.style.marginBottom = "10px";
+
+              // Agrega el elemento de la receta al contenedor
+              recetasContainer.appendChild(recetaElement);
+            });
+
+            modal.style.display = "block";
+          } else {
+            console.error("La propiedad 'recetas' no está definida en la respuesta.");
+          }
+        } catch (error) {
+          console.error("Error al procesar las recetas: " + error);
+        }
+      },
+      error: function (error) {
+        console.error("Error al cargar las recetas: " + error);
+      }
+    });
+  }
+</script>
+
 
 
   </body>
