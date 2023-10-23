@@ -1,15 +1,17 @@
-INSERT INTO motivo (motivo) VALUES
+
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE `mod-denuncias`.motivo;
+
+TRUNCATE `mod-denuncias`.denuncia;
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+INSERT INTO `mod-denuncias`.motivo (motivo) VALUES
     ('Contenido inapropiado'),
     ('Ingredientes prohibidos'),
     ('Peligroso para la salud');
     
-select * from motivo;
-
-/*
-SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE `mod-denuncias`.motivo;
-SET FOREIGN_KEY_CHECKS = 1;
-*/
+select * from `mod-denuncias`.motivo;
 
 INSERT INTO `mod-denuncias`.`denuncia` (`receta_id`, `resuelta`, `user_id`, `motivo_id`) VALUES
 (1, 1, 1, 1),
@@ -23,10 +25,5 @@ INSERT INTO `mod-denuncias`.`denuncia` (`receta_id`, `resuelta`, `user_id`, `mot
 (9, 1, 9, 3),
 (10, 0, 11, 1);
 
-select * from denuncia;
+select * from `mod-denuncias`.denuncia;
 
-/*
-SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE `mod-denuncias`.denuncia;
-SET FOREIGN_KEY_CHECKS = 1;
-*/

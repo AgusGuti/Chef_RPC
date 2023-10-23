@@ -85,14 +85,11 @@
     });
 
     function inicio() {
-      selectMotivos();
       cargarIngredientesYReceta(recetaId);
       addFavorito(recetaId);
       mostrarComentarios(recetaId);
       mostrarPuntaje(recetaId);      
-    }
-
-    
+    }    
 
     function cargarIngredientesYReceta(recetaId, ingredientesSeleccionados) {
       console.log("cargarIngredientesYReceta function called");
