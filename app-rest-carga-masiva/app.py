@@ -398,7 +398,7 @@ def lista_borradores():
 @app.route('/api/borradores/<int:borrador_id>', methods=['GET', 'PUT', 'DELETE'])
 def detalle_borrador(borrador_id):
     borrador = Borrador.query.get_or_404(borrador_id)
-
+    
     if request.method == 'GET':
         return jsonify(borrador.as_dict())
 

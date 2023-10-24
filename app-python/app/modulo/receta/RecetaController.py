@@ -4,7 +4,7 @@ from . import receta_blueprint
 from google.protobuf.json_format import MessageToJson
 
 import os,grpc
-
+import requests
 import logging
 
 import threading
@@ -171,6 +171,49 @@ def altaReceta():
             flash('Receta creada exitosamente!','success')
             return redirect('/misRecetas')
             
+
+@receta_blueprint.route('/guardar_como_receta/<int:borrador_id>', methods=['POST'])
+def guardar_como_receta(borrador_id):
+    try:
+        # Hacer una solicitud GET a la API para obtener los datos del borrador
+        api_url = 'http://'+os.getenv("SERVER-REST-CARGAMASIVA")+'/api/borradores/borrador_id/' + str(borrador_id)
+        response = requests.get(api_url)
+
+        # Verificar si la solicitud fue exitosa (código de respuesta 200)
+        if response.status_code == 200:
+            borrador_data = response.json()  # Obtener los datos en formato JSON
+           
+       
+           
+
+            # Transformar borrador_data en una lista de borradores
+            borradores = borrador_data if isinstance(borrador_data, list) else [borrador_data]
+            
+            print("ACA")
+            print("ACA")
+            print("ACA")
+            print(borradores)
+            print("ACA")
+            print("ACA")
+            print("ACA")
+            # Imprimir la lista de borradores
+            for borrador in borradores:
+                with grpc.insecure_channel(os.getenv("SERVER-JAVA-RPC")) as channel:
+                    stub = RecetasServiceStub(channel)
+                    response = stub.AddReceta(
+                        Receta(user=User(id=int(borrador['usuario'])),categoria=int(borrador['categoria_id']), tituloReceta=borrador['titulo_receta'],
+                            descripcion=borrador['descripcion'], pasos=borrador['pasos'], tiempoPreparacion=int(borrador['tiempo_preparacion']), foto1=borrador['foto1'],
+                            foto2=borrador['foto2'], foto3=borrador['foto3'], foto4=borrador['foto4'],
+                            foto5=borrador['foto5']))
+                    
+                    
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        # Handle the exception here
+        # You can log the error or return an appropriate response
+
+
+
 
 @receta_blueprint.route("/storyline",methods = ['GET'])
 def findAll():

@@ -433,7 +433,7 @@
 
             // Realiza la solicitud POST para guardar el borrador como receta
             $.ajax({
-                url: "/api/guardar_como_receta/" + borradorId,
+                url: "guardar_como_receta/" + borradorId,
                 type: "POST",
                 success: function (data) {
                     if (data.mensaje) {
