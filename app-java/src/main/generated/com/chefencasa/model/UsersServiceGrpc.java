@@ -170,6 +170,37 @@ public final class UsersServiceGrpc {
     return getFindUserByIdMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.chefencasa.model.UserProto.User,
+      com.chefencasa.model.UserProto.User> getFindByEmailMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "FindByEmail",
+      requestType = com.chefencasa.model.UserProto.User.class,
+      responseType = com.chefencasa.model.UserProto.User.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.chefencasa.model.UserProto.User,
+      com.chefencasa.model.UserProto.User> getFindByEmailMethod() {
+    io.grpc.MethodDescriptor<com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.User> getFindByEmailMethod;
+    if ((getFindByEmailMethod = UsersServiceGrpc.getFindByEmailMethod) == null) {
+      synchronized (UsersServiceGrpc.class) {
+        if ((getFindByEmailMethod = UsersServiceGrpc.getFindByEmailMethod) == null) {
+          UsersServiceGrpc.getFindByEmailMethod = getFindByEmailMethod =
+              io.grpc.MethodDescriptor.<com.chefencasa.model.UserProto.User, com.chefencasa.model.UserProto.User>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FindByEmail"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.UserProto.User.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.chefencasa.model.UserProto.User.getDefaultInstance()))
+              .setSchemaDescriptor(new UsersServiceMethodDescriptorSupplier("FindByEmail"))
+              .build();
+        }
+      }
+    }
+    return getFindByEmailMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -252,6 +283,13 @@ public final class UsersServiceGrpc {
         io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.User> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindUserByIdMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void findByEmail(com.chefencasa.model.UserProto.User request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.User> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindByEmailMethod(), responseObserver);
+    }
   }
 
   /**
@@ -320,6 +358,14 @@ public final class UsersServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getFindUserByIdMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void findByEmail(com.chefencasa.model.UserProto.User request,
+        io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.User> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getFindByEmailMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -371,6 +417,13 @@ public final class UsersServiceGrpc {
     public com.chefencasa.model.UserProto.User findUserById(com.chefencasa.model.UserProto.User request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getFindUserByIdMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.chefencasa.model.UserProto.User findByEmail(com.chefencasa.model.UserProto.User request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getFindByEmailMethod(), getCallOptions(), request);
     }
   }
 
@@ -429,6 +482,14 @@ public final class UsersServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getFindUserByIdMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.chefencasa.model.UserProto.User> findByEmail(
+        com.chefencasa.model.UserProto.User request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getFindByEmailMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_ADD_USER = 0;
@@ -436,6 +497,7 @@ public final class UsersServiceGrpc {
   private static final int METHODID_TRAER_USER = 2;
   private static final int METHODID_FIND_ALL = 3;
   private static final int METHODID_FIND_USER_BY_ID = 4;
+  private static final int METHODID_FIND_BY_EMAIL = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -472,6 +534,10 @@ public final class UsersServiceGrpc {
           break;
         case METHODID_FIND_USER_BY_ID:
           serviceImpl.findUserById((com.chefencasa.model.UserProto.User) request,
+              (io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.User>) responseObserver);
+          break;
+        case METHODID_FIND_BY_EMAIL:
+          serviceImpl.findByEmail((com.chefencasa.model.UserProto.User) request,
               (io.grpc.stub.StreamObserver<com.chefencasa.model.UserProto.User>) responseObserver);
           break;
         default:
@@ -527,6 +593,13 @@ public final class UsersServiceGrpc {
               com.chefencasa.model.UserProto.User,
               com.chefencasa.model.UserProto.User>(
                 service, METHODID_FIND_USER_BY_ID)))
+        .addMethod(
+          getFindByEmailMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.chefencasa.model.UserProto.User,
+              com.chefencasa.model.UserProto.User>(
+                service, METHODID_FIND_BY_EMAIL)))
         .build();
   }
 
@@ -580,6 +653,7 @@ public final class UsersServiceGrpc {
               .addMethod(getTraerUserMethod())
               .addMethod(getFindAllMethod())
               .addMethod(getFindUserByIdMethod())
+              .addMethod(getFindByEmailMethod())
               .build();
         }
       }

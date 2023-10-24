@@ -1,10 +1,10 @@
 package com.example.demo.entity;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,14 +16,20 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Usuario {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    @Setter(AccessLevel.PROTECTED)
     private Long id;
     private String nombre;
 
     public Usuario(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Usuario(Long id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
     }		
+   
+
 }
