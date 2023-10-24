@@ -21,6 +21,10 @@ DENUNCIAS: (PORT: 8085)
    2. mvn clean install
    3. mvn spring-boot:run
 
+RECETARIOS: (PORT: 8088)
+   1. cd app-soap-recetarios
+   2. mvn clean install
+   3. mvn spring-boot:run
 
 Clases creadas en capa servidor:
 
