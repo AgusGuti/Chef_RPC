@@ -20,4 +20,8 @@ public interface UserRepository extends JpaRepository<User, Serializable> {
 
 	User findByNombre(String nombre);
 
+	
+	@Query("SELECT u FROM User u WHERE u.email LIKE :email ")
+	public abstract User findByEmail (@Param("email") String email);
+
 }

@@ -2201,14 +2201,15 @@ public final class UserProto {
       "User\022\n\n\002id\030\001 \001(\005\022\016\n\006nombre\030\002 \001(\t\022\020\n\010apel" +
       "lido\030\003 \001(\t\022\r\n\005email\030\004 \001(\t\022\r\n\005clave\030\005 \001(\t" +
       "\022\022\n\nfotoPerfil\030\006 \001(\t\022\021\n\tmoderador\030\007 \001(\t2" +
-      "\360\001\n\014UsersService\022%\n\007AddUser\022\013.model.User" +
+      "\233\002\n\014UsersService\022%\n\007AddUser\022\013.model.User" +
       "\032\013.model.User\"\000\0221\n\023ValidarCredenciales\022\013" +
       ".model.User\032\013.model.User\"\000\022\'\n\tTraerUser\022" +
       "\013.model.User\032\013.model.User\"\000\0221\n\007FindAll\022\026" +
       ".google.protobuf.Empty\032\014.model.Users\"\000\022*" +
       "\n\014FindUserById\022\013.model.User\032\013.model.User" +
-      "\"\000B!\n\024com.chefencasa.modelB\tUserProtob\006p" +
-      "roto3"
+      "\"\000\022)\n\013FindByEmail\022\013.model.User\032\013.model.U" +
+      "ser\"\000B!\n\024com.chefencasa.modelB\tUserProto" +
+      "b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
